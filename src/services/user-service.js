@@ -14,7 +14,7 @@ function login (username, password) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username, password })
   }
-  return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
+  return fetch(`${config.apiUrl}/clients/authenticate`, requestOptions)
     .then(handleResponse)
     .then(localUser => {
       // login successful if there's a jwt token in the response
@@ -38,7 +38,7 @@ function register (username, email, password) {
     body: JSON.stringify({ username, email, password })
   }
 
-  return fetch(`${config.apiUrl}/users/register`, requestOptions)
+  return fetch(`${config.apiUrl}/clients/register`, requestOptions)
     .then(handleResponse)
     .then(localUser => {
     // Registrations is successful if a jwt token is returned
