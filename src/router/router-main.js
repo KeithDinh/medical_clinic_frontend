@@ -5,10 +5,11 @@ import Router from 'vue-router'
 // User Created Imports
 import Main from '@/components/Main'
 import Login from '@/components/Login'
-import Profile from '@/components/Profile'
-import Dashboard from '@/components/Dashboard'
-import Quote from '@/components/Quote'
 import Register from '@/components/Register'
+import UpdateProfile from '@/components/UpdateProfile'
+import Dashboard from '@/components/Dashboard'
+import SearchDoctor from '@/components/SearchDoctor'
+import BookAppointment from '@/components/BookAppointment'
 import NotFound from '@/components/NotFound'
 
 // Letting Vue Know To Use Router
@@ -22,63 +23,66 @@ export const router = new Router({
       path: '/',
       name: 'Main',
       component: Main,
-      meta: { transition: 'fade', breadcrumb: 'Home'}
+      meta: {transition: 'fade', breadcrumb: 'Home'}
     },
     {
       path: '/login',
       name: 'Login',
       component: Login,
-      meta: { transition: 'fade', breadcrumb: 'Login'}
-    },
-    {
-      path: '/dashboard',
-      name: 'Dashboard',
-      component: Dashboard,
-      meta: { transition: 'fade', breadcrumb: 'Dashboard' }
-    },
-    {
-      path: '/profile',
-      name: 'Profile',
-      component: Profile,
-      meta: { transition: 'fade', breadcrumb: 'Profile'}
-    },
-    {
-      path: '/quote',
-      name: 'Quote',
-      component: Quote,
-      meta: { transition: 'fade'}
+      meta: {transition: 'fade', breadcrumb: 'Login'}
     },
     {
       path: '/register',
       name: 'Register',
       component: Register,
-      meta: { transition: 'fade', breadcrumb: 'Register'}
+      meta: {transition: 'fade', breadcrumb: 'Register'}
+    },
+    {
+      path: '/dashboard',
+      name: 'Dashboard',
+      component: Dashboard,
+      meta: {transition: 'fade', breadcrumb: 'Dashboard'}
+    },
+    {
+      path: '/update-profile',
+      name: 'UpdateProfile',
+      component: UpdateProfile,
+      meta: {transition: 'fade', breadcrumb: 'Update Profile'}
+    },
+    {
+      path: '/appointment',
+      name: 'BookAppointment',
+      component: BookAppointment,
+      meta: {transition: 'fade', breadcrumb: 'Book Appointment'}
+    },
+    {
+      path: '/search-doctor',
+      name: 'SearchDoctor',
+      component: SearchDoctor,
+      meta: {transition: 'fade', breadcrumb: 'Search Doctor'}
     },
     {
       path: '/404',
       component: NotFound,
-      meta: { transition: 'fade'}
+      meta: {transition: 'fade'}
     },
     {
       path: '*',
       redirect: '/404',
-      meta: { transition: 'fade'}
+      meta: {transition: 'fade'}
     }
   ]
 })
 
 router.beforeEach((to, from, next) => {
-  const nonAuthPages = ['/', '/register', '/login']
-  const authPages = !nonAuthPages.includes(to.path)
-  const loggedIn = localStorage.getItem('localUser')
-
-  if (authPages && !loggedIn) {
-    next('/')
+  var loggedIn = localStorage.getItem('localUser')
+  if(to.path == '/dashboard' || to.path == '/update-profile' || to.path == '/appointment') {
+    if(loggedIn) { 
+        next()
+    } else {
+      router.push('/login')
+    }
+    return
   }
-
-  if (loggedIn && to.path === '/') {
-    next('/dashboard')
-  }
-
   next()
 })

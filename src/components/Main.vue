@@ -1,7 +1,8 @@
 <template>
-  <div class="row">
+  <div class="row contain">
     <div class="row form-title">Main</div>
-    SOME TEXT
+    <h2>Search Doctors</h2>
+      </div>
   </div>
 </template>
 <script>

@@ -65,10 +65,10 @@ const validateRegistration = (username, passwordOne, passwordTwo, firstName, mid
   return errors
 }
 // Validate the Login Form
-const validateLogin = (username, password) => {
+const validateLogin = (email, password) => {
   let errors = []
-  if (!username) {
-    errors.push(new Error('Username required'))
+  if (!email) {
+    errors.push(new Error('email required'))
   }
   if (!password) {
     errors.push(new Error('Password required'))
@@ -110,11 +110,11 @@ export const authentication = {
     }
   },
   actions: {
-    login ({ dispatch, commit }, { username, password }) {
-      commit('loginRequest', { username })
-      let errors = validateLogin(username, password)
+    login ({ dispatch, commit }, { email, password }) {
+      commit('loginRequest', { email })
+      let errors = validateLogin(email, password)
       if (errors.length === 0) {
-        userService.login(username, password)
+        userService.login(email, password)
           .then(
             localUser => {
               commit('loginSuccess', localUser)

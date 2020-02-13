@@ -5,12 +5,17 @@ const initialState = {
   profileStatus: {},
   userProfile: {
     firstName: '',
+    middleInit: '',
     lastName: '',
-    addressOne: '',
-    addressTwo: '',
+    street: '',
     city: '',
     state: '',
-    zipcode: ''
+    zipcode: '',
+    phone: '',
+    dob: '',
+    gender: '',
+    marital: '',
+    race: ''
   }
 }
 
@@ -18,33 +23,52 @@ const initialState = {
 const validateProfile = profile => {
   const {
     firstName,
+    middleInit,
     lastName,
-    addressOne,
+    street,
     city,
     state,
-    zipcode
+    zipcode,
+    phone,
+    dob,
+    gender,
+    marital,
+    race
   } = profile
   let errors = []
+  const re = /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   if (!firstName) {
-    errors.push(new Error('First name required'))
+    errors.push(new Error('First name required.'))
   }
   if (!lastName) {
-    errors.push(new Error('Last name required'))
+    errors.push(new Error('Last name required.'))
   }
-  if (lastName.length + firstName.length > 50) {
-    errors.push(new Error('Fill name Exceeds Limit: 50'))
-  }
-  if (!addressOne) {
-    errors.push(new Error('Address required'))
+  if (!street) {
+    errors.push(new Error('Street address required.'))
   }
   if (!city) {
-    errors.push(new Error('City required'))
+    errors.push(new Error('city required.'))
   }
   if (!state) {
-    errors.push(new Error('State required'))
+    errors.push(new Error('State required.'))
   }
   if (!zipcode) {
-    errors.push(new Error('Zipcode required'))
+    errors.push(new Error('Zipcode required.'))
+  }
+  if (!phone) {
+    errors.push(new Error('Phone number required.'))
+  }
+  if (!dob) {
+    errors.push(new Error('Date of birth required.'))
+  }
+  if (!gender) {
+    errors.push(new Error('Gender required.'))
+  }
+  if (!marital) {
+    errors.push(new Error('Marital status required.'))
+  }
+  if (!race) {
+    errors.push(new Error('Race required.'))
   }
   return errors
 }
@@ -52,7 +76,7 @@ const validateProfile = profile => {
 const checkComplete = (profile) => {
   let complete = true
   for (let [key, value] of Object.entries(profile)) {
-    if (key !== 'addressTwo' && value.length === 0) {
+    if (key !== 'middleInit' && value.length === 0) {
       complete = false
     }
   }
@@ -122,7 +146,6 @@ export const profile = {
           const profile = response.profile
           if (!profile.state) {
             commit('loadingProfileSuccess', profile)
-            router.push('/profile')
             dispatch('alert/success', 'Profile Empty', { root: true })
           } else {
             commit('loadingProfileSuccess', profile)
@@ -145,7 +168,7 @@ export const profile = {
         profileService.postProfile(profile).then(
           response => {
             commit('createProfileSuccess', response.profile)
-            router.push('/quote')
+            router.push('/dashboard')
             dispatch('alert/success', 'Profile Created', { root: true })
           },
           error => {

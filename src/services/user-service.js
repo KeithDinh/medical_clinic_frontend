@@ -8,11 +8,11 @@ export const userService = {
   register
 }
 
-function login (username, password) {
+function login (email, password) {
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password })
+    body: JSON.stringify({ email, password })
   }
   return fetch(`${config.apiUrl}/clients/authenticate`, requestOptions)
     .then(handleResponse)
@@ -31,11 +31,11 @@ function logout () {
   localStorage.removeItem('localUser')
 }
 
-function register (username, password, firstName, middleInit, lastName, street, city, state, zipcode, phone, email, dob, gender, marital, race) {
+function register (email, password, firstName, middleInit, lastName, street, city, state, zipcode, phone, dob, gender, marital, race) {
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password, firstName, middleInit, lastName, street, city, state, zipcode, phone, email, dob, gender, marital, race })
+    body: JSON.stringify({ email, password, firstName, middleInit, lastName, street, city, state, zipcode, phone, dob, gender, marital, race })
   }
 
   return fetch(`${config.apiUrl}/clients/register`, requestOptions)

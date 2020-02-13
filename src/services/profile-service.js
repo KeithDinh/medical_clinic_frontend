@@ -14,7 +14,7 @@ function getProfile () {
     method: 'GET',
     headers: authorizationHeader()
   }
-  return fetch(`${config.apiUrl}/users/profile`, requestOptions)
+  return fetch(`${config.apiUrl}/clients/profile`, requestOptions)
     .then(handleResponse)
 }
 

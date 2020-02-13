@@ -3,7 +3,7 @@
     <div class="row form">
       <div class="row form-ctn">
         <div class="row form-title">Dashboard</div>
-HOME PAGE
+        DASHBOARD
       </div>
     </div>
   </div>

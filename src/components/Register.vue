@@ -4,7 +4,7 @@
       <div class="row form-ctn">
         <div class="row form-title">Register</div>
         <div id="register-form" class="row forms">
-          <input type="text" v-model="username" id="username" name="username" placeholder="Username">
+          <input type="text" v-model="email" id="email" name="email" placeholder="email">
           <input type="password" v-model="passwordOne" id="passwordOne" name="passwordOne" placeholder="Password">
           <input type="password" v-model="passwordTwo" id="passwordTwo" name="passwordTwo" placeholder="Confirm Password">
           <input type="text" v-model="firstName" id="firstName" name="firstName" placeholder="First Name">
@@ -42,7 +42,7 @@ export default {
   },
   data () {
     return {
-      username: '',
+      email: '',
       passwordOne: '',
       passwordTwo: '',
       firstName: '',
@@ -53,7 +53,6 @@ export default {
       state: '',
       zipcode: '',
       phone: '',
-      email: '',
       dob: '',
       gender: '',
       marital: '',
@@ -122,9 +121,9 @@ export default {
   methods: {
     register (e) {
       this.submitted = true
-      const { username, passwordOne, passwordTwo, firstName, middleInit, lastName, street, city, state, zipcode, phone, email, dob, gender, marital, race } = this
+      const { email, passwordOne, passwordTwo, firstName, middleInit, lastName, street, city, state, zipcode, phone, dob, gender, marital, race } = this
       const { dispatch } = this.$store
-      dispatch('authentication/register', { username, passwordOne, passwordTwo, firstName, middleInit, lastName, street, city, state, zipcode, phone, email, dob, gender, marital, race })
+      dispatch('authentication/register', { email, passwordOne, passwordTwo, firstName, middleInit, lastName, street, city, state, zipcode, phone, dob, gender, marital, race })
     }
   }
 }

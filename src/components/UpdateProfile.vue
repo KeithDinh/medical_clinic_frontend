@@ -2,7 +2,7 @@
   <div class="row">
     <div class="row form">
       <div v-if="profile" class="row form-ctn">
-        <div class="row form-title">Profile</div>
+        <div class="row form-title">Update Profile</div>
         <div id="profile-form" class="row forms">
           <input
             type="text"
@@ -20,17 +20,10 @@
           />
           <input
             type="text"
-            v-model="profile.addressOne"
+            v-model="profile.street"
             id="addressOne"
             name="addressOne"
             placeholder="Address 1"
-          />
-          <input
-            type="text"
-            v-model="profile.addressTwo"
-            id="addressTwo"
-            name="addressTwo"
-            placeholder="Address 2"
           />
           <input
             type="text"
