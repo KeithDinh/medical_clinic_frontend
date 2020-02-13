@@ -7,7 +7,7 @@ const initialState = localUser
   : { status: {}, localUser: null }
 
 // Validate the Registration Form
-const validateRegistration = (username, email, passwordOne, passwordTwo) => {
+const validateRegistration = (username, passwordOne, passwordTwo, firstName, middleInit, lastName, street, city, state, zipcode, phone, email, dob, gender, marital, race) => {
   let errors = []
   const re = /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   if (!username) {
@@ -24,6 +24,43 @@ const validateRegistration = (username, email, passwordOne, passwordTwo) => {
   }
   if (passwordOne !== passwordTwo) {
     errors.push(new Error('Passwords must match.'))
+  }
+
+  if (!firstName) {
+    errors.push(new Error('First name required.'))
+  }
+  if (!lastName) {
+    errors.push(new Error('Last name required.'))
+  }
+  if (!street) {
+    errors.push(new Error('Street address required.'))
+  }
+  if (!city) {
+    errors.push(new Error('city required.'))
+  }
+  if (!state) {
+    errors.push(new Error('State required.'))
+  }
+  if (!zipcode) {
+    errors.push(new Error('Zipcode required.'))
+  }
+  if (!phone) {
+    errors.push(new Error('Phone number required.'))
+  }
+  if (!email) {
+    errors.push(new Error('Email required.'))
+  }
+  if (!dob) {
+    errors.push(new Error('Date of birth required.'))
+  }
+  if (!gender) {
+    errors.push(new Error('Gender required.'))
+  }
+  if (!marital) {
+    errors.push(new Error('Marital status required.'))
+  }
+  if (!race) {
+    errors.push(new Error('Race required.'))
   }
   return errors
 }
@@ -81,7 +118,7 @@ export const authentication = {
           .then(
             localUser => {
               commit('loginSuccess', localUser)
-              router.push('/quote')
+              router.push('/dashboard')
               dispatch('alert/success', 'Logged In', { root: true })
             },
             error => {
@@ -100,15 +137,15 @@ export const authentication = {
       router.push('/')
       dispatch('alert/success', 'Logged Out', { root: true })
     },
-    register ({dispatch, commit}, { username, email, passwordOne, passwordTwo }) {
+    register ({dispatch, commit}, { username, passwordOne, passwordTwo, firstName, middleInit, lastName, street, city, state, zipcode, phone, email, dob, gender, marital, race }) {
       commit('registerRequest', {username})
-      let errors = validateRegistration(username, email, passwordOne, passwordTwo)
+      let errors = validateRegistration(username, passwordOne, passwordTwo, firstName, middleInit, lastName, street, city, state, zipcode, phone, email, dob, gender, marital, race)
       if (errors.length === 0) {
-        userService.register(username, email, passwordOne)
+        userService.register(username, passwordOne, firstName, middleInit, lastName, street, city, state, zipcode, phone, email, dob, gender, marital, race)
           .then(
             localUser => {
               commit('registerSuccess', localUser)
-              router.push('/profile')
+              router.push('/dashboard')
               dispatch('alert/success', 'Account Registered', { root: true })
             },
             error => {

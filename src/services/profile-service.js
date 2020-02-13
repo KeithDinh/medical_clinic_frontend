@@ -26,7 +26,7 @@ function postProfile (profile) {
     headers: reqHeader,
     body: JSON.stringify(profile)
   }
-  return fetch(`${config.apiUrl}/users/profile`, requestOptions)
+  return fetch(`${config.apiUrl}/clients/profile`, requestOptions)
     .then(handleResponse)
 }
 
@@ -38,6 +38,6 @@ function putProfile (profile) {
     headers: reqHeader,
     body: JSON.stringify(profile)
   }
-  return fetch(`${config.apiUrl}/users/profile`, requestOptions)
+  return fetch(`${config.apiUrl}/clients/profile`, requestOptions)
     .then(handleResponse)
 }

@@ -37,7 +37,7 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('authentication/logout')
+    
   },
   methods: {
     login (e) {

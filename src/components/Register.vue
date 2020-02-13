@@ -5,9 +5,28 @@
         <div class="row form-title">Register</div>
         <div id="register-form" class="row forms">
           <input type="text" v-model="username" id="username" name="username" placeholder="Username">
-          <input type="text" v-model="email" id="email" name="email" placeholder="Email">
           <input type="password" v-model="passwordOne" id="passwordOne" name="passwordOne" placeholder="Password">
           <input type="password" v-model="passwordTwo" id="passwordTwo" name="passwordTwo" placeholder="Confirm Password">
+          <input type="text" v-model="firstName" id="firstName" name="firstName" placeholder="First Name">
+          <input type="text" v-model="middleInit" id="middle" name="middle" placeholder="Middle Initial">
+          <input type="text" v-model="lastName" id="lastName" name="lastName" placeholder="Last Name">
+          <input type="text" v-model="street" id="street" name="street" placeholder="Street Address">
+          <input type="text" v-model="city" id="city" name="city" placeholder="City">
+          <select type="text" v-model="state" id="state" name="state">
+            <option
+              v-for="(usState, index) in usStates"
+              :key="index"
+              :selected="state === usState"
+              >{{ usState }}
+            </option>
+          </select>
+          <input type="text" v-model="zipcode" id="zipcode" name="zipcode" placeholder="Zipcode">
+          <input type="text" v-model="phone" id="phone" name="phone" placeholder="Phone">
+          <input type="text" v-model="email" id="email" name="email" placeholder="Email">
+          <datepicker v-model="dob" name="dob" placeholder="Date of birth" format="yyyy-MM-dd"></datepicker>
+          <input type="text" v-model="gender" id="gender" name="gender" placeholder="Gender">
+          <input type="text" v-model="marital" id="marital" name="marital" placeholder="Marital Status">
+          <input type="text" v-model="race" id="race" name="race" placeholder="Race / Ethnicity">
           <button id="submit" v-on:click="register()">REGISTER</button>
         </div>
       </div>
@@ -15,14 +34,84 @@
   </div>
 </template>
 <script>
+import Datepicker from 'vuejs-datepicker'
 export default {
   name: 'Register',
+  components: {
+    Datepicker
+  },
   data () {
     return {
       username: '',
-      email: '',
       passwordOne: '',
-      passwordTwo: ''
+      passwordTwo: '',
+      firstName: '',
+      middleInit: '',
+      lastName: '',
+      street: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      phone: '',
+      email: '',
+      dob: '',
+      gender: '',
+      marital: '',
+      race: '',
+      usStates: [
+        'AL',
+        'AK',
+        'AZ',
+        'AR',
+        'CA',
+        'CO',
+        'CT',
+        'DE',
+        'DC',
+        'FL',
+        'GA',
+        'HI',
+        'ID',
+        'IL',
+        'IN',
+        'IA',
+        'KS',
+        'KY',
+        'LA',
+        'ME',
+        'MD',
+        'MA',
+        'MI',
+        'MN',
+        'MS',
+        'MO',
+        'MT',
+        'NE',
+        'NV',
+        'NH',
+        'NJ',
+        'NM',
+        'NY',
+        'NC',
+        'ND',
+        'OH',
+        'OK',
+        'OR',
+        'PA',
+        'RI',
+        'SC',
+        'SD',
+        'TN',
+        'TX',
+        'UT',
+        'VT',
+        'VA',
+        'WA',
+        'WV',
+        'WI',
+        'WY'
+      ],
+      submitted: false
     }
   },
   computed: {
@@ -33,9 +122,9 @@ export default {
   methods: {
     register (e) {
       this.submitted = true
-      const { username, email, passwordOne, passwordTwo } = this
+      const { username, passwordOne, passwordTwo, firstName, middleInit, lastName, street, city, state, zipcode, phone, email, dob, gender, marital, race } = this
       const { dispatch } = this.$store
-      dispatch('authentication/register', { username, email, passwordOne, passwordTwo })
+      dispatch('authentication/register', { username, passwordOne, passwordTwo, firstName, middleInit, lastName, street, city, state, zipcode, phone, email, dob, gender, marital, race })
     }
   }
 }

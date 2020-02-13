@@ -2,13 +2,22 @@
   <div id="app">
     <header>
       <div class="row top-header">
-        <div class="row content">
-          <ul class="nav-links right" v-if="userStatus.localUser">
-            <li><a href="quote">Fuel Quote</a></li>
-            <li><a href="profile">Update Profile</a></li>
-            <li><a class="borderless" href="#"  v-on:click="logout()">Logout</a></li>
-          </ul>
-        </div>
+        <ul class="nav-links left">
+          <li><router-link to="/">Home</router-link></li>
+          <li class="menu-item-has-children">Patients
+            <ul class="sub-menu">
+              <li><router-link to="/search">Search Doctor</router-link></li>
+              <li><router-link to="/appointment">Book Appointment</router-link></li>
+              <li><router-link to="/dashboard">Patient Dashboard</router-link></li>
+              <li><router-link to="/profile">Profile Settings</router-link></li>
+            </ul
+          </li>
+          <li><router-link to="/admin">Admin</router-link></li>
+        </ul>
+        <a class="borderless" href="#"  v-on:click="logout()">Logout</a>
+      </div>
+      <div class="row breadcrumbs">
+        <breadcrumbs></breadcrumbs>
       </div>
       <div class="row main-header">
         <div class="row content"><h1>Medical Booking System</h1></div>
@@ -24,12 +33,18 @@
         </div>
       </div>
     </div>
-    <router-view></router-view>
+    <vue-page-transition name="fade">
+      <router-view/>
+    </vue-page-transition>
     <footer>Made with care by Team 5</footer>
   </div>
 </template>
-
 <script>
+import Vue from 'vue'
+import VuePageTransition from 'vue-page-transition'
+import VueBreadcrumbs from 'vue-breadcrumbs'
+Vue.use(VueBreadcrumbs)
+Vue.use(VuePageTransition)
 export default {
   name: 'App',
   computed: {
@@ -54,7 +69,6 @@ export default {
   }
 }
 </script>
-
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

@@ -8,22 +8,24 @@ ol, ul {list-style:none;margin:0;padding:0;}
 .left {float:left;}
 .right {float:right;}
 .hidden {display:none;}
+.sub-menu {display:none;}
+.menu-item-has-children:hover .sub-menu {display:inline-block;}
 
 /*body/html*/
-html, body {height:100%;background:#203746;font-family:'Ubuntu',sans-serif;}
-body {display:flex;flex-direction:column;}
+html, body {height:100%;background:#fff;font-family:'Ubuntu',sans-serif;}
+body {display:flex;flex-direction:column;color:#333;}
 .push-wrap {flex:1 0 auto;}
 
 /*header*/
-header {color:#ffffff;}
+header {color:#333;}
 header .top-header {font-size:16px;padding:10px 0 0;}
 header .main-header {padding:30px 0 10px;}
 header ul.nav-links {padding:0;}
-header ul.nav-links li {display:inline;margin:0 10px;}
-header ul.nav-links li a {font-weight:500;color:#ffffff;border:1.5px solid;border-radius:3px;padding:5px 10px;transition:all .15s ease-in;}
-header ul.nav-links li a.borderless {border:none;font-weight:300;}
-header ul.nav-links li a:hover {color:#ff6b0f;}
-
+header ul.nav-links > li {display:inline;margin:0 10px;}
+header ul.nav-links li a {font-weight:500;color:#333;padding:5px 10px;transition:all .15s ease-in;}
+header ul.nav-links li a:hover {color:#0ddfea;}
+header ul.nav-links .sub-menu {position:absolute;left:65px;top:20px;width:230px;text-align:left;padding:20px;z-index:2;}
+header ul.nav-links .sub-menu li {display:inline-block;padding:5px 10px;}
 
 /*footer*/
 footer {padding:50px 0;text-align:center;color:#ffffff;flex-shrink:0;}
@@ -97,7 +99,8 @@ h1 {font-size:40px;}
 .history-ctn table tbody tr:first-child {background:#cbe4ec;}
 span.title {font-weight:600;}
 
-
+/*App.vue*/
+.breadcrumbs {text-align:left;}
 
 
 /*mobile media queries*/

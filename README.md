@@ -7,6 +7,9 @@
 ``` bash
 # install dependencies
 npm install
+npm install vue-page-transition
+npm install vue-breadcrumbs
+npm install vuejs-datepicker --save
 
 # serve with hot reload at localhost:8080
 npm run dev
