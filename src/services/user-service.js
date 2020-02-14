@@ -30,14 +30,51 @@ function logout () {
   // remove user from local storage to log user out
   localStorage.removeItem('localUser')
 }
+// Format the Date
+function formatDate (birthdate) {
+  let dob = birthdate.toString()
+  var dateArr = dob.split(' ')
+  var month = dateArr[1]
+  var day = dateArr[2]
+  var year = dateArr[3]
+  if (month === 'Jan') {
+    month = '01'
+  } else if (month === 'Feb') {
+    month = '02'
+  } else if (month === 'Mar') {
+    month = '03'
+  } else if (month === 'Apr') {
+    month = '04'
+  } else if (month === 'May') {
+    month = '05'
+  } else if (month === 'Jun') {
+    month = '06'
+  } else if (month === 'Jul') {
+    month = '07'
+  } else if (month === 'Aug') {
+    month = '08'
+  } else if (month === 'Sep') {
+    month = '09'
+  } else if (month === 'Oct') {
+    month = '10'
+  } else if (month === 'Nov') {
+    month = '11'
+  } else if (month === 'Dec') {
+    month = '12'
+  } else {
+    month = '00'
+  }
+  return year + '-' + month + '-' + day
+}
 
 function register (email, password, firstName, middleInit, lastName, street, city, state, zipcode, phone, dob, gender, marital, race) {
+  dob = formatDate(dob)
+  alert(dob)
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password, firstName, middleInit, lastName, street, city, state, zipcode, phone, dob, gender, marital, race })
   }
-
   return fetch(`${config.apiUrl}/clients/register`, requestOptions)
     .then(handleResponse)
     .then(localUser => {

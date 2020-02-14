@@ -18,6 +18,7 @@
             name="lastName"
             placeholder="Last Name"
           />
+          <div class="test">{{ profile.lastName }}</div>
           <input
             type="text"
             v-model="profile.street"

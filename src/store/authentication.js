@@ -7,12 +7,9 @@ const initialState = localUser
   : { status: {}, localUser: null }
 
 // Validate the Registration Form
-const validateRegistration = (username, passwordOne, passwordTwo, firstName, middleInit, lastName, street, city, state, zipcode, phone, email, dob, gender, marital, race) => {
+const validateRegistration = (email, passwordOne, passwordTwo, firstName, middleInit, lastName, street, city, state, zipcode, phone, dob, gender, marital, race) => {
   let errors = []
   const re = /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  if (!username) {
-    errors.push(new Error('Username required.'))
-  }
   if (!re.test(email)) {
     errors.push(new Error('Valid email required.'))
   }
@@ -25,7 +22,6 @@ const validateRegistration = (username, passwordOne, passwordTwo, firstName, mid
   if (passwordOne !== passwordTwo) {
     errors.push(new Error('Passwords must match.'))
   }
-
   if (!firstName) {
     errors.push(new Error('First name required.'))
   }
@@ -46,9 +42,6 @@ const validateRegistration = (username, passwordOne, passwordTwo, firstName, mid
   }
   if (!phone) {
     errors.push(new Error('Phone number required.'))
-  }
-  if (!email) {
-    errors.push(new Error('Email required.'))
   }
   if (!dob) {
     errors.push(new Error('Date of birth required.'))
@@ -137,11 +130,11 @@ export const authentication = {
       router.push('/')
       dispatch('alert/success', 'Logged Out', { root: true })
     },
-    register ({dispatch, commit}, { username, passwordOne, passwordTwo, firstName, middleInit, lastName, street, city, state, zipcode, phone, email, dob, gender, marital, race }) {
-      commit('registerRequest', {username})
-      let errors = validateRegistration(username, passwordOne, passwordTwo, firstName, middleInit, lastName, street, city, state, zipcode, phone, email, dob, gender, marital, race)
+    register ({dispatch, commit}, { email, passwordOne, passwordTwo, firstName, middleInit, lastName, street, city, state, zipcode, phone, dob, gender, marital, race }) {
+      commit('registerRequest', {email, passwordOne, passwordTwo, firstName, middleInit, lastName, street, city, state, zipcode, phone, dob, gender, marital, race})
+      let errors = validateRegistration(email, passwordOne, passwordTwo, firstName, middleInit, lastName, street, city, state, zipcode, phone, dob, gender, marital, race)
       if (errors.length === 0) {
-        userService.register(username, passwordOne, firstName, middleInit, lastName, street, city, state, zipcode, phone, email, dob, gender, marital, race)
+        userService.register(email, passwordOne, firstName, middleInit, lastName, street, city, state, zipcode, phone, dob, gender, marital, race)
           .then(
             localUser => {
               commit('registerSuccess', localUser)

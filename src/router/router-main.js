@@ -76,13 +76,14 @@ export const router = new Router({
 
 router.beforeEach((to, from, next) => {
   var loggedIn = localStorage.getItem('localUser')
-  if(to.path == '/dashboard' || to.path == '/update-profile' || to.path == '/appointment') {
-    if(loggedIn) { 
-        next()
+  if (to.path === '/dashboard' || to.path === '/update-profile' || to.path === '/appointment') {
+    if (loggedIn) {
+      next()
+      return
     } else {
       router.push('/login')
+      return
     }
-    return
   }
   next()
 })

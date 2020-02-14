@@ -36,7 +36,6 @@ export default {
     }
   },
   created () {
-    
   },
   methods: {
     login (e) {

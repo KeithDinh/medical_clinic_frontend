@@ -22,8 +22,7 @@
           </select>
           <input type="text" v-model="zipcode" id="zipcode" name="zipcode" placeholder="Zipcode">
           <input type="text" v-model="phone" id="phone" name="phone" placeholder="Phone">
-          <input type="text" v-model="email" id="email" name="email" placeholder="Email">
-          <datepicker v-model="dob" name="dob" placeholder="Date of birth" format="yyyy-MM-dd"></datepicker>
+          <datepicker v-model="dob" name="dob" placeholder="Date of birth" format="MM/dd/yyyy"></datepicker>
           <input type="text" v-model="gender" id="gender" name="gender" placeholder="Gender">
           <input type="text" v-model="marital" id="marital" name="marital" placeholder="Marital Status">
           <input type="text" v-model="race" id="race" name="race" placeholder="Race / Ethnicity">

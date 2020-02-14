@@ -5,19 +5,20 @@
         <div class="logo left">LOGO</div>
         <ul class="nav-links left">
           <li><router-link to="/">Home</router-link></li>
-          <li class="menu-item-has-children">Patients
+          <li class="menu-item-has-children">
+            Patients
             <ul class="sub-menu">
               <li><router-link to="/search-doctor">Search Doctor</router-link></li>
               <li><router-link to="/appointment">Book Appointment</router-link></li>
               <li><router-link to="/dashboard">Patient Dashboard</router-link></li>
               <li><router-link to="/update-profile">Update Profile</router-link></li>
-            </ul
+            </ul>
           </li>
           <li><router-link to="/admin">Admin</router-link></li>
         </ul>
         <div class="links right">
           <a href="#" v-if="userStatus.localUser" v-on:click="logout()">Logout</a>
-          <router-link to="/login" v-else="userStatus.localUser">Login</router-link>
+          <router-link to="/login" v-else>Login</router-link>
         </div>
       </div>
       <div class="row container breadcrumbs">

@@ -31,7 +31,7 @@ if (module.hot) {
       modules: {
         newModuleAlert,
         newModuleAuthentication,
-        newModuleProfile,
+        newModuleProfile
       }
     })
   })
