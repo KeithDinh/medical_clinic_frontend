@@ -14,7 +14,7 @@ function login (email, password) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password })
   }
-  return fetch(`${config.apiUrl}/clients/authenticate`, requestOptions)
+  return fetch(`${config.apiUrl}/patients/authenticate`, requestOptions)
     .then(handleResponse)
     .then(localUser => {
       // login successful if there's a jwt token in the response
@@ -75,7 +75,7 @@ function register (email, password, firstName, middleInit, lastName, street, cit
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password, firstName, middleInit, lastName, street, city, state, zipcode, phone, dob, gender, marital, race })
   }
-  return fetch(`${config.apiUrl}/clients/register`, requestOptions)
+  return fetch(`${config.apiUrl}/patients/register`, requestOptions)
     .then(handleResponse)
     .then(localUser => {
     // Registrations is successful if a jwt token is returned

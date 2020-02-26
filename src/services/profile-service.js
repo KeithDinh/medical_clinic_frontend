@@ -14,7 +14,7 @@ function getProfile () {
     method: 'GET',
     headers: authorizationHeader()
   }
-  return fetch(`${config.apiUrl}/clients/profile`, requestOptions)
+  return fetch(`${config.apiUrl}/patients/profile`, requestOptions)
     .then(handleResponse)
 }
 
@@ -26,7 +26,7 @@ function postProfile (profile) {
     headers: reqHeader,
     body: JSON.stringify(profile)
   }
-  return fetch(`${config.apiUrl}/clients/profile`, requestOptions)
+  return fetch(`${config.apiUrl}/patients/profile`, requestOptions)
     .then(handleResponse)
 }
 
@@ -38,6 +38,6 @@ function putProfile (profile) {
     headers: reqHeader,
     body: JSON.stringify(profile)
   }
-  return fetch(`${config.apiUrl}/clients/profile`, requestOptions)
+  return fetch(`${config.apiUrl}/patients/profile`, requestOptions)
     .then(handleResponse)
 }
