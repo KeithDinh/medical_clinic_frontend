@@ -4,21 +4,21 @@
       <div class="row container top-header">
         <div class="logo left">LOGO</div>
         <ul class="nav-links left">
-          <li><router-link to="/">Home</router-link></li>
+          <li><a to="/">Home</a></li>
           <li class="menu-item-has-children">
             Patients
             <ul class="sub-menu">
-              <li><router-link to="/search-doctor">Search Doctor</router-link></li>
-              <li><router-link to="/appointment">Book Appointment</router-link></li>
-              <li><router-link to="/dashboard">Patient Dashboard</router-link></li>
-              <li><router-link to="/update-profile">Update Profile</router-link></li>
+              <li><a href="search-doctor">Search Doctor</a></li>
+              <li><a href="appointment">Book Appointment</a></li>
+              <li><a href="dashboard">Patient Dashboard</a></li>
+              <li><a href="update-profile">Update Profile</a></li>
             </ul>
           </li>
-          <li><router-link to="/admin">Admin</router-link></li>
+          <li><a to="admin">Admin</a></li>
         </ul>
         <div class="links right">
-          <a href="#" v-if="userStatus.localUser" v-on:click="logout()">Logout</a>
-          <router-link to="/login" v-else>Login</router-link>
+          <a href="login" v-if="userStatus.localUser" v-on:click="logout()">Logout</a>
+          <a href="login" v-else>Login</a>
         </div>
       </div>
       <div class="row container breadcrumbs">
@@ -43,10 +43,8 @@
 </template>
 <script>
 import Vue from 'vue'
-import VuePageTransition from 'vue-page-transition'
 import VueBreadcrumbs from 'vue-breadcrumbs'
 Vue.use(VueBreadcrumbs)
-Vue.use(VuePageTransition)
 export default {
   name: 'App',
   computed: {

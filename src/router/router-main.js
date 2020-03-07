@@ -22,54 +22,45 @@ export const router = new Router({
     {
       path: '/',
       name: 'Main',
-      component: Main,
-      meta: {transition: 'fade', breadcrumb: 'Home'}
+      component: Main
     },
     {
       path: '/login',
       name: 'Login',
-      component: Login,
-      meta: {transition: 'fade', breadcrumb: 'Login'}
+      component: Login
     },
     {
       path: '/register',
       name: 'Register',
-      component: Register,
-      meta: {transition: 'fade', breadcrumb: 'Register'}
+      component: Register
     },
     {
       path: '/dashboard',
       name: 'Dashboard',
-      component: Dashboard,
-      meta: {transition: 'fade', breadcrumb: 'Dashboard'}
+      component: Dashboard
     },
     {
       path: '/update-profile',
       name: 'UpdateProfile',
-      component: UpdateProfile,
-      meta: {transition: 'fade', breadcrumb: 'Update Profile'}
+      component: UpdateProfile
     },
     {
       path: '/appointment',
       name: 'BookAppointment',
-      component: BookAppointment,
-      meta: {transition: 'fade', breadcrumb: 'Book Appointment'}
+      component: BookAppointment
     },
     {
       path: '/search-doctor',
       name: 'SearchDoctor',
-      component: SearchDoctor,
-      meta: {transition: 'fade', breadcrumb: 'Search Doctor'}
+      component: SearchDoctor
     },
     {
       path: '/404',
-      component: NotFound,
-      meta: {transition: 'fade'}
+      component: NotFound
     },
     {
       path: '*',
-      redirect: '/404',
-      meta: {transition: 'fade'}
+      redirect: '/404'
     }
   ]
 })

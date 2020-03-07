@@ -41,7 +41,7 @@ export default {
     ]),
     createProfile (e) {
       this.submitted = true
-      const {profile} = this
+      const { profile } = this
       const { dispatch } = this.$store
       // An Action Loaded in From mapActions
       dispatch('profile/createProfile', profile)
