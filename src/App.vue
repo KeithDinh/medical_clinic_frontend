@@ -25,7 +25,7 @@
         <breadcrumbs></breadcrumbs>
       </div>
     </header>
-    <div class="row content main">
+    <div class="row main">
       <div class="row return-messages" v-if="alert.messages">
         <div class="message error" v-if="alert.type == 'alert-danger'">
           <div v-for="(message, index) in alert.messages" :key="index">{{ message }}</div>
@@ -77,4 +77,5 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+.return-messages{width: 150px;}
 </style>

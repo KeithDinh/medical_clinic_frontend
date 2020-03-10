@@ -1,21 +1,17 @@
 <template>
-  <div class="row">
-    <div class="row form">
-      <div v-if="profile" class="row form-ctn">
-        <div class="row form-title">Client Profile</div>
-        <div>{{ profile.firstName }}</div>
-        <div>{{ profile.middleInit }}</div>
-        <div>{{ profile.lastName }}</div>
-        <div>{{ profile.street }}</div>
-        <div>{{ profile.city }}</div>
-        <div>{{ profile.state }}</div>
-        <div>{{ profile.zipcode }}</div>
-        <div>{{ profile.phone }}</div>
-        <div>{{ profile.dob }}</div>
-        <div>{{ profile.gender }}</div>
-        <div>{{ profile.marital }}</div>
-        <div>{{ profile.race }}</div>
-      </div>
+  <div id="profile">
+      <div v-if="profile" style="margin: 30px 0 20px;">
+        <div
+          <img src="https://image.flaticon.com/icons/svg/758/758935.svg" width="100" alt="">
+        </div>
+        <div class="patient-name">{{ profile.firstName }}  <span>{{ profile.middleInit }}</span> <span>{{ profile.lastName }}</span></div>
+        <p>{{ profile.street }}<br>{{ profile.city }}, {{ profile.state }} , {{ profile.zipcode }}</p>
+        <div>Phone: {{ profile.phone }}</div>
+        <div>DOB: {{ profile.dob }}</div>
+        <div>Gender: {{ profile.gender }}</div>
+        <div>Status: {{ profile.marital }}</div>
+        <div>Race: {{ profile.race }}</div>
+        <p></p>
     </div>
   </div>
 </template>
@@ -24,6 +20,7 @@
 import { mapState, mapActions } from 'vuex'
 
 export default {
+
   name: 'Profile',
   created () {
     // An Action Loaded in From mapActions
@@ -45,7 +42,18 @@ export default {
       const { dispatch } = this.$store
       // An Action Loaded in From mapActions
       dispatch('profile/createProfile', profile)
+    },
+    parseDate (str){
+      var date = new Date(str);
+      return str(date.getUTCDay(),date.getUTCDate(), date.getFullYear())
     }
   }
 }
 </script>
+<style media="screen">
+.patient-name{
+  font-weight: bold;
+  font-size: 20px;
+
+}
+</style>
