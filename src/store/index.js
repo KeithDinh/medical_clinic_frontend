@@ -6,6 +6,7 @@ import { authentication } from './authentication'
 import { profile } from './profile'
 import { dates } from './dates'
 import { doctors } from './doctors'
+import { offices } from './offices'
 
 Vue.use(Vuex)
 
@@ -15,7 +16,8 @@ export const store = new Vuex.Store({
     authentication,
     profile,
     dates,
-    doctors
+    doctors,
+    offices
   }
 })
 
@@ -32,6 +34,7 @@ if (module.hot) {
     const newModuleProfile = require('./profile').default
     const newModuleDates = require('./dates').default
     const newModuleDoctors = require('./doctors').default
+    const newModuleOffices = require('./offices').default
     // swap in the new modules and mutations
     store.hotUpdate({
       modules: {
@@ -39,7 +42,8 @@ if (module.hot) {
         newModuleAuthentication,
         newModuleProfile,
         newModuleDates,
-        newModuleDoctors
+        newModuleDoctors,
+        newModuleOffices
       }
     })
   })

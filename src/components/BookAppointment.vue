@@ -12,7 +12,7 @@
             </select>
             {{ doctor.toString() }}
             <select type="text" v-model="office" id="office" name="office">
-              <option v-for="(off, index) in offs" :key="index" :selected="office === off">{{ off }}</option>
+              <option v-for="(off, index) in offices" :key="index" :selected="office === off">{{ off.office_name }}</option>
             </select>
             <datepicker v-model="date" name="date" placeholder="Select Date" format="MM/dd/yyyy"></datepicker>
             <select type="text" v-model="timeslots" id="timeslots" name="timeslots">
@@ -41,7 +41,7 @@ export default {
   },
   watch: {
     doctor: function (value) {
-      this.loadDates(value)
+      this.loadOffices(value)
     }
   },
   created () {
@@ -54,6 +54,9 @@ export default {
     }),
     ...mapState('doctors', {
       doctors: state => state.doctorsList
+    }),
+    ...mapState('offices', {
+      offices: state => state.officeList
     })
   },
   methods: {
@@ -62,7 +65,10 @@ export default {
     ]),
     ...mapActions('dates', [
       'loadDates'
-    ])
+    ]),
+    ...mapActions('offices', [
+      'loadOffices'
+    ]),
   }
 }
 </script>
