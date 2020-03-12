@@ -8,11 +8,11 @@
             <div id="firstName">First Name: {{ profile.firstName }}</div>
             <div id="lastName">Last Name: {{ profile.lastName }}</div>
             <select type="text" v-model="doctor" id="doctor" name="doctor">
-              <option v-for="doc in doctors" v-bind:value="doc.doctor_id.toString()">{{ doc.first_name }} {{ doc.last_name }}</option>
+              <option v-for="doc in doctors" v-bind:value="doc.doctor_id">{{ doc.first_name }} {{ doc.last_name }}</option>
             </select>
             {{ doctor.toString() }}
-            <select type="text" v-model="office" id="office" name="office">
-              <option v-for="(off, index) in offices" :key="index" :selected="office === off">{{ off.office_name }}</option>
+            <select type="text" v-model="office" id="office" name="office" @change="dates()">
+              <option v-for="off in offices" v-bind:value="off.office_id">{{ off.office_name }}</option>
             </select>
             <datepicker v-model="date" name="date" placeholder="Select Date" format="MM/dd/yyyy"></datepicker>
             <select type="text" v-model="timeslots" id="timeslots" name="timeslots">
@@ -36,12 +36,17 @@ export default {
   },
   data: function () {
     return {
-      doctor: ''
+      doctor: '',
+      office: ''
     };
   },
   watch: {
     doctor: function (value) {
       this.loadOffices(value)
+    },
+    office: function (value) {
+      let d = [value, doctor.value]
+      this.loadDates(d)
     }
   },
   created () {
@@ -57,18 +62,22 @@ export default {
     }),
     ...mapState('offices', {
       offices: state => state.officeList
+    }),
+    ...mapState('dates', {
+      dates: state => state.datesList
     })
+
   },
   methods: {
     ...mapActions('doctors', [
       'loadDoctors'
     ]),
-    ...mapActions('dates', [
-      'loadDates'
-    ]),
     ...mapActions('offices', [
       'loadOffices'
     ]),
+    ...mapActions('dates', [
+      'loadDates'
+    ])
   }
 }
 </script>

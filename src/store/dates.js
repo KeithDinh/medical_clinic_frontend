@@ -23,9 +23,9 @@ export const dates = {
   },
   actions: {
     loadDates (
-      { dispatch, commit }, doctor_id ) {
+      { dispatch, commit }, d) {
       commit('datesRequest')
-      datesService.getDates(doctor_id)
+      datesService.getDates(d[0], d[1])
         .then(
           response => {
             const dates = response.dates
