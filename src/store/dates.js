@@ -3,12 +3,8 @@ import { router } from '../router'
 
 const initialState = {
   datesStatus: {},
-  dates: []
+  datesList: []
 }
-
-/*const formatDates = dates => {
-//format the dates to work with vue-fullcalendar
-}*/
 
 export const dates = {
   namespaced: true,
@@ -19,7 +15,7 @@ export const dates = {
     },
     datesSuccess (state, dates) {
       state.datesStatus = { loadedDates: true }
-      state.dates = dates
+      state.datesList = dates
     },
     datesFailure (state) {
       state.datesStatus = { datesFailure: true }
@@ -27,9 +23,9 @@ export const dates = {
   },
   actions: {
     loadDates (
-      { dispatch, commit }) {
+      { dispatch, commit }, doctor_id ) {
       commit('datesRequest')
-      datesService.getDates()
+      datesService.getDates(doctor_id)
         .then(
           response => {
             const dates = response.dates

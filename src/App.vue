@@ -34,9 +34,7 @@
           <div>{{ alert.messages }}</div>
         </div>
       </div>
-      <vue-page-transition name="fade">
-        <router-view/>
-      </vue-page-transition>
+      <router-view/>
     </div>
     <footer>Made with care by Team 5</footer>
   </div>
