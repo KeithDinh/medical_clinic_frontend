@@ -14,7 +14,7 @@
             <select type="text" v-model="office" id="office" name="office" @change="dates()">
               <option v-for="off in offices" v-bind:value="off.office_id">{{ off.office_name }}</option>
             </select>
-            <datepicker v-model="date" name="date" placeholder="Select Date" format="MM/dd/yyyy"></datepicker>
+            <datepicker :disabled-dates="disabledDates" v-model="date" name="date" placeholder="Select Date" format="MM/dd/yyyy"></datepicker>
             <select type="text" v-model="timeslots" id="timeslots" name="timeslots">
               <option v-for="(slot, index) in slots" :key="index" :selected="timeslots === slot">{{ slot }}</option>
             </select>
@@ -37,7 +37,8 @@ export default {
   data: function () {
     return {
       doctor: '',
-      office: ''
+      office: '',
+      date: ''
     };
   },
   watch: {
@@ -64,7 +65,7 @@ export default {
       offices: state => state.officeList
     }),
     ...mapState('dates', {
-      dates: state => state.datesList
+      disabledDates: state => state.disabledDates
     })
 
   },
