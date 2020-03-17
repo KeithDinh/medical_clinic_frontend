@@ -11,13 +11,14 @@
               <option v-for="doc in doctors" v-bind:value="doc.doctor_id">{{ doc.first_name }} {{ doc.last_name }}</option>
             </select>
             {{ doctor.toString() }}
-            <select type="text" v-model="office" id="office" name="office" @change="dates()">
+            <select type="text" v-model="office" id="office" name="office">
               <option v-for="off in offices" v-bind:value="off.office_id">{{ off.office_name }}</option>
             </select>
             <datepicker :disabled-dates="disabledDates" v-model="date" name="date" placeholder="Select Date" format="MM/dd/yyyy"></datepicker>
-            <select type="text" v-model="timeslots" id="timeslots" name="timeslots">
-              <option v-for="(slot, index) in slots" :key="index" :selected="timeslots === slot">{{ slot }}</option>
+            <select type="text" v-model="timeslot" id="timeslot" name="timeslot">
+              <option v-for="slot in timeslots" v-bind:value="slot.slot">{{ slot.time }}</option>
             </select>
+            {{ timeslot.toString() }}
             <textarea type="text" v-model="reason" placeholder="Reason for visit"></textarea>
             <button id="submit" v-on:click="book()">BOOK APPOINTMENT</button>
           </div>
@@ -38,7 +39,10 @@ export default {
     return {
       doctor: '',
       office: '',
-      date: ''
+      date: '',
+      timeslot: '',
+      reason: '',
+      bookingMethod: 'web'
     };
   },
   watch: {
@@ -48,6 +52,9 @@ export default {
     office: function (value) {
       let d = [value, doctor.value]
       this.loadDates(d)
+    },
+    date: function (date) {
+      this.loadTimeslots(date)
     }
   },
   created () {
@@ -65,9 +72,9 @@ export default {
       offices: state => state.officeList
     }),
     ...mapState('dates', {
-      disabledDates: state => state.disabledDates
+      disabledDates: state => state.disabledDates,
+      timeslots: state => state.timeslots
     })
-
   },
   methods: {
     ...mapActions('doctors', [
@@ -77,8 +84,14 @@ export default {
       'loadOffices'
     ]),
     ...mapActions('dates', [
-      'loadDates'
-    ])
+      'loadDates',
+      'loadTimeslots'
+    ]),
+    book (e) {
+      const { doctor, office, date, timeslot, reason, bookingMethod } = this
+      const { dispatch } = this.$store
+      dispatch('appointment/setAppointment', { doctor, office, date, timeslot, reason, bookingMethod })
+    }
   }
 }
 </script>
