@@ -10,15 +10,18 @@
             <select type="text" v-model="doctor" id="doctor" name="doctor">
               <option v-for="doc in doctors" v-bind:value="doc.doctor_id">{{ doc.first_name }} {{ doc.last_name }}</option>
             </select>
-            {{ doctor.toString() }}
             <select type="text" v-model="office" id="office" name="office">
               <option v-for="off in offices" v-bind:value="off.office_id">{{ off.office_name }}</option>
+            </select>
+            <label for="referred">I was referred by another doctor</label>
+            <input type="checkbox" v-model="referred" name="referred">
+            <select type="text" v-if="referred" v-model="refDoctor" id="refDoctor" name="refDoctor">
+              <option v-for="doc in doctors" v-bind:value="doc.doctor_id">{{ doc.first_name }} {{ doc.last_name }}</option>
             </select>
             <datepicker :disabled-dates="disabledDates" v-model="date" name="date" placeholder="Select Date" format="MM/dd/yyyy"></datepicker>
             <select type="text" v-model="timeslot" id="timeslot" name="timeslot">
               <option v-for="slot in timeslots" v-bind:value="slot.slot">{{ slot.time }}</option>
             </select>
-            {{ timeslot.toString() }}
             <textarea type="text" v-model="reason" placeholder="Reason for visit"></textarea>
             <button id="submit" v-on:click="book()">BOOK APPOINTMENT</button>
           </div>
@@ -39,6 +42,8 @@ export default {
     return {
       doctor: '',
       office: '',
+      referred: false,
+      refDoctor: '0',
       date: '',
       timeslot: '',
       reason: '',
@@ -88,9 +93,9 @@ export default {
       'loadTimeslots'
     ]),
     book (e) {
-      const { doctor, office, date, timeslot, reason, bookingMethod } = this
+      const { doctor, office, refDoctor, date, timeslot, reason, bookingMethod } = this
       const { dispatch } = this.$store
-      dispatch('appointment/setAppointment', { doctor, office, date, timeslot, reason, bookingMethod })
+      dispatch('appointment/setAppointment', { doctor, office, refDoctor, date, timeslot, reason, bookingMethod })
     }
   }
 }

@@ -7,11 +7,11 @@ export const appointmentService = {
   postAppointment
 }
 
-function postAppointment (doctor, office, date, timeslot, reason, bookingMethod) {
+function postAppointment (doctor, office, refDoctor, date, timeslot, reason, bookingMethod) {
   const requestOptions = {
     method: 'POST',
     headers: { 'Authorization': 'Bearer ' + userToken(), 'Content-Type': 'application/json' },
-    body: JSON.stringify({ doctor, office, date, timeslot, reason, bookingMethod })
+    body: JSON.stringify({ doctor, office, refDoctor, date, timeslot, reason, bookingMethod })
   }
   return fetch(`${config.apiUrl}/patients/appointment`, requestOptions)
     .then(handleResponse)

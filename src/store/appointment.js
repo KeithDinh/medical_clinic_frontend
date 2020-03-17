@@ -23,12 +23,12 @@ export const appointment = {
   },
   actions: {
     setAppointment (
-      { dispatch, commit }, { doctor, office, date, timeslot, reason, bookingMethod }) {
+      { dispatch, commit }, { doctor, office, refDoctor, date, timeslot, reason, bookingMethod }) {
       commit('apptRequest')
-      appointmentService.postAppointment(doctor, office, date, timeslot, reason, bookingMethod)
+      appointmentService.postAppointment(doctor, office, refDoctor, date, timeslot, reason, bookingMethod)
       .then(
         response => {
-          commit('apptSuccess', { doctor, office, date, timeslot, reason, bookingMethod })
+          commit('apptSuccess', { doctor, office, refDoctor, date, timeslot, reason, bookingMethod })
           dispatch('alert/success', 'Appointment Set', { root: true })
         },
         error => {
