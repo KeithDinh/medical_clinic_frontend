@@ -1,10 +1,14 @@
 <template lang="html">
   <div class="info_container">
     <div class="navigation-button">
-    <ul>
-      <li>Appointments</li>
-      <li>Prescriptions</li>
-      <li>Medical Records</li>
+      <tabs :options="{ useUrlFragment: false }" @clicked="tabClicked" @changed="tabChanged">
+        <tab name="Appointments">
+          some stuff here
+        </tab>
+        <tab name="Prescriptions">
+          pres stuff here
+        </tab>
+      </tabs>
     </ul>
     </div>
     <div class="appointments">
@@ -36,8 +40,16 @@
 </template>
 
 <script>
+import Vue from 'vue';
+import {Tabs, Tab} from 'vue-tabs-component';
+ 
+Vue.component('tabs', Tabs);
+Vue.component('tab', Tab);
 export default {
-  name: 'Info'
+  name: 'Info',
+  components: {
+    Tabs
+  }
 }
 </script>
 

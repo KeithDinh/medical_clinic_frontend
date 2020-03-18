@@ -9,6 +9,7 @@
 npm install
 npm install vue-breadcrumbs
 npm install vuejs-datepicker
+npm install vue-tabs-component
 
 # serve with hot reload at localhost:8080
 npm run dev
