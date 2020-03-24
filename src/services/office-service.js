@@ -5,23 +5,23 @@ const handleResponse = responseHandler.handleResponse
 
 export const officeService = {
   getOffices,
-  getOffice
+  getOfficesByDoctor
 }
 
-function getOffice(){
+function getOffices(){
     const requestOptions = {
     method: 'GET',
     headers: authorizationHeader()
-  }
-  return fetch(`${config.apiUrl}/doctors/offices?did=`, requestOptions)
+  }// FIX THIS ENDPOINT
+  return fetch(`${config.apiUrl}/offices/list`, requestOptions)
     .then(handleResponse)
 }
 
-function getOffices (doctor_id) {
+function getOfficesByDoctor (doctor_id) {
   const requestOptions = {
     method: 'GET',
     headers: authorizationHeader()
   }
-  return fetch(`${config.apiUrl}/doctors/offices?did=` + doctor_id, requestOptions)
+  return fetch(`${config.apiUrl}/offices/doctor?did=` + doctor_id, requestOptions)
     .then(handleResponse)
 }

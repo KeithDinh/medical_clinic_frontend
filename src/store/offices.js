@@ -22,10 +22,10 @@ export const offices = {
     }
   },
   actions: {
-    loadOffices (
+    loadOfficesByDoctor (
       { dispatch, commit }, doctor_id ) {
       commit('officeRequest')
-      officeService.getOffices(doctor_id)
+      officeService.getOfficesByDoctor(doctor_id)
         .then(
           response => {
             const offices = response.offices
@@ -38,23 +38,21 @@ export const offices = {
           }
         )
     },
-  
-    loadOffice(
-      {dispatch, commit},)
-        {
-          commit('officeRequest')
-          officeService.getOffice()
-            .then(
-              response => {
-                const offices = response.offices
-                commit('officeSuccess', offices)
-                dispatch('alert/success', 'Offices Retreived', { root: true })
-              },
-              error => {
-                commit('officeFailure')
-                dispatch('alert/error', error, { root: true })
-              }
-            )    
-      }
+    loadOffices (
+      { dispatch, commit } ) {
+      commit('officeRequest')
+      officeService.getOffices()
+        .then(
+          response => {
+            const offices = response.offices
+            commit('officeSuccess', offices)
+            dispatch('alert/success', 'Offices Retreived', { root: true })
+          },
+          error => {
+            commit('officeFailure')
+            dispatch('alert/error', error, { root: true })
+          }
+        )    
+    }
   }
 }
