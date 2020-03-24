@@ -4,7 +4,17 @@ import { responseHandler } from './response-handler'
 const handleResponse = responseHandler.handleResponse
 
 export const officeService = {
-  getOffices
+  getOffices,
+  getOffice
+}
+
+function getOffice(){
+    const requestOptions = {
+    method: 'GET',
+    headers: authorizationHeader()
+  }
+  return fetch(`${config.apiUrl}/doctors/offices?did=`, requestOptions)
+    .then(handleResponse)
 }
 
 function getOffices (doctor_id) {
