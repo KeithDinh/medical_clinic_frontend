@@ -37,6 +37,24 @@ export const offices = {
             dispatch('alert/error', error, { root: true })
           }
         )
-    }
+    },
+  
+    loadOffice(
+      {dispatch, commit},)
+        {
+          commit('officeRequest')
+          officeService.getOffice()
+            .then(
+              response => {
+                const offices = response.offices
+                commit('officeSuccess', offices)
+                dispatch('alert/success', 'Offices Retreived', { root: true })
+              },
+              error => {
+                commit('officeFailure')
+                dispatch('alert/error', error, { root: true })
+              }
+            )    
+      }
   }
 }
