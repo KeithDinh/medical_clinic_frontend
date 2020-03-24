@@ -380,3 +380,16 @@ section.main {
     width: 50%;
   }
 }
+
+/* ****************** TAB ***************** */
+.tabs-component-tabs {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 30px 20px;
+}
+
+.tab-component-tab {
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+}

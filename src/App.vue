@@ -2,9 +2,9 @@
   <div id="app">
     <header>
       <div class="row container top-header">
-        <div class="logo left">LOGO</div>
+        <div class="logo left" >LOGO</div>
         <ul class="nav-links left">
-          <li><a to="/">Home</a></li>
+          <li><a to="/" href="/">Home</a></li>
           <li class="menu-item-has-children">
             Patients
             <ul class="sub-menu">
@@ -16,7 +16,7 @@
           </li>
           <li><a to="admin">Admin</a></li>
         </ul>
-        <div class="links right">
+        <div style='margin-top: 20px;' class="links right">
           <a href="login" v-if="userStatus.localUser" v-on:click="logout()">Logout</a>
           <a href="login" v-else>Login</a>
         </div>
@@ -28,7 +28,8 @@
     <div class="row main">
       <div class="row return-messages" v-if="alert.messages">
         <div class="message error" v-if="alert.type == 'alert-danger'">
-          <div v-for="(message, index) in alert.messages" :key="index">{{ message }}</div>
+          <!-- <div v-for="(message, index) in alert.messages" :key="index">{{ message }}</div> -->
+          <div>{{ alert.messages }}</div>
         </div>
         <div class="message success" v-if="alert.type == 'alert-success'">
           <div>{{ alert.messages }}</div>
