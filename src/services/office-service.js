@@ -12,7 +12,7 @@ function getOffices(){
     const requestOptions = {
     method: 'GET',
     headers: authorizationHeader()
-  }// FIX THIS ENDPOINT
+  }
   return fetch(`${config.apiUrl}/offices/list`, requestOptions)
     .then(handleResponse)
 }

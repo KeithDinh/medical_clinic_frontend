@@ -52,7 +52,7 @@ export default {
   },
   watch: {
     doctor: function (value) {
-      this.loadOffices(value)
+      this.loadOfficesByDoctor(value)
     },
     office: function (value) {
       let d = [value, doctor.value]
@@ -86,7 +86,7 @@ export default {
       'loadDoctors'
     ]),
     ...mapActions('offices', [
-      'loadOffices'
+      'loadOfficesByDoctor'
     ]),
     ...mapActions('dates', [
       'loadDates',

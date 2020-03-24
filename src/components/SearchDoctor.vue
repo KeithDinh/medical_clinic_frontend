@@ -29,14 +29,14 @@ export default {
   },
   watch: {
     office: function (value) {
-      this.loadDoctorsByOffice()
+      this.loadDoctorsByOffice(value)
     }
   },
   created () {
-    
+    this.loadOffices()
   },
   computed: {
-      ...mapState('doctors', {
+    ...mapState('doctors', {
       doctors: state => state.doctorList
     }),
     ...mapState('offices', {
