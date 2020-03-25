@@ -5,19 +5,27 @@
           <img src="https://image.flaticon.com/icons/svg/758/758935.svg" width="100" alt="">
         </div>
         <div class="patient-name">{{ profile.firstName }}  <span>{{ profile.middleInit }}</span> <span>{{ profile.lastName }}</span></div>
-        <p>{{ profile.street }}<br>{{ profile.city }}, {{ profile.state }} , {{ profile.zipcode }}</p>
-        <div>Phone: {{ profile.phone }}</div>
-        <div>DOB: {{ profile.dob }}</div>
-        <div>Gender: {{ profile.gender }}</div>
-        <div>Status: {{ profile.marital }}</div>
-        <div>Race: {{ profile.race }}</div>
+        <p class="patient-MR"><strong>MRN: </strong>{{profile.patient_id}}</p>
+
+        <p class="patient-addr">{{ profile.street }}<br>{{ profile.city }}, {{ profile.state }} , {{ profile.zipcode }}</p>
+        <hr size="2" width="80%" align="center" noshade="false">
+        <div class="text"><p class="align-left">Phone: </p><p class="align-right">{{ profile.phone }}</p></div>
+        <div style="clear:both;"></div>
+        <div class="text"><p class="align-left">DOB </p><p class="align-right">{{ profile.dob }}</p></div>
+        <div style="clear:both;"></div>
+        <div class="text"><p class="align-left">Gender: </p><p class="align-right">{{ profile.gender }}</p></div>
+        <div style="clear:both;"></div>
+        <div class="text"><p class="align-left">Marital Status: </p><p class="align-right">{{ profile.marital }}</p></div>
+        <div style="clear:both;"></div>
+        <div class="text"><p class="align-left">Race: </p><p class="align-right">{{ profile.race }}</p></div>
+        <div style="clear:both;"></div>
         <p></p>
     </div>
   </div>
 </template>
 <script>
 
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions,v } from 'vuex'
 
 export default {
 
@@ -54,6 +62,27 @@ export default {
 .patient-name{
   font-weight: bold;
   font-size: 20px;
+}
+.patient-MR{
+  font-size:15px;
+  color:"#6f92a2";
+}
+.patient-addr{
+  font-size:15px;
+  }
+.text{
+  display:block;
+  margin-left:25px;
+  margin-right:25px;
+  font-size:14px;
+}
+.align-left{
+  float:left;
+
+  }
+.align-right{
+  float:right;
+  color:#898790
 
 }
 </style>
