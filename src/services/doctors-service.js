@@ -4,7 +4,8 @@ import { responseHandler } from './response-handler'
 const handleResponse = responseHandler.handleResponse
 
 export const doctorsService = {
-  getDoctors
+  getDoctors,
+  getDoctorsByOffice
 }
 
 function getDoctors () {
