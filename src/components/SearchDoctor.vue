@@ -39,6 +39,9 @@ export default {
     this.loadOffices()
   },
   computed: {
+    ...mapState('doctors', {
+      doctors: state => state.doctorList
+    }),
     ...mapState('offices', {
       offices: state => state.officeList
     }),
