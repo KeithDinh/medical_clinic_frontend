@@ -1,29 +1,78 @@
 <template>
   <div class="row">
-    <div class="row form">
-      <div class="row form-ctn">
-        <div class="row form-title">Book Appointment</div>
+        <h2 class='dashboard_header'>Book Appointment</h2>
+
+    <div class="row form" >
+      <div class="row form-ctn" style="padding-top:10px">
         <form @submit.prevent="handleSubmit">
           <div id="appointment-form" class="row forms">
-            <div id="firstName">First Name: {{ profile.firstName }}</div>
-            <div id="lastName">Last Name: {{ profile.lastName }}</div>
-            <select type="text" v-model="doctor" id="doctor" name="doctor">
-              <option v-for="doc in doctors" v-bind:value="doc.doctor_id">{{ doc.first_name }} {{ doc.last_name }}</option>
-            </select>
-            <select type="text" v-model="office" id="office" name="office">
-              <option v-for="off in offices" v-bind:value="off.office_id">{{ off.office_name }}</option>
-            </select>
-            <label for="referred">I was referred by another doctor</label>
-            <input type="checkbox" v-model="referred" name="referred">
-            <select type="text" v-if="referred" v-model="refDoctor" id="refDoctor" name="refDoctor">
-              <option v-for="doc in doctors" v-bind:value="doc.doctor_id">{{ doc.first_name }} {{ doc.last_name }}</option>
-            </select>
-            <datepicker :disabled-dates="disabledDates" v-model="date" name="date" placeholder="Select Date" format="MM/dd/yyyy"></datepicker>
-            <select type="text" v-model="timeslot" id="timeslot" name="timeslot">
-              <option v-for="slot in timeslots" v-bind:value="slot.slot">{{ slot.time }}</option>
-            </select>
-            <textarea type="text" v-model="reason" placeholder="Reason for visit"></textarea>
-            <button id="submit" v-on:click="book()">BOOK APPOINTMENT</button>
+            <div class="card card-container" style="display:flex;">
+                <div>
+                  <img src="https://image.flaticon.com/icons/svg/758/758935.svg" width="80" alt="">
+                </div>
+                <div style="display:block; margin:10px 30px;text-align:left">
+                <div id="firstName">First Name: {{ profile.firstName }}</div><br>
+                <div id="lastName">Last Name: {{ profile.lastName }}</div>
+                </div>
+           </div>
+
+           <div class="card card-container" style="margin-top:30px">
+
+             <div class="row form" >
+              <div class="col-30" style="text-align:center">
+                <label>Select a Medical Office</label>
+              </div>
+              <div class="col-70">
+                  <select type="text" v-model="office" id="office" name="office">
+                    <option v-for="off in offices" v-bind:value="off.office_id">{{ off.office_name }}</option>
+                  </select>
+              </div>
+              <div style="clear:both;"></div>
+            </div>
+
+             <div class="row form" >
+              <div class="col-30" style="text-align:center">
+                <label>Select a Doctor</label>
+              </div>
+              <div class="col-70">
+                  <select type="text" v-model="doctor" id="doctor" name="doctor">
+                    <option v-for="doc in doctors" v-bind:value="doc.doctor_id">{{ doc.first_name }} {{ doc.last_name }}</option>
+                  </select>
+              </div>
+              <div style="clear:both;"></div>
+            </div>
+
+             <div class="row form" >
+              <div class="col-30" style="text-align:center">
+                <label for="referred">I was referred by another doctor</label>
+              </div>
+              <div class="col-70">
+                <input type="checkbox" v-model="referred" name="referred">
+                <select type="text" v-if="referred" v-model="refDoctor" id="refDoctor" name="refDoctor">
+                  <option v-for="doc in doctors" v-bind:value="doc.doctor_id">{{ doc.first_name }} {{ doc.last_name }}</option>
+                </select>
+              </div>
+              <div style="clear:both;"></div>
+            </div>
+
+             <div class="row form" >
+              <div class="col-30" style="text-align:center">
+                <label>Date</label>
+              </div>
+              <div class="col-70">
+                <datepicker :disabled-dates="disabledDates" v-model="date" name="date" placeholder="Select Date" format="MM/dd/yyyy"></datepicker>
+                <select type="text" v-model="timeslot" id="timeslot" name="timeslot">
+                  <option v-for="slot in timeslots" v-bind:value="slot.slot">{{ slot.time }}</option>
+                </select>
+              </div>
+              <div style="clear:both;"></div>
+            </div>
+              <textarea type="text" v-model="reason" placeholder="Reason for visit"></textarea>
+              <div style="padding:30px">
+              <button id="submit" v-on:click="book()">BOOK APPOINTMENT</button>
+              </div>
+            </div>
+
           </div>
         </form>
       </div>

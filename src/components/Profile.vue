@@ -6,7 +6,6 @@
         </div>
         <div class="patient-name">{{ profile.firstName }}  <span>{{ profile.middleInit }}</span> <span>{{ profile.lastName }}</span></div>
         <p class="patient-MR"><strong>MRN: </strong>{{profile.patient_id}}</p>
-
         <p class="patient-addr">{{ profile.street }}<br>{{ profile.city }}, {{ profile.state }} , {{ profile.zipcode }}</p>
         <hr size="2" width="80%" align="center" noshade="false">
         <div class="text"><p class="align-left">Phone: </p><p class="align-right">{{ profile.phone }}</p></div>
@@ -57,6 +56,8 @@ export default {
     }
   }
 }
+
+
 </script>
 <style media="screen">
 .patient-name{
