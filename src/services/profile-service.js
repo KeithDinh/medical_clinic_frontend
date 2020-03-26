@@ -9,6 +9,7 @@ export const profileService = {
   putProfile
 }
 
+
 function getProfile () {
   const requestOptions = {
     method: 'GET',
