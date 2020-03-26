@@ -2,8 +2,8 @@
       <div class="row">
         <h2 class='dashboard_header'>Dashboard</h2>
         <div class="db">
-          <Profile class="db1" />
-          <Info class="db2" />
+          <Profile class="db-col1 card" />
+          <Info class="db-col2 card" />
         </div>
       </div>
 </template>

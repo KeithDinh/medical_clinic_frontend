@@ -428,10 +428,17 @@ section.main {
   width: 70%;
   margin-top: 6px;
 }
+
+.db{display: flex;  margin-top: 30px;}
+.db>*{background-color: #fff;border: 1px}
+.db-col1{width: 25%; margin: 0 15px 0 30px;}
+.db-col2{width: 75%; margin: 0 30px 0 15px;}
 label{
   display:inline-block;
   padding:12px;
 }
+
+ .page_header{ color: white; background-color: #15558d; padding: 20px;text-align: left;}
 
 input[type=text], select, textarea {
   width: 100%;
@@ -450,3 +457,4 @@ input[type=submit] {
   cursor: pointer;
   float: right;
 }
+
