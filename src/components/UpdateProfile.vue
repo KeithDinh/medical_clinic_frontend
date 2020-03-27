@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="row card card-container" style="width:50%">
     <div class="row form">
       <div v-if="profile" class="row form-ctn">
         <div class="row form-title">Update Profile</div>

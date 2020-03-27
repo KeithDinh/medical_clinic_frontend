@@ -421,12 +421,14 @@ section.main {
   float: left;
   width: 30%;
   margin-top: 6px;
+
 }
 
 .col-70 {
   float: left;
   width: 70%;
   margin-top: 6px;
+
 }
 
 .db{display: flex;  margin-top: 30px;}

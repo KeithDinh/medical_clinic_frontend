@@ -1,5 +1,5 @@
 <template>
-  <div class="row" style="background-color: white">
+  <div class="row" >
         <h2 class='page_header'>Booking</h2>
         <div class="db">
           <Profile class="db-col1 card" />
