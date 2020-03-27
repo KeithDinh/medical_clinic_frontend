@@ -111,7 +111,13 @@ export const authentication = {
           .then(
             localUser => {
               commit('loginSuccess', localUser)
-              router.push('/dashboard')
+              if (localUser.role_id === 1)
+                router.push('/admin')
+              if (localUser.role_id === 2)
+                router.push('/dashboard')
+              if (localUser.role_id === 3)
+                router.push('/doctor-profile')
+
               dispatch('alert/success', 'Logged In', { root: true })
             },
             error => {

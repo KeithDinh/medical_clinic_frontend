@@ -3,7 +3,8 @@ import { router } from '../router'
 
 const initialState = {
   apptStatus: {},
-  appt: {}
+  appt: {},
+  apptsList: {}
 }
 
 export const appointment = {
@@ -18,6 +19,16 @@ export const appointment = {
       state.appt = appt
     },
     apptFailure (state) {
+      state.apptStatus = { apptFailure: true }
+    },
+    loadApptRequest (state) {
+      state.apptStatus = { postingAppt: true }
+    },
+    loadApptSuccess (state, appts) {
+      state.apptStatus = { postedAppt: true }
+      state.apptsList = appts
+    },
+    loadApptFailure (state) {
       state.apptStatus = { apptFailure: true }
     }
   },
@@ -36,6 +47,22 @@ export const appointment = {
           dispatch('alert/error', error, { root: true })
         }
       )
+    },
+    loadAppointments (
+      { dispatch, commit }) {
+      commit('loadApptRequest')
+      appointmentService.getAppointments()
+      .then(
+        response => {
+          commit('loadApptSuccess', response)
+          dispatch('alert/success', 'Appointments Loaded', { root:true })
+        },
+        error => {
+          commit('loadApptFailure')
+          dispatch('alert/error', error, { root:true })
+        }
+      )
     }
   }
 }
+

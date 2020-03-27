@@ -1,48 +1,37 @@
 <template>
   <div class="row">
-        <h2 class='dashboard_header'>Book Appointment</h2>
+    <h2 class='dashboard_header'>Book Appointment</h2>
 
     <div class="row form" >
-      <div class="row form-ctn" style="padding-top:10px">
+      <Profile class="block1 left" />
+      <div class="block2 left" style="padding-top:10px">
         <form @submit.prevent="handleSubmit">
-          <div id="appointment-form" class="row forms">
-            <div class="card card-container" style="display:flex;">
-                <div>
-                  <img src="https://image.flaticon.com/icons/svg/758/758935.svg" width="80" alt="">
-                </div>
-                <div style="display:block; margin:10px 30px;text-align:left">
-                <div id="firstName">First Name: {{ profile.firstName }}</div><br>
-                <div id="lastName">Last Name: {{ profile.lastName }}</div>
-                </div>
-           </div>
-
-           <div class="card card-container" style="margin-top:30px">
-
-             <div class="row form" >
-              <div class="col-30" style="text-align:center">
-                <label>Select a Medical Office</label>
-              </div>
-              <div class="col-70">
-                  <select type="text" v-model="office" id="office" name="office">
-                    <option v-for="off in offices" v-bind:value="off.office_id">{{ off.office_name }}</option>
-                  </select>
-              </div>
-              <div style="clear:both;"></div>
-            </div>
-
-             <div class="row form" >
+          <div id="appointment-form" class="row panel">
+            <div class="row" >
               <div class="col-30" style="text-align:center">
                 <label>Select a Doctor</label>
               </div>
               <div class="col-70">
-                  <select type="text" v-model="doctor" id="doctor" name="doctor">
-                    <option v-for="doc in doctors" v-bind:value="doc.doctor_id">{{ doc.first_name }} {{ doc.last_name }}</option>
-                  </select>
+                <select type="text" v-model="doctor" id="doctor" name="doctor">
+                  <option v-for="doc in doctors" v-bind:value="doc.doctor_id">{{ doc.first_name }} {{ doc.last_name }}</option>
+                </select>
               </div>
               <div style="clear:both;"></div>
             </div>
 
-             <div class="row form" >
+            <div class="row" >
+              <div class="col-30" style="text-align:center">
+                <label>Select a Medical Office</label>
+              </div>
+              <div class="col-70">
+                <select type="text" v-model="office" id="office" name="office">
+                  <option v-for="off in offices" v-bind:value="off.office_id">{{ off.office_name }}</option>
+                </select>
+              </div>
+              <div style="clear:both;"></div>
+            </div>
+
+            <div class="row form" >
               <div class="col-30" style="text-align:center">
                 <label for="referred">I was referred by another doctor</label>
               </div>
@@ -55,7 +44,7 @@
               <div style="clear:both;"></div>
             </div>
 
-             <div class="row form" >
+            <div class="row form" >
               <div class="col-30" style="text-align:center">
                 <label>Date</label>
               </div>
@@ -67,12 +56,10 @@
               </div>
               <div style="clear:both;"></div>
             </div>
-              <textarea type="text" v-model="reason" placeholder="Reason for visit"></textarea>
-              <div style="padding:30px">
+            <textarea type="text" v-model="reason" placeholder="Reason for visit"></textarea>
+            <div style="padding:30px">
               <button id="submit" v-on:click="book()">BOOK APPOINTMENT</button>
-              </div>
             </div>
-
           </div>
         </form>
       </div>
@@ -82,10 +69,12 @@
 <script>
 import Datepicker from 'vuejs-datepicker'
 import { mapState, mapActions } from 'vuex'
+import Profile from './Profile'
 export default {
   name: 'BookAppointment',
   components: {
-    Datepicker
+    Datepicker,
+    Profile
   },
   data: function () {
     return {
@@ -116,9 +105,6 @@ export default {
     this.loadDoctors()
   },
   computed: {
-    ...mapState('profile', {
-      profile: state => state.userProfile
-    }),
     ...mapState('doctors', {
       doctors: state => state.doctorsList
     }),
@@ -149,3 +135,8 @@ export default {
   }
 }
 </script>
+<style media="screen">
+  .block1{width:25%;}
+  .block2{width:75%;}
+
+</style>

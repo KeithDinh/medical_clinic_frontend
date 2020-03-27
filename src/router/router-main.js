@@ -9,6 +9,7 @@ import Register from '@/components/Register'
 import UpdateProfile from '@/components/UpdateProfile'
 import Dashboard from '@/components/Dashboard'
 import SearchDoctor from '@/components/SearchDoctor'
+import DoctorProfile from '@/components/DoctorProfile'
 import BookAppointment from '@/components/BookAppointment'
 import NotFound from '@/components/NotFound'
 
@@ -55,6 +56,11 @@ export const router = new Router({
       component: SearchDoctor
     },
     {
+      path: '/doctor-profile',
+      name: 'DoctorProfile',
+      component: DoctorProfile
+    },
+    {
       path: '/404',
       component: NotFound
     },
@@ -67,7 +73,7 @@ export const router = new Router({
 
 router.beforeEach((to, from, next) => {
   var loggedIn = localStorage.getItem('localUser')
-  if (to.path === '/dashboard' || to.path === '/update-profile' || to.path === '/appointment') {
+  if (to.path === '/dashboard' || to.path === '/update-profile' || to.path === '/appointment' || to.path === '/doctor-profile') {
     if (loggedIn) {
       next()
       return

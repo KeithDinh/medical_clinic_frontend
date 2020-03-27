@@ -1,5 +1,6 @@
 <template>
   <div id="profile">
+    <div class="row panel">
       <div v-if="profile" style="margin: 30px 0 20px;">
         <div
           <img src="https://image.flaticon.com/icons/svg/758/758935.svg" width="100" alt="">
@@ -19,12 +20,13 @@
         <div class="text"><p class="align-left">Race: </p><p class="align-right">{{ profile.race }}</p></div>
         <div style="clear:both;"></div>
         <p></p>
+      </div>
     </div>
   </div>
 </template>
 <script>
 
-import { mapState, mapActions,v } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
 
