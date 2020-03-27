@@ -1,5 +1,5 @@
-<template>
-  <div class="row">
+<template >
+    <div class="row card card-container" style="width:35%">
     <div class="row form">
       <div class="row form-ctn">
         <div class="row form-title">Login</div>
@@ -21,6 +21,7 @@
       </div>
     </div>
   </div>
+
 </template>
 <script>
 export default {
