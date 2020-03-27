@@ -18,7 +18,11 @@
       </div>
 </template>
 <script>
+import Vue from 'vue';
+import {Tabs, Tab} from 'vue-tabs-component';
 import { mapState, mapActions } from 'vuex'
+Vue.component('tabs', Tabs);
+Vue.component('tab', Tab);
 import Profile from './Profile'
 import Appointments from './Appointments'
 import Prescriptions from './Prescriptions'
@@ -29,7 +33,9 @@ export default {
     Profile,
     Appointments,
     Prescriptions,
-    MedicalRecords
+    MedicalRecords,
+    Tabs,
+    Tab
   },
   data () {
     return {}
