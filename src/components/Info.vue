@@ -11,12 +11,13 @@
                 <th>Booking Date</th>
                 <th>Status</th>
               </tr>
-              <tr>
-                <td>Ruby </td>
+              <tr v-for="appt in appointments">
+                <td>{{ appt.first_name }}</td>
                 <td>14 Nov </td>
                 <td>12 Nov </td>
                 <td>Pending </td>
               </tr>
+              <div v-for="a in appointments">{{ a.first_name.toString() }}</div>
             </table>
           </div>
         </tab>
@@ -65,29 +66,13 @@ export default {
   },
   
   created () {
-    // An Action Loaded in From mapActions
-    this.loadProfile()
   },
 
   computed: {
     
     ...mapState('profile', {
-        complete: state => state.profileStatus.profileComplete,
-        profile: state => state.userProfile,
-        profile: state => state.prescriptionList,
-        profile: state => state.appointmentList,
-        profile: state => state.medicalrecordList
-    })/* ,
-    ...mapState('prescription', {
-      profile: state => state.prescriptionList,
-    }),
-    ...mapState('appointment', {
-        profile: state => state.appointmentList,
-      
-    }),
-    ...mapState('medicalrecord', {
-      profile: state => state.medicalrecordList
-    }) */
+        appointments: state => state.appointmentsList
+    })
   },
 
     methods: {

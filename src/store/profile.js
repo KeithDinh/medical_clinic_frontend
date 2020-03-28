@@ -15,12 +15,8 @@ const initialState = {
     dob: '',
     gender: '',
     marital: '',
-    race: '',
-    prescriptionList: [],
-  medicalrecordList:[],
-  appointmentList:[]
-  },
-  
+    race: ''
+  } 
 }
 
 // Validate the Profile Form

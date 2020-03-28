@@ -2,21 +2,43 @@
       <div class="row">
         <h2 class='dashboard_header'>Dashboard</h2>
         <div class="db">
-          <Profile class="db-col1 card" />
-          <Info class="db-col2 card" />
+        <Profile class="db1" />  
+        <tabs :options="{ useUrlFragment: false }" @clicked="tabClicked" @changed="tabChanged">
+          <tab name="Appointments">
+            <Appointments />  
+          </tab>
+          <tab name="Prescriptions">
+            <Prescriptions />
+          </tab>
+          <tab name="Records">
+            <MedicalRecords />
+          </tab>
+        </tabs>
         </div>
       </div>
 </template>
 <script>
+import Vue from 'vue';
+import {Tabs, Tab} from 'vue-tabs-component';
+import { mapState, mapActions } from 'vuex'
+Vue.component('tabs', Tabs);
+Vue.component('tab', Tab);
 import Profile from './Profile'
-import Info from './Info'
+import Appointments from './Appointments'
+import Prescriptions from './Prescriptions'
+import MedicalRecords from './MedicalRecords'
 export default {
   name: 'Dashboard',
   components: {
     Profile,
-    Info
+    Appointments,
+    Prescriptions,
+    MedicalRecords,
+    Tabs,
+    Tab
   },
   data () {
+    return {}
   },
   computed: {
   },

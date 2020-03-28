@@ -66,6 +66,8 @@ ol, ul {
 .menu-item-has-children:hover .sub-menu {
   display: inline-block;
 }
+[class*="block"] {padding:7px;}
+.panel {background-color: #fff;  border: 1px solid rgba(0,0,0,0.1); border-radius: 7px;}
 
 /*body/html*/
 html, body {
