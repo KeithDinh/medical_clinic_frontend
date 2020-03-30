@@ -1,5 +1,5 @@
 <template>
-  <div class="medicalrecords">  
+  <div class="medicalrecords">
     <table >
       <tr>
         <th>Doctor</th>
@@ -32,7 +32,7 @@ export default {
   },
   computed: {
     ...mapState('medicalRecords', {
-      records: state => state.medicalRecordsList
+      records: state => state.recordsList
     })
   },
   methods: {

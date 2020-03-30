@@ -1,7 +1,7 @@
  <template>
   <div id="doctorProfile">
       <div style="margin: 30px 0 20px;">
-        <div
+        <div>
           <img src="https://image.flaticon.com/icons/svg/758/758935.svg" width="100" alt="">
         </div>
         <div class="doctor-name">{{ doctor.firstName }}  <span>{{ doctor.middleInit }}</span> <span>{{ doctor.lastName }}</span></div>
