@@ -1,5 +1,5 @@
 <template>
-  <div class="medicalrecords">  
+  <div class="medicalrecords">
     <table >
       <tr>
         <th>Doctor</th>
