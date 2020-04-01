@@ -16,6 +16,7 @@ export const medicalRecords = {
     loadRecordsSuccess (state, records) {
       state.recordsStatus = { loadedRecords: true }
       state.recordsList = records
+      console.log(state.recordsList)
     },
     loadRecordsFailure (state) {
       state.recordsStatus = { loadingRecordsFailure: true }
@@ -38,5 +39,6 @@ export const medicalRecords = {
       )
     }
   }
+
 }
 

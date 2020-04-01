@@ -2,17 +2,19 @@
       <div class="row">
         <h2 class='dashboard_header'>Dashboard</h2>
         <div class="db">
-        <Profile class="db1" />  
+        <Profile class="db1" />
         <tabs :options="{ useUrlFragment: false }" @clicked="tabClicked" @changed="tabChanged">
+
           <tab name="Appointments">
-            <Appointments />  
+            <Appointments />
           </tab>
           <tab name="Prescriptions">
             <Prescriptions />
           </tab>
-          <tab name="Records">
+           <tab name="Records">
             <MedicalRecords />
           </tab>
+
         </tabs>
         </div>
       </div>

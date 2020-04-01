@@ -16,7 +16,7 @@ const initialState = {
     gender: '',
     marital: '',
     race: ''
-  } 
+  }
 }
 
 // Validate the Profile Form
@@ -96,6 +96,7 @@ export const profile = {
         profileComplete: checkComplete(profile)
       }
       state.userProfile = profile
+      console.log(state.userProfile)
     },
     loadingProfileFailure (state) {
       state.profileStatus = {}

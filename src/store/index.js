@@ -46,6 +46,7 @@ if (module.hot) {
     const newModuleOffices = require('./offices').default
     const newModuleAppointment = require('./appointment').default
     const newModulePrescription = require('./prescription').default
+    // const newModuleRecords = require('./records').default
     // swap in the new modules and mutations
     store.hotUpdate({
       modules: {
@@ -57,7 +58,8 @@ if (module.hot) {
         newModuleDoctors,
         newModuleOffices,
         newModuleAppointment,
-        newModulePrescription
+        newModulePrescription,
+        newModuleRecords
       }
     })
   })

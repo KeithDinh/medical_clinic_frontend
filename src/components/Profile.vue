@@ -2,7 +2,7 @@
   <div id="profile">
     <div class="row panel">
       <div v-if="profile" style="margin: 30px 0 20px;">
-        <div
+        <div>
           <img src="https://image.flaticon.com/icons/svg/758/758935.svg" width="100" alt="">
         </div>
         <div class="patient-name">{{ profile.firstName }}  <span>{{ profile.middleInit }}</span> <span>{{ profile.lastName }}</span></div>

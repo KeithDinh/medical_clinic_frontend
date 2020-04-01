@@ -16,6 +16,8 @@ export const prescription = {
     loadRxSuccess (state, rxs) {
       state.rxStatus = { loadedRx: true }
       state.rxList = rxs
+      // document.write(state.rxList)
+      console.log(state.rxList)
     },
     loadRxFailure (state) {
       state.rxStatus = { loadingRxFailure: true }
