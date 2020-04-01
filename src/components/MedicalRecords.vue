@@ -32,7 +32,7 @@ export default {
   },
   computed: {
     ...mapState('medicalRecords', {
-      records: state => state.medicalRecordsList
+      records: state => state.recordsList
     })
   },
   methods: {
