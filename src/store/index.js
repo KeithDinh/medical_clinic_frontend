@@ -34,7 +34,7 @@ export const store = new Vuex.Store({
 
 if (module.hot) {
 // accept actions and mutations as hot modules
-  module.hot.accept(['./alert', './authentication', './profile', './dates', './doctor-profile', './doctors'], () => {
+  module.hot.accept(['./alert', './authentication', './profile', './dates', './doctor-profile', './doctors', './appointment', './prescription'], () => {
     // require the updated modules
     // have to add .default here due to babel 6 module output
     const newModuleAlert = require('./alert').default

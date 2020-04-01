@@ -51,3 +51,6 @@ export default {
   }
 }
 </script>
+<style>
+#login-form {max-width:360px;}
+</style>

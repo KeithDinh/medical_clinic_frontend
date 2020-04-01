@@ -23,20 +23,15 @@ export const medicalRecords = {
     }
   },
   actions: {
+    receiveRecords (
+      { dispatch, commit }, records) {
+      commit('loadRecordsSuccess', records)
+    },
     loadMedicalRecords (
       { dispatch, commit }) {
       commit('loadRecordsRequest')
-      recordsService.getMedicalRecords()
-      .then(
-        response => {
-          commit('loadRecordsSuccess', response)
-          dispatch('alert/success', 'Records Loaded', { root:true })
-        },
-        error => {
-          commit('loadRecordsFailure')
-          dispatch('alert/error', error, { root:true })
-        }
-      )
+      const localUser = JSON.parse(localStorage.getItem('localUser'))
+      commit('loadRecordsSuccess', localUser.records)
     }
   }
 

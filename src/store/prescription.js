@@ -21,23 +21,18 @@ export const prescription = {
     },
     loadRxFailure (state) {
       state.rxStatus = { loadingRxFailure: true }
+    },
+    receiveRx (state, rxs) {
+      state.rxStatus = { loadedRx: true }
+      state.rxList = rxs
     }
   },
   actions: {
     loadPrescriptions (
       { dispatch, commit }) {
       commit('loadRxRequest')
-      prescriptionService.getPrescriptions()
-      .then(
-        response => {
-          commit('loadRxSuccess', response)
-          dispatch('alert/success', 'Prescriptions Loaded', { root:true })
-        },
-        error => {
-          commit('loadRxFailure')
-          dispatch('alert/error', error, { root:true })
-        }
-      )
+      const localUser = JSON.parse(localStorage.getItem('localUser'))
+      commit('loadRxSuccess', localUser.prescriptions)
     }
   }
 }
