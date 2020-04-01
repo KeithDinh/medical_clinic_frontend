@@ -3,20 +3,7 @@ import { router } from '../router'
 
 const initialState = {
   profileStatus: {},
-  userProfile: {
-    firstName: '',
-    middleInit: '',
-    lastName: '',
-    street: '',
-    city: '',
-    state: '',
-    zipcode: '',
-    phone: '',
-    dob: '',
-    gender: '',
-    marital: '',
-    race: ''
-  } 
+  userProfile: {}
 }
 
 // Validate the Profile Form
@@ -139,23 +126,8 @@ export const profile = {
   actions: {
     loadProfile ({ dispatch, commit }) {
       commit('loadProfileRequest')
-      // Call To Profile Service Here
-      profileService.getProfile().then(
-        response => {
-          const profile = response.profile
-          if (!profile.state) {
-            commit('loadingProfileSuccess', profile)
-            dispatch('alert/success', 'Profile Empty', { root: true })
-          } else {
-            commit('loadingProfileSuccess', profile)
-            dispatch('alert/success', 'Profile Loaded', { root: true })
-          }
-        },
-        error => {
-          commit('loadingProfileFailure')
-          dispatch('alert/error', error, { root: true })
-        }
-      )
+      const localUser = JSON.parse(localStorage.getItem('localUser'))
+      commit('loadingProfileSuccess', localUser.profile)
     },
     createProfile ({ dispatch, commit }, profile) {
       commit('createProfileRequest', profile)

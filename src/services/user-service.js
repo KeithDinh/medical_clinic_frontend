@@ -69,7 +69,6 @@ function formatDate (birthdate) {
 
 function register (email, password, firstName, middleInit, lastName, street, city, state, zipcode, phone, dob, gender, marital, race) {
   dob = formatDate(dob)
-  alert(dob)
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

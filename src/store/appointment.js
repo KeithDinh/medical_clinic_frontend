@@ -51,17 +51,8 @@ export const appointment = {
     loadAppointments (
       { dispatch, commit }) {
       commit('loadApptRequest')
-      appointmentService.getAppointments()
-      .then(
-        response => {
-          commit('loadApptSuccess', response)
-          dispatch('alert/success', 'Appointments Loaded', { root:true })
-        },
-        error => {
-          commit('loadApptFailure')
-          dispatch('alert/error', error, { root:true })
-        }
-      )
+      const localUser = JSON.parse(localStorage.getItem('localUser'))
+      commit('loadApptSuccess', localUser.appointments)
     }
   }
 }
