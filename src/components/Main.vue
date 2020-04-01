@@ -1,8 +1,14 @@
 <template>
-  <div class="row contain">
-    <div class="row form-title">Main</div>
-    <h2>Search Doctors</h2>
+
+  <div>
+    <h1 class="mainPage">Make an Appointment today by clicking on the 'Patients' tab
+    </h1>
+    <img src="https://image.flaticon.com/icons/svg/387/387628.svg" width="150" alt="">
+    <h2 class="mainPage">Discover the best doctors, clinics & hospitals at the Health Hub.</h2>
   </div>
+  
+  
+
 </template>
 <script>
 
@@ -16,3 +22,20 @@ export default {
   }
 }
 </script>
+
+<style>
+
+.mainPage {
+  font-size:30px;
+  padding: 40px;
+  font: bold;
+}
+
+</style>
+
+
+
+
+
+
+
