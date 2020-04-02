@@ -10,6 +10,7 @@ import UpdateProfile from '@/components/UpdateProfile'
 import Dashboard from '@/components/Dashboard'
 import SearchDoctor from '@/components/SearchDoctor'
 import DoctorProfile from '@/components/DoctorProfile'
+import DoctorDashboard from "../components/DoctorDashboard";
 import BookAppointment from '@/components/BookAppointment'
 import NotFound from '@/components/NotFound'
 import Admin from '@/components/Admin'
@@ -67,6 +68,12 @@ export const router = new Router({
       component: DoctorProfile
     },
     {
+      path: '/doctor-dashboard',
+      name: 'doctor-dashboard',
+      component: DoctorDashboard
+    }
+    ,
+    {
       path: '/404',
       component: NotFound
     },
@@ -79,7 +86,8 @@ export const router = new Router({
 
 router.beforeEach((to, from, next) => {
   var loggedIn = localStorage.getItem('localUser')
-  if (to.path === '/dashboard' || to.path === '/update-profile' || to.path === '/appointment' || to.path === '/doctor-profile' || to.path === '/admin') {
+  if (to.path === '/dashboard' || to.path === '/update-profile' || to.path === '/appointment'
+    || to.path === '/doctor-profile' || to.path === '/admin') {
     if (loggedIn) {
       next()
       return

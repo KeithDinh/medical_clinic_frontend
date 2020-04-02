@@ -8,18 +8,22 @@
         <div class="patient-name">{{ profile.firstName }}  <span>{{ profile.middleInit }}</span> <span>{{ profile.lastName }}</span></div>
         <p class="patient-MR"><strong>MRN: </strong>{{profile.patient_id}}</p>
         <p class="patient-addr">{{ profile.street }}<br>{{ profile.city }}, {{ profile.state }} , {{ profile.zipcode }}</p>
-        <hr size="2" width="80%" align="center" noshade="false">
+<!--        <hr size="2" width="80%" align="center" noshade="false">-->
+        <hr class="style1">
         <div class="text"><p class="align-left">Phone: </p><p class="align-right">{{ profile.phone }}</p></div>
         <div style="clear:both;"></div>
+         <hr class="style1">
         <div class="text"><p class="align-left">DOB </p><p class="align-right">{{ profile.dob }}</p></div>
         <div style="clear:both;"></div>
+         <hr class="style1">
         <div class="text"><p class="align-left">Gender: </p><p class="align-right">{{ profile.gender }}</p></div>
         <div style="clear:both;"></div>
+         <hr class="style1">
         <div class="text"><p class="align-left">Marital Status: </p><p class="align-right">{{ profile.marital }}</p></div>
         <div style="clear:both;"></div>
+         <hr class="style1">
         <div class="text"><p class="align-left">Race: </p><p class="align-right">{{ profile.race }}</p></div>
         <div style="clear:both;"></div>
-        <p></p>
       </div>
     </div>
   </div>
@@ -86,6 +90,6 @@ export default {
 .align-right{
   float:right;
   color:#898790
-
 }
+
 </style>

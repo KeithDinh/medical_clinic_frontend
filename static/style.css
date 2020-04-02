@@ -442,7 +442,12 @@ label{
   padding:12px;
 }
 
- .page_header{ color: white; background-color: #15558d; padding: 20px;text-align: left;}
+.page_header{ color: white; background-color: #15558d; padding: 20px;text-align: left;}
+
+.subtitle1{
+   color:#898790;
+   font-size:15px;
+}
 
 input[type=text], select, textarea {
   width: 100%;
@@ -460,5 +465,12 @@ input[type=submit] {
   border-radius: 4px;
   cursor: pointer;
   float: right;
+}
+
+hr.style1 {
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 

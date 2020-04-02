@@ -7,7 +7,7 @@ const initialState = {
   doctorPatientStatus: {},
   patients: {},
   doctorApptStatus: {},
-  appointments: {},
+
 }
 
 export const doctor = {
@@ -37,14 +37,15 @@ export const doctor = {
     doctorApptSuccess (state, returnedAppts) {
       state.doctorApptStatus = { loadedAppts: true }
       state.appointments = returnedAppts
-    }
+    },
   },
   actions: {
     loadDoctorProfile (
       { dispatch, commit }) {
       commit('doctorProfileRequest')
       commit('doctorPatientRequest')
-      commit('doctorApptRequest')
+      // commit('doctorApptRequest')
+
       doctorService.getDoctor()
         .then(
           response => {
