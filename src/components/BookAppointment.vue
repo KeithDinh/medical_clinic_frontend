@@ -1,7 +1,6 @@
 <template>
   <div class="row">
     <h2 class='dashboard_header'>Book Appointment</h2>
-
     <div class="row form" >
       <Profile class="block1 left" />
       <div class="block2 left" style="padding-top:10px">

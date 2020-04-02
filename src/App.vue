@@ -14,7 +14,13 @@
               <li><a href="update-profile">Update Profile</a></li>
             </ul>
           </li>
-          <li><a to="doctor">Doctors</a></li>
+<!--          <li><a to="doctor">Doctors</a></li>-->
+          <li class="menu-item-has-children">
+            Doctors
+            <ul class="sub-menu">
+              <li><a href="doctor-dashboard">Doctor Dashboard</a></li>
+            </ul>
+          </li>
           <li><a to="admin">Admin</a></li>
           <img src="https://image.flaticon.com/icons/svg/2345/2345601.svg" width="20" alt="">
         </ul>
@@ -43,14 +49,14 @@
     </div>
 
 
-    
+
     <section class="SpecialistBackground">
 
-    
+
     <ul class="specialist">
     <h1>Clinic and Specialists</h1>
     <table>
-      <th class="tableEdit">General Practitioner</th> 
+      <th class="tableEdit">General Practitioner</th>
       <th class="tableEdit">Urologist</th>
       <th class="tableEdit">Neurologist</th>
       <th class="tableEdit">Orthopedic</th>
@@ -82,13 +88,13 @@
     <h1 class="AvailFeatHead">Available Features in Our Clinic</h1>
     <ul class="AvailFeat">
     <table>
-      <th class="AvailEdit">Operation</th> 
+      <th class="AvailEdit">Operation</th>
       <th class="AvailEdit">Medical</th>
       <th class="AvailEdit">Patient Ward</th>
       <th class="AvailEdit">Test Room</th>
       <th class="AvailEdit">ICU</th>
       <th class="AvailEdit">Laboratory</th>
-      
+
 
       <tr>
       <td><img src="https://webstockreview.net/images/patient-clipart-surgery-patient-1.png" width="200" alt=""></td>
