@@ -7,6 +7,7 @@ const initialState = {
   doctorPatientStatus: {},
   patients: {},
   doctorApptStatus: {},
+  doctorAppointmentsList:{}
 
 }
 
@@ -36,15 +37,17 @@ export const doctor = {
     },
     doctorApptSuccess (state, returnedAppts) {
       state.doctorApptStatus = { loadedAppts: true }
-      state.appointments = returnedAppts
+      state.doctorAppointmentsList= returnedAppts
+      console.log(state.doctorAppointmentsList)
     },
+
   },
   actions: {
     loadDoctorProfile (
       { dispatch, commit }) {
       commit('doctorProfileRequest')
       commit('doctorPatientRequest')
-      // commit('doctorApptRequest')
+      commit('doctorApptRequest')
 
       doctorService.getDoctor()
         .then(
@@ -62,6 +65,19 @@ export const doctor = {
           error => {
             commit('doctorProfileFailure')
             dispatch('alert/error', error, { root: true })
+          }
+        )
+    },
+       loadDoctorAppointments (
+      { dispatch, commit }) {
+      commit('doctorApptRequest')
+
+      doctorService.getDoctor()
+        .then(
+          response => {
+            const appts = response.appointments
+            commit('doctorApptSuccess', appts)
+            dispatch('alert/success', 'appointments Retreived', { root: true })
           }
         )
     }
