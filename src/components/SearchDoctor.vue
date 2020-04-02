@@ -30,12 +30,16 @@ export default {
   data: function () {
     return {
       office: '',
-      doctor: ''
+      doctor: '',
+      doctorprofile:''
     };
   },
   watch: {
     office: function (value) {
       this.loadDoctorsByOffice(value)
+    },
+    doctor: function (value) {
+      this.loadDoctorInfo (value)
     }
   },
   created () {
@@ -58,7 +62,10 @@ export default {
     ]),
     ...mapActions('doctors', [
       'loadDoctorsByOffice'
-    ])
+    ]),
+    loadDoctorInfo (value) {
+      
+    }
   }
 }
 </script>
