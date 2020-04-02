@@ -10,11 +10,11 @@
                 <th>Date and Time</th>
                 <th>Reason for Visit</th>
               </tr>
-              <template v-for="appt in todayAppointments">
+              <template v-for="appt in allAppointmentsList.todayAppointments">
                 <tr>
-                  <td>{{ appt.patient</td>
-                  <td>{{ appt.office</td>
-                  <td>{{ appt.appt_start_time</td>
+                  <td>{{ appt.patient}}</td>
+                  <td>{{ appt.office}}</td>
+                  <td>{{ appt.appt_start_time}}</td>
                   <td>{{ appt.reason_for_visit}}</td>
                 </tr>
               </template>
@@ -22,6 +22,22 @@
           </tab>
           <tab name="Upcoming">
             Future
+            <table>
+              <tr>
+                <th>Patient Name</th>
+                <th>Office Name</th>
+                <th>Date and Time</th>
+                <th>Reason for Visit</th>
+              </tr>
+              <template v-for="appt in allAppointmentsList.futureAppointments">
+                <tr>
+                  <td>{{ appt.patient}}</td>
+                  <td>{{ appt.office}}</td>
+                  <td>{{ appt.appt_start_time}}</td>
+                  <td>{{ appt.reason_for_visit}}</td>
+                </tr>
+              </template>
+            </table>
           </tab>
           <tab name="Past Appointments">
             PAST
@@ -32,11 +48,11 @@
                 <th>Date and Time</th>
                 <th>Reason for Visit</th>
               </tr>
-              <template v-for="appt in pastAppointments">
+              <template v-for="appt in allAppointmentsList.pastAppointments">
                 <tr>
-                  <td>{{ appt.patient</td>
-                  <td>{{ appt.office</td>
-                  <td>{{ appt.appt_start_time</td>
+                  <td>{{ appt.patient}}</td>
+                  <td>{{ appt.office}}</td>
+                  <td>{{ appt.appt_start_time}}</td>
                   <td>{{ appt.reason_for_visit}}</td>
                 </tr>
               </template>
@@ -48,27 +64,46 @@
 <script>
 
 import { mapState, mapActions } from 'vuex'
-import { doctorAppointmentsService } from '../services'
+import { doctorAppointmentsService,doctorService } from '../services'
 import Vue from "vue";
 import {Tab, Tabs} from "vue-tabs-component";
 Vue.component('tabs', Tabs);
 Vue.component('tab', Tab);
-export default {
+// export default {
+//
+//   name: 'DoctorAppointment',
+//   created () {
+//     this.loadDoctorAppointments()
+//
+//   },
+//   computed: {
+//     ...mapState('doctorAppointments', {
+//       // todayAppointments: state => state.todayAppointments,
+//       // futureAppointments: state => state.futureAppointments,
+//       // pastAppointments: state => state.pastAppointments
+//       allAppointmentsList:state => state.allAppointmentsList
+//     })
+//   },
+//   methods: {
+//     ...mapActions('doctorAppointments', [
+//       'loadDoctorAppointments'
+//     ])
+//   }
+// }
 
-  name: 'DoctorAppointment',
+  export default {
+
+  name: 'DoctorAppointments',
   created () {
     this.loadDoctorAppointments()
-
   },
   computed: {
-    ...mapState('doctorAppointments', {
-      todayAppointments: state => state.todayAppointments,
-      futureAppointments: state => state.futureAppointments,
-      pastAppointments: state => state.pastAppointments
+    ...mapState('doctor', {
+      allAppointmentsList: state => state.doctorAppointmentsList
     })
   },
   methods: {
-    ...mapActions('doctorAppointments', [
+    ...mapActions('doctor', [
       'loadDoctorAppointments'
     ])
   }

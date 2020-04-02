@@ -94,7 +94,7 @@ export const router = new Router({
 router.beforeEach((to, from, next) => {
   var loggedIn = localStorage.getItem('localUser')
   if (to.path === '/dashboard' || to.path === '/update-profile' || to.path === '/appointment'
-    || to.path === '/doctor-profile' || to.path === '/admin') {
+    || to.path === '/doctor-dashboard' || to.path === '/admin') {
     if (loggedIn) {
       next()
       return
