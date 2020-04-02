@@ -14,6 +14,8 @@ import DoctorDashboard from "../components/DoctorDashboard";
 import BookAppointment from '@/components/BookAppointment'
 import NotFound from '@/components/NotFound'
 import Admin from '@/components/Admin'
+import Office from '@/components/Office'
+
 
 // Letting Vue Know To Use Router
 Vue.use(Router)
@@ -31,6 +33,11 @@ export const router = new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/office',
+      name: 'Office',
+      component: Office
     },
     {
       path: '/admin',
@@ -89,6 +96,9 @@ router.beforeEach((to, from, next) => {
   if (to.path === '/dashboard' || to.path === '/update-profile' || to.path === '/appointment'
     || to.path === '/doctor-dashboard' || to.path === '/admin') {
     if (loggedIn) {
+      next()
+      return
+    }else if(to.path === '/office' || to.path === '/search-doctor') {
       next()
       return
     } else {
