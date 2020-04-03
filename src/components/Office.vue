@@ -1,7 +1,7 @@
 <template>
     <div>
            
-        <h1 class="mainHeader">We Offer Health Services At Multiple Offices</h1>
+        <h1 class="mainHeader">We Offer Health Services At <br>Multiple Offices</h1>
             <table >
                 <template>
                 <div v-for="off in offices" v-bind:value="off.office_id">
@@ -59,28 +59,29 @@ div {
     color:rgb(0, 0, 0);
     font: bold;
     padding-left:180px;
-
 }
+
 .tablerow_zip{
     font-size: 20px;
     color:rgb(0, 0, 0);
     font: bold;
-
-
 }
 
 .tableEdit_1 {
-  font-size: 30px;
+  font-size: 35px;
   padding-right: 120px;
   padding-left: 150px;
   padding-bottom: 10px;
-  color:rgb(5, 197, 255);
+  color: #0d75a6;
 }
 
 .mainHeader{
-  font-size:30px;
-  padding: 40px;
+  padding: 200px;
+  padding-top: 50px;
   font: bold;
-  color:rgb(28, 25, 228);
+  font-size:40px;
+  color: #ffffff;
+  background-image: url("https://wallpaperplay.com/walls/full/2/0/8/13986.jpg");
+
 }
 </style>
