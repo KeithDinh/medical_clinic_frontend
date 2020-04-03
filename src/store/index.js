@@ -11,7 +11,6 @@ import { offices } from './offices'
 import { appointment } from './appointment'
 import { prescription } from './prescription'
 import { medicalRecords } from './records'
-import { doctorAppointments} from "../../backup/doctor-appointments";
 
 Vue.use(Vuex)
 
@@ -27,7 +26,6 @@ export const store = new Vuex.Store({
     appointment,
     prescription,
     medicalRecords,
-    doctorAppointments
 
   }
 })

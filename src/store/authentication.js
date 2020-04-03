@@ -113,12 +113,14 @@ export const authentication = {
               commit('loginSuccess', localUser)
               if (localUser.role_id === 1)
                 router.push('/admin')
-              if (localUser.role_id === 2)
-                dispatch('appointment/receiveAppts', localUser.appointments, { root: true })
-                dispatch('prescription/receiveRx', localUser.prescriptions, { root: true })
+              else if (localUser.role_id === 2) {
+                alert('doctor found')
                 router.push('/dashboard')
-              if (localUser.role_id === 3)
-                router.push('/doctor-profile')
+              }
+              else if (localUser.role_id === 3) {
+                alert("doctor detected")
+                router.push('/doctor-dashboard')
+              }                
 
               dispatch('alert/success', 'Logged In', { root: true })
             },

@@ -12,8 +12,6 @@
          <div style="clear:both;"></div>
         <hr class="style1">
 
-<!--        <p>{{ patients[0].firstName }}</p>-->
-        <div v-for="a in appointments">{{ a.appt_start_time }}</div>
     </div>
   </div>
 </template>
@@ -30,9 +28,7 @@ export default {
   },
   computed: {
     ...mapState('doctor', {
-      doctor: state => state.doctorProfile,
-      patients: state => state.patients,
-      appointments: state => state.appointments
+      doctor: state => state.doctorProfile
     })
   },
   methods: {

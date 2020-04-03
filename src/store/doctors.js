@@ -3,7 +3,9 @@ import { router } from '../router'
 
 const initialState = {
   doctorsStatus: {},
-  doctorsList: []
+  doctorsList: [],
+  doctorProfileStatus: {},
+  doctorProfile: {}
 }
 
 export const doctors = {
@@ -19,6 +21,20 @@ export const doctors = {
     },
     doctorsFailure (state) {
       state.doctorsStatus = { doctorsFailure: true }
+    },
+    doctorProfileRequest (state) {
+      state.doctorProfileStatus = { loadingDoctor: true }
+    },
+    doctorProfileSuccess (state, doctorId) {
+      state.doctorsList.forEach(doctor => {
+        if (doctor.doctor_id === doctorId) {
+          state.doctorProfile = doctor
+        }
+      })
+      state.doctorProfileStatus = { loadedDoctor: true }
+    },
+    doctorProfileFailure (state) {
+      state.doctorProfileStatus = { doctorFailure: true }
     }
   },
   actions: {
@@ -53,6 +69,11 @@ export const doctors = {
             dispatch('alert/error', error, { root: true })
           }
         )
+    },
+    loadDoctorById (
+      { dispatch, commit }, doctor_id) {
+      commit('doctorProfileRequest')
+      commit('doctorProfileSuccess', doctor_id) 
     }
   }
 }

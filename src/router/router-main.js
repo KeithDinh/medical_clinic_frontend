@@ -76,7 +76,7 @@ export const router = new Router({
     },
     {
       path: '/doctor-dashboard',
-      name: 'doctor-dashboard',
+      name: 'DoctorDashboard',
       component: DoctorDashboard
     }
     ,

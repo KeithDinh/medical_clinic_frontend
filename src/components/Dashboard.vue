@@ -4,7 +4,6 @@
         <div class="db">
         <Profile class="db1" />
         <tabs :options="{ useUrlFragment: false }" @clicked="tabClicked" @changed="tabChanged">
-
           <tab name="Appointments">
             <Appointments />
           </tab>
