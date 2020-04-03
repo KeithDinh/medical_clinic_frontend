@@ -1,11 +1,15 @@
 <template>
-
+<div>
   <div>
-    <h1 class="mainPage">Make an Appointment today by clicking on the 'Patients' tab
-    </h1>
-    <img src="https://image.flaticon.com/icons/svg/387/387628.svg" width="150" alt="">
-    <h2 class="mainPage">Discover the best doctors, clinics and hospitals at the Health Hub.</h2>
-    <section class="SpecialistBackground">
+    <div class="mainBG">
+      <h1 class="mainPage">Make an Appointment today by clicking on the 'Patients' tab
+      </h1>
+      <img src="https://image.flaticon.com/icons/svg/387/387628.svg" width="150" alt="">
+      <h2 class="mainPage">Discover the best doctors, clinics and hospitals at the Health Hub.</h2>
+    </div>
+
+
+      <section class="SpecialistBackground">
 
     
     <ul class="specialist">
@@ -58,24 +62,21 @@
       <td><img src="https://www.chp.edu/-/media/chp/departments-and-services/radiology/patient-procedures/nuclear-medicine-tests.jpg?h=243&w=275&la=en&hash=4976F8F9DEB7C037C66E997368869896" width="200" alt=""></td>
       <td><img src="https://cdn.clipart.email/77cee3096f71516e044edd3b0e7d1543_royalty-free-icu-patient-clip-art-vector-images-illustrations-_612-612.jpeg" width="200" alt=""></td>
       <td><img src="https://us.123rf.com/450wm/aurielaki/aurielaki1708/aurielaki170800016/83486378-stock-vector-clinical-research-clinical-laboratory-isometric-people-cartoon-character-vector-icon.jpg?ver=6" width="200" alt=""></td>
-
-    </tr>
+      </tr>
     </table>
     </ul>
-
     </section>
 
 
     <footer>
-    <h1 class="foottitle">Health Hub</h1>
-    <p class="footpara">We offer an expanded range of health services for everyday care and chronic conditions.</p>
-    <p class="footpara">All from a team of care professionals. </p>
-    <p class="footpara">We promote a path to better health. </p>
-    <p class="footpara">ALL IN ONE PLACE! </p>
+    <h1 class="foottitle" >Health Hub</h1>
+    <p class="footpara">We offer an expanded range of health services for everyday care and chronic conditions. <br>All from a team of care professionals.<br>We promote a path to better health. <br>ALL IN ONE PLACE!</p>
     <img class="footlogo center" src="https://www.cvs.com/bizcontent/marketing/health-hub/health-hub-illustration.png" width="600" alt="">
-
     </footer>
   </div>
+</div>
+
+  
   
   
 
@@ -97,12 +98,23 @@ export default {
 
 .mainPage {
   font-size:30px;
-  padding: 40px;
+  padding: 35px;
   font: bold;
+  background: black;
+  opacity: 0.75;
 }
 
+
+.mainBG {
+  background-image: url("https://cdn.shopify.com/s/files/1/2198/0277/files/Houston-skyline.jpg?15716366482872199911");
+  color: #ffffff;
+  padding-top: 0.1px;
+  padding-bottom: 0.1px;
+}
+
+
 .SpecialistBackground {
-  background: #81d4f7;
+  background: #0d75a6;
 }
 
 .tableEdit {
@@ -131,8 +143,8 @@ export default {
 }
 
 footer {
-  padding-top: 5px;
-  padding-bottom: 100px;
+  padding-top: 0.1px;
+  padding-bottom: 30px;
   color: #ffffff;
   flex-shrink: 0;
   background: #0d75a6;
@@ -141,16 +153,21 @@ footer {
 
 
 .footlogo {
-width: 300px;
+width: 140px;
 padding-bottom: -150px;
-padding-left: 20px;
+padding-left: 13px;
 float: center;
 }
 
 .foottitle {
-text-align: center;
-padding: 0px;
-font-size: 50px;
+padding: 0.25em;
+padding-top: 10px;
+font-size: 37px;
+border-style: groove;
+border-width: 5px;
+
+height: 75px;
+margin: 0.25em;
 }
 
 .logo {
@@ -161,7 +178,7 @@ font-size: 50px;
 .footpara {
 text-align: center;
 padding-right: 0px;
-font-size: 30px
+font-size: 17px
 }
 </style>
 
