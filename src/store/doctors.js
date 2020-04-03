@@ -22,14 +22,18 @@ export const doctors = {
     doctorsFailure (state) {
       state.doctorsStatus = { doctorsFailure: true }
     },
-    doctorsProfileRequest (state) {
+    doctorProfileRequest (state) {
       state.doctorProfileStatus = { loadingDoctor: true }
     },
-    doctorsProfileSuccess (state, returnedDoctor) {
+    doctorProfileSuccess (state, doctorId) {
+      state.doctorsList.forEach(doctor => {
+        if (doctor.doctor_id === doctorId) {
+          state.doctorProfile = doctor
+        }
+      })
       state.doctorProfileStatus = { loadedDoctor: true }
-      state.doctorsProfile = returnedDoctor
     },
-    doctorsProfileFailure (state) {
+    doctorProfileFailure (state) {
       state.doctorProfileStatus = { doctorFailure: true }
     }
   },
@@ -68,14 +72,8 @@ export const doctors = {
     },
     loadDoctorById (
       { dispatch, commit }, doctor_id) {
-      commit('doctorsProfileRequest')
-      doctorsService.getDoctorById(doctor_id)
-        .then(
-          response => {
-            const doctor = response.profile
-            commit('doctorProfileSuccess', doctor)
-            dispatch('alert/success', 'doctor profile Retreived', { root: true })
-          })
+      commit('doctorProfileRequest')
+      commit('doctorProfileSuccess', doctor_id) 
     }
   }
 }

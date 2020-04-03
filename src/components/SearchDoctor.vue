@@ -13,7 +13,10 @@
             <select type="text" v-model="doctor" id="doctor" name="doctor">
               <option v-if="doctors" v-for="doc in doctors" v-bind:value="doc.doctor_id">{{ doc.first_name }} {{ doc.last_name }}</option>
             </select>
-            {{ profile.first_name }}
+            <div class="row" v-if="profile.first_name">
+              <div class="row">{{ profile.first_name }} {{ profile.last_name }}</div>
+              <div class="row">Specialization: {{ profile.specialization_name }}</div>
+            </div>
           </div>
         </form>
 
@@ -31,8 +34,7 @@ export default {
   data: function () {
     return {
       office: '',
-      doctor: '',
-      doctorprofile:''
+      doctor: ''
     };
   },
   watch: {
