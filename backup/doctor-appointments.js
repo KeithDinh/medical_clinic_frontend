@@ -1,5 +1,5 @@
 // import { doctorAppointmentsService } from '../services'
-import { router } from '../router'
+import { router } from '../src/router'
 
 const initialState = {
   doctorApptStatus: {},

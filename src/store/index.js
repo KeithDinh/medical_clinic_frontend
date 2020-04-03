@@ -11,7 +11,7 @@ import { offices } from './offices'
 import { appointment } from './appointment'
 import { prescription } from './prescription'
 import { medicalRecords } from './records'
-import { doctorAppointments} from "./doctor-appointments";
+import { doctorAppointments} from "../../backup/doctor-appointments";
 
 Vue.use(Vuex)
 
