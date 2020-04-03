@@ -5,7 +5,8 @@ const handleResponse = responseHandler.handleResponse
 
 export const doctorsService = {
   getDoctors,
-  getDoctorsByOffice
+  getDoctorsByOffice,
+  getDoctorById
 }
 
 function getDoctors () {
@@ -23,5 +24,13 @@ function getDoctorsByOffice (office_id) {
     headers: authorizationHeader()
   }
   return fetch(`${config.apiUrl}/doctors/office?oid=` + office_id, requestOptions)
+    .then(handleResponse)
+}
+
+function getDoctorById (doctor_id) {
+  const requestOptions = {
+    method: 'GET'
+  }
+  return fetch(`${config.apiUrl}/doctor/profile?did=` + doctor_id, requestOptions)
     .then(handleResponse)
 }

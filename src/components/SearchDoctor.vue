@@ -13,6 +13,7 @@
             <select type="text" v-model="doctor" id="doctor" name="doctor">
               <option v-if="doctors" v-for="doc in doctors" v-bind:value="doc.doctor_id">{{ doc.first_name }} {{ doc.last_name }}</option>
             </select>
+            {{ profile.first_name }}
           </div>
         </form>
 
@@ -39,21 +40,21 @@ export default {
       this.loadDoctorsByOffice(value)
     },
     doctor: function (value) {
-      this.loadDoctorInfo (value)
+      this.loadDoctorById(value)
     }
   },
   created () {
     this.loadOffices()
   },
   computed: {
-    ...mapState('doctors', {
-      doctors: state => state.doctorList
-    }),
     ...mapState('offices', {
       offices: state => state.officeList
     }),
     ...mapState('doctors', {
       doctors: state => state.doctorsList
+    }),
+    ...mapState('doctors', {
+      profile: state => state.doctorProfile
     })
   },
   methods: {
@@ -63,9 +64,9 @@ export default {
     ...mapActions('doctors', [
       'loadDoctorsByOffice'
     ]),
-    loadDoctorInfo (value) {
-      
-    }
+    ...mapActions('doctors', [
+      'loadDoctorById'
+    ]),
   }
 }
 </script>

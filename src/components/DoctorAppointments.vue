@@ -69,29 +69,8 @@ import Vue from "vue";
 import {Tab, Tabs} from "vue-tabs-component";
 Vue.component('tabs', Tabs);
 Vue.component('tab', Tab);
-// export default {
-//
-//   name: 'DoctorAppointment',
-//   created () {
-//     this.loadDoctorAppointments()
-//
-//   },
-//   computed: {
-//     ...mapState('doctorAppointments', {
-//       // todayAppointments: state => state.todayAppointments,
-//       // futureAppointments: state => state.futureAppointments,
-//       // pastAppointments: state => state.pastAppointments
-//       allAppointmentsList:state => state.allAppointmentsList
-//     })
-//   },
-//   methods: {
-//     ...mapActions('doctorAppointments', [
-//       'loadDoctorAppointments'
-//     ])
-//   }
-// }
 
-  export default {
+export default {
 
   name: 'DoctorAppointments',
   created () {

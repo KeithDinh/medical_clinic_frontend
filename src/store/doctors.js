@@ -3,7 +3,9 @@ import { router } from '../router'
 
 const initialState = {
   doctorsStatus: {},
-  doctorsList: []
+  doctorsList: [],
+  doctorProfileStatus: {},
+  doctorProfile: {}
 }
 
 export const doctors = {
@@ -19,6 +21,16 @@ export const doctors = {
     },
     doctorsFailure (state) {
       state.doctorsStatus = { doctorsFailure: true }
+    },
+    doctorsProfileRequest (state) {
+      state.doctorProfileStatus = { loadingDoctor: true }
+    },
+    doctorsProfileSuccess (state, returnedDoctor) {
+      state.doctorProfileStatus = { loadedDoctor: true }
+      state.doctorsProfile = returnedDoctor
+    },
+    doctorsProfileFailure (state) {
+      state.doctorProfileStatus = { doctorFailure: true }
     }
   },
   actions: {
@@ -53,6 +65,17 @@ export const doctors = {
             dispatch('alert/error', error, { root: true })
           }
         )
+    },
+    loadDoctorById (
+      { dispatch, commit }, doctor_id) {
+      commit('doctorsProfileRequest')
+      doctorsService.getDoctorById(doctor_id)
+        .then(
+          response => {
+            const doctor = response.profile
+            commit('doctorProfileSuccess', doctor)
+            dispatch('alert/success', 'doctor profile Retreived', { root: true })
+          })
     }
   }
 }

@@ -46,40 +46,26 @@ export const doctor = {
     loadDoctorProfile (
       { dispatch, commit }) {
       commit('doctorProfileRequest')
-      commit('doctorPatientRequest')
-      commit('doctorApptRequest')
-
-      doctorService.getDoctor()
-        .then(
-          response => {
-            const doc = response.doctors
-            const pat = response.patients
-            const appts = response.appointments
-            commit('doctorProfileSuccess', doc)
-            dispatch('alert/success', 'doctor Retreived', { root: true })
-            commit('doctorPatientSuccess', pat)
-            dispatch('alert/success', 'patients Retreived', { root: true })
-            commit('doctorApptSuccess', appts)
-            dispatch('alert/success', 'appointments Retreived', { root: true })
-          },
-          error => {
-            commit('doctorProfileFailure')
-            dispatch('alert/error', error, { root: true })
-          }
-        )
+      const localUser = JSON.parse(localStorage.getItem('localUser'))
+      const profile = localUser.profile
+      commit('doctorProfileSuccess', profile)
+      dispatch('alert/success', 'doctor Retreived', { root: true })
     },
-       loadDoctorAppointments (
+    loadDoctorPatients (
+      { dispatch, commit }) {
+      commit('doctorPatientRequest')
+      const localUser = JSON.parse(localStorage.getItem('localUser'))
+      const patients = localUser.patients
+      commit('doctorPatientSuccess', patients)
+      dispatch('alert/success', 'patients Retreived', { root: true })
+    },
+    loadDoctorAppointments (
       { dispatch, commit }) {
       commit('doctorApptRequest')
-
-      doctorService.getDoctor()
-        .then(
-          response => {
-            const appts = response.appointments
-            commit('doctorApptSuccess', appts)
-            dispatch('alert/success', 'appointments Retreived', { root: true })
-          }
-        )
+      const localUser = JSON.parse(localStorage.getItem('localUser'))
+      const appts = localUser.appointments
+      commit('doctorApptSuccess', appts)
+      dispatch('alert/success', 'appointments Retreived', { root: true })
     }
   }
 }
