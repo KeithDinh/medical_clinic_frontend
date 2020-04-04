@@ -12,8 +12,6 @@
 import { mapState, mapActions } from 'vuex'
 import { doctorAppointmentsService,doctorService } from '../services'
 import Vue from "vue";
-import moment from 'moment';
-import Profile from "./Profile";
 import DoctorProfile from "./DoctorProfile";
 import DoctorPatientsList from "./DoctorPatientsList";
 export default {
@@ -25,7 +23,6 @@ export default {
    components: {
      DoctorPatientsList,
     DoctorProfile,
-    Profile,
   },
   computed: {
     ...mapState('doctor', {

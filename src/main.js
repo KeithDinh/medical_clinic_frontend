@@ -38,4 +38,11 @@ Vue.filter('frontEndTimeFormat', function(str) {
   return hours + ":" + minutes + ":" + seconds;
 })
 
+Vue.filter('frontEndDateFormat', function(str) {
+  var dateobj=new Date(str);
+  var date = dateobj.getUTCDate();
+  var month=dateobj.getUTCMonth();
+  var year= dateobj.getUTCFullYear();
+  return month+"/"+date+"/"+year;
+})
 

@@ -14,7 +14,7 @@
                 <tr>
                    <td style="text-align: left">{{ appt.patient}}<br><div class="subtitle1">MRN: {{appt.patient_id}}</div></td>
                   <td>{{ appt.office}}</td>
-                  <td>{{ frontEndDateFormat(appt.appt_start_time)}} <br>
+                  <td>{{ appt.appt_start_time | frontEndDateFormat}} <br>
                       <div class="text-info subtitle1">{{appt.appt_start_time |frontEndTimeFormat}}</div></td>
                   <td>{{ appt.reason_for_visit}}</td>
                 </tr>
@@ -34,7 +34,7 @@
                 <tr>
                    <td style="text-align: left">{{ appt.patient}}<br><div class="subtitle1">MRN: {{appt.patient_id}}</div></td>
                   <td>{{ appt.office}}</td>
-                  <td>{{ frontEndDateFormat(appt.appt_start_time)}} <br>
+                  <td>{{ appt.appt_start_time | frontEndDateFormat}} <br>
                     <div class="text-info subtitle1">{{appt.appt_start_time |frontEndTimeFormat}}</div></td>
                   <td>{{ appt.reason_for_visit}}</td>
                 </tr>
@@ -53,7 +53,7 @@
                 <tr>
                    <td style="text-align: left">{{ appt.patient}}<br><div class="subtitle1">MRN: {{appt.patient_id}}</div></td>
                   <td>{{ appt.office}}</td>
-                  <td>{{ frontEndDateFormat(appt.appt_start_time)}} <br>
+                  <td>{{ appt.appt_start_time | frontEndDateFormat}} <br>
                     <div class="text-info subtitle1">{{appt.appt_start_time | frontEndTimeFormat}}</div></td>
                   <td>{{ appt.reason_for_visit}}</td>
                 </tr>
@@ -70,24 +70,8 @@ import { mapState, mapActions } from 'vuex'
 import { doctorAppointmentsService,doctorService } from '../services'
 import Vue from "vue"
 import {Tab, Tabs} from "vue-tabs-component"
-import moment from 'moment'
 Vue.component('tabs', Tabs)
 Vue.component('tab', Tab)
-
-//TODO:I would like to make a resuable code, but I could not pass the data into appt props
-// Vue.component('apptTable',{
-//     props: ['appt'],
-//     template:`
-//           <tr>
-//              <td style="text-align: left">{{ appt.patient}}<br><div class="subtitle1">MRN: {{appt.patient_id}}</div></td>
-//             <td>{{ appt.office}}</td>
-//             <td>{{ frontEndDateFormat(appt.appt_start_time)}} <br>
-//               <div class="text-info subtitle1">{{frontEndTimeFormat(appt.appt_start_time)}}</div></td>
-//             <td>{{ appt.reason_for_visit}}</td>
-//           </tr>`
-// });
-
-
 
 export default {
 
@@ -104,13 +88,6 @@ export default {
     ...mapActions('doctor', [
       'loadDoctorAppointments'
     ]),
-    frontEndDateFormat: function(date) {
-      return moment.utc(date).format('MM/DD/YYYY');
-    },
-    //  frontEndTimeFormat: function(date) {
-    //   return moment.utc(date).format(' hh:mm:ss A');
-    // },
-
   }
 }
 </script>
