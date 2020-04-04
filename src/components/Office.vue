@@ -77,11 +77,15 @@ div {
 
 .mainHeader{
   padding: 200px;
-  padding-top: 50px;
+  padding-top: 15px;
   font: bold;
   font-size:40px;
   color: #ffffff;
   background-image: url("https://wallpaperplay.com/walls/full/2/0/8/13986.jpg");
+  background-size: cover;
+
+}
+</style>
 
 }
 </style>
