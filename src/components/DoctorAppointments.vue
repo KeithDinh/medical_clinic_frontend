@@ -15,7 +15,7 @@
                    <td style="text-align: left">{{ appt.patient}}<br><div class="subtitle1">MRN: {{appt.patient_id}}</div></td>
                   <td>{{ appt.office}}</td>
                   <td>{{ frontEndDateFormat(appt.appt_start_time)}} <br>
-                    <div class="text-info subtitle1">{{frontEndTimeFormat(appt.appt_start_time)}}</div></td>
+                      <div class="text-info subtitle1">{{appt.appt_start_time |frontEndTimeFormat}}</div></td>
                   <td>{{ appt.reason_for_visit}}</td>
                 </tr>
               </template>
@@ -35,7 +35,7 @@
                    <td style="text-align: left">{{ appt.patient}}<br><div class="subtitle1">MRN: {{appt.patient_id}}</div></td>
                   <td>{{ appt.office}}</td>
                   <td>{{ frontEndDateFormat(appt.appt_start_time)}} <br>
-                    <div class="text-info subtitle1">{{frontEndTimeFormat(appt.appt_start_time)}}</div></td>
+                    <div class="text-info subtitle1">{{appt.appt_start_time |frontEndTimeFormat}}</div></td>
                   <td>{{ appt.reason_for_visit}}</td>
                 </tr>
               </template>
@@ -54,7 +54,7 @@
                    <td style="text-align: left">{{ appt.patient}}<br><div class="subtitle1">MRN: {{appt.patient_id}}</div></td>
                   <td>{{ appt.office}}</td>
                   <td>{{ frontEndDateFormat(appt.appt_start_time)}} <br>
-                    <div class="text-info subtitle1">{{frontEndTimeFormat(appt.appt_start_time)}}</div></td>
+                    <div class="text-info subtitle1">{{appt.appt_start_time | frontEndTimeFormat}}</div></td>
                   <td>{{ appt.reason_for_visit}}</td>
                 </tr>
               </template>
@@ -107,9 +107,9 @@ export default {
     frontEndDateFormat: function(date) {
       return moment.utc(date).format('MM/DD/YYYY');
     },
-     frontEndTimeFormat: function(date) {
-      return moment.utc(date).format(' hh:mm:ss A');
-    },
+    //  frontEndTimeFormat: function(date) {
+    //   return moment.utc(date).format(' hh:mm:ss A');
+    // },
 
   }
 }
