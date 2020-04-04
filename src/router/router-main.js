@@ -15,7 +15,7 @@ import BookAppointment from '@/components/BookAppointment'
 import NotFound from '@/components/NotFound'
 import Admin from '@/components/Admin'
 import Office from '@/components/Office'
-
+import DoctorPatients from "../components/DoctorPatients";
 
 // Letting Vue Know To Use Router
 Vue.use(Router)
@@ -78,6 +78,11 @@ export const router = new Router({
       path: '/doctor-dashboard',
       name: 'DoctorDashboard',
       component: DoctorDashboard
+    },
+    {
+      path: '/doctor-patients',
+      name: 'DoctorPatients',
+      component: DoctorPatients
     }
     ,
     {
@@ -94,7 +99,7 @@ export const router = new Router({
 router.beforeEach((to, from, next) => {
   var loggedIn = localStorage.getItem('localUser')
   if (to.path === '/dashboard' || to.path === '/update-profile' || to.path === '/appointment'
-    || to.path === '/doctor-dashboard' || to.path === '/admin') {
+    || to.path === '/doctor-dashboard' || to.path === '/admin' || to.path==='/doctor-patients') {
     if (loggedIn) {
       next()
       return

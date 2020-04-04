@@ -19,6 +19,7 @@
             Doctors
             <ul class="sub-menu">
               <li><a href="doctor-dashboard">Doctor Dashboard</a></li>
+              <li><a href="doctor-patients">Patients List</a></li>
             </ul>
           </li>
           <li><a to="admin">Admin</a></li>
