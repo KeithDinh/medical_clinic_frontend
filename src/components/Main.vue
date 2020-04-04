@@ -106,10 +106,12 @@ export default {
 
 
 .mainBG {
+  background-size: cover;
   background-image: url("https://cdn.shopify.com/s/files/1/2198/0277/files/Houston-skyline.jpg?15716366482872199911");
   color: #ffffff;
   padding-top: 0.1px;
   padding-bottom: 0.1px;
+
 }
 
 
