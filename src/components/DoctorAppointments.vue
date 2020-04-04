@@ -12,9 +12,10 @@
               </tr>
               <template v-for="appt in allAppointmentsList.todayAppointments">
                 <tr>
-                  <td>{{ appt.patient}}</td>
+                   <td style="text-align: left">{{ appt.patient}}<br><div class="subtitle1">MRN: {{appt.patient_id}}</div></td>
                   <td>{{ appt.office}}</td>
-                  <td>{{ appt.appt_start_time}}</td>
+                  <td>{{ frontEndDateFormat(appt.appt_start_time)}} <br>
+                    <div class="text-info subtitle1">{{frontEndTimeFormat(appt.appt_start_time)}}</div></td>
                   <td>{{ appt.reason_for_visit}}</td>
                 </tr>
               </template>
@@ -31,17 +32,17 @@
               </tr>
               <template v-for="appt in allAppointmentsList.futureAppointments">
                 <tr>
-                  <td>{{ appt.patient}}</td>
+                   <td style="text-align: left">{{ appt.patient}}<br><div class="subtitle1">MRN: {{appt.patient_id}}</div></td>
                   <td>{{ appt.office}}</td>
-                  <td>{{ appt.appt_start_time}}</td>
+                  <td>{{ frontEndDateFormat(appt.appt_start_time)}} <br>
+                    <div class="text-info subtitle1">{{frontEndTimeFormat(appt.appt_start_time)}}</div></td>
                   <td>{{ appt.reason_for_visit}}</td>
                 </tr>
               </template>
             </table>
           </tab>
           <tab name="Past Appointments">
-            PAST
-             <table>
+            <table>
               <tr>
                 <th>Patient Name</th>
                 <th>Office Name</th>
@@ -50,13 +51,15 @@
               </tr>
               <template v-for="appt in allAppointmentsList.pastAppointments">
                 <tr>
-                  <td>{{ appt.patient}}</td>
+                   <td style="text-align: left">{{ appt.patient}}<br><div class="subtitle1">MRN: {{appt.patient_id}}</div></td>
                   <td>{{ appt.office}}</td>
-                  <td>{{ appt.appt_start_time}}</td>
+                  <td>{{ frontEndDateFormat(appt.appt_start_time)}} <br>
+                    <div class="text-info subtitle1">{{frontEndTimeFormat(appt.appt_start_time)}}</div></td>
                   <td>{{ appt.reason_for_visit}}</td>
                 </tr>
               </template>
             </table>
+
           </tab>
         </tabs>
   </div>
@@ -65,10 +68,26 @@
 
 import { mapState, mapActions } from 'vuex'
 import { doctorAppointmentsService,doctorService } from '../services'
-import Vue from "vue";
-import {Tab, Tabs} from "vue-tabs-component";
-Vue.component('tabs', Tabs);
-Vue.component('tab', Tab);
+import Vue from "vue"
+import {Tab, Tabs} from "vue-tabs-component"
+import moment from 'moment'
+Vue.component('tabs', Tabs)
+Vue.component('tab', Tab)
+
+//TODO:I would like to make a resuable code, but I could not pass the data into appt props
+// Vue.component('apptTable',{
+//     props: ['appt'],
+//     template:`
+//           <tr>
+//              <td style="text-align: left">{{ appt.patient}}<br><div class="subtitle1">MRN: {{appt.patient_id}}</div></td>
+//             <td>{{ appt.office}}</td>
+//             <td>{{ frontEndDateFormat(appt.appt_start_time)}} <br>
+//               <div class="text-info subtitle1">{{frontEndTimeFormat(appt.appt_start_time)}}</div></td>
+//             <td>{{ appt.reason_for_visit}}</td>
+//           </tr>`
+// });
+
+
 
 export default {
 
@@ -84,11 +103,20 @@ export default {
   methods: {
     ...mapActions('doctor', [
       'loadDoctorAppointments'
-    ])
+    ]),
+    frontEndDateFormat: function(date) {
+      return moment.utc(date).format('MM/DD/YYYY');
+    },
+     frontEndTimeFormat: function(date) {
+      return moment.utc(date).format(' hh:mm:ss A');
+    },
+
   }
 }
-
-
 </script>
 <style media="screen">
+td{
+  padding:15px;
+}
+
 </style>
