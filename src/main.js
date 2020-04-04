@@ -6,6 +6,7 @@ import { store } from './store'
 import {router} from './router'
 import App from './App'
 
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
@@ -27,3 +28,14 @@ Vue.filter('toCurrency', function (value) {
   })
   return formatter.format(value)
 })
+
+Vue.filter('frontEndTimeFormat', function(str) {
+  var dateobj=new Date(str);
+  var hours = dateobj.getUTCHours();
+  var minutes = dateobj.getUTCMinutes();
+  var seconds = dateobj.getUTCSeconds();
+  console.log(hours + ":" + minutes + ":" + seconds);
+  return hours + ":" + minutes + ":" + seconds;
+})
+
+
