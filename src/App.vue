@@ -22,7 +22,7 @@
               <li><a href="doctor-patients">Patients List</a></li>
             </ul>
           </li>
-          <li><a to="admin">Admin</a></li>
+          <li><a to="admin" href = "admin">Admin</a></li>
           <li><a to="office" href="office">Health Offices</a></li>
           <img src="https://image.flaticon.com/icons/svg/2345/2345601.svg" width="20" alt="">
         </ul>

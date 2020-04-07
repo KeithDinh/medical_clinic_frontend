@@ -1,7 +1,15 @@
 <template>
     <div>
-           
-        <h1 class="mainHeader">We Offer Health Services At <br>Multiple Offices</h1>
+
+        <div class="headerContainer">
+            <div class="headerBackground"></div>
+          <div class="overlay">
+            <div class="header">
+              <h1>We Offer Health Services At <br>Multiple Offices </h1>
+            </div>
+          </div>
+        </div>
+
             <table >
                 <template>
                 <div v-for="off in offices" v-bind:value="off.office_id">
@@ -15,7 +23,7 @@
                 </template>
             </table>
             
-    </div>
+      </div>
     
 </template>
 <script>
@@ -75,17 +83,47 @@ div {
   color: #0d75a6;
 }
 
-.mainHeader{
+
+
+.headerContainer {
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  background-color: #0d75a6;
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+  transition: .5s ease;
+}
+
+.headerContainer:hover .overlay {
+  bottom: 0;
+  height: 100%;
+}
+
+.header {
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.headerBackground {
   padding: 200px;
   padding-top: 15px;
-  font: bold;
-  font-size:40px;
-  color: #ffffff;
-  background-image: url("https://wallpaperplay.com/walls/full/2/0/8/13986.jpg");
+  background: url("https://wallpaperplay.com/walls/full/2/0/8/13986.jpg");
   background-size: cover;
+  height: 300px;
 
 }
-</style>
 
-}
 </style>
