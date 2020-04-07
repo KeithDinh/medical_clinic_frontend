@@ -32,7 +32,7 @@
 
   <div class="rightsideofPage" style="margin-left: 75%; margin-right: 30%; height: 20px; float: right;">
     <br><br><br><br>
-    <img class="doctorPic" src="https://images.generated.photos/kKm6mHstrQ7Fi5Nec03mPNtN8w-w6W_g43vI0UKrnIg/rs:fit:512:512/Z3M6Ly9nZW5lcmF0/ZWQtcGhvdG9zLzA2/MjExNjEuanBn.jpg">
+    <img class="doctorPic" :src="profile.image">
     <section class="NameSpecializationBackground" >
               <div class="doctorprofile" v-if="profile.firstName">
                 <div >
