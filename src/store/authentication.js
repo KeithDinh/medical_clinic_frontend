@@ -2,10 +2,9 @@ import { userService, profileService, doctorService } from '../services'
 import { router } from '../router'
 
 const localUser = JSON.parse(localStorage.getItem('localUser'))
-const initialState = {
-  localUser: {},
-  status: {}
-  }
+const initialState = localUser
+  ? { status: { loggedIn: true }, localUser: localUser }
+  : { status: {}, localUser: null }
 
 // Validate the Registration Form
 const validateRegistration = (email, passwordOne, passwordTwo, firstName, middleInit, lastName, street, city, state, zipcode, phone, dob, gender, marital, race) => {
@@ -165,8 +164,13 @@ export const authentication = {
           .then(
             localUser => {
               commit('registerSuccess', localUser)
-              router.push('/dashboard')
-              dispatch('alert/success', 'Account Registered', { root: true })
+              profileService.getProfile(localUser.patient_id).then(
+                response => {
+                  router.push('/dashboard')
+                },
+                error => {
+                  alert('registrationFailure')
+                })
             },
             error => {
               commit('registerFailure', error)
