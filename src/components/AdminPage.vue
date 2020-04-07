@@ -4,7 +4,7 @@
       <h2 class='dashboard_header'>Admin Dashboard</h2>
 
       <div >
-      <AdminProfile class="db1" />
+      <Admin class="db1" />
       <tabs :options="{ useUrlFragment: false }" @clicked="tabClicked" @changed="tabChanged">
         <tab name="Patients">
           <AdminPatient />
@@ -40,7 +40,7 @@ Vue.component('tabs', Tabs);
 Vue.component('tab', Tab);
 export default {
 
-  name: 'Admin',
+  name: 'AdminPage',
   components: {
     AdminProfile,
     AdminPatient,
@@ -51,14 +51,18 @@ export default {
     Tab
   },
   created () {
-
+    this.loadAdminProfile()
   },
   computed: {
-
-  },
-  methods: {
-
-  }
+   ...mapState('admin', {
+     admin: state => state.adminProfile
+   })
+ },
+ methods: {
+   ...mapActions('admin', [
+     'loadAdminProfile'
+   ])
+ }
 }
 </script>
 <style media="screen">
