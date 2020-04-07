@@ -63,6 +63,15 @@ export const doctor = {
           dispatch('alert/success', 'doctor Retreived', { root: true })
         })
     },
+    loadDoctorFromList (
+      { dispatch, commit, state }, doctor_id) {
+      commit('doctorProfileFromList')
+      state.doctorsList.forEach(doc => {
+        if (doc.doctor_id === doctor_id) {
+          commit('doctorProfileSuccess', doc)
+        }
+      })
+    },
     loadDoctorProfile (
       { dispatch, commit }) {
       commit('doctorProfileRequest')

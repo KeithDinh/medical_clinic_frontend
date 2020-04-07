@@ -34,13 +34,13 @@
     <br><br><br><br>
     <img class="doctorPic" :src="profile.image">
     <section class="NameSpecializationBackground" >
-              <div class="doctorprofile" v-if="profile.firstName">
-                <div >
-                Name: {{ profile.firstName }} {{ profile.lastName }}
-                </div>
-                <div >Specialization: {{ profile.specializationName }}
-                </div>
-              </div>
+      <div class="doctorprofile" v-if="profile.first_name">
+        <div >
+        Name: {{ profile.first_name }} {{ profile.last_name }}
+        </div>
+        <div >Specialization: {{ profile.specialization_name }}
+        </div>
+      </div>
     </section>
   </div>
 </div>
@@ -65,7 +65,7 @@ export default {
       this.loadDoctorsByOffice(value)
     },
     doctor: function (value) {
-      this.loadDoctorById(value)
+      this.loadDoctorFromList(value)
     }
   },
   created () {
@@ -90,7 +90,7 @@ export default {
       'loadDoctorsByOffice'
     ]),
     ...mapActions('doctor', [
-      'loadDoctorById'
+      'loadDoctorFromList'
     ]),
   }
 }
