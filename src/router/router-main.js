@@ -13,7 +13,7 @@ import DoctorProfile from '@/components/DoctorProfile'
 import DoctorDashboard from "../components/DoctorDashboard";
 import BookAppointment from '@/components/BookAppointment'
 import NotFound from '@/components/NotFound'
-import Admin from '@/components/Admin'
+import AdminPage from '@/components/AdminPage'
 import Office from '@/components/Office'
 import DoctorPatients from "../components/DoctorPatients";
 
@@ -41,8 +41,8 @@ export const router = new Router({
     },
     {
       path: '/admin',
-      name: 'Admin',
-      component: Admin
+      name: 'AdminPage',
+      component: AdminPage
     },
     {
       path: '/register',
