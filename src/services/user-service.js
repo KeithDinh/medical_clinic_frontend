@@ -29,6 +29,8 @@ function login (email, password) {
 function logout () {
   // remove user from local storage to log user out
   localStorage.removeItem('localUser')
+  localStorage.removeItem('patient')
+  localStorage.removeItem('doctor')
 }
 // Format the Date
 function formatDate (birthdate) {

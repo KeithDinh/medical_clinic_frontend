@@ -1,10 +1,11 @@
-import { userService } from '../services'
+import { userService, profileService, doctorService } from '../services'
 import { router } from '../router'
 
 const localUser = JSON.parse(localStorage.getItem('localUser'))
-const initialState = localUser
-  ? { status: { loggedIn: true }, localUser: localUser }
-  : { status: {}, localUser: null }
+const initialState = {
+  localUser: {},
+  status: {}
+  }
 
 // Validate the Registration Form
 const validateRegistration = (email, passwordOne, passwordTwo, firstName, middleInit, lastName, street, city, state, zipcode, phone, dob, gender, marital, race) => {
@@ -114,12 +115,28 @@ export const authentication = {
               if (localUser.role_id === 1)
                 router.push('/admin')
               else if (localUser.role_id === 2) {
-                alert('doctor found')
-                router.push('/dashboard')
+                alert('patient logged in')
+                //get patient
+                profileService.getProfile(localUser.patient_id).then(
+                  response => {
+                    router.push('/dashboard')
+                  },
+                  error => {
+                    alert('profileFailure')
+                  })
               }
               else if (localUser.role_id === 3) {
-                alert("doctor detected")
-                router.push('/doctor-dashboard')
+                alert("doctor logged in")
+                // get doctor
+                doctorService.getDoctor(localUser.doctor_id).then(
+                  response => {
+                    if (response) {
+                      router.push('./doctor-dashboard')
+                    }
+                  },
+                  error => {
+                    alert('doctorFailure')
+                  })
               }                
 
               dispatch('alert/success', 'Logged In', { root: true })

@@ -7,11 +7,15 @@ export const doctorService = {
   getDoctor
 }
 
-function getDoctor () {
+function getDoctor (doctor_id) {
   const requestOptions = {
-    method: 'GET',
-    headers: authorizationHeader()
+    method: 'GET'
   }
-  return fetch(`${config.apiUrl}/doctor/profile`, requestOptions)
+  return fetch(`${config.apiUrl}/doctor/profile?did=` + doctor_id, requestOptions)
     .then(handleResponse)
+    .then(doctor => {
+      localStorage.setItem('doctor', JSON.stringify(doctor))
+      alert(doctor)
+      return doctor
+    })
 }

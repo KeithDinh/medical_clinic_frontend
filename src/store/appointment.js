@@ -1,4 +1,4 @@
-import { appointmentService } from '../services'
+import { appointmentService, profileService } from '../services'
 import { router } from '../router'
 
 const initialState = {
@@ -40,6 +40,11 @@ export const appointment = {
       .then(
         response => {
           commit('apptSuccess', { doctor, office, refDoctor, date, timeslot, reason, bookingMethod })
+          profileService.getProfile(localUser.patient_id).then(
+            response => {
+              router.push('/dashboard')
+            }
+          )
           dispatch('alert/success', 'Appointment Set', { root: true })
         },
         error => {
@@ -51,8 +56,8 @@ export const appointment = {
     loadAppointments (
       { dispatch, commit }) {
       commit('loadApptRequest')
-      const localUser = JSON.parse(localStorage.getItem('localUser'))
-      commit('loadApptSuccess', localUser.appointments)
+      const patient = JSON.parse(localStorage.getItem('patient'))
+      commit('loadApptSuccess', patient.appointments)
     }
   }
 }

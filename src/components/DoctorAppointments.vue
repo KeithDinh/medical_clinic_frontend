@@ -67,7 +67,6 @@
 <script>
 
 import { mapState, mapActions } from 'vuex'
-import { doctorAppointmentsService,doctorService } from '../services'
 import Vue from "vue"
 import {Tab, Tabs} from "vue-tabs-component"
 Vue.component('tabs', Tabs)

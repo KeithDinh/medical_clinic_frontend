@@ -31,8 +31,8 @@ export const prescription = {
     loadPrescriptions (
       { dispatch, commit }) {
       commit('loadRxRequest')
-      const localUser = JSON.parse(localStorage.getItem('localUser'))
-      commit('loadRxSuccess', localUser.prescriptions)
+      const patient = JSON.parse(localStorage.getItem('patient'))
+      commit('loadRxSuccess', patient.prescriptions)
     }
   }
 }

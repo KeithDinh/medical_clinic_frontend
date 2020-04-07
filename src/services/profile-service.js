@@ -17,6 +17,10 @@ function getProfile (patient_id) {
   }
   return fetch(`${config.apiUrl}/patients/profile?pid=` + patient_id, requestOptions)
     .then(handleResponse)
+    .then(patient => {
+      localStorage.setItem('patient', JSON.stringify(patient))
+      return patient
+    })
 }
 
 function postProfile (profile) {

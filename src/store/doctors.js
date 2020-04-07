@@ -4,8 +4,6 @@ import { router } from '../router'
 const initialState = {
   doctorsStatus: {},
   doctorsList: [],
-  doctorProfileStatus: {},
-  doctorProfile: {}
 }
 
 export const doctors = {
@@ -69,11 +67,6 @@ export const doctors = {
             dispatch('alert/error', error, { root: true })
           }
         )
-    },
-    loadDoctorById (
-      { dispatch, commit }, doctor_id) {
-      commit('doctorProfileRequest')
-      commit('doctorProfileSuccess', doctor_id) 
     }
   }
 }

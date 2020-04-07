@@ -47,26 +47,27 @@ export const doctor = {
     loadDoctorProfile (
       { dispatch, commit }) {
       commit('doctorProfileRequest')
-      const localUser = JSON.parse(localStorage.getItem('localUser'))
-      const profile = localUser.profile
-      commit('doctorProfileSuccess', profile)
+      const doctor = JSON.parse(localStorage.getItem('doctor'))
+      commit('doctorProfileSuccess', doctor.profile)
       dispatch('alert/success', 'doctor Retreived', { root: true })
     },
     loadDoctorPatients (
       { dispatch, commit }) {
       commit('doctorPatientRequest')
-      const localUser = JSON.parse(localStorage.getItem('localUser'))
-      const patients = localUser.patients
-      commit('doctorPatientSuccess', patients)
+      const doctor = JSON.parse(localStorage.getItem('doctor'))
+      commit('doctorPatientSuccess', doctor.patients)
       dispatch('alert/success', 'patients Retreived', { root: true })
     },
     loadDoctorAppointments (
       { dispatch, commit }) {
       commit('doctorApptRequest')
-      const localUser = JSON.parse(localStorage.getItem('localUser'))
-      const appts = localUser.appointments
-      commit('doctorApptSuccess', appts)
+      const doctor = JSON.parse(localStorage.getItem('doctor'))
+      commit('doctorApptSuccess', doctor.appointments)
       dispatch('alert/success', 'appointments Retreived', { root: true })
+    },
+    editPatient (
+      { dispatch, commit }) {
+      router.push('/dashboard')
     }
   }
 }

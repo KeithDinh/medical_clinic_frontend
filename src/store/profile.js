@@ -133,28 +133,9 @@ export const profile = {
   },
   actions: {
     loadProfile ({ dispatch, commit, state }) {
-      const localUser = JSON.parse(localStorage.getItem('localUser'))
       commit('loadProfileRequest')
-      // Admin
-      /*if (localUser.role_id === 1)
-        router.push('/admin')*/
-
-      // Patient
-      if (localUser.role_id === 2) {
-        commit('loadingProfileSuccess', localUser.profile)
-      } // Doctor
-      else if (localUser.role_id === 3) {
-        commit('loadPatientIdRequest')
-        const patient_id = state.patientId
-        commit('loadPatientIdSuccess')
-        profileService.getProfile(patient_id).then(
-          response => {
-            commit('loadingProfileSuccess', response.profile)
-          },
-          error => {
-            commit('createProfileFailure')
-          })
-      } 
+      const patient = JSON.parse(localStorage.getItem('patient'))
+      commit('loadingProfileSuccess', patient.profile)
     },
     createProfile ({ dispatch, commit }, profile) {
       commit('createProfileRequest', profile)
@@ -194,6 +175,14 @@ export const profile = {
           }
         )
       }
+    },
+    reloadPatient (
+      { dispatch, commit }, patient_id) {
+      profileService.getProfile(patient_id).then(
+        response => {
+          router.push('/dashboard')
+          return response
+        })
     }
   }
 }

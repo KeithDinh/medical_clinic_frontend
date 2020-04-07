@@ -21,6 +21,7 @@
               <div style="clear:both;"></div>
               <div class="text"><p class="align-left">Race: </p><p class="align-right">{{ profile.race }}</p></div>
               <div style="clear:both;"></div>
+              <div class="row"><a href="#" v-on:click="patient(profile.patient_id)">Edit Patient</a></div>
           </div>
           </div>
       </div>
@@ -50,8 +51,15 @@ export default {
   },
   methods: {
     ...mapActions('doctor', [
-      'loadDoctorPatients'
-    ])
+      'loadDoctorPatients',
+      'editPatient'
+    ]),
+    ...mapActions('profile', [
+      'reloadPatient'
+    ]),
+    patient(value) {
+      const res = this.reloadPatient(value)
+    }
   },
   filters: {
     frontEndTimeFormat(str) {
