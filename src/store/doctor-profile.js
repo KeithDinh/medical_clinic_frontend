@@ -64,10 +64,6 @@ export const doctor = {
       const doctor = JSON.parse(localStorage.getItem('doctor'))
       commit('doctorApptSuccess', doctor.appointments)
       dispatch('alert/success', 'appointments Retreived', { root: true })
-    },
-    editPatient (
-      { dispatch, commit }) {
-      router.push('/dashboard')
     }
   }
 }

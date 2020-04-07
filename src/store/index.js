@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import { alert } from './alert'
+import { admin } from './admin'
 import { authentication } from './authentication'
 import { profile } from './profile'
 import { dates } from './dates'
@@ -17,6 +18,7 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
   modules: {
     alert,
+    admin,
     authentication,
     profile,
     dates,
