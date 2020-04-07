@@ -30,7 +30,7 @@ export const doctor = {
     },
     doctorPatientSuccess (state, returnedPatients) {
       state.doctorPatientStatus = { loadedPatients: true }
-      state.patients = returnedPatients
+      state.patients = {...state.patients, ...returnedPatients}
       console.log("Patient List",state.patients)
     },
     doctorApptRequest (state) {
@@ -38,7 +38,7 @@ export const doctor = {
     },
     doctorApptSuccess (state, returnedAppts) {
       state.doctorApptStatus = { loadedAppts: true }
-      state.doctorAppointmentsList= returnedAppts
+      state.doctorAppointmentsList= {...state.doctorAppointmentsList, ...returnedAppts}
 
     },
 
