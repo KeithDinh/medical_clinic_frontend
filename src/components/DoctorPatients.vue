@@ -22,7 +22,7 @@ export default {
   },
    components: {
      DoctorPatientsList,
-    DoctorProfile,
+     DoctorProfile,
   },
   computed: {
     ...mapState('doctor', {
