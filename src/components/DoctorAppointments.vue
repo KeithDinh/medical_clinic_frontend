@@ -77,6 +77,7 @@ export default {
 
   name: 'DoctorAppointments',
   created () {
+    allAppointmentsList: [],
     this.loadDoctorAppointments()
   },
   computed: {
@@ -88,6 +89,22 @@ export default {
     ...mapActions('doctor', [
       'loadDoctorAppointments'
     ]),
+  },
+  filters: {
+    frontEndTimeFormat(str) {
+      var dateobj=new Date(str);
+      var hours = ("0"+ dateobj.getUTCHours()).slice(-2)
+      var minutes = ("0"+ dateobj.getUTCMinutes()).slice(-2)
+      console.log(hours + ":" + minutes);
+      return hours + ":" + minutes;
+    },
+    frontEndDateFormat(str) {
+      var dateobj=new Date(str);
+      var date = dateobj.getUTCDate();
+      var month=dateobj.getUTCMonth();
+      var year= dateobj.getUTCFullYear();
+      return month+"/"+date+"/"+year;
+    }
   }
 }
 </script>

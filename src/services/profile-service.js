@@ -10,12 +10,12 @@ export const profileService = {
 }
 
 
-function getProfile () {
+function getProfile (patient_id) {
   const requestOptions = {
     method: 'GET',
     headers: authorizationHeader()
   }
-  return fetch(`${config.apiUrl}/patients/profile`, requestOptions)
+  return fetch(`${config.apiUrl}/patients/profile?pid=` + patient_id, requestOptions)
     .then(handleResponse)
 }
 

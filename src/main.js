@@ -28,21 +28,3 @@ Vue.filter('toCurrency', function (value) {
   })
   return formatter.format(value)
 })
-
-Vue.filter('frontEndTimeFormat', function(str) {
-  var dateobj=new Date(str);
-  var hours = dateobj.getUTCHours();
-  var minutes = dateobj.getUTCMinutes();
-  var seconds = dateobj.getUTCSeconds();
-  console.log(hours + ":" + minutes + ":" + seconds);
-  return hours + ":" + minutes + ":" + seconds;
-})
-
-Vue.filter('frontEndDateFormat', function(str) {
-  var dateobj=new Date(str);
-  var date = dateobj.getUTCDate();
-  var month=dateobj.getUTCMonth();
-  var year= dateobj.getUTCFullYear();
-  return month+"/"+date+"/"+year;
-})
-

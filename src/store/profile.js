@@ -3,7 +3,8 @@ import { router } from '../router'
 
 const initialState = {
   profileStatus: {},
-  userProfile: {}
+  userProfile: {},
+  patientId: '1'
 }
 
 // Validate the Profile Form
@@ -121,13 +122,39 @@ export const profile = {
     },
     updateProfileFailure (state) {
       state.profileStatus = { updateProfileFailure: true }
+    },
+    loadPatientIdRequest (state) {
+      state.patientIdStatus = { loadingPatientId: true }
+    },
+    loadPatientIdSuccess (state, patientId) {
+      state.patientId = patientId
+      state.patientIdStatus = { loadedPatientId: true }
     }
   },
   actions: {
-    loadProfile ({ dispatch, commit }) {
-      commit('loadProfileRequest')
+    loadProfile ({ dispatch, commit, state }) {
       const localUser = JSON.parse(localStorage.getItem('localUser'))
-      commit('loadingProfileSuccess', localUser.profile)
+      commit('loadProfileRequest')
+      // Admin
+      /*if (localUser.role_id === 1)
+        router.push('/admin')*/
+
+      // Patient
+      if (localUser.role_id === 2) {
+        commit('loadingProfileSuccess', localUser.profile)
+      } // Doctor
+      else if (localUser.role_id === 3) {
+        commit('loadPatientIdRequest')
+        const patient_id = state.patientId
+        commit('loadPatientIdSuccess')
+        profileService.getProfile(patient_id).then(
+          response => {
+            commit('loadingProfileSuccess', response.profile)
+          },
+          error => {
+            commit('createProfileFailure')
+          })
+      } 
     },
     createProfile ({ dispatch, commit }, profile) {
       commit('createProfileRequest', profile)
