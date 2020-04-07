@@ -41,6 +41,9 @@ Vue.component('tab', Tab);
 export default {
 
   name: 'AdminPage',
+  data () {
+    return {}
+  },
   components: {
     AdminProfile,
     AdminPatient,
@@ -51,17 +54,13 @@ export default {
     Tab
   },
   created () {
-    this.loadAdminProfile()
+    
   },
   computed: {
-   ...mapState('admin', {
-     admin: state => state.adminProfile
-   })
+   
  },
  methods: {
-   ...mapActions('admin', [
-     'loadAdminProfile'
-   ])
+   
  }
 }
 </script>
