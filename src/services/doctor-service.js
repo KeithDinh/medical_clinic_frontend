@@ -20,9 +20,10 @@ function getDoctor (doctor_id) {
 
 function getDoctorData (doctor_id) {
   const requestOptions = {
-    method: 'GET'
+    method: 'GET',
+    headers: authorizationHeader()
   }
-  return fetch(`${config.apiUrl}/doctor/data?did=` + doctor_id, requestOptions)
+  return fetch(`${config.apiUrl}/doctor/data`, requestOptions)
     .then(handleResponse)
     .then(doctor => {
       localStorage.setItem('doctor', JSON.stringify(doctor))
