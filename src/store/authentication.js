@@ -127,7 +127,7 @@ export const authentication = {
               else if (localUser.role_id === 3) {
                 alert("doctor logged in")
                 // get doctor
-                doctorService.getDoctor(localUser.doctor_id).then(
+                doctorService.getDoctorData(localUser.doctor_id).then(
                   response => {
                     if (response) {
                       router.push('./doctor-dashboard')

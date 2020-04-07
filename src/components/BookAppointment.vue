@@ -104,7 +104,7 @@ export default {
     this.loadDoctors()
   },
   computed: {
-    ...mapState('doctors', {
+    ...mapState('doctor', {
       doctors: state => state.doctorsList
     }),
     ...mapState('offices', {
@@ -116,7 +116,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions('doctors', [
+    ...mapActions('doctor', [
       'loadDoctors'
     ]),
     ...mapActions('offices', [

@@ -34,11 +34,11 @@
     <br><br><br><br>
     <img class="doctorPic" src="https://images.generated.photos/kKm6mHstrQ7Fi5Nec03mPNtN8w-w6W_g43vI0UKrnIg/rs:fit:512:512/Z3M6Ly9nZW5lcmF0/ZWQtcGhvdG9zLzA2/MjExNjEuanBn.jpg">
     <section class="NameSpecializationBackground" >
-              <div class="doctorprofile" v-if="profile.first_name">
+              <div class="doctorprofile" v-if="profile.firstName">
                 <div >
-                Name: {{ profile.first_name }} {{ profile.last_name }}
+                Name: {{ profile.firstName }} {{ profile.lastName }}
                 </div>
-                <div >Specialization: {{ profile.specialization_name }}
+                <div >Specialization: {{ profile.specializationName }}
                 </div>
               </div>
     </section>
@@ -75,10 +75,10 @@ export default {
     ...mapState('offices', {
       offices: state => state.officeList
     }),
-    ...mapState('doctors', {
+    ...mapState('doctor', {
       doctors: state => state.doctorsList
     }),
-    ...mapState('doctors', {
+    ...mapState('doctor', {
       profile: state => state.doctorProfile
     })
   },
@@ -86,10 +86,10 @@ export default {
     ...mapActions('offices', [
       'loadOffices'
     ]),
-    ...mapActions('doctors', [
+    ...mapActions('doctor', [
       'loadDoctorsByOffice'
     ]),
-    ...mapActions('doctors', [
+    ...mapActions('doctor', [
       'loadDoctorById'
     ]),
   }

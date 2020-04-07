@@ -7,8 +7,9 @@ const initialState = {
   doctorPatientStatus: {},
   patients: {},
   doctorApptStatus: {},
-  doctorAppointmentsList:{}
-
+  doctorAppointmentsList:{},
+  doctorsStatus: {},
+  doctorsList: []
 }
 
 export const doctor = {
@@ -41,9 +42,27 @@ export const doctor = {
       state.doctorAppointmentsList= {...state.doctorAppointmentsList, ...returnedAppts}
 
     },
-
+    doctorsRequest (state) {
+      state.doctorsStatus = { loadingDoctors: true }
+    },
+    doctorsSuccess (state, returnedDoctors) {
+      state.doctorsStatus = { loadedDoctors: true }
+      state.doctorsList = returnedDoctors
+    },
+    doctorsFailure (state) {
+      state.doctorsStatus = { doctorsFailure: true }
+    }
   },
   actions: {
+    loadDoctorById (
+      { dispatch, commit }, doctor_id) {
+      commit('doctorProfileRequest')
+      doctorService.getDoctor(doctor_id).then(
+        response => {
+          commit('doctorProfileSuccess', response.profile)
+          dispatch('alert/success', 'doctor Retreived', { root: true })
+        })
+    },
     loadDoctorProfile (
       { dispatch, commit }) {
       commit('doctorProfileRequest')
@@ -64,6 +83,38 @@ export const doctor = {
       const doctor = JSON.parse(localStorage.getItem('doctor'))
       commit('doctorApptSuccess', doctor.appointments)
       dispatch('alert/success', 'appointments Retreived', { root: true })
+    },
+    loadDoctors (
+      { dispatch, commit }) {
+      commit('doctorsRequest')
+      doctorService.getDoctors()
+        .then(
+          response => {
+            const doctors = response.doctors
+            commit('doctorsSuccess', doctors)
+            dispatch('alert/success', 'doctors Retreived', { root: true })
+          },
+          error => {
+            commit('doctorsFailure')
+            dispatch('alert/error', error, { root: true })
+          }
+        )
+    },
+    loadDoctorsByOffice (
+      { dispatch, commit }, office_id ) {
+      commit('doctorsRequest')
+      doctorService.getDoctorsByOffice(office_id)
+        .then(
+          response => {
+            const doctors = response.doctors
+            commit('doctorsSuccess', doctors)
+            dispatch('alert/success', 'doctors Retreived', { root: true })
+          },
+          error => {
+            commit('doctorsFailure')
+            dispatch('alert/error', error, { root: true })
+          }
+        )
     }
   }
 }
