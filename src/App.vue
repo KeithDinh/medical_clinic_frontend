@@ -1,9 +1,10 @@
 <template>
-  <div id="app">
-    <header>
-      <div class="row container top-header">
-        <div class="logo left" >Health Hub</div>
-        <ul class="nav-links left">
+  <div id="app" class="row">
+    <header class="row">
+      <div class="row-flex container top-header">
+        <div class="logo"><img src="/static/images/logo.png" alt=""></div>
+        <div class="logo-text left">Health Hub</div>
+        <ul class="nav-links">
           <li><a to="/" href="/">Home</a></li>
           <li class="menu-item-has-children">
             Patients
@@ -14,7 +15,6 @@
               <li><a href="update-profile">Update Profile</a></li>
             </ul>
           </li>
-<!--          <li><a to="doctor">Doctors</a></li>-->
           <li class="menu-item-has-children">
             Doctors
             <ul class="sub-menu">
@@ -24,20 +24,19 @@
           </li>
           <li><a to="admin" href = "admin">Admin</a></li>
           <li><a to="office" href="office">Health Offices</a></li>
-          <img src="https://image.flaticon.com/icons/svg/2345/2345601.svg" width="20" alt="">
         </ul>
-        <div class="links right">
-          <button style='margin-top: 20px; font-size: 18px'>
+        <div class="links">
+          <button>
           <a href="login" v-if="userStatus.localUser" v-on:click="logout()">Logout</a>
           <a href="login" v-else>Login</a>
           </button>
         </div>
       </div>
-      <div class="row container breadcrumbs">
-        <breadcrumbs></breadcrumbs>
-      </div>
     </header>
-    <div class="row main">
+    <section class="row main">
+      <router-view/>
+    </section>
+    <footer class="row">
       <div class="row return-messages" v-if="alert.messages">
         <div class="message error" v-if="alert.type == 'alert-danger'">
           <!-- <div v-for="(message, index) in alert.messages" :key="index">{{ message }}</div> -->
@@ -47,8 +46,7 @@
           <div>{{ alert.messages }}</div>
         </div>
       </div>
-      <router-view/>
-    </div>
+    </footer>
   </div>
 </template>
 <script>
@@ -81,16 +79,10 @@ export default {
 </script>
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
-.logo {
-  color: #0d75a6;
-  font: bold;
-}
-
 .return-messages{width: 150px;}
 </style>

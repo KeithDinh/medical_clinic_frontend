@@ -145,10 +145,4 @@ select{
 .rightsideofPage {
 padding: auto;
 }
-
-footer {
-  background: #0d75a6;
-  padding-bottom: 180px;
-}
-
 </style>
