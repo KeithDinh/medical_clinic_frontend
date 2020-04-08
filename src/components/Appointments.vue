@@ -1,5 +1,6 @@
 <template>
   <div class="appointments">
+    <div class="table-border-round">
     <table>
       <tr>
         <th>Doctor</th>
@@ -20,6 +21,7 @@
         <td></td>
       </tr>
     </table>
+    </div>
   </div>
 </template>
 <script>
@@ -45,8 +47,8 @@ export default {
     CancelAppt : function (apptId) {
       alert(apptId)
       this.deleteAppointment(apptId)
-    } 
-  
+    }
+
   }
 }
 
