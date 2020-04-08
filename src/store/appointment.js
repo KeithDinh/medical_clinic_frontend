@@ -1,4 +1,4 @@
-import { appointmentService, profileService } from '../services'
+import { appointmentService, profileService,deleteAppointmentService } from '../services'
 import { router } from '../router'
 
 const initialState = {

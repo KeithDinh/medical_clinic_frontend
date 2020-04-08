@@ -40,6 +40,10 @@
         </div>
         <div >Specialization: {{ profile.specialization_name }}
         </div>
+        <div >Gender: {{ profile.gender }}
+        </div>
+        <div >Phone: {{ profile.phone }}
+        </div>
       </div>
     </section>
   </div>
