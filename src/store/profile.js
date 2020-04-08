@@ -4,7 +4,7 @@ import { router } from '../router'
 const initialState = {
   profileStatus: {},
   userProfile: {},
-  patientId: '1'
+  patientId: ''
 }
 
 // Validate the Profile Form
