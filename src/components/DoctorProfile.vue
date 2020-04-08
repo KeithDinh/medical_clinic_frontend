@@ -10,6 +10,13 @@
         <hr class="style1">
           <div class="text"><p class="align-left">Phone: </p><p class="align-right">{{ doctor.phone }}</p></div>
          <div style="clear:both;"></div>
+         <div class="text"><p class="align-left">Race </p><p class="align-right">{{ doctor.race }}</p></div>
+        <div style="clear:both;"></div>
+        <div class="text"><p class="align-left">Gender </p><p class="align-right">{{ doctor.gender }}</p></div>
+        <div style="clear:both;"></div>
+        <div class="text"><p class="align-left">Address </p><p class="align-right">{{doctor.street}} </p></div>
+        <div style="clear:both;"></div>
+        <div class="text"><p class="align-left"> </p><p class="align-right">{{doctor.city}}, {{doctor.state}} {{doctor.zipcode}}</p> </div>
         <hr class="style1">
 
     </div>

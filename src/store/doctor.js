@@ -65,7 +65,7 @@ export const doctor = {
     },
     loadDoctorFromList (
       { dispatch, commit, state }, doctor_id) {
-      commit('doctorProfileFromList')
+      commit('doctorProfileRequest')
       state.doctorsList.forEach(doc => {
         if (doc.doctor_id === doctor_id) {
           commit('doctorProfileSuccess', doc)

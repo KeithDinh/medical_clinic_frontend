@@ -13,8 +13,12 @@
           <td>{{ appt.appt_start_time }}</td>
           <td>{{ appt.booking_date }}</td>
           <td>{{ appt.appt_status }}</td>
+          <td v-if= "appt.appt_status === 'pending'"><input type="checkbox" v-bind:value="appt.appt_id"> <label>Check the box to cancel the apppointment</label></td>
         </tr>
       </template>
+      <tr>
+        <td><button v-on:click="CancelAppt()" >Cancel Appointment</button></td>
+      </tr>
     </table>
   </div>
 </template>
@@ -25,6 +29,11 @@ import { mapState, mapActions } from 'vuex'
 export default {
 
   name: 'Appointments',
+  data: function () {
+    return {
+     AppointmentID:'' 
+    }
+  },
   created () {
     this.loadAppointments()
   },
@@ -35,8 +44,15 @@ export default {
   },
   methods: {
     ...mapActions('appointment', [
-      'loadAppointments'
-    ])
+      'loadAppointments',
+       'deleteAppointment'
+    ]),
+    CancelAppt : function (e) {
+      alert(AppointmentID)
+      let appt_id = AppointmentID
+      this.deleteAppointment(appt_id)
+    } 
+  
   }
 }
 

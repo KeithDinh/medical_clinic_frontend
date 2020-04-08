@@ -3,13 +3,21 @@
    <table>
      <tr>
        <th>Name</th>
-       <th>Phone</th>
        <th>Specialization</th>
+       <th>Race</th>
+       <th>Gender</th>
+       <th>Address</th>
+       <th>Email</th>
+       <th>Phone</th>
      </tr>
      <tr v-for="doc in doctors" >
        <td>{{doc.firstName}} {{doc.middleInit}} {{doc.lastName}} </td>
+       <td>{{doc.specializationName}} </td>
+       <td>{{doc.race}} </td>
+       <td>{{doc.gender}} </td>
+       <td>{{doc.street}}, {{doc.city}}, {{doc.state}} {{doc.zipcode}} </td>
+       <td>{{doc.email}} </td>
        <td>{{doc.phone}} </td>
-       <td>{{doc.specialization_name}} </td>
      </tr>
    </table>
  </div>
