@@ -1,9 +1,13 @@
 <template>
-  <div class="prescriptions">
+  <div >
+    <hr class="style1">
+    <div style="position:relative;text-align: right;padding-right:10px"><button class="button-info round">Add New</button></div>
+    <div class="table-border-round">
     <table>
       <tr>
         <th>Doctor</th>
         <th>Date Prescribed</th>
+        <th>Medication</th>
         <th>Dose Form</th>
         <th>Dosage</th>
       </tr>
@@ -11,11 +15,13 @@
         <tr>
           <td>{{ rx.first_name }} {{ rx.last_name }}</td>
           <td>{{ rx.date_prescribed }}</td>
+           <td>{{ rx.medication_name }}</td>
           <td>{{ rx.dose_form_name }}</td>
           <td>{{ rx.dosage }}</td>
         </tr>
       </template>
     </table>
+    </div>
   </div>
 </template>
 <script>

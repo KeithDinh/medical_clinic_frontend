@@ -497,3 +497,43 @@ hr.style1 {
   color:#009EFB;
 }
 
+table{
+  border-collapse: collapse;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.table-border-round {
+  border-radius: 7px;
+  margin: 10px 20px;
+  border:1px solid rgba(0,0,0,0.2);
+
+}
+.table-border-round table tr th{
+  padding:20px;
+}
+.table-border-round table tr td{
+  padding:20px;
+}
+.table-border-round table tr:not(:last-child){
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+
+.round {
+  border-radius: 25px;
+}
+.button-info {
+  border: 2px solid #4CAF50;
+  transition-duration: 0.4s;
+  padding: 8px 20px;
+  font-size: 14px;
+  background-color: white;
+  font-weight: bold;
+  margin:10px;
+}
+.button-info:hover {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
