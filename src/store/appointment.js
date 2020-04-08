@@ -81,6 +81,9 @@ export const appointment = {
             commit('loadApptRequest')
             appointmentService.getAppointments().then(
               response => {
+                var patient = JSON.parse(localStorage.getItem('patient'))
+                patient['appointments'] = response
+                localStorage.setItem('patient', JSON.stringify(patient))
                 commit('loadApptSuccess', response)
               })
           },
