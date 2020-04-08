@@ -103,9 +103,6 @@ router.beforeEach((to, from, next) => {
     if (loggedIn) {
       next()
       return
-    }else if(to.path === '/office' || to.path === '/search-doctor') {
-      next()
-      return
     } else {
       router.push('/login')
       return

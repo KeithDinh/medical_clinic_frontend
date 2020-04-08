@@ -78,6 +78,11 @@ export const appointment = {
             const apptDeleteStatus = response.msg
             commit('deleteApptSuccess', apptDeleteStatus)
             dispatch('alert/success', 'Deleted Appointment', { root: true })
+            commit('loadApptRequest')
+            appointmentService.getAppointments().then(
+              response => {
+                commit('loadApptSuccess', response)
+              })
           },
           error => {
             commit('deleteApptFailure')
