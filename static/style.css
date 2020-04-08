@@ -67,9 +67,6 @@ ol, ul {
 .menu-item-has-children:hover .sub-menu {
   display: inline-block;
 }
-[class*="block"] {padding:7px;}
-
-.panel {background-color: #fff;  border: 1px solid rgba(0,0,0,0.1); border-radius: 7px;}
 
 /*body/html*/
 html {
@@ -420,7 +417,6 @@ section.main {
   font-size: 18px;
   font-weight: bold;
 }
-
 .dashboard_header{ color: white; background-color: #15558d; padding: 20px;text-align: left;}
 
 .card {
@@ -495,5 +491,44 @@ hr.style1 {
 
 .text-info{
   color:#009EFB;
+}
+.table-border-round table{
+  border-collapse: collapse;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.table-border-round {
+  border-radius: 7px;
+  margin: 10px 20px;
+  border:1px solid rgba(0,0,0,0.2);
+
+}
+.table-border-round table tr th{
+  padding:20px;
+}
+.table-border-round table tr td{
+  padding:20px;
+}
+.table-border-round table tr:not(:last-child){
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+
+.round {
+  border-radius: 25px;
+}
+.button-info {
+  border: 2px solid #4CAF50;
+  transition-duration: 0.4s;
+  padding: 8px 20px;
+  font-size: 14px;
+  background-color: white;
+  font-weight: bold;
+  margin:10px;
+}
+.button-info:hover {
+  background-color: #4CAF50; /* Green */
+  color: white;
 }
 

@@ -1,5 +1,8 @@
 <template>
-  <div class="medicalrecords">
+  <div >
+    <hr class="style1">
+    <div style="position:relative;text-align: right;padding-right:10px"><button class="button-info round">Add New</button></div>
+    <div class="table-border-round">
     <table >
       <tr>
         <th>Doctor</th>
@@ -18,6 +21,7 @@
         </tr>
       </template>
     </table>
+    </div>
   </div>
 </template>
 <script>
