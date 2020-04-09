@@ -9,7 +9,9 @@ const initialState = {
   doctorApptStatus: {},
   doctorAppointmentsList:{},
   doctorsStatus: {},
-  doctorsList: []
+  doctorsList: [],
+  doctorMedsStatus:{},
+  doctorMedsList:[]
 }
 
 export const doctor = {
@@ -40,7 +42,6 @@ export const doctor = {
     doctorApptSuccess (state, returnedAppts) {
       state.doctorApptStatus = { loadedAppts: true }
       state.doctorAppointmentsList= {...state.doctorAppointmentsList, ...returnedAppts}
-
     },
     doctorsRequest (state) {
       state.doctorsStatus = { loadingDoctors: true }
@@ -51,6 +52,16 @@ export const doctor = {
     },
     doctorsFailure (state) {
       state.doctorsStatus = { doctorsFailure: true }
+    },
+    doctorMedsRequest (state) {
+      state.doctorMedStatus = { loadingMeds: true }
+    },
+    doctorMedsSuccess (state, returnedMeds) {
+      state.doctorMedsStatus = { loadedMeds: true }
+      state.doctorMedsList = returnedMeds
+    },
+    doctorMedsFailure (state) {
+      state.doctorMedsStatus = { medsFailure: true }
     }
   },
   actions: {
@@ -124,6 +135,13 @@ export const doctor = {
             dispatch('alert/error', error, { root: true })
           }
         )
-    }
+    },
+     loadDoctorMedications (
+      { dispatch, commit }) {
+      commit('doctorMedsRequest')
+      const doctor = JSON.parse(localStorage.getItem('doctor'))
+      commit('doctorMedsSuccess', doctor.medications)
+      dispatch('alert/success', 'medications Retreived', { root: true })
+    },
   }
 }
