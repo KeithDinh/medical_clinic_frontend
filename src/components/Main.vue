@@ -2,15 +2,18 @@
 
   <div class="row">
     <div class="row mainBG">
-      <h1 class="row mainPage">Make an Appointment today by clicking on the 'Patients' tab
-      </h1>
-      <img src="https://image.flaticon.com/icons/svg/387/387628.svg" width="150" alt="">
-      <h2 class="row mainPage">Discover the best doctors, clinics and hospitals at the Health Hub.</h2>
+      <div class="row container">
+        <div class="row heading1"><h1>Discover the best doctors, and clinics at the Health Hub.</h1></div>
+        <!--<img src="https://image.flaticon.com/icons/svg/387/387628.svg" width="150" alt="">-->
+        <div class="row heading2"><h2>Make an Appointment today by clicking on the 'Patients' tab</h2></div>
+      </div>
+      <div class="overlay"></div>
     </div>
 
 
     <section class="row specialist">
       <div class="row container">
+        <div class="row heading"><h2>Our doctors specialize in the following areas:</h2></div>
         <ul>
           <li>
             <div class="row content">
@@ -131,25 +134,41 @@ export default {
   opacity: 0.75;
 }
 
-
 .mainBG {
+  position:relative;
   background-size: cover;
-  background-image: url("/static/images/Houston-Image.jpg");
-  color: #ffffff;
-  padding-top: 0.1px;
-  padding-bottom: 0.1px;
-
+  background-image: url("/static/images/sunny.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  color: #0d75a6;
+  padding:80px 0;
 }
+
+.mainBG .container {max-width:1000px;}
+
+.mainBG .heading1, .mainBG .heading2 {position:relative;width:50%;z-index:2}
+.mainBG .heading2 {margin-top:20px;}
+
+h1 {font-weight:700;}
+h2 {font-weight:700;}
+
+.overlay {height:100%;width:100%;display:block;position:absolute;top:0;left:0;background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 30%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.8) 70%, rgba(255,255,255,0) 100%);}
 
 
 .specialist {
-  background: #0d75a6;
   padding:50px 0 80px;
+}
+
+.specialist h2 {
+  color: #6d6e6f;  
+  font-weight:600;
 }
 
 .specialist .container {
   max-width:1200px;
 }
+
+.specialist ul {margin:15px 0 0;}
 
 .specialist li {
   margin:30px 0 0;
@@ -159,15 +178,19 @@ export default {
 }
 
 .specialist li .spec-title {
-  color:#fff;
+  color:#0d75a6;
   font-size:18px;
   text-align: center;
 }
 
-.specialist li img {
-  margin:15px 0 0;
+.specialist .spec-logo {
+  text-align:center;
+}
+
+.specialist .spec-logo img {
+  margin:15px auto 0;
   padding:0 15px;
-  width:100%;
+  width:60%;
 }
 
 .tableEdit {

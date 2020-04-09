@@ -4,15 +4,6 @@
     <div style="position:relative;text-align: right;padding-right:10px"><button class="button-info round">Add New</button></div>
     <div class="table-border-round">
       <table >
-      <tr>
-        <th>Doctor</th>
-        <th>Date</th>
-        <th>Diagnoses</th>
-        <th>Treatment</th>
-        <th>Lab Test Required</th>
-      </tr>
-      <template v-for="record in records">
-
         <tr>
           <th>Doctor</th>
           <th>Date</th>
@@ -20,6 +11,16 @@
           <th>Treatment</th>
           <th>Lab Test Required</th>
         </tr>
+        <template v-for="record in records">
+
+          <tr>
+            <th>Doctor</th>
+            <th>Date</th>
+            <th>Diagnoses</th>
+            <th>Treatment</th>
+            <th>Lab Test Required</th>
+          </tr>
+        </template>
         <template v-for="record in records">
           <tr>
             <td>{{ record.first_name }} {{ record.last_name }}</td>
