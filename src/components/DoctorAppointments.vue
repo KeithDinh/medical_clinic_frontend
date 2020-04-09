@@ -10,13 +10,14 @@
                 <th>Date and Time</th>
                 <th>Reason for Visit</th>
               </tr>
-              <template v-for="appt in allAppointmentsList.todayAppointments">
+              <template v-for="appt in allAppointmentsList.todayAppointments[0]">
                 <tr>
                    <td style="text-align: left">{{ appt.patient}}<br><div class="subtitle1">MRN: {{appt.patient_id}}</div></td>
                   <td>{{ appt.office}}</td>
                   <td>{{ appt.appt_start_time | frontEndDateFormat}} <br>
                       <div class="text-info subtitle1">{{appt.appt_start_time |frontEndTimeFormat}}</div></td>
                   <td>{{ appt.reason_for_visit}}</td>
+                  <td><div style="position:relative;text-align: right"><button class="button-info round" style="font-size: 12px" v-on:click="patient(appt.patient_id)" >View</button></div></td>
                 </tr>
               </template>
             </table>
@@ -30,13 +31,14 @@
                 <th>Date and Time</th>
                 <th>Reason for Visit</th>
               </tr>
-              <template v-for="appt in allAppointmentsList.futureAppointments">
+              <template v-for="appt in allAppointmentsList.futureAppointments[0]">
                 <tr>
                    <td style="text-align: left">{{ appt.patient}}<br><div class="subtitle1">MRN: {{appt.patient_id}}</div></td>
                   <td>{{ appt.office}}</td>
                   <td>{{ appt.appt_start_time | frontEndDateFormat}} <br>
                     <div class="text-info subtitle1">{{appt.appt_start_time |frontEndTimeFormat}}</div></td>
                   <td>{{ appt.reason_for_visit}}</td>
+                  <td><div style="position:relative;text-align: right"><button class="button-info round" style="font-size: 12px" v-on:click="patient(appt.patient_id)" >View</button></div></td>
                 </tr>
               </template>
             </table>
@@ -49,13 +51,14 @@
                 <th>Date and Time</th>
                 <th>Reason for Visit</th>
               </tr>
-              <template v-for="appt in allAppointmentsList.pastAppointments">
+              <template v-for="appt in allAppointmentsList.pastAppointments[0]">
                 <tr>
                    <td style="text-align: left">{{ appt.patient}}<br><div class="subtitle1">MRN: {{appt.patient_id}}</div></td>
                   <td>{{ appt.office}}</td>
                   <td>{{ appt.appt_start_time | frontEndDateFormat}} <br>
                     <div class="text-info subtitle1">{{appt.appt_start_time | frontEndTimeFormat}}</div></td>
                   <td>{{ appt.reason_for_visit}}</td>
+                  <td><div style="position:relative;text-align: right"><button class="button-info round" style="font-size: 12px" v-on:click="patient(appt.patient_id)" >View</button></div></td>
                 </tr>
               </template>
             </table>
@@ -86,8 +89,15 @@ export default {
   },
   methods: {
     ...mapActions('doctor', [
-      'loadDoctorAppointments'
+      'loadDoctorAppointments',
+       'editPatient'
     ]),
+        ...mapActions('profile', [
+      'reloadPatient'
+    ]),
+    patient(value) {
+      const res = this.reloadPatient(value)
+    }
   },
   filters: {
     frontEndTimeFormat(str) {
