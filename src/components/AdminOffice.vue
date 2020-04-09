@@ -4,57 +4,44 @@
       <tr>
         <th>Office Name</th>
         <th>Phone</th>
-        <th>Street Address</th>
+        <th>Street</th>
         <th>City</th>
         <th>State</th>
         <th>Zipcode</th>
-
+        <th>Edit</th>
       </tr>
       <tr v-for="office in adminOffice">
-          <td><input
-            type="text"
-            v-model="office.office_name"
-            readonly
-          /></td>
-          <td><input
-            type="text"
-            v-model="office.phone"
-            readonly
-          /></td>
-          <td><input
-            type="text"
-            v-model="office.street_1"
-            readonly
-          /></td>
-          <td><input
-            type="text"
-            v-model="office.city"
-            readonly
-          /></td>
-          <td><input
-            type="text"
-            v-model="office.state"
-            readonly
-          /></td>
-          <td><input
-            type="text"
-            v-model="office.zipcode"
-            readonly
-          /></td>
+          <td>{{office.office_name}}</td>
+          <td>{{office.phone}}</td>
+          <td>{{office.street_1}}</td>
+          <td>{{office.city}}</td>
+          <td>{{office.state}}</td>
+          <td>{{office.zipcode}}</td>
           <td>
-            <button v-on:click="update(office.office_id)" >Edit Office</button>
+            <button @click="popUpModal(office)">Edit</button>
           </td>
       </tr>
     </table>
+    <div v-if="isHidden" class="modal-container"><AdminOfficeUpdateModal :diableModal="disableModal" :officeObject="singleOffice" class="modal" /></div>
+
  </div>
 </template>
 <script>
 
 import { mapState, mapActions } from 'vuex'
-
+import AdminOfficeUpdateModal from './AdminOfficeUpdateModal'
 export default {
 
    name: 'AdminOffice',
+   data() {
+     return {
+       isHidden: false,
+       singleOffice: {}
+     };
+   },
+   components:{
+     AdminOfficeUpdateModal
+   },
    created () {
       this.loadAdminOffices()
    },
@@ -70,6 +57,13 @@ export default {
      ...mapActions('admin', [
        'loadAdminOffices'
      ]),
+     disableModal () {
+      this.isHidden = false;
+    },
+    popUpModal(obj){
+      this.isHidden = true;
+      this.singleOffice = obj;
+    },
     ...mapActions('offices',[
       'updateOffice',
       'loadOfficeProfile'
@@ -82,5 +76,18 @@ export default {
 }
 </script>
 <style media="screen">
-
+.modal-container{
+  background-color:rgba(0,0,0,0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.modal{
+  width: 500px;
+  margin: 5% auto;
+  background-color: white;
+  padding: 20px;
+}
 </style>

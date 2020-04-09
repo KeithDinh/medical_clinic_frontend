@@ -39,6 +39,7 @@ export const offices = {
     updateOfficeFailure (state) {
       state.officeStatus = { updateOfficeFailure: true }
     }
+
   },
   actions: {
     loadOfficesByDoctor (
@@ -85,7 +86,22 @@ export const offices = {
           }
         )    
     },
+    updateOffice ({ dispatch, commit, state },office) {
+      commit('updateOfficeRequest')
 
+      let tempList = [...state.officeList]
+      /* alert(state.offices) */
+      for (let i=0; i<state.officeList.length; i++) {
+        if (tempList[i].office_id === office.office_id )
+        {
+          /* alert("inside if") */
+          tempList[i] = office
+
+        }
+      }
+      /* alert("After Loop") */
+      commit('updateOfficeSuccess',tempList)
+    },
     loadOfficeProfile (
       { dispatch, commit }, office_id ) {
       commit('officeProfileRequest')

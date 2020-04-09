@@ -38,6 +38,7 @@ function getOfficesByDoctor (doctor_id) {
 }
 
 function putOffice (updateOfficePayload) {
+  alert(updateOfficePayload)
   let reqHeader = authorizationHeader()
   reqHeader['Content-Type'] = 'application/json'
   const requestOptions = {
