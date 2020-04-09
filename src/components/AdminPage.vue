@@ -54,13 +54,13 @@ export default {
     Tab
   },
   created () {
-    
+
   },
   computed: {
-   
+
  },
  methods: {
-   
+
  }
 }
 </script>
