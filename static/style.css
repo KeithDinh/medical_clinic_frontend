@@ -304,10 +304,13 @@ header ul.nav-links {
   letter-spacing: 0.5px;
 }
 
-header .links {
+header .login-links {
   width:25%;
   text-align: right;
 }
+
+header .login-links button {font-weight:600;padding:10px 30px;border:none;border-radius:50px;background:#00c7db;color:#fff;}
+header .login-links button a {color:#fff;}
 
 header ul.nav-links>li {
   display: inline;
@@ -323,7 +326,7 @@ header ul.nav-links li a {
 }
 
 header ul.nav-links li a:hover {
-  color: #0ddfea;
+  color: #00c7db;
 }
 
 header ul.nav-links .sub-menu {

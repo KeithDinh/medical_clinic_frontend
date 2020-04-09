@@ -25,7 +25,7 @@
           <li><a to="admin" href = "admin">Admin</a></li>
           <li><a to="office" href="office">Health Offices</a></li>
         </ul>
-        <div class="links">
+        <div class="login-links">
           <button>
           <a href="login" v-if="userStatus.localUser" v-on:click="logout()">Logout</a>
           <a href="login" v-else>Login</a>

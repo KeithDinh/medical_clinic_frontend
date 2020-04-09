@@ -2,10 +2,12 @@
 
   <div class="row">
     <div class="row mainBG">
-      <div class="row container">
-        <div class="row heading1"><h1>Discover the best doctors, and clinics at the Health Hub.</h1></div>
-        <!--<img src="https://image.flaticon.com/icons/svg/387/387628.svg" width="150" alt="">-->
-        <div class="row heading2"><h2>Make an Appointment today by clicking on the 'Patients' tab</h2></div>
+      <div class="row">
+        <div class="headings left">
+          <div class="row heading1"><h1>Discover the best doctors, and clinics at the Health Hub.</h1></div>
+          <div class="row heading2"><h2>Make an Appointment today by clicking on the 'Patients' tab</h2></div>
+          <div class="row action"><div class="login-btn"><a href="login">click here to login</a></div></div>
+        </div>
       </div>
       <div class="overlay"></div>
     </div>
@@ -137,7 +139,7 @@ export default {
 .mainBG {
   position:relative;
   background-size: cover;
-  background-image: url("/static/images/sunny.jpg");
+  background-image: url("/static/images/female-doctor.jpg");
   background-repeat: no-repeat;
   background-position: center;
   color: #0d75a6;
@@ -145,14 +147,17 @@ export default {
 }
 
 .mainBG .container {max-width:1000px;}
-
-.mainBG .heading1, .mainBG .heading2 {position:relative;width:50%;z-index:2}
+.mainBG .headings {width:70%}
+.mainBG h1, .mainBG h2 {text-align:left;}
+.mainBG .heading1, .mainBG .heading2, .mainBG .action {position:relative;width:50%;z-index:2}
 .mainBG .heading2 {margin-top:20px;}
+.mainBG .action {margin-top:33px;}
+.mainBG .action .login-btn a {font-weight:600;padding:10px 30px;border:none;border-radius:50px;background:#00c7db;color:#fff;}
 
 h1 {font-weight:700;}
 h2 {font-weight:700;}
 
-.overlay {height:100%;width:100%;display:block;position:absolute;top:0;left:0;background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 30%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.8) 70%, rgba(255,255,255,0) 100%);}
+.overlay {height:100%;width:100%;display:block;position:absolute;top:0;left:0;background: linear-gradient(90deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.8) 35%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 80%);}
 
 
 .specialist {
