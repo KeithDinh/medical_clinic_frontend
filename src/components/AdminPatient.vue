@@ -25,7 +25,7 @@
               <div style="clear:both;"></div>
               <div class="text"><p class="align-left"> </p><p class="align-right">{{profile.state}} {{profile.zipcode}}</p></div>
               <div style="clear:both;"></div>
-              <div class="row"><a href="#" v-on:click="patient(profile.patient_id)">Edit Patient</a></div>
+              <div class="row"><a href="#" v-on:click="patient(profile.patientId)">Edit Patient</a></div>
           </div>
           </div>
       </div>
