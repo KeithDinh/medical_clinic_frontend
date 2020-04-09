@@ -1,6 +1,6 @@
  <template>
   <div id="admin">
-    <div class="row">
+    <div class="row container">
       <h2 class='dashboard_header'>Admin Dashboard</h2>
 
       <div >
