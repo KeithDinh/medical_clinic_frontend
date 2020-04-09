@@ -25,8 +25,7 @@ export const store = new Vuex.Store({
     offices,
     appointment,
     prescription,
-    medicalRecords,
-
+    medicalRecords
   }
 })
 
@@ -35,9 +34,11 @@ export const store = new Vuex.Store({
 
 if (module.hot) {
 // accept actions and mutations as hot modules
-  module.hot.accept(['./alert', './authentication', './profile', './dates', './doctor', './appointment', './prescription'], () => {
+  module.hot.accept(['./admin','./alert', './authentication', './profile', './dates',
+  './doctor','./offices', './appointment', './prescription','./records'], () => {
     // require the updated modules
     // have to add .default here due to babel 6 module output
+    const newModuleAdmin = require('./admin').default
     const newModuleAlert = require('./alert').default
     const newModuleAuthentication = require('./authentication').default
     const newModuleProfile = require('./profile').default
@@ -46,10 +47,12 @@ if (module.hot) {
     const newModuleOffices = require('./offices').default
     const newModuleAppointment = require('./appointment').default
     const newModulePrescription = require('./prescription').default
+    const newModuleRecords = require('./records').default
     // const newModuleRecords = require('./records').default
     // swap in the new modules and mutations
     store.hotUpdate({
       modules: {
+        newModuleAdmin,
         newModuleAlert,
         newModuleAuthentication,
         newModuleProfile,
