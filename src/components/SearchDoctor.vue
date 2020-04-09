@@ -30,8 +30,8 @@
 </div>
   
 
-  <div class="rightsideofPage" style="margin-left: 75%; margin-right: 30%; height: 20px; float: right;">
-    <br><br><br><br>
+  <div class="rightsideofPage" style="margin-left: 75%;            margin-right: 30%; height: 20px; float: right;">
+    <br><br>
     <img class="doctorPic" :src="profile.image">
     <section class="NameSpecializationBackground" >
       <div class="doctorprofile" v-if="profile.first_name">
@@ -112,6 +112,7 @@ select{
 
 .selectLabels{
   color: #ffffff;
+  font-size: 20px;
 }
 
 .office_header {
@@ -128,7 +129,8 @@ select{
   background: black;
   width: 300px;
   margin: 0 auto;
-  border-radius: 10px;
+  border-radius: 15px 50px 30px;
+  text-align: center;
 }
 
 .doctorprofile {
@@ -139,11 +141,7 @@ select{
   width: 200px;
   height: 200px;
   margin: 0;
-
-}
-
-.rightsideofPage {
-padding: auto;
+  border-radius: 20px;
 }
 
 footer {

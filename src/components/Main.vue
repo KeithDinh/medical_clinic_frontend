@@ -1,47 +1,86 @@
 <template>
-<div>
-  <div>
-    <div class="mainBG">
-      <h1 class="mainPage">Make an Appointment today by clicking on the 'Patients' tab
-      </h1>
-      <img src="https://image.flaticon.com/icons/svg/387/387628.svg" width="150" alt="">
-      <h2 class="mainPage">Discover the best doctors, clinics and hospitals at the Health Hub.</h2>
+
+  <div class="row">
+    <div class="row mainBG">
+      <div class="row">
+        <div class="headings left">
+          <div class="row heading1"><h1>Discover the best doctors, and clinics at the Health Hub.</h1></div>
+          <div class="row heading2"><h2>Make an Appointment today by clicking on the 'Patients' tab</h2></div>
+          <div class="row action"><div class="login-btn"><a href="login">click here to login</a></div></div>
+        </div>
+      </div>
+      <div class="overlay"></div>
     </div>
 
 
-      <section class="SpecialistBackground">
-
-    
-    <ul class="specialist">
-    <h1>Clinic and Specialists</h1>
-    <table>
-      <th class="tableEdit">General Practitioner</th> 
-      <th class="tableEdit">Urologist</th>
-      <th class="tableEdit">Neurologist</th>
-      <th class="tableEdit">Orthopedic</th>
-      <th class="tableEdit">Cardiologist</th>
-      <th class="tableEdit">Allergist</th>
-      <th class="tableEdit">Radiologist</th>
-      <th class="tableEdit">Pathologist</th>
-      <th class="tableEdit">Ophthalmologist</th>
-      <th class="tableEdit">Pediatrician</th>
-
-      <tr>
-      <td><img src="https://image.flaticon.com/icons/svg/387/387561.svg" width="100" alt=""></td>
-      <td><img src="https://image.flaticon.com/icons/svg/2518/2518743.svg" width="100" alt=""></td>
-      <td><img src="https://image.flaticon.com/icons/svg/1491/1491416.svg" width="100" alt=""></td>
-      <td><img src="https://image.flaticon.com/icons/svg/2719/2719401.svg" width="100" alt=""></td>
-      <td><img src="https://image.flaticon.com/icons/svg/1142/1142172.svg" width="100" alt=""></td>
-      <td><img src="https://image.flaticon.com/icons/svg/2328/2328381.svg" width="100" alt=""></td>
-      <td><img src="https://image.flaticon.com/icons/svg/2522/2522870.svg" width="100" alt=""></td>
-      <td><img src="https://image.flaticon.com/icons/svg/2167/2167212.svg" width="100" alt=""></td>
-      <td><img src="https://image.flaticon.com/icons/svg/2731/2731582.svg" width="100" alt=""></td>
-      <td><img src="https://image.flaticon.com/icons/svg/163/163003.svg" width="100" alt=""></td>
-      </tr>
-    </table>
-    </ul>
+    <section class="row specialist">
+      <div class="row container">
+        <div class="row heading"><h2>Our doctors specialize in the following areas:</h2></div>
+        <ul>
+          <li>
+            <div class="row content">
+              <div class="row spec-title">General Practitioner</div>
+              <div class="row spec-logo"><img src="https://image.flaticon.com/icons/svg/387/387561.svg" alt=""></div>
+            </div>
+          </li>
+          <li>
+            <div class="row content">
+              <div class="row spec-title">Urologist</div>
+              <div class="row spec-logo"><img src="https://image.flaticon.com/icons/svg/2518/2518743.svg" alt=""></div>
+            </div>
+          </li>
+          <li>
+            <div class="row content">
+              <div class="row spec-title">Neurologist</div>
+              <div class="row spec-logo"><img src="https://image.flaticon.com/icons/svg/1491/1491416.svg" alt=""></div>
+            </div>
+          </li>
+          <li>
+            <div class="row content">
+              <div class="row spec-title">Orthopedic</div>
+              <div class="row spec-logo"><img src="https://image.flaticon.com/icons/svg/2719/2719401.svg" alt=""></div>
+            </div>
+          </li>
+          <li>
+            <div class="row content">
+              <div class="row spec-title">Cardiologist</div>
+              <div class="row spec-logo"><img src="https://image.flaticon.com/icons/svg/1142/1142172.svg" alt=""></div>
+            </div>
+          </li>
+          <li>
+            <div class="row content">
+              <div class="row spec-title">Allergist</div>
+              <div class="row spec-logo"><img src="https://image.flaticon.com/icons/svg/2328/2328381.svg" alt=""></div>
+            </div>
+          </li>
+          <li>
+            <div class="row content">
+              <div class="row spec-title">Radiologist</div>
+              <div class="row spec-logo"><img src="https://image.flaticon.com/icons/svg/2522/2522870.svg" alt=""></div>
+            </div>
+          </li>
+          <li>
+            <div class="row content">
+              <div class="row spec-title">Pathologist</div>
+              <div class="row spec-logo"><img src="https://image.flaticon.com/icons/svg/2167/2167212.svg" alt=""></div>
+            </div>
+          </li>
+          <li>
+            <div class="row content">
+              <div class="row spec-title">Ophthalmologist</div>
+              <div class="row spec-logo"><img src="https://image.flaticon.com/icons/svg/2731/2731582.svg" alt=""></div>
+            </div>
+          </li>
+          <li>
+            <div class="row content">
+              <div class="row spec-title">Pediatrician</div>
+              <div class="row spec-logo"><img src="https://image.flaticon.com/icons/svg/163/163003.svg" alt=""></div>
+            </div>
+          </li>       
+        </ul>
+      </div>
     </section>
-
+<!--
     <section>
 
     <h1 class="AvailFeatHead">Available Features in Our Clinic</h1>
@@ -64,15 +103,8 @@
       <td><img src="https://us.123rf.com/450wm/aurielaki/aurielaki1708/aurielaki170800016/83486378-stock-vector-clinical-research-clinical-laboratory-isometric-people-cartoon-character-vector-icon.jpg?ver=6" width="200" alt=""></td>
       </tr>
     </table>
-    </ul>
+    </ul>-->
     </section>
-
-
-    <footer>
-    <h1 class="foottitle" >Health Hub</h1>
-    <p class="footpara">We offer an expanded range of health services for everyday care and chronic conditions. <br>All from a team of care professionals.<br>We promote a path to better health. <br>ALL IN ONE PLACE!</p>
-    <img class="footlogo center" src="https://www.cvs.com/bizcontent/marketing/health-hub/health-hub-illustration.png" width="600" alt="">
-    </footer>
   </div>
 </div>
 
@@ -104,31 +136,71 @@ export default {
   opacity: 0.75;
 }
 
-
 .mainBG {
+  position:relative;
   background-size: cover;
-  background-image: url("https://cdn.shopify.com/s/files/1/2198/0277/files/Houston-skyline.jpg?15716366482872199911");
-  color: #ffffff;
-  padding-top: 0.1px;
-  padding-bottom: 0.1px;
-
+  background-image: url("/static/images/female-doctor.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  color: #0d75a6;
+  padding:80px 0;
 }
 
+.mainBG .container {max-width:1000px;}
+.mainBG .headings {width:70%}
+.mainBG h1, .mainBG h2 {text-align:left;}
+.mainBG .heading1, .mainBG .heading2, .mainBG .action {position:relative;width:50%;z-index:2}
+.mainBG .heading2 {margin-top:20px;}
+.mainBG .action {margin-top:33px;}
+.mainBG .action .login-btn a {font-weight:600;padding:10px 30px;border:none;border-radius:50px;background:#00c7db;color:#fff;}
 
-.SpecialistBackground {
-  background: #0d75a6;
+h1 {font-weight:700;}
+h2 {font-weight:700;}
+
+.overlay {height:100%;width:100%;display:block;position:absolute;top:0;left:0;background: linear-gradient(90deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.8) 35%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 80%);}
+
+
+.specialist {
+  padding:50px 0 80px;
+}
+
+.specialist h2 {
+  color: #6d6e6f;  
+  font-weight:600;
+}
+
+.specialist .container {
+  max-width:1200px;
+}
+
+.specialist ul {margin:15px 0 0;}
+
+.specialist li {
+  margin:30px 0 0;
+  width:20%;
+  float:left;
+  padding:5px;
+}
+
+.specialist li .spec-title {
+  color:#0d75a6;
+  font-size:18px;
+  text-align: center;
+}
+
+.specialist .spec-logo {
+  text-align:center;
+}
+
+.specialist .spec-logo img {
+  margin:15px auto 0;
+  padding:0 15px;
+  width:60%;
 }
 
 .tableEdit {
   font-size: 17px;
   padding: 20px;
-}
-
-.specialist {
-  list-style-type: square;
-  padding-top: 20px;
-  padding-bottom: 150px;
-  color: #ffffff;
 }
 
 .AvailFeatHead {
@@ -144,44 +216,6 @@ export default {
   padding: 60px;
 }
 
-footer {
-  padding-top: 0.1px;
-  padding-bottom: 30px;
-  color: #ffffff;
-  flex-shrink: 0;
-  background: #0d75a6;
-}
-
-
-
-.footlogo {
-width: 140px;
-padding-bottom: -150px;
-padding-left: 13px;
-float: center;
-}
-
-.foottitle {
-padding: 0.25em;
-padding-top: 10px;
-font-size: 37px;
-border-style: groove;
-border-width: 5px;
-
-height: 75px;
-margin: 0.25em;
-}
-
-.logo {
-  color: #0d75a6;
-  font: bold;
-}
-
-.footpara {
-text-align: center;
-padding-right: 0px;
-font-size: 17px
-}
 </style>
 
 

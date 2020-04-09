@@ -1,9 +1,9 @@
 <template>
   <div class="db-col2">
     <tabs :options="{ useUrlFragment: false }" @clicked="tabClicked" @changed="tabChanged">
-          <tab name="Today">
+          <tab name="Today" >
             TODAY
-             <table>
+             <table >
               <tr>
                 <th>Patient Name</th>
                 <th>Office Name</th>
@@ -76,7 +76,7 @@ export default {
 
   name: 'DoctorAppointments',
   created () {
-    allAppointmentsList: [],
+    allAppointmentsList:[],
     this.loadDoctorAppointments()
   },
   computed: {

@@ -48,7 +48,10 @@ export default {
    computed: {
      ...mapState('admin', {
        adminOffice: state => state.offices
-     })
+     }),
+     ...mapState('office',{
+      selectedOffice: state => state.officeProfile
+    }) 
    },
    methods: {
      ...mapActions('admin', [
@@ -60,6 +63,14 @@ export default {
     popUpModal(obj){
       this.isHidden = true;
       this.singleOffice = obj;
+    },
+    ...mapActions('offices',[
+      'updateOffice',
+      'loadOfficeProfile'
+    ]),
+    update: function(value) {
+      this.loadOfficeProfile(value)
+      /* this.updateOffice(value) */
     }
    }
 }

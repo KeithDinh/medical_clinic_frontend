@@ -4,7 +4,7 @@ import { responseHandler } from './response-handler'
 const handleResponse = responseHandler.handleResponse
 
 export const adminService = {
-  getAdmin
+  getAdmin,
 }
 
 function getAdmin () {
