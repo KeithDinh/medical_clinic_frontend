@@ -4,8 +4,6 @@ import { router } from '../router'
 const initialState = {
   officeStatus: {},
   officeList: [],
-  officeProfileStatus:{},
-  officeProfile:{}
 }
 
 export const offices = {
@@ -13,13 +11,6 @@ export const offices = {
   state: initialState,
   mutations: {
     
-    officeProfileRequest (state){
-      state.officeProfile = {loadingOffice: true}
-    },
-    officeProfileSuccess (state, office){
-      state.officeProfileStatus = { loadedOffice: true }
-      state.officeProfile = office
-    },
     officeRequest (state) {
       state.officeStatus = { loadingOffices: true }
     },
@@ -58,18 +49,6 @@ export const offices = {
           }
         )
     },
-    updateOffice ({ dispatch, commit, state },office) {
-      commit('updateOfficeRequest')
-      var tempList = state.officeList
-      for (let i=0; i<state.officeList.length; i++) {
-        if (off[i].office_id === office.office_id )
-          tempList[i] = office
-      }
-      
-      commit('updateOfficeSuccess',tempList)
-        
-      
-    },
     loadOffices (
       { dispatch, commit } ) {
       commit('officeRequest')
@@ -102,21 +81,5 @@ export const offices = {
       /* alert("After Loop") */
       commit('updateOfficeSuccess',tempList)
     },
-    loadOfficeProfile (
-      { dispatch, commit }, office_id ) {
-      commit('officeProfileRequest')
-      officeService.getOffice(office_id)
-        .then(
-          response => {
-            const officeProfile = response.office
-            commit('officeProfileSuccess', officeProfile)
-            dispatch('alert/success', 'Office Retreived', { root: true })
-          },
-          error => {
-            commit('officeProfileFailure')
-            dispatch('alert/error', error, { root: true })
-          }
-        )    
-    }
   }
 }
