@@ -17,13 +17,13 @@
 
     <label for="office_zipcode">Zipcode</label><br>
     <input type="text" name="office_zipcode" v-model="officeObject.zipcode">
-    <button type="submit" name="button">Save</button>
+    <button v-on:click="update(officeObject)">Save</button>
     <button @click="disableModal">Cancel</button>
   </form>
 </template>
 
 <script>
-
+import { mapState, mapActions } from 'vuex'
 export default {
   name: 'AdminOfficeUpdateModal',
   data(){
@@ -44,7 +44,12 @@ export default {
 },
 
  methods: {
-
+   update: function(value) {
+      this.updateOffice(value) 
+    },
+   ...mapActions('offices', [
+       'updateOffice'
+     ]),
  }
 }
 </script>

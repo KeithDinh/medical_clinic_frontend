@@ -5,7 +5,8 @@ const handleResponse = responseHandler.handleResponse
 
 export const officeService = {
   getOffices,
-  getOfficesByDoctor
+  getOfficesByDoctor,
+  putOffice
 }
 
 function getOffices(){
@@ -23,5 +24,18 @@ function getOfficesByDoctor (doctor_id) {
     headers: authorizationHeader()
   }
   return fetch(`${config.apiUrl}/offices/doctor?did=` + doctor_id, requestOptions)
+    .then(handleResponse)
+}
+
+function putOffice (updateOfficePayload) {
+  alert(updateOfficePayload)
+  let reqHeader = authorizationHeader()
+  reqHeader['Content-Type'] = 'application/json'
+  const requestOptions = {
+    method: 'PUT',
+    headers: reqHeader,
+    body: JSON.stringify(updateOfficePayload)
+  }
+  return fetch(`${config.apiUrl}/office/updateoffice`, requestOptions)
     .then(handleResponse)
 }
