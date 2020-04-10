@@ -1,9 +1,49 @@
-import { prescriptionService } from '../services'
+import {appointmentService, prescriptionService, profileService, userService} from '../services'
 import { router } from '../router'
+import {doctor} from "./doctor";
+import NewPrescription from "../components/NewPrescription";
 
 const initialState = {
   rxStatus: {},
-  rxList: []
+  rxList: [],
+  newRxStatus:{},
+  newRx:[]
+}
+
+const validatePrescriptionForm = (apptId, doctorId , patientId , medicationId, doseForm, dosage, datePrescribed) => {
+  let errors = []
+  if (!apptId) {
+    errors.push(new Error('ApptId required.'))
+  }
+  if (!doctorId) {
+    errors.push(new Error('DoctorId required.'))
+  }
+  if (!patientId) {
+    errors.push(new Error('PatientId required.'))
+  }
+  if (!medicationId) {
+    errors.push(new Error('medicationId required'))
+  }
+  if (!doseForm) {
+    errors.push(new Error('doseForm required'))
+  }
+  if (!dosage) {
+    errors.push(new Error('dosage required'))
+  }
+  if (!datePrescribed) {
+    errors.push(new Error('datePrescribed required.'))
+  }
+  return errors
+}
+
+const checkComplete = (prescription) => {
+  let complete = true
+  for (let [value] of Object.entries(prescription)) {
+    if (value.length === 0) {
+      complete = false
+    }
+  }
+  return complete
 }
 
 export const prescription = {
@@ -25,14 +65,34 @@ export const prescription = {
     receiveRx (state, rxs) {
       state.rxStatus = { loadedRx: true }
       state.rxList = rxs
-    }
+    },
+    loadingNewRxSuccess (state, newPrescrition) {
+      state.newRxStatus = {
+        newRxComplete: checkComplete(newPrescrition)
+      }
+      state.newRxStatus= newPrescription
+    },
+     addRxRequest (state, submittedRx) {
+      state.newRxStatus= { addRxRequest: true }
+      state.newRx = submittedRx
+    },
   },
   actions: {
-    loadPrescriptions (
-      { dispatch, commit }) {
+    loadPrescriptions ({ dispatch, commit,state}) {
       commit('loadRxRequest')
       const patient = JSON.parse(localStorage.getItem('patient'))
       commit('loadRxSuccess', patient.prescriptions)
+    },
+    addPrescription ({ dispatch, commit }, { apptId, doctorId , patientId , medicationId, doseForm, dosage, datePrescribed}) {
+      commit('addRxRequest')
+      let errors = validatePrescriptionForm(apptId, doctorId , patientId , medicationId, doseForm, dosage, datePrescribed)
+      if (errors.length === 0) {
+        console.log("before putPrescription")
+        prescriptionService.putPrescription({apptId, doctorId, patientId, medicationId, doseForm, dosage, datePrescribed})
+      }
+      else{
+        console.log(errors)
+      }
     }
   }
 }

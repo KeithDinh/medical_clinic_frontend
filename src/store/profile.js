@@ -181,6 +181,7 @@ export const profile = {
       profileService.getProfile(patient_id).then(
         response => {
           router.push('/dashboard')
+          console.log(response)
           return response
         })
     }

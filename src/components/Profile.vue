@@ -6,7 +6,7 @@
           <img src="https://image.flaticon.com/icons/svg/758/758935.svg" width="100" alt="">
         </div>
         <div class="patient-name">{{ profile.firstName }}  <span>{{ profile.middleInit }}</span> <span>{{ profile.lastName }}</span></div>
-        <p class="patient-MR"><strong>MRN: </strong>{{profile.patient_id}}</p>
+        <p class="patient-MR"><strong>MRN: </strong>{{profile.patientId}}</p>
         <p class="patient-addr">{{ profile.street }}<br>{{ profile.city }}, {{ profile.state }} , {{ profile.zipcode }}</p>
 <!--        <hr size="2" width="80%" align="center" noshade="false">-->
         <hr class="style1">
