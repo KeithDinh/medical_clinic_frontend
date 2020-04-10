@@ -3,7 +3,7 @@ import { router } from '../router'
 
 const initialState = {
   officeStatus: {},
-  officeList: [],
+  officeList: []
 }
 
 export const offices = {
@@ -21,6 +21,10 @@ export const offices = {
     officeFailure (state) {
       state.officeStatus = { officesFailure: true }
     },
+    updateOfficeRequest (state, submittedOffice) {
+      state.OfficeStatus = { updatingOffice: true }
+      state.officeList = submittedOffice
+    },
     updateOfficeSuccess (state, returnedOfficeList) {
       state.officeStatus = {
         updatedOffice: true,
@@ -31,6 +35,11 @@ export const offices = {
       state.officeStatus = { updateOfficeFailure: true }
     }
 
+  },
+  getters:{
+    getOfficeList: state => {
+      return state.officeList
+    }
   },
   actions: {
     loadOfficesByDoctor (
@@ -66,19 +75,26 @@ export const offices = {
         )    
     },
     updateOffice ({ dispatch, commit, state },office) {
-      commit('updateOfficeRequest')
-
-      let tempList = [...state.officeList]
-      /* alert(state.offices) */
-      for (let i=0; i<state.officeList.length; i++) {
-        if (tempList[i].office_id === office.office_id )
-        {
-          /* alert("inside if") */
-          tempList[i] = office
-
-        }
+      commit('updateOfficeRequest', state.officeList)
+      const tempList = state.officeList
+       alert(state.officeList[0]) 
+       alert(state.officeList) 
+       alert(context.state.officeList) 
+      for (let i=0;i<state.officeList.length;i++)
+      {
+        if(tempList[i].office_id == office.office_id)
+            tempList[i] = office
       }
-      /* alert("After Loop") */
+       // tempList = tempList.map(item =>{
+      //   var temp = Object.assign({}, item);
+      //   if(item.office_id == office.office_id)
+      //   {
+      //     temp.name = name;
+      //     alert("inside if")
+      //   }
+      //   return temp
+      // })
+      alert("After Loop")
       commit('updateOfficeSuccess',tempList)
     },
   }
