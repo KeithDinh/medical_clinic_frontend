@@ -7,17 +7,8 @@ export const officeService = {
   getOffices,
   getOfficesByDoctor,
   putOffice,
-  getOffice
 }
 
-function getOffice(office_id){
-  const requestOptions = {
-  method: 'GET',
-  headers: authorizationHeader()
-}
-return fetch(`${config.apiUrl}/offices/office?oid=` + office_id, requestOptions)
-  .then(handleResponse)
-}
 
 function getOffices(){
     const requestOptions = {
@@ -49,14 +40,3 @@ function putOffice (updateOfficePayload) {
   return fetch(`${config.apiUrl}/office/updateoffice`, requestOptions)
     .then(handleResponse)
 }
-// # {
-// 	# 	"payload":{
-// 	# 		"oid": id,
-// 	# 		"oname": "name",
-// 	# 		"address": "main street",
-// 	# 		"city": "HT",
-// 	# 		"state": "TX",
-// 	# 		"zipcode": "23422",
-// 	# 		"phone": "29329383838"
-// 	# 	}
-// 	# }

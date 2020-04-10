@@ -16,7 +16,7 @@ import NotFound from '@/components/NotFound'
 import AdminPage from '@/components/AdminPage'
 import Office from '@/components/Office'
 import DoctorPatients from "../components/DoctorPatients";
-
+import UpdateDoctorProfile from "../components/UpdateDoctorProfile";
 // Letting Vue Know To Use Router
 Vue.use(Router)
 
@@ -60,6 +60,11 @@ export const router = new Router({
       component: UpdateProfile
     },
     {
+      path: '/update-doctor-profile',
+      name: 'UpdateDoctorProfile',
+      component: UpdateDoctorProfile
+    },
+    {
       path: '/appointment',
       name: 'BookAppointment',
       component: BookAppointment
@@ -99,7 +104,8 @@ export const router = new Router({
 router.beforeEach((to, from, next) => {
   var loggedIn = localStorage.getItem('localUser')
   if (to.path === '/dashboard' || to.path === '/update-profile' || to.path === '/appointment'
-    || to.path === '/doctor-dashboard' || to.path === '/admin' || to.path==='/doctor-patients') {
+    || to.path === '/doctor-dashboard' || to.path === '/admin' || to.path==='/doctor-patients'
+    || to.path === '/update-doctor-profile') {
     if (loggedIn) {
       next()
       return

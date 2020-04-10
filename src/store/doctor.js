@@ -14,6 +14,55 @@ const initialState = {
   doctorMedsList:[]
 }
 
+// Validate the Profile Form
+const validateProfile = profile => {
+  const {
+    firstName,
+    middleInit,
+    lastName,
+    street,
+    city,
+    state,
+    zipcode,
+    phone,
+    dob,
+    gender,
+    race
+  } = profile
+  let errors = []
+  if (!firstName) {
+    errors.push(new Error('First name required.'))
+  }
+  if (!lastName) {
+    errors.push(new Error('Last name required.'))
+  }
+  if (!street) {
+    errors.push(new Error('Street address required.'))
+  }
+  if (!city) {
+    errors.push(new Error('city required.'))
+  }
+  if (!state) {
+    errors.push(new Error('State required.'))
+  }
+  if (!zipcode) {
+    errors.push(new Error('Zipcode required.'))
+  }
+  if (!phone) {
+    errors.push(new Error('Phone number required.'))
+  }
+  if (!dob) {
+    errors.push(new Error('Date of birth required.'))
+  }
+  if (!gender) {
+    errors.push(new Error('Gender required.'))
+  }
+  if (!race) {
+    errors.push(new Error('Race required.'))
+  }
+  return errors
+}
+
 export const doctor = {
   namespaced: true,
   state: initialState,
@@ -62,6 +111,19 @@ export const doctor = {
     },
     doctorMedsFailure (state) {
       state.doctorMedsStatus = { medsFailure: true }
+    },
+    updateDoctorProfileRequest (state, submittedProfile) {
+      state.doctorProfileStatus = { updatingProfile: true }
+      state.doctorProfile = submittedProfile
+    },
+    updateDoctorProfileSuccess (state, returnedProfile) {
+      state.doctorProfileStatus = {
+        updatedProfile: true,
+      }
+      state.doctorProfile = returnedProfile
+    },
+    updateDoctorProfileFailure (state) {
+      state.doctorProfileStatus = { updateProfileFailure: true }
     }
   },
   actions: {
@@ -142,6 +204,21 @@ export const doctor = {
       const doctor = JSON.parse(localStorage.getItem('doctor'))
       commit('doctorMedsSuccess', doctor.medications)
       dispatch('alert/success', 'medications Retreived', { root: true })
+    },
+    
+    updateProfile ({ dispatch, commit }, doctorProfile) {
+      commit('updateDoctorProfileRequest', doctorProfile) 
+        doctorService.putDoctor(doctorProfile).then(
+          response => {
+            commit('updateDoctorProfileSuccess', doctorProfile)
+            dispatch('alert/success', 'Profile Updated', { root: true })
+          },
+          error => {
+            commit('updateDoctorProfileFailure')
+            dispatch('alert/error', error, { root: true })
+          }
+        )
+      
     },
   }
 }

@@ -3,9 +3,7 @@ import { router } from '../router'
 
 const initialState = {
   officeStatus: {},
-  officeList: [],
-  officeProfileStatus:{},
-  officeProfile:{}
+  officeList: []
 }
 
 export const offices = {
@@ -13,13 +11,6 @@ export const offices = {
   state: initialState,
   mutations: {
     
-    officeProfileRequest (state){
-      state.officeProfile = {loadingOffice: true}
-    },
-    officeProfileSuccess (state, office){
-      state.officeProfileStatus = { loadedOffice: true }
-      state.officeProfile = office
-    },
     officeRequest (state) {
       state.officeStatus = { loadingOffices: true }
     },
@@ -29,6 +20,10 @@ export const offices = {
     },
     officeFailure (state) {
       state.officeStatus = { officesFailure: true }
+    },
+    updateOfficeRequest (state, submittedOffice) {
+      state.OfficeStatus = { updatingOffice: true }
+      state.officeList = submittedOffice
     },
     updateOfficeSuccess (state, returnedOfficeList) {
       state.officeStatus = {
@@ -40,6 +35,11 @@ export const offices = {
       state.officeStatus = { updateOfficeFailure: true }
     }
 
+  },
+  getters:{
+    getOfficeList: state => {
+      return state.officeList
+    }
   },
   actions: {
     loadOfficesByDoctor (
@@ -58,18 +58,6 @@ export const offices = {
           }
         )
     },
-    updateOffice ({ dispatch, commit, state },office) {
-      commit('updateOfficeRequest')
-      var tempList = state.officeList
-      for (let i=0; i<state.officeList.length; i++) {
-        if (off[i].office_id === office.office_id )
-          tempList[i] = office
-      }
-      
-      commit('updateOfficeSuccess',tempList)
-        
-      
-    },
     loadOffices (
       { dispatch, commit } ) {
       commit('officeRequest')
@@ -87,36 +75,27 @@ export const offices = {
         )    
     },
     updateOffice ({ dispatch, commit, state },office) {
-      commit('updateOfficeRequest')
-
-      let tempList = [...state.officeList]
-      /* alert(state.offices) */
-      for (let i=0; i<state.officeList.length; i++) {
-        if (tempList[i].office_id === office.office_id )
-        {
-          /* alert("inside if") */
-          tempList[i] = office
-
-        }
+      commit('updateOfficeRequest', state.officeList)
+      const tempList = state.officeList
+       alert(state.officeList[0]) 
+       alert(state.officeList) 
+       alert(context.state.officeList) 
+      for (let i=0;i<state.officeList.length;i++)
+      {
+        if(tempList[i].office_id == office.office_id)
+            tempList[i] = office
       }
-      /* alert("After Loop") */
+       // tempList = tempList.map(item =>{
+      //   var temp = Object.assign({}, item);
+      //   if(item.office_id == office.office_id)
+      //   {
+      //     temp.name = name;
+      //     alert("inside if")
+      //   }
+      //   return temp
+      // })
+      alert("After Loop")
       commit('updateOfficeSuccess',tempList)
     },
-    loadOfficeProfile (
-      { dispatch, commit }, office_id ) {
-      commit('officeProfileRequest')
-      officeService.getOffice(office_id)
-        .then(
-          response => {
-            const officeProfile = response.office
-            commit('officeProfileSuccess', officeProfile)
-            dispatch('alert/success', 'Office Retreived', { root: true })
-          },
-          error => {
-            commit('officeProfileFailure')
-            dispatch('alert/error', error, { root: true })
-          }
-        )    
-    }
   }
 }

@@ -20,6 +20,7 @@
             <ul class="sub-menu">
               <li><a href="doctor-dashboard">Doctor Dashboard</a></li>
               <li><a href="doctor-patients">Patients List</a></li>
+              <li><a href="update-doctor-profile">Update Profile</a></li>
             </ul>
           </li>
           <li><a to="admin" href = "admin">Admin</a></li>
