@@ -34,7 +34,7 @@
       </div>
       <div class="col-70">
         <select type="text" id="apptId" name="apptId">
-          <option v-for="appt in appointments" v-if="appt.doctor_id===doctor.doctorId" v-bind:value="appt.appt_id" >{{appt.appt_start_time}}</option>
+          <option v-for="appt in appointments" v-if="appt.doctor_id===doctor.doctorId" v-model="appt.appt_id" >{{appt.appt_start_time}}</option>
         </select>
       </div>
     </div>
@@ -55,7 +55,7 @@
       </div>
       <div class="col-70">
         <select type="text" id="medicationId" name="medicationName">
-          <option v-for="meds in medications.medicationNames[0]" v-bind:value="meds.medication_name" >{{meds.medication_name}}</option>
+          <option v-for="meds in medications.medicationNames[0]" v-model="meds.medication_id">{{meds.medication_name}}</option>
         </select>
       </div>
     </div>
@@ -66,7 +66,7 @@
       </div>
       <div class="col-70">
         <select type="text" id="medicationForm" name="medicationForm">
-          <option v-for="meds in medications.medicationForms[0]" v-bind:value="meds.dose_form_name" >{{meds.dose_form_name}}</option>
+          <option v-for="meds in medications.medicationForms[0]" v-model="meds.dose_form_id">{{meds.dose_form_name}}</option>
         </select>
       </div>
     </div>
@@ -76,11 +76,11 @@
         <label for="dosage">Dosage</label>
       </div>
       <div class="col-70">
-        <textarea id="dosage" name="dosage" placeholder="Dosage and instruction" style="height:100px"></textarea>
+        <textarea  style="height:70px" type="text" id="dosage" name="dosage" placeholder="Dosage and instruction"></textarea>
       </div>
     </div>
-    <div class="row">
-        <input type="submit" id="submit" v-on:click="addingPrescription()" Submit>
+    <div class="row" style="position:relative;text-align: right;padding-right:10px">
+       <button class="button-info round" type="submit" v-if id="submit" v-on:click="addingPrescription()">SUBMIT</button>
     </div>
   </form>
 </div>
@@ -99,8 +99,7 @@ export default {
       medicationId :'',
       doseForm :'',
       dosage :'',
-      datePrescribed :''
-      ,
+      datePrescribed :'',
       submitted: false
     }
   },
@@ -140,7 +139,12 @@ export default {
       'loadAppointments',
     ]),
      addingPrescription (e) {
-      this.submitted = true
+      this.submitted=true
+
+      const {apptId, doctorId , patientId , medicationId, doseForm, dosage, datePrescribed} = this
+             console.log("prescription input data ",apptId, doctorId , patientId , medicationId, doseForm, dosage, datePrescribed)
+       const {dispatch} = this.$store
+       dispatch('prescription/addPrescription', {apptId, doctorId , patientId , medicationId, doseForm, dosage, datePrescribed})
     },
     getTimestamp: function () {
       const today = new Date();
@@ -150,11 +154,6 @@ export default {
       this.datePrescribed = dateTime;
       return this.datePrescribed
     },
-    book (e) {
-      const { doctor, office, refDoctor, date, timeslot, reason, bookingMethod } = this
-      const { dispatch } = this.$store
-      dispatch('appointment/setAppointment', { doctor, office, refDoctor, date, timeslot, reason, bookingMethod })
-    }
   }
 }
 </script>

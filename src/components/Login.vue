@@ -45,7 +45,6 @@ export default {
       this.submitted = true
       const { email, password } = this
       const { dispatch } = this.$store
-
       dispatch('authentication/login', { email, password })
     }
   }
