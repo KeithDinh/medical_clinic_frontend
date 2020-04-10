@@ -6,7 +6,7 @@
         <label >By</label>
       </div>
       <div class="col-70">
-        <input type="text" id="doctor_name" name="doctorName"  v-model="doctor.firstName +' '+doctor.lastName" disabled>
+        <input type="text" id="doctorName" name="doctorName"  v-model="doctor.firstName +' '+doctor.lastName" disabled>
       </div>
     </div>
 
@@ -15,7 +15,27 @@
         <label >DoctorID</label>
       </div>
       <div class="col-70">
-        <input type="text" id="doctor_id" name="doctorId"  v-model="doctor.doctorId" disabled>
+        <input type="text" id="doctorId" name="doctorId"  v-model="doctor.doctorId" disabled>
+      </div>
+    </div>
+
+          <div class="row">
+      <div class="col-30">
+        <label >ApptId</label>
+      </div>
+      <div class="col-70">
+        <select type="text" id="apptId" name="apptId">
+          <option v-for="appt in appointments" v-if="appt.doctor_id===doctor.doctorId" v-bind:value="appt.appt_id" >{{appt.appt_start_time}}</option>
+        </select>
+      </div>
+    </div>
+
+        <div class="row">
+      <div class="col-30">
+        <label >Patient MRN</label>
+      </div>
+      <div class="col-70" v-if="patient">
+        <input type="text" id="patientId" name="patientId"  v-model="patient.patientId" disabled>
       </div>
     </div>
 
@@ -25,7 +45,7 @@
         <label >Medication Name</label>
       </div>
       <div class="col-70">
-        <select type="text" id="medication_name" name="medication name">
+        <select type="text" id="medicationId" name="medicationName">
           <option v-for="meds in medications.medicationNames[0]" v-bind:value="meds.medication_name" >{{meds.medication_name}}</option>
         </select>
       </div>
@@ -36,7 +56,7 @@
         <label >Medication Form</label>
       </div>
       <div class="col-70">
-        <select type="text" id="medication_forms" name="medication form">
+        <select type="text" id="medicationForm" name="medicationForm">
           <option v-for="meds in medications.medicationForms[0]" v-bind:value="meds.dose_form_name" >{{meds.dose_form_name}}</option>
         </select>
       </div>
@@ -76,14 +96,17 @@ export default {
     }
   },
     created() {
-    this.loadDoctorMedications(),
-      this.loadDoctorProfile
+    this.loadDoctorMedications()
   },
   watch: {
     medications: function () {
       this.loadDoctorMedications(),
          this.loadDoctorProfile()
+    },
+    appointments: function () {
+      this.loadAppointments()
     }
+
   },
   computed: {
     ...mapState('doctor', {
@@ -93,12 +116,18 @@ export default {
     ...mapState('profile',{
       patient: state => state.userProfile
     }),
+        ...mapState('appointment', {
+      appointments: state => state.apptsList
+    })
     },
 
   methods: {
     ...mapActions('doctor', [
       'loadDoctorMedications',
       'loadDoctorProfile',
+    ]),
+        ...mapActions('appointment', [
+      'loadAppointments',
     ]),
      addNewPescription (e) {
       this.submitted = true
