@@ -1,9 +1,18 @@
 <template>
   <div class="container">
   <form @submit.prevent="handleSubmit">
+     <div class="row">
+      <div class="col-30">
+        <label >Created Time</label>
+      </div>
+      <div class="col-70">
+        <input type="text" id="datePrescribed" name="datePrescribed"  v-model="datePrescribed" disabled>
+      </div>
+    </div>
+
     <div class="row">
       <div class="col-30">
-        <label >By</label>
+        <label >Created By</label>
       </div>
       <div class="col-70">
         <input type="text" id="doctorName" name="doctorName"  v-model="doctor.firstName +' '+doctor.lastName" disabled>
@@ -21,7 +30,7 @@
 
           <div class="row">
       <div class="col-30">
-        <label >ApptId</label>
+        <label >Appointment Time</label>
       </div>
       <div class="col-70">
         <select type="text" id="apptId" name="apptId">
@@ -71,7 +80,7 @@
       </div>
     </div>
     <div class="row">
-      <input type="submit" value="Submit">
+        <input type="submit" value="Submit">
     </div>
   </form>
 </div>
@@ -96,7 +105,8 @@ export default {
     }
   },
     created() {
-    this.loadDoctorMedications()
+    this.loadDoctorMedications(),
+      setInterval(this.getTimestamp, 1000);
   },
   watch: {
     medications: function () {
@@ -131,6 +141,14 @@ export default {
     ]),
      addNewPescription (e) {
       this.submitted = true
+    },
+    getTimestamp: function () {
+      const today = new Date();
+      const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      const dateTime = date +' '+ time;
+      this.datePrescribed = dateTime;
+      return this.datePrescribed
     }
   }
 }
