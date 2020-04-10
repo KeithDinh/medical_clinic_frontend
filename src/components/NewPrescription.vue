@@ -73,14 +73,14 @@
 
     <div class="row">
       <div class="col-30">
-        <label for="subject">Subject</label>
+        <label for="dosage">Dosage</label>
       </div>
       <div class="col-70">
-        <textarea id="subject" name="subject" placeholder="Dosage and instruction" style="height:100px"></textarea>
+        <textarea id="dosage" name="dosage" placeholder="Dosage and instruction" style="height:100px"></textarea>
       </div>
     </div>
     <div class="row">
-        <input type="submit" value="Submit">
+        <input type="submit" id="submit" v-on:click="addingPrescription()" Submit>
     </div>
   </form>
 </div>
@@ -128,7 +128,7 @@ export default {
     }),
         ...mapState('appointment', {
       appointments: state => state.apptsList
-    })
+    }),
     },
 
   methods: {
@@ -139,7 +139,7 @@ export default {
         ...mapActions('appointment', [
       'loadAppointments',
     ]),
-     addNewPescription (e) {
+     addingPrescription (e) {
       this.submitted = true
     },
     getTimestamp: function () {
@@ -149,6 +149,11 @@ export default {
       const dateTime = date +' '+ time;
       this.datePrescribed = dateTime;
       return this.datePrescribed
+    },
+    book (e) {
+      const { doctor, office, refDoctor, date, timeslot, reason, bookingMethod } = this
+      const { dispatch } = this.$store
+      dispatch('appointment/setAppointment', { doctor, office, refDoctor, date, timeslot, reason, bookingMethod })
     }
   }
 }
