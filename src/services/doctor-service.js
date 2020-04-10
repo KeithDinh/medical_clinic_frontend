@@ -7,7 +7,8 @@ export const doctorService = {
   getDoctor,
   getDoctorData,
   getDoctors,
-  getDoctorsByOffice
+  getDoctorsByOffice,
+  putDoctor
 }
 
 function getDoctor (doctor_id) {
@@ -46,5 +47,17 @@ function getDoctorsByOffice (office_id) {
     headers: authorizationHeader()
   }
   return fetch(`${config.apiUrl}/doctors/office?oid=` + office_id, requestOptions)
+    .then(handleResponse)
+}
+
+function putDoctor (updateDoctorPayload) {
+  let reqHeader = authorizationHeader()
+  reqHeader['Content-Type'] = 'application/json'
+  const requestOptions = {
+    method: 'PUT',
+    headers: reqHeader,
+    body: JSON.stringify(updateDoctorPayload)
+  }
+  return fetch(`${config.apiUrl}/doctor/updatedoctor`, requestOptions)
     .then(handleResponse)
 }
