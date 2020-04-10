@@ -138,9 +138,10 @@ export default {
         ...mapActions('appointment', [
       'loadAppointments',
     ]),
+
+     //TODO: Jon, somwhow the only data from the form is the datePrescribed. From the console, the others is empty string
      addingPrescription (e) {
       this.submitted=true
-
       const {apptId, doctorId , patientId , medicationId, doseForm, dosage, datePrescribed} = this
              console.log("prescription input data ",apptId, doctorId , patientId , medicationId, doseForm, dosage, datePrescribed)
        const {dispatch} = this.$store
