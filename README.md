@@ -7,7 +7,7 @@
 ``` bash
 # install dependencies
 npm install
-npm install vue-breadcrumbs
+npm i --save vue-phone-number-input
 npm install vuejs-datepicker
 npm install vue-tabs-component
 npm install moment
