@@ -17,7 +17,6 @@
         </tabs>
 
         </div>
-           <NewPrescription/>
       </div>
 </template>
 <script>
@@ -30,7 +29,6 @@ import Profile from './Profile'
 import Appointments from './Appointments'
 import Prescriptions from './Prescriptions'
 import MedicalRecords from './MedicalRecords'
-import NewPrescription from './NewPrescription'
 export default {
   name: 'Dashboard',
   components: {
@@ -38,7 +36,6 @@ export default {
     Appointments,
     Prescriptions,
     MedicalRecords,
-    NewPrescription,
     Tabs,
     Tab
   },

@@ -9,7 +9,6 @@ export const deleteAppointmentService = {
 
 
 function deleteAppointment (appt_id) {
-  alert("Cancel Fucntion")
     const requestOptions = {
       method: 'DELETE',
       headers: authorizationHeader()

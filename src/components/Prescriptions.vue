@@ -1,9 +1,9 @@
 <template>
-  <div >
+  <div class="row">
     <hr class="style1">
-    <div style="position:relative;text-align: right;padding-right:10px"><button class="button-info round" @click='isOpen = !isOpen'>Add New</button></div>
+    <div style="position:relative;text-align: right;padding-right:10px"><button v-if="!isOpen" class="button-info round" v-on:click="addClicked()">Add New</button><button v-if="isOpen" class="button-info round" v-on:click="addClicked()">Close</button></div>
     <!--    TODO:Jon, please take a look at this. the value of isOpen changes when button is clicked, but the value of isOpen in the div doesn't change. My idea is showing the form here, instead of dashboard-->
-    <div v-show = "isOpen"><NewPrescription/></div>
+    <div class="prescription-form" v-if="isOpen"><NewPrescription /></div>
     <div class="table-border-round">
     <table>
       <tr>
@@ -26,6 +26,8 @@
     </div>
   </div>
 </template>
+
+
 <script>
 
 import { mapState, mapActions } from 'vuex'
@@ -40,8 +42,10 @@ export default {
   created () {
     this.loadPrescriptions()
   },
-   data:{
-      isOpen: true,
+   data: function () {
+    return {
+      isOpen: false
+    }
   },
   components: {
     NewPrescription,
@@ -55,6 +59,13 @@ export default {
     ...mapActions('prescription', [
       'loadPrescriptions'
     ]),
+    addClicked: function () {
+      if (this.isOpen) {
+        this.isOpen = false
+      } else {
+        this.isOpen = true
+      }
+    }
   }
 }
 

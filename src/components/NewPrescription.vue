@@ -21,25 +21,24 @@
 
     <div class="row">
       <div class="col-30">
-        <label >DoctorID</label>
+        <label>DoctorID</label>
       </div>
       <div class="col-70">
-        <input type="text" id="doctorId" name="doctorId"  v-model="doctor.doctorId" disabled>
+        <input type="text" id="doctorId" name="doctorId" v-model="doctor.doctorId" disabled>
       </div>
     </div>
-
-          <div class="row">
+    <div class="row">
       <div class="col-30">
         <label >Appointment Time</label>
       </div>
       <div class="col-70">
-        <select type="text" id="apptId" name="apptId">
-          <option v-for="appt in appointments" v-if="appt.doctor_id===doctor.doctorId" v-model="appt.appt_id" >{{appt.appt_start_time}}</option>
+        <select type="text" id="apptId" name="apptId" v-model="apptId">
+          <option v-for="appt in appointments" v-if="appt.doctor_id===doctor.doctorId" v-bind:value="appt.appt_id">{{appt.appt_start_time}}</option>
         </select>
       </div>
     </div>
 
-        <div class="row">
+    <div class="row">
       <div class="col-30">
         <label >Patient MRN</label>
       </div>
@@ -54,29 +53,28 @@
         <label >Medication Name</label>
       </div>
       <div class="col-70">
-        <select type="text" id="medicationId" name="medicationName">
-          <option v-for="meds in medications.medicationNames[0]" v-model="meds.medication_id">{{meds.medication_name}}</option>
-        </select>
-      </div>
-    </div>
-
-      <div class="row">
-      <div class="col-30">
-        <label >Medication Form</label>
-      </div>
-      <div class="col-70">
-        <select type="text" id="medicationForm" name="medicationForm">
-          <option v-for="meds in medications.medicationForms[0]" v-model="meds.dose_form_id">{{meds.dose_form_name}}</option>
+        <select type="text" id="medicationId" name="medicationName" v-model="medicationId">
+          <option v-for="meds in medications.medicationNames[0]" v-bind:value="meds.medication_id">{{meds.medication_name}}</option>
         </select>
       </div>
     </div>
 
     <div class="row">
       <div class="col-30">
+        <label >Medication Form</label>
+      </div>
+      <div class="col-70">
+        <select type="text" id="medicationForm" v-model="doseFormId" name="medicationForm">
+          <option v-for="meds in medications.medicationForms[0]" v-bind:value="meds.dose_form_id">{{meds.dose_form_name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-30">
         <label for="dosage">Dosage</label>
       </div>
       <div class="col-70">
-        <textarea  style="height:70px" type="text" id="dosage" name="dosage" placeholder="Dosage and instruction"></textarea>
+        <textarea  style="height:70px" type="text" id="dosage" name="dosage" v-model="dosage" placeholder="Dosage and instruction"></textarea>
       </div>
     </div>
     <div class="row" style="position:relative;text-align: right;padding-right:10px">
@@ -94,10 +92,8 @@ export default {
   data () {
     return {
       apptId :'',
-      doctorId : '',
-      patientId :'',
       medicationId :'',
-      doseForm :'',
+      doseFormId: '',
       dosage :'',
       datePrescribed :'',
       submitted: false
@@ -108,14 +104,6 @@ export default {
       setInterval(this.getTimestamp, 1000);
   },
   watch: {
-    medications: function () {
-      this.loadDoctorMedications(),
-         this.loadDoctorProfile()
-    },
-    appointments: function () {
-      this.loadAppointments()
-    }
-
   },
   computed: {
     ...mapState('doctor', {
@@ -125,7 +113,7 @@ export default {
     ...mapState('profile',{
       patient: state => state.userProfile
     }),
-        ...mapState('appointment', {
+    ...mapState('appointment', {
       appointments: state => state.apptsList
     }),
     },
@@ -139,13 +127,12 @@ export default {
       'loadAppointments',
     ]),
 
-     //TODO: Jon, somwhow the only data from the form is the datePrescribed. From the console, the others is empty string
-     addingPrescription (e) {
+    //TODO: Jon, somwhow the only data from the form is the datePrescribed. From the console, the others is empty string
+    addingPrescription (e) {
       this.submitted=true
-      const {apptId, doctorId , patientId , medicationId, doseForm, dosage, datePrescribed} = this
-             console.log("prescription input data ",apptId, doctorId , patientId , medicationId, doseForm, dosage, datePrescribed)
-       const {dispatch} = this.$store
-       dispatch('prescription/addPrescription', {apptId, doctorId , patientId , medicationId, doseForm, dosage, datePrescribed})
+      const {apptId, patient, medicationId, doseFormId, dosage, datePrescribed} = this
+      const {dispatch} = this.$store
+      dispatch('prescription/addPrescription', {apptId, patient , medicationId, doseFormId, dosage, datePrescribed})
     },
     getTimestamp: function () {
       const today = new Date();
