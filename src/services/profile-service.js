@@ -6,9 +6,21 @@ const handleResponse = responseHandler.handleResponse
 export const profileService = {
   getProfile,
   postProfile,
-  putProfile
+  putProfile,
+  updatePatientProfile
 }
 
+function updatePatientProfile (updatePatientPayload) {
+  let reqHeader = authorizationHeader()
+  reqHeader['Content-Type'] = 'application/json'
+  const requestOptions = {
+    method: 'PUT',
+    headers: reqHeader,
+    body: JSON.stringify(updatePatientPayload)
+  }
+  return fetch(`${config.apiUrl}/patient/updatepatient`, requestOptions)
+    .then(handleResponse)
+}
 
 function getProfile (patient_id) {
   const requestOptions = {
@@ -43,6 +55,6 @@ function putProfile (profile) {
     headers: reqHeader,
     body: JSON.stringify(profile)
   }
-  return fetch(`${config.apiUrl}/patients/profile`, requestOptions)
+  return fetch(`${config.apiUrl}/doctor/updatedoctor`, requestOptions)
     .then(handleResponse)
 }
