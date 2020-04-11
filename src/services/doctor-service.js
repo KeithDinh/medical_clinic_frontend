@@ -8,7 +8,7 @@ export const doctorService = {
   getDoctorData,
   getDoctors,
   getDoctorsByOffice,
-  putDoctor,
+  updateDoctorProfile,
   getSpecialization,
   postDoctor
 }
@@ -73,7 +73,7 @@ function getDoctorsByOffice (office_id) {
     .then(handleResponse)
 }
 
-function putDoctor (updateDoctorPayload) {
+function updateDoctorProfile (updateDoctorPayload) {
   let reqHeader = authorizationHeader()
   reqHeader['Content-Type'] = 'application/json'
   const requestOptions = {

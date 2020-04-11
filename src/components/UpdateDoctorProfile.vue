@@ -4,103 +4,33 @@
       <div v-if="doctorProfile" class="row form-ctn">
         <div class="row form-title">Update Profile</div>
         <div id="profile-form" class="row forms">
-          <label>First Name</label>
-          <input
-            type="text"
-            v-model="doctorProfile.firstName"
-            id="firstName"
-            name="firstName"
-            placeholder="First Name"
-          />
-          <label> Middle Initial</label>
-          <input
-            type="text"
-            v-model="doctorProfile.middleInit"
-            id="middleInit"
-            name="middleInit"
-            placeholder="middleInit"
-          />
-          <label>Last Name</label>
-          <input
-            type="text"
-            v-model="doctorProfile.lastName"
-            id="lastName"
-            name="lastName"
-            placeholder="Last Name"
-          />
-          <label>Specialization</label>
-          <input
-            type="text"
-            v-model="doctorProfile.specializationName"
-            id="specializationName"
-            name="specializationName"
-            placeholder="specializationName"
-          />
-          <label>Gender</label>
-          <input
-            type="text"
-            v-model="doctorProfile.gender"
-            id="gender"
-            name="gender"
-            placeholder="gender"
-          />
-          <label>Race</label>
-          <input
-            type="text"
-            v-model="doctorProfile.race"
-            id="race"
-            name="race"
-            placeholder="race"
-          />
-          <label>Date Of Birth</label>
-          <input
-            type="text"
-            v-model="doctorProfile.dob"
-            id="date_of_birth"
-            name="date_of_birth"
-            placeholder="date_of_birth"
-          />
-          <label>Phone</label>
-          <input
-            type="text"
-            v-model="doctorProfile.phone"
-            id="phone"
-            name="phone"
-            placeholder="phone"
-          />
-          <label>Street Address</label>
-          <input
-            type="text"
-            v-model="doctorProfile.street"
-            id="addressOne"
-            name="addressOne"
-            placeholder="Address 1"
-          />
-          <label>City</label>
-          <input
-            type="text"
-            v-model="doctorProfile.city"
-            id="city"
-            name="city"
-            placeholder="City"
-          />
-          <label>State</label>
+          <label class="inputs">First Name</label>
+          <input type="text" v-model="doctorProfile.firstName" id="firstName" name="firstName" placeholder="First Name"/>
+          <label class="inputs"> Middle Initial</label>
+          <input type="text" v-model="doctorProfile.middleInit" id="middleInit" name="middleInit" placeholder="middleInit"/>
+          <label class="inputs">Last Name</label>
+          <input type="text" v-model="doctorProfile.lastName" id="lastName" name="lastName" placeholder="Last Name"/>
+          <label class="inputs">Specialization</label>
+          <input type="text" v-model="doctorProfile.specializationName" id="specializationName"
+            name="specializationName" placeholder="specialization name" disabled/>
+          <label class="inputs">Gender</label>
+          <input type="text" v-model="doctorProfile.gender" id="gender" name="gender" placeholder="gender"/>
+          <label class="inputs">Race</label>
+          <input type="text" v-model="doctorProfile.race" id="race" name="race" placeholder="race"/>
+          <label class="inputs">Date Of Birth</label>
+          <input type="text" v-model="doctorProfile.dob" id="date_of_birth" name="date_of_birth" placeholder="date_of_birth" disabled/>
+          <label class="inputs">Phone</label>
+          <VuePhoneNumberInput v-model="doctorProfile.phone" />
+          <label class="inputs">Street Address</label>
+          <input type="text" v-model="doctorProfile.street" id="addressOne" name="addressOne" placeholder="Address 1"/>
+          <label class="inputs">City</label>
+          <input type="text" v-model="doctorProfile.city" id="city" name="city" placeholder="City"/>
+          <label class="inputs">State</label>
           <select type="text" v-model="doctorProfile.state" id="state" name="state">
-            <option
-              v-for="(usState, index) in usStates"
-              :key="index"
-              :selected="doctorProfile.state === usState"
-              >{{ usState }}</option
-            >
+            <option v-for="(usState, index) in usStates" :key="index" :selected="doctorProfile.state === usState">{{ usState }}</option>
           </select>
-          <label>Zipcode</label>
-          <input
-            type="text"
-            v-model="doctorProfile.zipcode"
-            id="zipcode"
-            name="zipcode"
-            placeholder="Zipcode"
-          />
+          <label class="inputs">Zipcode</label>
+          <input type="text" v-model="doctorProfile.zipcode" id="zipcode" name="zipcode" placeholder="Zipcode"/>
           <button v-on:click="updateProfile()">UPDATE</button>
         </div>
       </div>
@@ -108,7 +38,11 @@
   </div>
 </template>
 <script>
-
+import Vue from 'vue';
+import VuePhoneNumberInput from 'vue-phone-number-input';
+import 'vue-phone-number-input/dist/vue-phone-number-input.css';
+ 
+Vue.component('vue-phone-number-input', VuePhoneNumberInput);
 import { mapState, mapActions } from 'vuex'
 
 export default {
@@ -171,6 +105,9 @@ export default {
       
     }
   },
+  components: {
+    VuePhoneNumberInput
+  },
   created () {
     // An Action Loaded in From mapActions
     this.loadDoctorProfile()
@@ -188,7 +125,6 @@ export default {
       const {doctorProfile} = this
       const { dispatch } = this.$store
       // An Action Loaded in From mapActions
-      console.log(this)
       dispatch('doctor/updateProfile', doctorProfile)
     }
   }

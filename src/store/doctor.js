@@ -128,15 +128,13 @@ export const doctor = {
     doctorMedsFailure (state) {
       state.doctorMedsStatus = { medsFailure: true }
     },
-    updateDoctorProfileRequest (state, submittedProfile) {
+    updateDoctorProfileRequest (state) {
       state.doctorProfileStatus = { updatingProfile: true }
-      state.doctorProfile = submittedProfile
     },
     updateDoctorProfileSuccess (state, returnedProfile) {
       state.doctorProfileStatus = {
         updatedProfile: true,
       }
-      state.doctorProfile = returnedProfile
     },
     updateDoctorProfileFailure (state) {
       state.doctorProfileStatus = { updateProfileFailure: true }
@@ -238,29 +236,35 @@ export const doctor = {
           }
         )
     },
-     loadDoctorMedications (
+    loadDoctorMedications (
       { dispatch, commit }) {
       commit('doctorMedsRequest')
       const doctor = JSON.parse(localStorage.getItem('doctor'))
       commit('doctorMedsSuccess', doctor.medications)
       dispatch('alert/success', 'medications Retreived', { root: true })
     },
-    
     updateProfile ({ dispatch, commit }, doctorProfile) {
-      commit('updateDoctorProfileRequest', doctorProfile) 
-        doctorService.putDoctor(doctorProfile).then(
+      commit('updateDoctorProfileRequest') 
+        doctorService.updateDoctorProfile(doctorProfile).then(
           response => {
-            commit('updateDoctorProfileSuccess', doctorProfile)
+            commit('updateDoctorProfileSuccess')
             dispatch('alert/success', 'Profile Updated', { root: true })
+            commit('doctorProfileRequest')
+            doctorService.getDoctor(doctorProfile.doctorId).then(
+              response => {
+                const doctor = JSON.parse(localStorage.getItem('doctor'))
+                doctor.profile = response.profile
+                localStorage.setItem('doctor', JSON.stringify(doctor))
+                commit('doctorProfileSuccess', response.profile)
+                dispatch('alert/success', 'doctor Retreived', { root: true })
+              })
           },
           error => {
             commit('updateDoctorProfileFailure')
             dispatch('alert/error', error, { root: true })
           }
         )
-      
     },
-
     loadSpecializations (
       { dispatch, commit }) {
       commit('specializationRequest')
@@ -277,7 +281,6 @@ export const doctor = {
           }
         )
     },
-
     createDoctorProfile ({ dispatch, commit }, doctorProfile) {
       commit('createProfileRequest', doctorProfile)
       const validationErrors = validateProfile(doctorProfile)
