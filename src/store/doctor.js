@@ -11,11 +11,13 @@ const initialState = {
   doctorsStatus: {},
   doctorsList: [],
   doctorMedsStatus:{},
-  doctorMedsList:[]
+  doctorMedsList:[],
+  specializationStatus: {},
+  specializationList: []
 }
 
 // Validate the Profile Form
-const validateProfile = profile => {
+const validateProfile = doctorProfile => {
   const {
     firstName,
     middleInit,
@@ -27,8 +29,9 @@ const validateProfile = profile => {
     phone,
     dob,
     gender,
+    specialist,
     race
-  } = profile
+  } = doctorProfile
   let errors = []
   if (!firstName) {
     errors.push(new Error('First name required.'))
@@ -57,10 +60,23 @@ const validateProfile = profile => {
   if (!gender) {
     errors.push(new Error('Gender required.'))
   }
+  if (!specialist) {
+    errors.push(new Error('Specialization required.'))
+  }
   if (!race) {
     errors.push(new Error('Race required.'))
   }
   return errors
+}
+
+const checkComplete = (doctorProfile) => {
+  let complete = true
+  for (let [key, value] of Object.entries(doctorProfile)) {
+    if (key !== 'middleInit' && value.length === 0) {
+      complete = false
+    }
+  }
+  return complete
 }
 
 export const doctor = {
@@ -124,6 +140,30 @@ export const doctor = {
     },
     updateDoctorProfileFailure (state) {
       state.doctorProfileStatus = { updateProfileFailure: true }
+    },
+    specializationRequest (state) {
+      state.specializationStatus = { loadingspecialization: true }
+    },
+    specializationSuccess (state, specialization) {
+      state.specializationStatus = { loadedSpecialization: true }
+      state.specializationList = specialization
+    },
+    specializationFailure (state) {
+      state.specializationStatus = { specializationFailure: true }
+    },
+    createProfileRequest (state, submittedProfile) {
+      state.doctorProfileStatus = { creatingProfile: true }
+      state.doctorProfile = submittedProfile
+    },
+    createProfileSuccess (state, returnedProfile) {
+      state.doctorProfileStatus = {
+        createdProfile: true,
+        profileComplete: checkComplete(doctorProfile)
+      }
+      state.doctorProfile = returnedProfile
+    },
+    createProfileFailure (state) {
+      state.doctorProfileStatus = { createProfileFailure: true }
     }
   },
   actions: {
@@ -219,6 +259,44 @@ export const doctor = {
           }
         )
       
+    },
+
+    loadSpecializations (
+      { dispatch, commit }) {
+      commit('specializationRequest')
+      doctorService.getSpecialization()
+        .then(
+          response => {
+            const specializations = response.specializations
+            commit('specializationSuccess', specializations)
+            dispatch('alert/success', 'specializations Retreived', { root: true })
+          },
+          error => {
+            commit('specializationFailure')
+            dispatch('alert/error', error, { root: true })
+          }
+        )
+    },
+
+    createDoctorProfile ({ dispatch, commit }, doctorProfile) {
+      commit('createProfileRequest', doctorProfile)
+      const validationErrors = validateProfile(doctorProfile)
+      if (validationErrors.length > 0) {
+        commit('createProfileFailure')
+        dispatch('alert/error', validationErrors, { root: true })
+      } else {
+        doctorService.postProfile(doctorProfile).then(
+          response => {
+            commit('createProfileSuccess', response.profile)
+            router.push('/doctor-dashboard')
+            dispatch('alert/success', 'Profile Created', { root: true })
+          },
+          error => {
+            commit('createProfileFailure')
+            dispatch('alert/error', error, { root: true })
+          }
+        )
+      }
     },
   }
 }

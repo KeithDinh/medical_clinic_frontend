@@ -18,7 +18,9 @@
          <tab name="Offices">
           <AdminOffice />
         </tab>
-
+        <tab name="RegisterDoctor">
+          <AdminDoctorRegister />
+        </tab>
       </tabs>
       <!-- <Doctors> -->
       </div>
@@ -34,6 +36,7 @@ import AdminPatient from './AdminPatient'
 import AdminDoctor from './AdminDoctor'
 import AdminAppointment from './AdminAppointment'
 import AdminOffice from './AdminOffice'
+import AdminDoctorRegister from './AdminDoctorRegister'
 
 import {Tabs, Tab} from 'vue-tabs-component';
 Vue.component('tabs', Tabs);
@@ -50,6 +53,7 @@ export default {
     AdminDoctor,
     AdminAppointment,
     AdminOffice,
+    AdminDoctorRegister,
     Tabs,
     Tab
   },
