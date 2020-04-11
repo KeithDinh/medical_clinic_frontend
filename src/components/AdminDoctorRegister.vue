@@ -28,9 +28,21 @@
           
           <input type="text" v-model="phone" id="phone" name="phone" placeholder="Phone">
           <datepicker v-model="dob" name="dob" placeholder="Date of birth" format="MM/dd/yyyy"></datepicker>
-          <input type="text" v-model="gender" id="gender" name="gender" placeholder="Gender">
+          <select type="text" v-model="gender" id="gender" name="gender" placeholder="Gender">
+                  <option> M</option>
+                  <option> F</option>
+          </select>
           <input type="text" v-model="image" id="image" name="image" placeholder="Image">
-          <input type="text" v-model="race" id="race" name="race" placeholder="Race / Ethnicity">
+          <select type="text" v-model="race" id="race" name="race" placeholder="Race / Ethnicity">
+                  <option> White</option>
+                  <option> African American</option>
+                  <option> Hispanic and Latino Americans</option>
+                  <option> Asian</option>
+                  <option>Native Americans and Alaska Natives</option>
+                  <option>Native Hawaiian or Other Pacific Islander</option>
+                  
+            </select>
+          
           <button id="submit" v-on:click="register()">REGISTER</button>
         </div>
       </div>
