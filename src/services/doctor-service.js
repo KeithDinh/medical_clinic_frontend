@@ -8,7 +8,30 @@ export const doctorService = {
   getDoctorData,
   getDoctors,
   getDoctorsByOffice,
-  putDoctor
+  putDoctor,
+  getSpecialization,
+  postDoctor
+}
+
+function postDoctor (profile) {
+  let reqHeader = authorizationHeader()
+  reqHeader['Content-Type'] = 'application/json'
+  const requestOptions = {
+    method: 'POST',
+    headers: reqHeader,
+    body: JSON.stringify(profile)
+  }
+  return fetch(`${config.apiUrl}/doctor/data`, requestOptions)
+    .then(handleResponse)
+}
+
+function getSpecialization () {
+  const requestOptions = {
+    method: 'GET',
+    headers: authorizationHeader()
+  }
+  return fetch(`${config.apiUrl}/doctor/specialization`, requestOptions)
+    .then(handleResponse)
 }
 
 function getDoctor (doctor_id) {

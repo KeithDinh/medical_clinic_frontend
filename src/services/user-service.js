@@ -5,7 +5,8 @@ const handleResponse = responseHandler.handleResponse
 export const userService = {
   login,
   logout,
-  register
+  register,
+  registerDoctor
 }
 
 function login (email, password) {
@@ -77,6 +78,25 @@ function register (email, password, firstName, middleInit, lastName, street, cit
     body: JSON.stringify({ email, password, firstName, middleInit, lastName, street, city, state, zipcode, phone, dob, gender, marital, race })
   }
   return fetch(`${config.apiUrl}/patients/register`, requestOptions)
+    .then(handleResponse)
+    .then(localUser => {
+    // Registrations is successful if a jwt token is returned
+      if (localUser.access_token) {
+      // store user details and jwt token in local storage to keep user logged in between page refreshes
+        localStorage.setItem('localUser', JSON.stringify(localUser))
+      }
+      return localUser
+    })
+}
+
+function registerDoctor (firstName, middleInit, lastName,phone, specialistId,gender,email,password, race,dob, street, city, state, zipcode, image ) {
+  dob = formatDate(dob)
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ firstName, middleInit, lastName,phone, specialistId,gender,email,password, race,dob, street, city, state, zipcode, image })
+  }
+  return fetch(`${config.apiUrl}/doctors/register`, requestOptions)
     .then(handleResponse)
     .then(localUser => {
     // Registrations is successful if a jwt token is returned
