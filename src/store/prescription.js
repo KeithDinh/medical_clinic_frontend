@@ -10,28 +10,19 @@ const initialState = {
   newRx:[]
 }
 
-const validatePrescriptionForm = (apptId, doctorId , patientId , medicationId, doseForm, dosage, datePrescribed) => {
+const validatePrescriptionForm = (apptId, medicationId, doseFormId, dosage) => {
   let errors = []
   if (!apptId) {
     errors.push(new Error('ApptId required.'))
   }
-  if (!doctorId) {
-    errors.push(new Error('DoctorId required.'))
-  }
-  if (!patientId) {
-    errors.push(new Error('PatientId required.'))
-  }
   if (!medicationId) {
     errors.push(new Error('medicationId required'))
   }
-  if (!doseForm) {
+  if (!doseFormId) {
     errors.push(new Error('doseForm required'))
   }
   if (!dosage) {
     errors.push(new Error('dosage required'))
-  }
-  if (!datePrescribed) {
-    errors.push(new Error('datePrescribed required.'))
   }
   return errors
 }
@@ -83,12 +74,12 @@ export const prescription = {
       const patient = JSON.parse(localStorage.getItem('patient'))
       commit('loadRxSuccess', patient.prescriptions)
     },
-    addPrescription ({ dispatch, commit }, { apptId, doctorId , patientId , medicationId, doseForm, dosage, datePrescribed}) {
+    addPrescription ({ dispatch, commit }, { apptId, patient , medicationId, doseFormId, dosage, datePrescribed }) {
+      alert("action entered")
       commit('addRxRequest')
-      let errors = validatePrescriptionForm(apptId, doctorId , patientId , medicationId, doseForm, dosage, datePrescribed)
+      let errors = validatePrescriptionForm(apptId, patient.patientId , medicationId, doseFormId, dosage, datePrescribed)
       if (errors.length === 0) {
-        console.log("before putPrescription")
-        prescriptionService.putPrescription({apptId, doctorId, patientId, medicationId, doseForm, dosage, datePrescribed})
+        prescriptionService.putPrescription(apptId, patient.patientId , medicationId, doseFormId, dosage, datePrescribed)
       }
       else{
         console.log(errors)
