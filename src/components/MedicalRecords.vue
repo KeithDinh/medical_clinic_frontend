@@ -1,11 +1,16 @@
 <template>
   <div class="medicalrecords">
     <hr class="style1">
-       <div style="position:relative;text-align: right;padding-right:10px">
-         <button v-if="!isOpen" class="button-info round" v-on:click="addClicked()">Add New</button>
-         <button v-if="isOpen" class="button-info round" v-on:click="addClicked()">Close</button>
-       </div>
-      <div v-if="isOpen"><NewRecord/></div>
+     <div style="position:relative;text-align: right;padding-right:10px">
+       <button v-if="!isOpen" class="button-info round" v-on:click="addClicked()">Add New</button>
+       <button v-if="isOpen" class="button-info round" v-on:click="addClicked()">Close</button>
+     </div>
+
+    <div v-if="isOpen">
+      <NewRecord/>
+     <hr class="style1" style="padding-bottom: 30px; margin-top:20px">
+    </div>
+
     <div class="table-border-round">
       <table >
         <tr>
