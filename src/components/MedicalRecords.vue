@@ -18,7 +18,9 @@
         <template v-for="record in records">
           <tr>
             <td>{{ record.first_name }} {{ record.last_name }}</td>
-            <td>{{ record.actual_start_time }}</td>
+            <td>{{ record.actual_start_time | frontEndDateFormat}} <br>
+              <div class="subtitle1">{{record.actual_start_time |frontEndTimeFormat}}</div>
+            </td>
             <td>{{ record.diagnoses }}</td>
             <td>{{ record.treatment }}</td>
             <td>{{ record.treatment }}</td>
@@ -64,6 +66,21 @@ export default {
       } else {
         this.isOpen = true
       }
+    }
+  },
+  filters: {
+    frontEndTimeFormat(str) {
+      var dateobj = new Date(str);
+      var hours = ("0" + dateobj.getUTCHours()).slice(-2)
+      var minutes = ("0" + dateobj.getUTCMinutes()).slice(-2)
+      return hours + ":" + minutes;
+    },
+    frontEndDateFormat(str) {
+      var dateobj = new Date(str);
+      var date = dateobj.getUTCDate();
+      var month = dateobj.getUTCMonth();
+      var year = dateobj.getUTCFullYear();
+      return month + "/" + date + "/" + year;
     }
   }
 }
