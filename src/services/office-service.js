@@ -1,5 +1,5 @@
 import config from 'config'
-import { authorizationHeader } from '../helpers'
+import { authorizationHeader, userToken } from '../helpers'
 import { responseHandler } from './response-handler'
 const handleResponse = responseHandler.handleResponse
 
@@ -29,12 +29,11 @@ function getOfficesByDoctor (doctor_id) {
 }
 
 function putOffice (updateOfficePayload) {
-  alert(updateOfficePayload)
   let reqHeader = authorizationHeader()
   reqHeader['Content-Type'] = 'application/json'
   const requestOptions = {
     method: 'PUT',
-    headers: reqHeader,
+    headers: { 'Authorization': 'Bearer ' + userToken(), 'Content-Type': 'application/json' },
     body: JSON.stringify(updateOfficePayload)
   }
   return fetch(`${config.apiUrl}/office/updateoffice`, requestOptions)
