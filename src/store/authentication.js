@@ -20,17 +20,20 @@ const validateDoctorRegistration = (firstName, middleInit, lastName,phone, speci
     errors.push(new Error('Valid email required.'))
   }
   if (!passwordOne) {
-    alert("check email " + passwordOne)
+    alert("check pw1 " + passwordOne)
 
     errors.push(new Error('Password required.'))
   }
   if (!passwordTwo) {
+    alert("check pw2 " + passwordTwo)
     errors.push(new Error('Must confirm password.'))
   }
   if (passwordOne !== passwordTwo) {
     errors.push(new Error('Passwords must match.'))
   }
   if (!firstName) {
+    alert("check fname " + firstName)
+
     errors.push(new Error('First name required.'))
   }
   if (!lastName) {
