@@ -50,8 +50,12 @@ export const appointment = {
       .then(
         response => {
           commit('apptSuccess', { doctor, office, refDoctor, date, timeslot, reason, bookingMethod })
+          const localUser = JSON.parse(localStorage.getItem('localUser'))
           profileService.getProfile(localUser.patient_id).then(
             response => {
+              const patient = JSON.parse(localStorage.getItem('patient'))
+              patient.appointments = response.appointments
+              localStorage.setItem('patient', JSON.stringify(patient))
               router.push('/dashboard')
             }
           )

@@ -12,7 +12,7 @@
         <tr>
           <td>{{ appt.first_name }} {{ appt.last_name }}</td>
            <td>{{ appt.appt_start_time | frontEndDateFormat}} <br>
-             <div class="text-info subtitle1">{{appt.appt_start_time |frontEndTimeFormat}}</div></td>
+             <div class="text-info subtitle1">{{appt.appt_start_time | frontEndTimeFormat}}</div></td>
           <td>{{ appt.booking_date | frontEndDateFormat}} <br>
              <div class="subtitle1">{{appt.booking_date |frontEndTimeFormat}}</div></td>
           <td>{{ appt.appt_status }}</td>
@@ -59,7 +59,7 @@ export default {
     frontEndDateFormat(str) {
       var dateobj = new Date(str);
       var date = dateobj.getUTCDate();
-      var month = dateobj.getUTCMonth();
+      var month = dateobj.getUTCMonth() + 1;
       var year = dateobj.getUTCFullYear();
       return month + "/" + date + "/" + year;
     }
