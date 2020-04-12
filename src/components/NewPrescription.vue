@@ -69,14 +69,25 @@
         </select>
       </div>
     </div>
+
     <div class="row">
       <div class="col-30">
         <label for="dosage">Dosage</label>
       </div>
       <div class="col-70">
-        <textarea  style="height:70px" type="text" id="dosage" name="dosage" v-model="dosage" placeholder="Dosage and instruction"></textarea>
+        <textarea  maxlength="40" style="height:50px" type="text" id="dosage" name="dosage" v-model="dosage" placeholder="Dosage and instruction"></textarea>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-30">
+        <label for="indication">Indication</label>
+      </div>
+      <div class="col-70">
+        <textarea maxlength="40"  style="height:50px" type="text" id="indication" name="indication" v-model="indication" placeholder="Indication"></textarea>
+      </div>
+    </div>
+
     <div class="row" style="position:relative;text-align: right;padding-right:10px">
        <button class="button-info round" type="submit" v-if id="submit" v-on:click="addingPrescription()">SUBMIT</button>
     </div>
@@ -95,6 +106,7 @@ export default {
       medicationId :'',
       doseFormId: '',
       dosage :'',
+      indication: '',
       datePrescribed :'',
       submitted: false
     }
@@ -130,9 +142,9 @@ export default {
     //TODO: Jon, somwhow the only data from the form is the datePrescribed. From the console, the others is empty string
     addingPrescription (e) {
       this.submitted=true
-      const {apptId, patient, medicationId, doseFormId, dosage, datePrescribed} = this
+      const {apptId, patient, medicationId, doseFormId, dosage, indication, datePrescribed} = this
       const {dispatch} = this.$store
-      dispatch('prescription/addPrescription', {apptId, patient , medicationId, doseFormId, dosage, datePrescribed})
+      dispatch('prescription/addPrescription', {apptId, patient , medicationId, doseFormId, dosage, indication, datePrescribed})
     },
     getTimestamp: function () {
       const today = new Date();

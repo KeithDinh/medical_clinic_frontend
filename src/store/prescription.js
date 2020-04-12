@@ -10,7 +10,7 @@ const initialState = {
   newRx:[]
 }
 
-const validatePrescriptionForm = (apptId, medicationId, doseFormId, dosage) => {
+const validatePrescriptionForm = (apptId, medicationId, doseFormId, dosage,indication) => {
   let errors = []
   if (!apptId) {
     errors.push(new Error('ApptId required.'))
@@ -23,6 +23,9 @@ const validatePrescriptionForm = (apptId, medicationId, doseFormId, dosage) => {
   }
   if (!dosage) {
     errors.push(new Error('dosage required'))
+  }
+  if (!indication) {
+    errors.push(new Error('indication required'))
   }
   return errors
 }
@@ -74,15 +77,15 @@ export const prescription = {
       const patient = JSON.parse(localStorage.getItem('patient'))
       commit('loadRxSuccess', patient.prescriptions)
     },
-    addPrescription ({ dispatch, commit }, { apptId, patient , medicationId, doseFormId, dosage, datePrescribed }) {
+    addPrescription ({ dispatch, commit }, { apptId, patient , medicationId, doseFormId, dosage, indication, datePrescribed }) {
       alert("action entered")
       commit('addRxRequest')
-      let errors = validatePrescriptionForm(apptId, patient.patientId , medicationId, doseFormId, dosage, datePrescribed)
+      let errors = validatePrescriptionForm(apptId, medicationId, doseFormId, dosage, indication)
       if (errors.length === 0) {
-        prescriptionService.putPrescription(apptId, patient.patientId , medicationId, doseFormId, dosage, datePrescribed)
+        prescriptionService.putPrescription(apptId, patient.patientId , medicationId,  doseFormId, dosage, indication, datePrescribed)
       }
       else{
-        console.log(errors)
+        alert("Missing Fields")
       }
     }
   }
