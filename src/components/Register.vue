@@ -120,9 +120,13 @@ export default {
   methods: {
     register (e) {
       this.submitted = true
-      const { email, passwordOne, passwordTwo, firstName, middleInit, lastName, street, city, state, zipcode, phone, dob, gender, marital, race } = this
+      const { email, passwordOne, passwordTwo, firstName, middleInit, lastName, 
+      street, city, state, zipcode, phone, dob, gender, marital, race } = this
+
       const { dispatch } = this.$store
-      dispatch('authentication/register', { email, passwordOne, passwordTwo, firstName, middleInit, lastName, street, city, state, zipcode, phone, dob, gender, marital, race })
+      
+      dispatch('authentication/register', { email, passwordOne, passwordTwo, 
+      firstName, middleInit, lastName, street, city, state, zipcode, phone, dob, gender, marital, race })
     }
   }
 }
