@@ -391,6 +391,11 @@ font-size: 17px
 }
 /*section main*/
 section.main {
+  background: #ebebeb;
+}
+
+.main-pad-80 {
+  padding:80px 0;
 }
 
 /* ****************** TAB ***************** */
@@ -416,6 +421,7 @@ section.main {
 
 .card-container{
   padding: 20px 20px;
+  background:#f8f9fa;
 }
 .custom-select {
   position:relative;

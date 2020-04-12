@@ -21,15 +21,13 @@ export const offices = {
     officeFailure (state) {
       state.officeStatus = { officesFailure: true }
     },
-    updateOfficeRequest (state, submittedOffice) {
+    updateOfficeRequest (state) {
       state.OfficeStatus = { updatingOffice: true }
-      state.officeList = submittedOffice
     },
-    updateOfficeSuccess (state, returnedOfficeList) {
+    updateOfficeSuccess (state) {
       state.officeStatus = {
         updatedOffice: true,
       }
-      state.officeList = returnedOfficeList
     },
     updateOfficeFailure (state) {
       state.officeStatus = { updateOfficeFailure: true }
@@ -74,28 +72,28 @@ export const offices = {
           }
         )    
     },
-    updateOffice ({ dispatch, commit, state },office) {
-      commit('updateOfficeRequest', state.officeList)
-      const tempList = state.officeList
-       alert(state.officeList[0]) 
-       alert(state.officeList) 
-       alert(context.state.officeList) 
-      for (let i=0;i<state.officeList.length;i++)
-      {
-        if(tempList[i].office_id == office.office_id)
-            tempList[i] = office
-      }
-       // tempList = tempList.map(item =>{
-      //   var temp = Object.assign({}, item);
-      //   if(item.office_id == office.office_id)
-      //   {
-      //     temp.name = name;
-      //     alert("inside if")
-      //   }
-      //   return temp
-      // })
-      alert("After Loop")
-      commit('updateOfficeSuccess',tempList)
+    updateOffice ({ dispatch, commit, state }, office) {
+      commit('updateOfficeRequest')
+      officeService.putOffice(office).then(
+        response => {
+          commit('updateOfficeSuccess')
+          commit('officeRequest')
+          officeService.getOffices()
+            .then(
+              response => {
+                const localUser = JSON.parse(localStorage.getItem('localUser'))
+                localUser.offices = response.offices
+                localStorage.setItem('localUser', JSON.stringify(localUser))
+                commit('officeSuccess', response.offices)
+                dispatch('alert/success', 'Offices Retreived', { root: true })
+              },
+              error => {
+                commit('officeFailure')
+                dispatch('alert/error', error, { root: true })
+              }
+            )  
+          dispatch('alert/success', 'Offices Retreived', { root: true })
+        })
     },
   }
 }

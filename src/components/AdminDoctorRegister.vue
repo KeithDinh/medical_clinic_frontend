@@ -71,11 +71,11 @@
 </template>
 <script>
 import { mapState, mapActions } from 'vuex'
-import Vue from 'vue';
-import VuePhoneNumberInput from 'vue-phone-number-input';
-import 'vue-phone-number-input/dist/vue-phone-number-input.css';
+import Vue from 'vue'
+import VuePhoneNumberInput from 'vue-phone-number-input'
+import 'vue-phone-number-input/dist/vue-phone-number-input.css'
+Vue.component('vue-phone-number-input', VuePhoneNumberInput)
 import Datepicker from 'vuejs-datepicker'
-Vue.component('vue-phone-number-input', VuePhoneNumberInput);
 export default {
   name: 'AdminDoctorRegister',
   components: {

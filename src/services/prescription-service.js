@@ -17,13 +17,13 @@ function getPrescriptions () {
     .then(handleResponse)
 }
 
-function putPrescription (apptId, patientId, medicationId, doseFormId, dosage, datePrescribed) {
+function putPrescription (apptId, patientId, medicationId, doseFormId, dosage, indication, datePrescribed) {
   let reqHeader = authorizationHeader()
   reqHeader['Content-Type'] = 'application/json'
   const requestOptions = {
     method: 'POST',
     headers: reqHeader,
-    body: JSON.stringify({apptId, patientId, medicationId, doseFormId, dosage, datePrescribed})
+    body: JSON.stringify({apptId, patientId, medicationId, doseFormId, dosage, indication, datePrescribed})
   }
   return fetch(`${config.apiUrl}/doctor/addprescription`, requestOptions)
     .then(handleResponse)
