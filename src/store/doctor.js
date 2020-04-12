@@ -16,69 +16,6 @@ const initialState = {
   specializationList: []
 }
 
-// Validate the Profile Form
-const validateProfile = doctorProfile => {
-  const {
-    firstName,
-    middleInit,
-    lastName,
-    street,
-    city,
-    state,
-    zipcode,
-    phone,
-    dob,
-    gender,
-    specialist,
-    race
-  } = doctorProfile
-  let errors = []
-  if (!firstName) {
-    errors.push(new Error('First name required.'))
-  }
-  if (!lastName) {
-    errors.push(new Error('Last name required.'))
-  }
-  if (!street) {
-    errors.push(new Error('Street address required.'))
-  }
-  if (!city) {
-    errors.push(new Error('city required.'))
-  }
-  if (!state) {
-    errors.push(new Error('State required.'))
-  }
-  if (!zipcode) {
-    errors.push(new Error('Zipcode required.'))
-  }
-  if (!phone) {
-    errors.push(new Error('Phone number required.'))
-  }
-  if (!dob) {
-    errors.push(new Error('Date of birth required.'))
-  }
-  if (!gender) {
-    errors.push(new Error('Gender required.'))
-  }
-  if (!specialist) {
-    errors.push(new Error('Specialization required.'))
-  }
-  if (!race) {
-    errors.push(new Error('Race required.'))
-  }
-  return errors
-}
-
-const checkComplete = (doctorProfile) => {
-  let complete = true
-  for (let [key, value] of Object.entries(doctorProfile)) {
-    if (key !== 'middleInit' && value.length === 0) {
-      complete = false
-    }
-  }
-  return complete
-}
-
 export const doctor = {
   namespaced: true,
   state: initialState,
@@ -148,20 +85,6 @@ export const doctor = {
     },
     specializationFailure (state) {
       state.specializationStatus = { specializationFailure: true }
-    },
-    createProfileRequest (state, submittedProfile) {
-      state.doctorProfileStatus = { creatingProfile: true }
-      state.doctorProfile = submittedProfile
-    },
-    createProfileSuccess (state, returnedProfile) {
-      state.doctorProfileStatus = {
-        createdProfile: true,
-        profileComplete: checkComplete(doctorProfile)
-      }
-      state.doctorProfile = returnedProfile
-    },
-    createProfileFailure (state) {
-      state.doctorProfileStatus = { createProfileFailure: true }
     }
   },
   actions: {
@@ -280,26 +203,6 @@ export const doctor = {
             dispatch('alert/error', error, { root: true })
           }
         )
-    },
-    createDoctorProfile ({ dispatch, commit }, doctorProfile) {
-      commit('createProfileRequest', doctorProfile)
-      const validationErrors = validateProfile(doctorProfile)
-      if (validationErrors.length > 0) {
-        commit('createProfileFailure')
-        dispatch('alert/error', validationErrors, { root: true })
-      } else {
-        doctorService.postProfile(doctorProfile).then(
-          response => {
-            commit('createProfileSuccess', response.profile)
-            router.push('/doctor-dashboard')
-            dispatch('alert/success', 'Profile Created', { root: true })
-          },
-          error => {
-            commit('createProfileFailure')
-            dispatch('alert/error', error, { root: true })
-          }
-        )
-      }
     },
   }
 }

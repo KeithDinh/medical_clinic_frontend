@@ -91,6 +91,7 @@ function register (email, password, firstName, middleInit, lastName, street, cit
 
 function registerDoctor (firstName, middleInit, lastName,phone, specialistId,gender,email,password, race,dob, street, city, state, zipcode, image ) {
   dob = formatDate(dob)
+  alert("I am in doctor user service")
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
