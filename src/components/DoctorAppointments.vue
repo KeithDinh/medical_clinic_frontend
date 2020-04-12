@@ -1,7 +1,7 @@
 <template>
   <div class="db-col2">
     <tabs :options="{ useUrlFragment: false }" @clicked="tabClicked" @changed="tabChanged">
-          <tab name="Today" >
+          <tab name="Today" class="table-border-round">
             TODAY
              <table >
               <tr>
@@ -10,7 +10,7 @@
                 <th>Date and Time</th>
                 <th>Reason for Visit</th>
               </tr>
-              <template v-for="appt in allAppointmentsList.todayAppointments[0]">
+              <template v-for="appt in allAppointmentsList.todayAppointments">
                 <tr>
                    <td style="text-align: left">{{ appt.patient}}<br><div class="subtitle1">MRN: {{appt.patient_id}}</div></td>
                   <td>{{ appt.office}}</td>
@@ -22,7 +22,7 @@
               </template>
             </table>
           </tab>
-          <tab name="Upcoming">
+          <tab name="Upcoming" class="table-border-round">
             Future
             <table>
               <tr>
@@ -31,7 +31,7 @@
                 <th>Date and Time</th>
                 <th>Reason for Visit</th>
               </tr>
-              <template v-for="appt in allAppointmentsList.futureAppointments[0]">
+              <template v-for="appt in allAppointmentsList.futureAppointments">
                 <tr>
                    <td style="text-align: left">{{ appt.patient}}<br><div class="subtitle1">MRN: {{appt.patient_id}}</div></td>
                   <td>{{ appt.office}}</td>
@@ -43,7 +43,7 @@
               </template>
             </table>
           </tab>
-          <tab name="Past Appointments">
+          <tab name="Past Appointments" class="table-border-round">
             <table>
               <tr>
                 <th>Patient Name</th>

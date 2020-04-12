@@ -77,17 +77,22 @@ export const prescription = {
       const patient = JSON.parse(localStorage.getItem('patient'))
       commit('loadRxSuccess', patient.prescriptions)
     },
+
     addPrescription ({ dispatch, commit }, { apptId, patient , medicationId, doseFormId, dosage, indication, datePrescribed }) {
       alert("action entered")
       commit('addRxRequest')
       let errors = validatePrescriptionForm(apptId, medicationId, doseFormId, dosage, indication)
       if (errors.length === 0) {
         prescriptionService.putPrescription(apptId, patient.patientId , medicationId,  doseFormId, dosage, indication, datePrescribed)
+          .then(
+            response => {
+            }
+          )
       }
       else{
         alert("Missing Fields")
       }
-    }
+    },
   }
 }
 
