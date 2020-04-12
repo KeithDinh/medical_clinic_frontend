@@ -18,7 +18,7 @@
          <tab name="Offices">
           <AdminOffice />
         </tab>
-        <tab name="RegisterDoctor">
+        <tab name="Register Doctor">
           <AdminDoctorRegister />
         </tab>
       </tabs>
