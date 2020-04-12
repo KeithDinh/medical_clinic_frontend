@@ -31,7 +31,6 @@ const validateRecordForm = (apptId, height,weight,diagnoses,labTesting,treatment
    if (newPrescriptions!=0&&newPrescriptions!=1) {
     errors.push(new Error('newPrescriptions required'))
   }
-   console.log(errors)
   return errors
 }
 export const medicalRecords = {

@@ -1,7 +1,7 @@
 
 <template>
   <div class="container">
-    <form>
+    <form @submit.prevent="handleSubmit">
       <div class="row">
           <div class="col-30">
             <label >Created By</label>
