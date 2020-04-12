@@ -46,7 +46,6 @@ export default {
       'deleteAppointment'
     ]),
     CancelAppt: function (apptId) {
-      alert(apptId)
       this.deleteAppointment(apptId)
     }
   },
