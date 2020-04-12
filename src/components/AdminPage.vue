@@ -2,7 +2,6 @@
   <div id="admin">
     <div class="row container">
       <h2 class='dashboard_header'>Admin Dashboard</h2>
-
       <div >
       <Admin class="db1" />
       <tabs :options="{ useUrlFragment: false }" @clicked="tabClicked" @changed="tabChanged">
@@ -18,7 +17,7 @@
          <tab name="Offices">
           <AdminOffice />
         </tab>
-        <tab name="RegisterDoctor">
+        <tab name="Register Doctor">
           <AdminDoctorRegister />
         </tab>
       </tabs>
@@ -27,7 +26,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import Vue from 'vue';
 import { mapState, mapActions } from 'vuex'
@@ -36,8 +34,6 @@ import AdminPatient from './AdminPatient'
 import AdminDoctor from './AdminDoctor'
 import AdminAppointment from './AdminAppointment'
 import AdminOffice from './AdminOffice'
-import AdminDoctorRegister from './AdminDoctorRegister'
-
 import {Tabs, Tab} from 'vue-tabs-component';
 Vue.component('tabs', Tabs);
 Vue.component('tab', Tab);
@@ -53,7 +49,6 @@ export default {
     AdminDoctor,
     AdminAppointment,
     AdminOffice,
-    AdminDoctorRegister,
     Tabs,
     Tab
   },
