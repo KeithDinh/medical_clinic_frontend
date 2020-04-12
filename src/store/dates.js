@@ -31,6 +31,7 @@ const getTimeslots = (dt) => {
   var month = dt.getMonth() + 1
   var year = dt.getFullYear()
   var dts = dates['state']['datesList']
+  alert(year)
   var timeslots = []
   var ts = []
   var hour = 0
@@ -99,9 +100,11 @@ export const dates = {
           commit('datesSuccess', datesReturn)
           dispatch('alert/success', 'Dates Retreived', { root: true })
           commit('disabledRequest')
-          const disabledDatesReturn = getDisabledDates(datesReturn)
-          commit('disabledSuccess', disabledDatesReturn)
-          dispatch('alert/success', 'Disabled Loaded', { root: true })
+          getDisabledDates(datesReturn).then(
+            response => {
+              commit('disabledSuccess', response)
+              dispatch('alert/success', 'Disabled Loaded', { root: true })
+            })
         },
         error => {
           commit('datesFailure')
