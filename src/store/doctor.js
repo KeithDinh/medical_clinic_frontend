@@ -1,4 +1,4 @@
-import { doctorService } from '../services'
+import { doctorService, adminService } from '../services'
 import { router } from '../router'
 
 const initialState = {
@@ -204,5 +204,13 @@ export const doctor = {
           }
         )
     },
+    reloadDoctor (
+      { dispatch, commit }, doctor_id) {
+      adminService.getDoctor(doctor_id).then(
+        response => {
+          router.push('/doctor-dashboard')
+          return response
+        })
+    }
   }
 }

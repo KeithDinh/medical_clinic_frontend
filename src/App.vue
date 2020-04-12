@@ -27,7 +27,6 @@
             Admin
             <ul class="sub-menu">
               <li><a href="admin">Admin Dashboard</a></li>
-              <li><a href="doctor-register">Register Doctor</a></li>
             </ul>
           </li>
           <li><a to="office" href="office">Health Offices</a></li>
