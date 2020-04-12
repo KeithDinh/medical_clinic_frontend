@@ -172,13 +172,10 @@ export default {
   {
     register (e) {
       this.submitted = true
-      const { firstName, middleInit, lastName,phone, specialistId,
-      gender,email,password, passwordTwo, race,dob, street, city, state, zipcode, image  } = this
+      const { firstName, middleInit, lastName, phone, specialistId, gender, email, passwordOne, passwordTwo, race, dob, street, city, state, zipcode, image } = this
       const { dispatch } = this.$store
-      dispatch('authentication/registerDoctor', { firstName, middleInit, lastName,phone, specialistId,gender,email,
-      passwordOne, passwordTwo, race,dob, street, city, state, zipcode,image})
+      dispatch('authentication/registerDoctor', { firstName, middleInit, lastName, phone, specialistId, gender, email, passwordOne, passwordTwo, race, dob, street, city, state, zipcode, image })
     },
-
     ...mapActions('doctor', [
           'loadSpecializations'
     ]),

@@ -34,6 +34,7 @@ import AdminPatient from './AdminPatient'
 import AdminDoctor from './AdminDoctor'
 import AdminAppointment from './AdminAppointment'
 import AdminOffice from './AdminOffice'
+import AdminDoctorRegister from './AdminDoctorRegister'
 import {Tabs, Tab} from 'vue-tabs-component';
 Vue.component('tabs', Tabs);
 Vue.component('tab', Tab);
@@ -48,6 +49,7 @@ export default {
     AdminPatient,
     AdminDoctor,
     AdminAppointment,
+    AdminDoctorRegister,
     AdminOffice,
     Tabs,
     Tab

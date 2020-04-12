@@ -153,9 +153,8 @@ export const authentication = {
       state.status = {}
       state.localUser = null
     },
-    registerRequest (state, localUser) {
+    registerRequest (state) {
       state.status = { registering: true }
-      state.localUser = localUser
     },
     registerSuccess (state, localUser) {
       state.status = { loggedIn: true }
@@ -224,13 +223,12 @@ export const authentication = {
     register ({dispatch, commit}, { email, passwordOne, passwordTwo, firstName,
        middleInit, lastName, street, city, state, zipcode, phone, dob, gender, marital, race }) 
     {
-      commit('registerRequest', {email, passwordOne, passwordTwo, firstName, middleInit,
-         lastName, street, city, state, zipcode, phone, dob, gender, marital, race})
-
-      let errors = validateRegistration(firstName, middleInit, lastName,phone, specialistId,
-        gender,email,passwordOne, passwordTwo, race,dob, street, city, state, zipcode)
+      commit('registerRequest')
+      let errors = validateRegistration(email, passwordOne, passwordTwo, firstName, middleInit, 
+  lastName, street, city, state, zipcode, phone, dob, gender, marital, race)
 
       if (errors.length === 0) {
+        alert("no errors")
         userService.register(email, passwordOne, firstName, middleInit, lastName, street, 
           city, state, zipcode, phone, dob, gender, marital, race)
           .then(
@@ -254,25 +252,16 @@ export const authentication = {
         dispatch('alert/error', errors, { root: true })
       }
     },
-
-    registerDoctor ({dispatch, commit}, { firstName, middleInit, lastName,phone, specialistId,
-      gender,email,passwordOne, passwordTwo, race,dob, street, city, state, zipcode,image} ) {
-
-      commit('registerRequest', { firstName, middleInit, lastName,phone, specialistId,gender,
-        email,passwordOne, race,dob, street, city, state, zipcode,image})
-        alert("email " + email)
-      
-      let errors = validateDoctorRegistration({ firstName, middleInit, lastName,phone, specialistId,gender,email,
-        passwordOne, passwordTwo, race,dob, street, city, state, zipcode})
-        alert(errors)
+    registerDoctor ({ dispatch, commit }, { firstName, middleInit, lastName, phone, specialistId,
+      gender, email, passwordOne, passwordTwo, race, dob, street, city, state, zipcode, image }) {
+      commit('registerRequest')
+      let errors = validateDoctorRegistration(firstName, middleInit, lastName, phone, specialistId, gender, email,
+        passwordOne, passwordTwo, race, dob, street, city, state, zipcode)
       if (errors.length === 0) {
-
-        userService.registerDoctor({ firstName, middleInit, lastName,phone, specialistId,gender,email,passwordOne, 
-          race,dob, street, city, state, zipcode,image})
-
+        userService.registerDoctor(firstName, middleInit,lastName, phone, specialistId, gender, email, passwordOne, 
+          race, dob, street, city, state, zipcode, image)
           .then(
             localUser => {
-              alert("I am in register sucess")
               commit('registerSuccess', localUser)
               doctorService.getDoctor(localUser.doctor_id).then(
                 response => {
