@@ -2,7 +2,7 @@
 
     <div>
       <template v-for="profile in patients">
-        <div v-if="profile" style="display:inline-block; padding-top:30px;">
+        <div class="patientBlock" v-if="profile" style="display:inline-block; padding-top:30px;">
           <div class="col">
             <img class="profile-icon" src="https://image.flaticon.com/icons/svg/1077/1077012.svg" alt="">
           </div>
@@ -64,9 +64,15 @@ export default {
 }
 </script>
 <style media="screen">
+
+.patientBlock {
+  margin-left: 170px;
+}
+
 .patient-name{
   font-weight: bold;
   font-size: 20px;
+  margin-left: 40%;
 }
 .text{
   display:block;
@@ -77,6 +83,7 @@ export default {
 .align-left{
   float:left;
   padding:0 30px;
+  color: #063d77;
 
   }
 .align-right{

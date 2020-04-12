@@ -30,7 +30,7 @@
 </div>
   
 
-  <div class="rightsideofPage" style="margin-left: 75%;            margin-right: 30%; height: 20px; float: right;">
+  <div class="rightsideofPage">
     <br><br>
     <img class="doctorPic" :src="profile.image">
     <section class="NameSpecializationBackground" >
@@ -125,6 +125,13 @@ select{
   background: #0d75a6;
 }
 
+.rightsideofPage {
+  margin-left: 75%;
+  margin-right: 30%;
+  height: 20px;
+  float: right;
+}
+
 .NameSpecializationBackground {
   background: black;
   width: 300px;
@@ -140,7 +147,8 @@ select{
 .doctorPic {
   width: 200px;
   height: 200px;
-  margin: 0;
+  margin-left: 15%;
+  margin-right: 15%;
   border-radius: 20px;
 }
 

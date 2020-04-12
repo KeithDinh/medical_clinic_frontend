@@ -1,7 +1,7 @@
 <template>
     <div>
       <template v-for="profile in doctors">
-        <div v-if="profile" style="display:inline-block; padding-top:30px;">
+        <div class="doctorBlock" v-if="profile" style="display:inline-block; padding-top:30px;">
           <div class="col">
             <img class="profile-icon" src="https://image.flaticon.com/icons/svg/1077/1077012.svg" alt="">
           </div>
@@ -58,9 +58,15 @@ export default
 </script>
 
 <style media="screen">
+
+.doctorBlock {
+  margin-left: 170px;
+}
+
 .doctor-name{
   font-weight: bold;
   font-size: 20px;
+  margin-left: 40%;
 }
 .text{
   display:block;
@@ -75,7 +81,7 @@ export default
   }
 .align-right{
   float:right;
-  color:#898790;
+  color: black;
   padding:0 30px;
 }
 .profile-icon{
