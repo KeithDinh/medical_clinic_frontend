@@ -3,7 +3,7 @@
     <hr class="style1">
     <div style="position:relative;text-align: right;padding-right:10px"><button v-if="!isOpen" class="button-info round" v-on:click="addClicked()">Add New</button><button v-if="isOpen" class="button-info round" v-on:click="addClicked()">Close</button></div>
     <!--    TODO:Jon, please take a look at this. the value of isOpen changes when button is clicked, but the value of isOpen in the div doesn't change. My idea is showing the form here, instead of dashboard-->
-    <div class="prescription-form" v-if="isOpen"><NewPrescription /></div>
+    <div class="prescription-form" v-if="isOpen"><NewPrescription /> <hr class="style1" style="padding-bottom: 30px; margin-top:20px"></div>
     <div class="table-border-round">
     <table>
       <tr>
@@ -16,7 +16,9 @@
       <template v-for="rx in prescriptions">
         <tr>
           <td>{{ rx.first_name }} {{ rx.last_name }}</td>
-          <td>{{ rx.date_prescribed }}</td>
+          <td>{{ rx.date_prescribed | frontEndDateFormat}} <br>
+            <div class="subtitle1">{{rx.date_prescribed |frontEndTimeFormat}}</div>
+          </td>
            <td>{{ rx.medication_name }}</td>
           <td>{{ rx.dose_form_name }}</td>
           <td>{{ rx.dosage }}</td>
@@ -65,6 +67,21 @@ export default {
       } else {
         this.isOpen = true
       }
+    }
+  },
+  filters: {
+    frontEndTimeFormat(str) {
+      var dateobj = new Date(str);
+      var hours = ("0" + dateobj.getUTCHours()).slice(-2)
+      var minutes = ("0" + dateobj.getUTCMinutes()).slice(-2)
+      return hours + ":" + minutes;
+    },
+    frontEndDateFormat(str) {
+      var dateobj = new Date(str);
+      var date = dateobj.getUTCDate();
+      var month = dateobj.getUTCMonth();
+      var year = dateobj.getUTCFullYear();
+      return month + "/" + date + "/" + year;
     }
   }
 }
