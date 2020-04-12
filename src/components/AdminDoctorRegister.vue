@@ -4,13 +4,21 @@
       <div class="row form-ctn">
         <div class="row form-title">Register A Doctor</div>
         <div id="register-form" class="row forms">
+          <label>Email</label>
           <input type="text" v-model="email" id="email" name="email" placeholder="email">
+          <label>Password</label>
           <input type="password" v-model="passwordOne" id="passwordOne" name="passwordOne" placeholder="Password">
+          <label>Confirm Password</label>
           <input type="password" v-model="passwordTwo" id="passwordTwo" name="passwordTwo" placeholder="Confirm Password">
+          <label>First Name</label>
           <input type="text" v-model="firstName" id="firstName" name="firstName" placeholder="First Name">
+          <label>Middle Initial</label>
           <input type="text" v-model="middleInit" id="middle" name="middle" placeholder="Middle Initial">
+          <label>Last Name</label>
           <input type="text" v-model="lastName" id="lastName" name="lastName" placeholder="Last Name">
+          <label>Street Address</label>
           <input type="text" v-model="street" id="street" name="street" placeholder="Street Address">
+          <label>City</label>
           <input type="text" v-model="city" id="city" name="city" placeholder="City">
           <label>State</label>
           <select type="text" v-model="state" id="state" name="state">
@@ -21,19 +29,30 @@
               >{{ usState }}
             </option>
           </select>
-          
+          <label>Zipcode</label>
           <input type="text" v-model="zipcode" id="zipcode" name="zipcode" placeholder="Zipcode">
+          <label>Specialization</label>
           <select type="text" v-model="specialistId" id="specialistId" name="specialistId" placeholder="Specialization">
                   <option v-for="off in specialList" v-bind:value="off.specialist_id">{{ off.specialization_name }}</option>
             </select>
-          
+          <br>
+          <br>
+          <label>Phone</label>
           <VuePhoneNumberInput v-model="phone" id="phone" name="phone" placeholder="Phone"/>
+          <br>
+          <label>Date Of Birth</label>
           <datepicker v-model="dob" name="dob" placeholder="Date of birth" format="MM/dd/yyyy"></datepicker>
+          <label>Gender</label>
           <select type="text" v-model="gender" id="gender" name="gender" placeholder="Gender">
                   <option> M</option>
                   <option> F</option>
           </select>
+          <br>
+          <br>
+          <label>Profile Picture</label>
           <input type="text" v-model="image" id="image" name="image" placeholder="Image">
+          
+          <label>Race/Ethnicity</label>
           <select type="text" v-model="race" id="race" name="race" placeholder="Race / Ethnicity">
                   <option> White</option>
                   <option> African American</option>
@@ -43,7 +62,7 @@
                   <option>Native Hawaiian or Other Pacific Islander</option>
                   
             </select>
-          
+          <br><br>
           <button id="submit" v-on:click="register()">REGISTER</button>
         </div>
       </div>
@@ -152,15 +171,15 @@ export default {
   methods: {
     register (e) {
       this.submitted = true
-      const { firstName, middleInit, lastName,phone, specialistId,gender,email,password, race,dob, street, city, state, zipcode, image  } = this
+      const { firstName, middleInit, lastName,phone, specialistId,
+      gender,email,password, race,dob, street, city, state, zipcode, image  } = this
       const { dispatch } = this.$store
-      alert(dispatch)
-      dispatch('authentication/registerDoctor', { firstName, middleInit, lastName,phone, specialistId,gender,email,password, race,dob, street, city, state, zipcode, image })
+      dispatch('authentication/registerDoctor', { firstName, middleInit, lastName,
+      phone, specialistId,gender,email,password, race,dob, street, city, state, zipcode, image })
     },
     ...mapActions('doctor', [
           'loadSpecializations'
-    ])
-  
+    ]),
   }
 }
 </script>
