@@ -4,61 +4,46 @@
       <div v-if="profile" class="row form-ctn">
         <div class="row form-title">Update Profile</div>
         <div id="profile-form" class="row forms">
-          <input
-            type="text"
-            v-model="profile.firstName"
-            id="firstName"
-            name="firstName"
-            placeholder="First Name"
-          />
-          <input
-            type="text"
-            v-model="profile.lastName"
-            id="lastName"
-            name="lastName"
-            placeholder="Last Name"
-          />
-          <div class="test">{{ profile.lastName }}</div>
-          <input
-            type="text"
-            v-model="profile.street"
-            id="addressOne"
-            name="addressOne"
-            placeholder="Address 1"
-          />
-          <input
-            type="text"
-            v-model="profile.city"
-            id="city"
-            name="city"
-            placeholder="City"
-          />
+          <label class="inputs">First Name</label>
+          <input type="text" v-model="profile.firstName" id="firstName" name="firstName" placeholder="First Name"/>
+          <label class="inputs"> Middle Initial</label>
+          <input type="text" v-model="profile.middleInit" id="middleInit" name="middleInit" placeholder="middleInit"/>
+          <label class="inputs">Last Name</label>
+          <input type="text" v-model="profile.lastName" id="lastName" name="lastName" placeholder="Last Name"/>
+          <label class="inputs">Primary Doctor</label>
+          <input type="text" v-model="profile.primaryDoctor" id="primaryDoctor"
+            name="primaryDoctor" placeholder="primary doctor" disabled/>
+          <label class="inputs">Gender</label>
+          <input type="text" v-model="profile.gender" id="gender" name="gender" placeholder="gender"/>
+          <label class="inputs">Race</label>
+          <input type="text" v-model="profile.race" id="race" name="race" placeholder="race"/>
+          <label class="inputs">Date Of Birth</label>
+          <input type="text" v-model="profile.dob" id="date_of_birth" name="date_of_birth" placeholder="date_of_birth" disabled/>
+          <label class="inputs">Phone</label>
+          <VuePhoneNumberInput v-model="profile.phone" />
+          <label class="inputs">Street Address</label>
+          <input type="text" v-model="profile.street" id="addressOne" name="addressOne" placeholder="Address 1"/>
+          <label class="inputs">City</label>
+          <input type="text" v-model="profile.city" id="city" name="city" placeholder="City"/>
+          <label class="inputs">State</label>
           <select type="text" v-model="profile.state" id="state" name="state">
-            <option
-              v-for="(usState, index) in usStates"
-              :key="index"
-              :selected="profile.state === usState"
-              >{{ usState }}</option
-            >
+            <option v-for="(usState, index) in usStates" :key="index" :selected="profile.state === usState">{{ usState }}</option>
           </select>
-          <input
-            type="text"
-            v-model="profile.zipcode"
-            id="zipcode"
-            name="zipcode"
-            placeholder="Zipcode"
-          />
-          <button v-if="complete" id="submit" v-on:click="updateProfile()">UPDATE</button>
-          <button v-else id="submit" v-on:click="createProfile()">SUBMIT</button>
+          <label class="inputs">Zipcode</label>
+          <input type="text" v-model="profile.zipcode" id="zipcode" name="zipcode" placeholder="Zipcode"/>
+          <button v-on:click="updateProfile()">UPDATE</button>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-
+import Vue from 'vue';
+import VuePhoneNumberInput from 'vue-phone-number-input';
+import 'vue-phone-number-input/dist/vue-phone-number-input.css';
+ 
+Vue.component('vue-phone-number-input', VuePhoneNumberInput);
 import { mapState, mapActions } from 'vuex'
-
 export default {
   name: 'Profile',
   data () {
@@ -119,6 +104,9 @@ export default {
       submitted: false
     }
   },
+  components: {
+    VuePhoneNumberInput
+  },
   created () {
     // An Action Loaded in From mapActions
     this.loadProfile()
@@ -133,13 +121,6 @@ export default {
     ...mapActions('profile', [
       'loadProfile'// -> this.foo()
     ]),
-    createProfile (e) {
-      this.submitted = true
-      const {profile} = this
-      const { dispatch } = this.$store
-      // An Action Loaded in From mapActions
-      dispatch('profile/createProfile', profile)
-    },
     updateProfile (e) {
       this.submitted = true
       const {profile} = this

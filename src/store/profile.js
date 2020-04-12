@@ -109,19 +109,16 @@ export const profile = {
     createProfileFailure (state, submittedProfile) {
       state.profileStatus = { createProfileFailure: true }
     },
-    updateProfileRequest (state, submittedProfile) {
-      state.profileStatus = { updatingProfile: true }
-      state.userProfile = submittedProfile
+    updatePatientProfileRequest (state) {
+      state.ProfileStatus = { updatingProfile: true }
     },
-    updateProfileSuccess (state, returnedProfile) {
-      state.profileStatus = {
+    updatePatientProfileSuccess (state, returnedProfile) {
+      state.ProfileStatus = {
         updatedProfile: true,
-        profileComplete: checkComplete(profile)
       }
-      state.userProfile = returnedProfile
     },
-    updateProfileFailure (state) {
-      state.profileStatus = { updateProfileFailure: true }
+    updatePatientProfileFailure (state) {
+      state.ProfileStatus = { updateProfileFailure: true }
     },
     loadPatientIdRequest (state) {
       state.patientIdStatus = { loadingPatientId: true }
@@ -158,23 +155,26 @@ export const profile = {
       }
     },
     updateProfile ({ dispatch, commit }, profile) {
-      commit('updateProfileRequest', profile)
-      const validationErrors = validateProfile(profile)
-      if (validationErrors.length > 0) {
-        commit('updateProfileFailure')
-        dispatch('alert/error', validationErrors, { root: true })
-      } else {
-        profileService.putProfile(profile).then(
+      commit('updatePatientProfileRequest') 
+        profileService.updatePatientProfile(profile).then(
           response => {
-            commit('updateProfileSuccess', response.profile)
+            commit('updatePatientProfileSuccess')
             dispatch('alert/success', 'Profile Updated', { root: true })
+            commit('loadProfileRequest')
+            profileService.getDoctor(profile.patientId).then(
+              response => {
+                const patient = JSON.parse(localStorage.getItem('patient'))
+                patient.profile = response.profile
+                localStorage.setItem('patient', JSON.stringify(patient))
+                commit('loadingProfileSuccess ', response.profile)
+                dispatch('alert/success', 'patient Retreived', { root: true })
+              })
           },
           error => {
-            commit('updateProfileFailure')
+            commit('updateDoctorProfileFailure')
             dispatch('alert/error', error, { root: true })
           }
         )
-      }
     },
     reloadPatient (
       { dispatch, commit }, patient_id) {
