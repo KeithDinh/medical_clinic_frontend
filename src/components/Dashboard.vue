@@ -1,6 +1,7 @@
 <template>
       <div class="row">
         <h2 class='dashboard_header'>Dashboard</h2>
+        <NotificationMessage />
         <div class="db">
         <Profile class="db1" />
         <tabs :options="{ useUrlFragment: false }" @clicked="tabClicked" @changed="tabChanged">
@@ -29,6 +30,7 @@ import Profile from './Profile'
 import Appointments from './Appointments'
 import Prescriptions from './Prescriptions'
 import MedicalRecords from './MedicalRecords'
+import NotificationMessage from "./NotificationMessage";
 export default {
   name: 'Dashboard',
   components: {
@@ -36,6 +38,7 @@ export default {
     Appointments,
     Prescriptions,
     MedicalRecords,
+    NotificationMessage,
     Tabs,
     Tab
   },
