@@ -23,7 +23,13 @@
               <li><a href="update-doctor-profile">Update Profile</a></li>
             </ul>
           </li>
-          <li><a to="admin" href="admin">Admin</a></li>
+          <li class="menu-item-has-children">
+            Admin
+            <ul class="sub-menu">
+              <li><a href="admin">Admin Dashboard</a></li>
+              <li><a href="doctor-register">Register Doctor</a></li>
+            </ul>
+          </li>
           <li><a to="office" href="office">Health Offices</a></li>
         </ul>
         <div class="login-links">
