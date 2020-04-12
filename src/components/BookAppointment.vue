@@ -138,4 +138,8 @@ export default {
   .block1{width:25%;}
   .block2{width:75%;}
 
+.col-30 {
+  
+}
+
 </style>
