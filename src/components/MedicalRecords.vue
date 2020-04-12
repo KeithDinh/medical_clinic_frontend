@@ -13,6 +13,7 @@
           <th>Date</th>
           <th>Diagnoses</th>
           <th>Treatment</th>
+          <th>New Prescription</th>
           <th>Lab Test Required</th>
         </tr>
         <template v-for="record in records">
@@ -21,9 +22,10 @@
             <td>{{ record.actual_start_time | frontEndDateFormat}} <br>
               <div class="subtitle1">{{record.actual_start_time |frontEndTimeFormat}}</div>
             </td>
-            <td>{{ record.diagnoses }}</td>
-            <td>{{ record.treatment }}</td>
-            <td>{{ record.treatment }}</td>
+            <td style="font-size: 14px">{{ record.diagnoses }}</td>
+            <td style="font-size: 14px">{{ record.treatment }}</td>
+            <td>{{record.new_prescriptions | booleanFormat}}</td>
+            <td>{{ record.lab_testing | booleanFormat}}</td>
           </tr>
         </template>
       </table>
@@ -81,11 +83,19 @@ export default {
       var month = dateobj.getUTCMonth();
       var year = dateobj.getUTCFullYear();
       return month + "/" + date + "/" + year;
+    },
+    booleanFormat(str){
+      if(str=="0")
+        return "No"
+      else
+        return "Yes"
     }
-  }
+  },
+
 }
 
 
 </script>
 <style media="screen">
+
 </style>
