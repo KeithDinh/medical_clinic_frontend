@@ -82,7 +82,7 @@ export const offices = {
             .then(
               response => {
                 const localUser = JSON.parse(localStorage.getItem('localUser'))
-                localUser.offices = response
+                localUser.offices = response.offices
                 localStorage.setItem('localUser', JSON.stringify(localUser))
                 commit('officeSuccess', response.offices)
                 dispatch('alert/success', 'Offices Retreived', { root: true })

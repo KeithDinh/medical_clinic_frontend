@@ -32,7 +32,7 @@ function putOffice (updateOfficePayload) {
   let reqHeader = authorizationHeader()
   reqHeader['Content-Type'] = 'application/json'
   const requestOptions = {
-    method: 'PUT',
+    method: 'POST',
     headers: { 'Authorization': 'Bearer ' + userToken(), 'Content-Type': 'application/json' },
     body: JSON.stringify(updateOfficePayload)
   }

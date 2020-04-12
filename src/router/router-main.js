@@ -10,13 +10,14 @@ import UpdateProfile from '@/components/UpdateProfile'
 import Dashboard from '@/components/Dashboard'
 import SearchDoctor from '@/components/SearchDoctor'
 import DoctorProfile from '@/components/DoctorProfile'
-import DoctorDashboard from "../components/DoctorDashboard";
+import DoctorDashboard from "../components/DoctorDashboard"
 import BookAppointment from '@/components/BookAppointment'
 import NotFound from '@/components/NotFound'
 import AdminPage from '@/components/AdminPage'
 import Office from '@/components/Office'
-import DoctorPatients from "../components/DoctorPatients";
-import UpdateDoctorProfile from "../components/UpdateDoctorProfile";
+import AdminDoctorRegister from '@/components/AdminDoctorRegister'
+import DoctorPatients from '@/components/DoctorPatients'
+import UpdateDoctorProfile from '@/components/UpdateDoctorProfile'
 // Letting Vue Know To Use Router
 Vue.use(Router)
 
@@ -43,6 +44,11 @@ export const router = new Router({
       path: '/admin',
       name: 'AdminPage',
       component: AdminPage
+    },
+    {
+      path: '/doctor-register',
+      name: 'AdminDoctorRegister',
+      component: AdminDoctorRegister
     },
     {
       path: '/register',
@@ -105,7 +111,7 @@ router.beforeEach((to, from, next) => {
   var loggedIn = localStorage.getItem('localUser')
   if (to.path === '/dashboard' || to.path === '/update-profile' || to.path === '/appointment'
     || to.path === '/doctor-dashboard' || to.path === '/admin' || to.path==='/doctor-patients'
-    || to.path === '/update-doctor-profile') {
+    || to.path === '/update-doctor-profile' || to.path === '/doctor-register') {
     if (loggedIn) {
       next()
       return

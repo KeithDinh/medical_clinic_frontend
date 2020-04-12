@@ -1,5 +1,5 @@
 <template lang="html">
-  <form>
+  <form @submit.prevent="handleSubmit">
     <label for="office_name">Office Name</label><br>
     <input type="text" name="office_name" v-model="officeObject.office_name">
 
@@ -17,7 +17,7 @@
 
     <label for="office_zipcode">Zipcode</label><br>
     <input type="text" name="office_zipcode" v-model="officeObject.zipcode">
-    <button v-on:click="update()">Save</button>
+    <button v-on:click="update()" @click="disableModal">Save</button>
     <button @click="disableModal">Cancel</button>
   </form>
 </template>
@@ -43,14 +43,15 @@ export default {
  mounted() {
 },
 
-  methods: {
-    update: function() {
-      const { officeObject } = this
-      this.updateOffice(officeObject) 
-    },
-   ...mapActions('offices', [
-       'updateOffice'
-     ]),
+methods: {
+ ...mapActions('offices', [
+     'updateOffice'
+   ]),
+  update: function() {
+    const { officeObject } = this
+    this.updateOffice(officeObject)
+    disableModal
+  }
  }
 }
 </script>

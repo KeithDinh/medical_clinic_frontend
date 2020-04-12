@@ -22,7 +22,7 @@
           </td>
       </tr>
     </table>
-    <div v-if="isHidden" class="modal-container"><AdminOfficeUpdateModal :diableModal="disableModal" :officeObject="singleOffice" class="modal" /></div>
+    <div v-if="isHidden" class="modal-container"><AdminOfficeUpdateModal :disableModal="disableModal" :officeObject="singleOffice" class="modal" /></div>
 
  </div>
 </template>
