@@ -12,21 +12,22 @@
           <input type="text" v-model="lastName" id="lastName" name="lastName" placeholder="Last Name">
           <input type="text" v-model="street" id="street" name="street" placeholder="Street Address">
           <input type="text" v-model="city" id="city" name="city" placeholder="City">
+          <label>State</label>
           <select type="text" v-model="state" id="state" name="state">
-            <option
+            <option 
               v-for="(usState, index) in usStates"
               :key="index"
               :selected="state === usState"
               >{{ usState }}
             </option>
           </select>
-
+          
           <input type="text" v-model="zipcode" id="zipcode" name="zipcode" placeholder="Zipcode">
           <select type="text" v-model="specialistId" id="specialistId" name="specialistId" placeholder="Specialization">
                   <option v-for="off in specialList" v-bind:value="off.specialist_id">{{ off.specialization_name }}</option>
             </select>
           
-          <input type="text" v-model="phone" id="phone" name="phone" placeholder="Phone">
+          <VuePhoneNumberInput v-model="phone" id="phone" name="phone" placeholder="Phone"/>
           <datepicker v-model="dob" name="dob" placeholder="Date of birth" format="MM/dd/yyyy"></datepicker>
           <select type="text" v-model="gender" id="gender" name="gender" placeholder="Gender">
                   <option> M</option>
@@ -52,11 +53,15 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import Vue from 'vue';
+import VuePhoneNumberInput from 'vue-phone-number-input';
+import 'vue-phone-number-input/dist/vue-phone-number-input.css';
 import Datepicker from 'vuejs-datepicker'
+Vue.component('vue-phone-number-input', VuePhoneNumberInput);
 export default {
   name: 'AdminDoctorRegister',
   components: {
-    Datepicker
+    Datepicker,
+    VuePhoneNumberInput
   },
 
   data () {
@@ -149,11 +154,12 @@ export default {
       this.submitted = true
       const { firstName, middleInit, lastName,phone, specialistId,gender,email,password, race,dob, street, city, state, zipcode, image  } = this
       const { dispatch } = this.$store
+      alert(dispatch)
       dispatch('authentication/registerDoctor', { firstName, middleInit, lastName,phone, specialistId,gender,email,password, race,dob, street, city, state, zipcode, image })
     },
     ...mapActions('doctor', [
           'loadSpecializations'
-    ]),
+    ])
   
   }
 }
