@@ -8,7 +8,7 @@
           <div class="col">
              <div class="doctor-name">{{ profile.firstName }}  <span>{{ profile.middleInit }}</span> <span>{{ profile.lastName }}</span></div>
               <div class="col">
-              <div class="text"><p ><p class="align-left">MRN: </p><p class="align-right"> {{profile.doctor_id}}</p></div>
+              <div class="text"><p ><p class="align-left">MRN: </p><p class="align-right"> {{profile.doctorId}}</p></div>
               <div style="clear:both;"></div>
               <div class="text"><p class="align-left">Phone: </p><p class="align-right">{{ profile.phone }}</p></div>
               <div style="clear:both;"></div>
@@ -26,6 +26,7 @@
               <div style="clear:both;"></div>
               <div class="text"><p class="align-left"> </p><p class="align-right">{{profile.state}} {{profile.zipcode}}</p></div>
               <div style="clear:both;"></div>
+              <div class="row"><a href="#" v-on:click="doctor(profile.doctorId)">Edit Doctor</a></div>
               
           </div>
           </div>
@@ -52,7 +53,14 @@ export default
    methods: {
      ...mapActions('admin', [
        'loadAdminDoctors'
-     ])
+     ]),
+     ...mapActions('doctor', [
+      'reloadDoctor'
+    ]),
+    doctor(value) {
+      alert(value)
+      const res = this.reloadDoctor(value)
+    }
    }
 }
 </script>
