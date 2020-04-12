@@ -61,8 +61,8 @@ export const medicalRecords = {
     loadMedicalRecords (
       { dispatch, commit }) {
       commit('loadRecordsRequest')
-      const localUser = JSON.parse(localStorage.getItem('localUser'))
-      commit('loadRecordsSuccess', localUser.records)
+      const patient = JSON.parse(localStorage.getItem('patient'))
+      commit('loadRecordsSuccess', patient.records)
     },
 
     addRecord ({ dispatch, commit }, {apptId, patient, height, weight,diagnoses,labTesting, treatment,newPrescriptions, actualStartTime, actualEndTime}) {
