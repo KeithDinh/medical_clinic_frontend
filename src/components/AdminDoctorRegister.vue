@@ -5,7 +5,7 @@
         <div class="row form-title">Register A Doctor</div>
         <div id="register-form" class="row forms">
           <label>Email</label>
-          <input type="text" v-model="email" id="email" name="email" placeholder="email">
+          <input type="text" v-model="email" id="email" name="email" placeholder="email"> 
           <label>Password</label>
           <input type="password" v-model="passwordOne" id="passwordOne" name="passwordOne" placeholder="Password">
           <label>Confirm Password</label>
@@ -161,24 +161,29 @@ export default {
     this.loadSpecializations()
   },
   computed: {
-    registering () {
-      return this.$store.state.authentication.status.registering
-    },
+    // registering () {
+    //   return this.$store.state.authentication.status.registering
+    // },
     ...mapState('doctor', {
       specialList: state => state.specializationList
     }),
   },
-  methods: {
+  methods: 
+  {
     register (e) {
       this.submitted = true
       const { firstName, middleInit, lastName,phone, specialistId,
-      gender,email,password, race,dob, street, city, state, zipcode, image  } = this
+      gender,email,password, passwordTwo, race,dob, street, city, state, zipcode, image  } = this
       const { dispatch } = this.$store
-      dispatch('authentication/registerDoctor', { firstName, middleInit, lastName,
-      phone, specialistId,gender,email,password, race,dob, street, city, state, zipcode, image })
+      dispatch('authentication/registerDoctor', { firstName, middleInit, lastName,phone, specialistId,gender,email,
+      passwordOne, passwordTwo, race,dob, street, city, state, zipcode,image})
     },
+
     ...mapActions('doctor', [
           'loadSpecializations'
+    ]),
+    ...mapActions('authentication', [
+          'registerDoctor'
     ]),
   }
 }
