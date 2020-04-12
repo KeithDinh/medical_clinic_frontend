@@ -31,7 +31,6 @@ const validateRecordForm = (apptId, height,weight,diagnoses,labTesting,treatment
    if (newPrescriptions!=0&&newPrescriptions!=1) {
     errors.push(new Error('newPrescriptions required'))
   }
-   console.log(errors)
   return errors
 }
 export const medicalRecords = {
@@ -70,7 +69,7 @@ export const medicalRecords = {
       commit('addRecordRequest')
       let errors = validateRecordForm(apptId, height,weight,diagnoses,labTesting,treatment, newPrescriptions)
       if (errors.length === 0) {
-        alert("call put record")
+        confirm("add new medical record")
         recordsService.putRecord(apptId, patient.patientId, height, weight,diagnoses,labTesting, treatment, newPrescriptions, actualStartTime, actualEndTime)
           .then(
             response => {
@@ -79,7 +78,6 @@ export const medicalRecords = {
       }
       else{
         alert("Missing Fields")
-        console.log(errors)
       }
     }
   }
