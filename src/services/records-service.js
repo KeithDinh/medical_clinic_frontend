@@ -18,7 +18,6 @@ function getMedicalRecords () {
 }
 
 function putRecord (apptId, patientId, height, weight,diagnoses,labTesting, treatment,newPrescriptions, actualStartTime, actualEndTime) {
-  alert("start to send request")
   let reqHeader = authorizationHeader()
   reqHeader['Content-Type'] = 'application/json'
   const requestOptions = {

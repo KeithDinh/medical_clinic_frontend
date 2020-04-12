@@ -69,7 +69,7 @@ export const medicalRecords = {
       commit('addRecordRequest')
       let errors = validateRecordForm(apptId, height,weight,diagnoses,labTesting,treatment, newPrescriptions)
       if (errors.length === 0) {
-        alert("call put record")
+        confirm("add new medical record")
         recordsService.putRecord(apptId, patient.patientId, height, weight,diagnoses,labTesting, treatment, newPrescriptions, actualStartTime, actualEndTime)
           .then(
             response => {
@@ -78,7 +78,6 @@ export const medicalRecords = {
       }
       else{
         alert("Missing Fields")
-        console.log(errors)
       }
     }
   }
