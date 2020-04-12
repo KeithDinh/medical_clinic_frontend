@@ -1,5 +1,5 @@
 <template lang="html">
-  <form class="" action="" >
+  <form>
     <label for="office_name">Office Name</label><br>
     <input type="text" name="office_name" v-model="officeObject.office_name">
 
@@ -17,7 +17,7 @@
 
     <label for="office_zipcode">Zipcode</label><br>
     <input type="text" name="office_zipcode" v-model="officeObject.zipcode">
-    <button v-on:click="update(officeObject)">Save</button>
+    <button v-on:click="update()">Save</button>
     <button @click="disableModal">Cancel</button>
   </form>
 </template>
@@ -28,12 +28,12 @@ export default {
   name: 'AdminOfficeUpdateModal',
   data(){
     return{
-      officeObject: this.officeObject,
+      officeObject: {},
     }
   },
   props: {
     officeObject: Object,
-    diableModal: Function
+    disableModal: Function
   },
  created () {
  },
@@ -43,9 +43,10 @@ export default {
  mounted() {
 },
 
- methods: {
-   update: function(value) {
-      this.updateOffice(value) 
+  methods: {
+    update: function() {
+      const { officeObject } = this
+      this.updateOffice(officeObject) 
     },
    ...mapActions('offices', [
        'updateOffice'
