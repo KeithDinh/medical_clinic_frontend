@@ -73,9 +73,10 @@ export default {
   margin-right: 0;
   list-style: none;
   border-radius:25px;
+  border: 2px;
 }
 .tabs-component-tab.is-active {
-  border: 2px solid #00c7db;
+    border: 2px #00c7db;
   transition-duration: 0.4s;
   background-color: #00c7db;
   color:#fff;
@@ -86,7 +87,7 @@ export default {
   align-items: center;
   color: inherit;
   display: flex;
-  padding: 0.4em 1em;
+  padding: 0.4em 1.5em;
   text-decoration: none;
     border-radius:25px
 }
