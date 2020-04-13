@@ -51,7 +51,7 @@
                 <th>Date and Time</th>
                 <th>Reason for Visit</th>
               </tr>
-              <template v-for="appt in allAppointmentsList.pastAppointments[0]">
+              <template v-for="appt in allAppointmentsList.pastAppointments">
                 <tr>
                    <td style="text-align: left">{{ appt.patient}}<br><div class="subtitle1">MRN: {{appt.patient_id}}</div></td>
                   <td>{{ appt.office}}</td>
@@ -79,7 +79,6 @@ export default {
 
   name: 'DoctorAppointments',
   created () {
-    allAppointmentsList:[],
     this.loadDoctorAppointments()
   },
   computed: {
@@ -92,7 +91,7 @@ export default {
       'loadDoctorAppointments',
        'editPatient'
     ]),
-        ...mapActions('profile', [
+    ...mapActions('profile', [
       'reloadPatient'
     ]),
     patient(value) {
