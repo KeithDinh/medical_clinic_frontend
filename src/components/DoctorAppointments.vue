@@ -1,9 +1,9 @@
 <template>
   <div class="db-col2">
     <tabs :options="{ useUrlFragment: false }" @clicked="tabClicked" @changed="tabChanged">
-          <tab name="Today" class="table-border-round">
-            TODAY
-             <table >
+          <tab name="Today" class="table-border-round" >
+
+             <table>
               <tr>
                 <th>Patient Name</th>
                 <th>Office Name</th>
@@ -17,7 +17,7 @@
                   <td>{{ appt.appt_start_time | frontEndDateFormat}} <br>
                       <div class="text-info subtitle1">{{appt.appt_start_time |frontEndTimeFormat}}</div></td>
                   <td>{{ appt.reason_for_visit}}</td>
-                  <td><div style="position:relative;text-align: right"><button class="button-info round" style="font-size: 12px" v-on:click="patient(appt.patient_id)" >View</button></div></td>
+                  <td><div style="position:relative;text-align: right"><button class="button-info round btn-small" style="font-size: 12px" v-on:click="patient(appt.patient_id)" >View</button></div></td>
                 </tr>
               </template>
             </table>
@@ -38,7 +38,7 @@
                   <td>{{ appt.appt_start_time | frontEndDateFormat}} <br>
                     <div class="text-info subtitle1">{{appt.appt_start_time |frontEndTimeFormat}}</div></td>
                   <td>{{ appt.reason_for_visit}}</td>
-                  <td><div style="position:relative;text-align: right"><button class="button-info round" style="font-size: 12px" v-on:click="patient(appt.patient_id)" >View</button></div></td>
+                  <td><div style="position:relative;text-align: right"><button class="button-info round btn-small" style="font-size: 12px" v-on:click="patient(appt.patient_id)" >View</button></div></td>
                 </tr>
               </template>
             </table>
@@ -51,14 +51,14 @@
                 <th>Date and Time</th>
                 <th>Reason for Visit</th>
               </tr>
-              <template v-for="appt in allAppointmentsList.pastAppointments[0]">
+              <template v-for="appt in allAppointmentsList.pastAppointments">
                 <tr>
                    <td style="text-align: left">{{ appt.patient}}<br><div class="subtitle1">MRN: {{appt.patient_id}}</div></td>
                   <td>{{ appt.office}}</td>
                   <td>{{ appt.appt_start_time | frontEndDateFormat}} <br>
                     <div class="text-info subtitle1">{{appt.appt_start_time | frontEndTimeFormat}}</div></td>
                   <td>{{ appt.reason_for_visit}}</td>
-                  <td><div style="position:relative;text-align: right"><button class="button-info round" style="font-size: 12px" v-on:click="patient(appt.patient_id)" >View</button></div></td>
+                  <td><div style="position:relative;text-align: right"><button class="button-info round btn-small" style="font-size: 12px" v-on:click="patient(appt.patient_id)" >View</button></div></td>
                 </tr>
               </template>
             </table>
@@ -79,7 +79,10 @@
                   <td>{{ appt.office}}</td>
                   <td>{{appt.doctor}}</td>
                   <td>{{ appt.reason_for_visit}}</td>
-                  <td><div style="position:relative;text-align: right"><button class="button-info round" style="font-size: 12px" v-on:click="patient(appt.patient_id)" >Approve</button></div></td>
+                  <td><div style="position:relative;text-align: right">
+                    <button class="button-info round btn-small" style="font-size: 12px" v-if="needApprove" v-on:click="approve(appt.appt_id)">Approve</button>
+                     <div class="button-approved round btn-small" style="font-size: 12px" v-if="!needApprove">Approved</div>
+                  </div></td>
                 </tr>
               </template>
             </table>
@@ -102,6 +105,11 @@ export default {
   created () {
     this.loadDoctorAppointments()
   },
+  data: function () {
+    return {
+      needApprove: true
+    }
+  },
   computed: {
     ...mapState('doctor', {
       allAppointmentsList: state => state.doctorAppointmentsList
@@ -117,7 +125,13 @@ export default {
     ]),
     patient(value) {
       const res = this.reloadPatient(value)
-    }
+    },
+    approve(appt_id){
+      if (this.needApprove) {
+        this.needApprove = false
+      }
+    // TODO: send request, the update the doctor profile.
+    },
   },
   filters: {
     frontEndTimeFormat(str) {
@@ -141,5 +155,38 @@ export default {
 td{
   padding:15px;
 }
+/* TABS*/
+.tabs-component-tabs {
+  border-radius: 25px;
+}
+.tabs-component-tab {
+  color: #999;
+  font-size: 13px;
+  font-weight: 600;
+  margin-right: 0;
+  list-style: none;
+  border-radius:25px;
+  border: 2px;
+}
+.tabs-component-tab.is-active {
+  border: 2px #00c7db;
+  transition-duration: 0.4s;
+  background-color: #00c7db;
+  color:#fff;
+  /*z-index: 2;*/
+  /*transform: translateY(0);*/
+}
+  .tabs-component-tab-a {
+  align-items: center;
+  color: inherit;
+  display: flex;
+  padding: 0.4em 1.5em;
+  text-decoration: none;
+    border-radius:25px
+}
+  .tabs-component-panels {
+  padding: 4em 0;
+}
+
 
 </style>
