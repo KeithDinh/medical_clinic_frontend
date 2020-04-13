@@ -10,7 +10,8 @@ export const doctorService = {
   getDoctorsByOffice,
   updateDoctorProfile,
   getSpecialization,
-  postDoctor
+  postDoctor,
+  getDoctorForAppointment
 }
 
 function postDoctor (profile) {
@@ -82,5 +83,14 @@ function updateDoctorProfile (updateDoctorPayload) {
     body: JSON.stringify(updateDoctorPayload)
   }
   return fetch(`${config.apiUrl}/doctor/updatedoctor`, requestOptions)
+    .then(handleResponse)
+}
+
+function getDoctorForAppointment () {
+  const requestOptions = {
+    method: 'GET',
+    headers: authorizationHeader()
+  }
+  return fetch(`${config.apiUrl}/appointment/doctor/list`, requestOptions)
     .then(handleResponse)
 }

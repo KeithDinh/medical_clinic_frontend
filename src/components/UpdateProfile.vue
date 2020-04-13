@@ -11,8 +11,8 @@
           <label class="inputs">Last Name</label>
           <input type="text" v-model="profile.lastName" id="lastName" name="lastName" placeholder="Last Name"/>
           <label class="inputs">Primary Doctor</label>
-          <input type="text" v-model="profile.primaryDoctor" id="primaryDoctor"
-            name="primaryDoctor" placeholder="primary doctor" disabled/>
+          <input type="text" v-model="profile.primaryDoctor.primary_doctor" id="primaryDoctor"
+          name="primaryDoctor" placeholder="primary doctor" disabled/>
           <label class="inputs">Gender</label>
           <input type="text" v-model="profile.gender" id="gender" name="gender" placeholder="gender"/>
           <label class="inputs">Race</label>

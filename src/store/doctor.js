@@ -143,6 +143,22 @@ export const doctor = {
           }
         )
     },
+    loadDoctorAppointment (
+      { dispatch, commit }) {
+      commit('doctorsRequest')
+      doctorService.getDoctorForAppointment()
+        .then(
+          response => {
+            const doctors = response.doctors
+            commit('doctorsSuccess', doctors)
+            dispatch('alert/success', 'doctors Retreived', { root: true })
+          },
+          error => {
+            commit('doctorsFailure')
+            dispatch('alert/error', error, { root: true })
+          }
+        )
+    },
     loadDoctorsByOffice (
       { dispatch, commit }, office_id ) {
       commit('doctorsRequest')
