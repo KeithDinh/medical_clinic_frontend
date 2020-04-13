@@ -97,14 +97,12 @@ export const dates = {
       .then(
         response => {
           const datesReturn = response.dates
+          const disDates = getDisabledDates(datesReturn)
           commit('datesSuccess', datesReturn)
           dispatch('alert/success', 'Dates Retreived', { root: true })
           commit('disabledRequest')
-          getDisabledDates(datesReturn).then(
-            response => {
-              commit('disabledSuccess', response)
-              dispatch('alert/success', 'Disabled Loaded', { root: true })
-            })
+          commit('disabledSuccess', disDates)
+          dispatch('alert/success', 'Disabled Loaded', { root: true })      
         },
         error => {
           commit('datesFailure')
