@@ -566,6 +566,17 @@ table{
   background-color: #4CAF50; /* Green */
   color: white;
 }
+.button-approved{
+  border: 2px solid #00c7db;
+  transition-duration: 0.4s;
+  padding: 8px 15px;
+  font-size: 14px;
+  background-color: white;
+  font-weight: bold;
+  margin:10px;
+}
+
+
 
 #profile {text-align:center;}
 
@@ -580,7 +591,6 @@ table{
   h1 {
     font-size: 30px;
   }
-
   .history-items li.quote-ctn {
     width: 50%;
   }

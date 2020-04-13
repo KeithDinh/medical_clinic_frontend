@@ -51,7 +51,7 @@
                 <th>Date and Time</th>
                 <th>Reason for Visit</th>
               </tr>
-              <template v-for="appt in allAppointmentsList.pastAppointments[0]">
+              <template v-for="appt in allAppointmentsList.pastAppointments">
                 <tr>
                    <td style="text-align: left">{{ appt.patient}}<br><div class="subtitle1">MRN: {{appt.patient_id}}</div></td>
                   <td>{{ appt.office}}</td>
@@ -79,7 +79,10 @@
                   <td>{{ appt.office}}</td>
                   <td>{{appt.doctor}}</td>
                   <td>{{ appt.reason_for_visit}}</td>
-                  <td><div style="position:relative;text-align: right"><button class="button-info round" style="font-size: 12px" v-on:click="patient(appt.patient_id)" >Approve</button></div></td>
+                  <td><div style="position:relative;text-align: right">
+                    <button class="button-info round" style="font-size: 12px" v-if="needApprove" v-on:click="approve(appt.appt_id)">Approve</button>
+                     <div class="button-approved round" style="font-size: 12px" v-if="!needApprove">Approved</div>
+                  </div></td>
                 </tr>
               </template>
             </table>
@@ -102,6 +105,11 @@ export default {
   created () {
     this.loadDoctorAppointments()
   },
+  data: function () {
+    return {
+      needApprove: true
+    }
+  },
   computed: {
     ...mapState('doctor', {
       allAppointmentsList: state => state.doctorAppointmentsList
@@ -117,7 +125,13 @@ export default {
     ]),
     patient(value) {
       const res = this.reloadPatient(value)
-    }
+    },
+    approve(appt_id){
+      if (this.needApprove) {
+        this.needApprove = false
+      }
+    // TODO: send request, the update the doctor profile.
+    },
   },
   filters: {
     frontEndTimeFormat(str) {
