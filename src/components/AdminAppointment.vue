@@ -1,6 +1,6 @@
 <template>
  <div id="">
-    <table>
+    <table class="table">
       <tr>
         <th>Patient</th>
         <th>Doctor</th>
@@ -28,7 +28,7 @@
         <td>{{appt.booking_method}}</td>
       </tr>
     </table>
-
+    <div><br></div>
  </div>
 </template>
 <script>
@@ -67,4 +67,7 @@ td {
 tr:nth-child(even){
 background-color: #f2f2f2
 }
+
+
+
 </style>
