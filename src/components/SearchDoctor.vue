@@ -1,6 +1,6 @@
 <template>
 
-<div>
+<div class="BG">
   <div class="leftsideofPage" style="width: 100%; height: 100px;    float: left;">
     <div class="row">
       <div class="row form">
@@ -151,6 +151,8 @@ select{
   margin-right: 15%;
   border-radius: 20px;
 }
+
+
 
 footer {
   background: #0d75a6;

@@ -23,8 +23,9 @@
       </tr>
     </table>
     <div v-if="isHidden" class="modal-container"><AdminOfficeUpdateModal :disableModal="disableModal" :officeObject="singleOffice" class="modal" /></div>
-
+    <br>
  </div>
+
 </template>
 <script>
 
@@ -65,6 +66,16 @@ export default {
 }
 </script>
 <style media="screen">
+
+
+th {
+  padding: 10px;
+}
+
+td {
+  padding: 10px;
+}
+
 .modal-container{
   background-color:rgba(0,0,0,0.2);
   position: fixed;
