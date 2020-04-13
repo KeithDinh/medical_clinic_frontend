@@ -17,7 +17,7 @@
                   <td>{{ appt.appt_start_time | frontEndDateFormat}} <br>
                       <div class="text-info subtitle1">{{appt.appt_start_time |frontEndTimeFormat}}</div></td>
                   <td>{{ appt.reason_for_visit}}</td>
-                  <td><div style="position:relative;text-align: right"><button class="button-info round" style="font-size: 12px" v-on:click="patient(appt.patient_id)" >View</button></div></td>
+                  <td><div style="position:relative;text-align: right"><button class="button-info round btn-small" style="font-size: 12px" v-on:click="patient(appt.patient_id)" >View</button></div></td>
                 </tr>
               </template>
             </table>
@@ -38,7 +38,7 @@
                   <td>{{ appt.appt_start_time | frontEndDateFormat}} <br>
                     <div class="text-info subtitle1">{{appt.appt_start_time |frontEndTimeFormat}}</div></td>
                   <td>{{ appt.reason_for_visit}}</td>
-                  <td><div style="position:relative;text-align: right"><button class="button-info round" style="font-size: 12px" v-on:click="patient(appt.patient_id)" >View</button></div></td>
+                  <td><div style="position:relative;text-align: right"><button class="button-info round btn-small" style="font-size: 12px" v-on:click="patient(appt.patient_id)" >View</button></div></td>
                 </tr>
               </template>
             </table>
@@ -58,7 +58,7 @@
                   <td>{{ appt.appt_start_time | frontEndDateFormat}} <br>
                     <div class="text-info subtitle1">{{appt.appt_start_time | frontEndTimeFormat}}</div></td>
                   <td>{{ appt.reason_for_visit}}</td>
-                  <td><div style="position:relative;text-align: right"><button class="button-info round" style="font-size: 12px" v-on:click="patient(appt.patient_id)" >View</button></div></td>
+                  <td><div style="position:relative;text-align: right"><button class="button-info round btn-small" style="font-size: 12px" v-on:click="patient(appt.patient_id)" >View</button></div></td>
                 </tr>
               </template>
             </table>
@@ -80,8 +80,8 @@
                   <td>{{appt.doctor}}</td>
                   <td>{{ appt.reason_for_visit}}</td>
                   <td><div style="position:relative;text-align: right">
-                    <button class="button-info round" style="font-size: 12px" v-if="needApprove" v-on:click="approve(appt.appt_id)">Approve</button>
-                     <div class="button-approved round" style="font-size: 12px" v-if="!needApprove">Approved</div>
+                    <button class="button-info round btn-small" style="font-size: 12px" v-if="needApprove" v-on:click="approve(appt.appt_id)">Approve</button>
+                     <div class="button-approved round btn-small" style="font-size: 12px" v-if="!needApprove">Approved</div>
                   </div></td>
                 </tr>
               </template>

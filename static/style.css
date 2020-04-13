@@ -556,11 +556,17 @@ table{
 .button-info {
   border: 2px solid #4CAF50;
   transition-duration: 0.4s;
-  padding: 8px 20px;
-  font-size: 14px;
   background-color: white;
   font-weight: bold;
   margin:10px;
+}
+.btn-small{
+  font-size:12px;
+  padding:5px 15px
+}
+.btn-medium{
+  font-size:14px;
+  padding:8px 20px;
 }
 .button-info:hover {
   background-color: #4CAF50; /* Green */
@@ -569,8 +575,6 @@ table{
 .button-approved{
   border: 2px solid #00c7db;
   transition-duration: 0.4s;
-  padding: 8px 15px;
-  font-size: 14px;
   background-color: white;
   font-weight: bold;
   margin:10px;
