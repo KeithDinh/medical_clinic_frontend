@@ -1,9 +1,9 @@
 <template>
   <div class="db-col2">
     <tabs :options="{ useUrlFragment: false }" @clicked="tabClicked" @changed="tabChanged">
-          <tab name="Today" class="table-border-round">
-            TODAY
-             <table >
+          <tab name="Today" class="table-border-round" >
+
+             <table>
               <tr>
                 <th>Patient Name</th>
                 <th>Office Name</th>
@@ -155,5 +155,37 @@ export default {
 td{
   padding:15px;
 }
+/* TABS*/
+.tabs-component-tabs {
+  border-radius: 25px;
+}
+.tabs-component-tab {
+  color: #999;
+  font-size: 13px;
+  font-weight: 600;
+  margin-right: 0;
+  list-style: none;
+  border-radius:25px;
+}
+.tabs-component-tab.is-active {
+  border: 2px solid #00c7db;
+  transition-duration: 0.4s;
+  background-color: #00c7db;
+  color:#fff;
+  /*z-index: 2;*/
+  /*transform: translateY(0);*/
+}
+  .tabs-component-tab-a {
+  align-items: center;
+  color: inherit;
+  display: flex;
+  padding: 0.4em 1em;
+  text-decoration: none;
+    border-radius:25px
+}
+  .tabs-component-panels {
+  padding: 4em 0;
+}
+
 
 </style>
