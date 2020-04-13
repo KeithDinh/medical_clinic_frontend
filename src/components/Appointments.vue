@@ -16,7 +16,7 @@
           <td>{{ appt.booking_date | frontEndDateFormat}} <br>
              <div class="subtitle1">{{appt.booking_date |frontEndTimeFormat}}</div></td>
           <td>{{ appt.appt_status }}</td>
-          <td v-if= "appt.appt_status === 'pending'"><button v-on:click="CancelAppt(appt.appt_id)" >Cancel Appointment</button></td>
+          <td v-if= "appt.appt_status === 'pending'"><button class="button" v-on:click="CancelAppt(appt.appt_id)" >Cancel </button></td>
         </tr>
       </template>
       <tr>
@@ -69,5 +69,29 @@ export default {
 
 </script>
 <style media="screen">
+
+.button {
+  background-color: #f91d1d;
+  color: white;
+  transition: 0.3s;
+  opacity: 0.7;
+  padding: 5px 10px;
+  border-radius: 15px;
+
+}
+
+.button:hover {
+background-color: red;
+opacity: 1
+}
+
+.subtitle1 {
+  color: #009EFB;
+}
+
+th {
+  background-color: #0d75a6;
+  color: white;
+}
 
 </style>
