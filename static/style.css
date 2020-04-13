@@ -336,11 +336,13 @@ header ul.nav-links .sub-menu {
   width: 230px;
   text-align: left;
   padding: 10px;
-  border: 1px solid;
+  border: 0.1px solid #ddd;
   z-index: 2;
   line-height: 20px;
   background: #fff;
+  border-radius:5px;
 }
+
 
 header ul.nav-links .sub-menu li {
   display: inline-block;
@@ -350,6 +352,10 @@ header ul.nav-links .sub-menu li {
 
 header ul.nav-links .sub-menu li a {}
 
+header ul.nav-links .sub-menu li a:hover{
+  padding-left:20px;
+   transition-duration: 0.2s;;
+}
 header .breadcrumbs {
   text-align: left;
   background: #10b2ff;
@@ -599,4 +605,5 @@ table{
     width: 50%;
   }
 }
+
 

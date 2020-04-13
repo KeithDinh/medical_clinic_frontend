@@ -9,9 +9,12 @@
           <li class="menu-item-has-children">
             Patients
             <ul class="sub-menu">
-              <li><a href="search-doctor">Search Doctor</a></li>
+              <li><a href="search-doctor">Search Doctor</a> </li>
+              <hr class="style1">
               <li><a href="appointment">Book Appointment</a></li>
+              <hr class="style1">
               <li><a href="dashboard">Patient Dashboard</a></li>
+              <hr class="style1">
               <li><a href="update-profile">Update Profile</a></li>
             </ul>
           </li>
@@ -19,7 +22,9 @@
             Doctors
             <ul class="sub-menu">
               <li><a href="doctor-dashboard">Doctor Dashboard</a></li>
+               <hr class="style1">
               <li><a href="doctor-patients">Patients List</a></li>
+               <hr class="style1">
               <li><a href="update-doctor-profile">Update Profile</a></li>
             </ul>
           </li>
