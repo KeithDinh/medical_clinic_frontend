@@ -12,10 +12,11 @@
               <div style="clear:both;"></div>
               <div class="text"><p class="align-left">Phone: </p><p class="align-right">{{ profile.phone }}</p></div>
               <div style="clear:both;"></div>
-              <div class="text"><p class="align-left">Specialization: </p><p class="align-right">{{ profile.specializationName }}</p></div>
+              <br>
+              <div class="text"><p class="align-left">Specialization: </p><br><p class="align-right">{{ profile.specializationName }}</p></div>
               <div style="clear:both;"></div>
           </div>
-          <div class="col">
+          <div class="col" style="margin: 10px;">
               <div class="text"><p class="align-left">DOB </p><p class="align-right">{{ profile.dob }}</p></div>
               <div style="clear:both;"></div>
               <div class="text"><p class="align-left">Gender: </p><p class="align-right">{{ profile.gender }}</p></div>
@@ -26,7 +27,8 @@
               <div style="clear:both;"></div>
               <div class="text"><p class="align-left"> </p><p class="align-right">{{profile.state}} {{profile.zipcode}}</p></div>
               <div style="clear:both;"></div>
-              <div class="row"><a href="#" v-on:click="doctor(profile.doctorId)">Edit Doctor</a></div>
+              <br>
+              <div class="editDoctor"><a href="#" v-on:click="doctor(profile.doctorId)">Edit Doctor</a></div>
               
           </div>
           </div>
@@ -71,6 +73,22 @@ export default
   margin-left: 170px;
 }
 
+.editDoctor {
+  text-align: center;
+  float: left;
+  background-color: #00c7db;
+  color: white;
+  transition: 0.3s;
+  opacity: 0.7;
+  padding: 5px 10px;
+  border-radius: 15px;
+}
+
+.editDoctor:hover {
+background-color: #00c7db;
+opacity: 1
+}
+
 .doctor-name{
   font-weight: bold;
   font-size: 20px;
@@ -91,6 +109,7 @@ export default
   float:right;
   color: black;
   padding:0 30px;
+  margin: 3px;
 }
 .profile-icon{
   padding:10px;
