@@ -85,6 +85,16 @@ export const doctor = {
     },
     specializationFailure (state) {
       state.specializationStatus = { specializationFailure: true }
+    },
+    approveApptRequest (state) {
+      state.doctorApptStatus = { approvingAppt: true }
+    },
+    approveApptSuccess (state,appts){
+      state.doctorApptStatus = { approvingAppt: true }
+      state.doctorAppointmentsList = appts
+    },
+    approveApptFailure(state) {
+      state.doctorApptStatus = { approvingApptFailure: true }
     }
   },
   actions: {
@@ -199,7 +209,7 @@ export const doctor = {
       dispatch('alert/success', 'medications Retreived', { root: true })
     },
     updateProfile ({ dispatch, commit }, doctorProfile) {
-      commit('updateDoctorProfileRequest') 
+      commit('updateDoctorProfileRequest')
         doctorService.updateDoctorProfile(doctorProfile).then(
           response => {
             commit('updateDoctorProfileSuccess')
@@ -243,6 +253,32 @@ export const doctor = {
           router.push('/doctor-dashboard')
           return response
         })
+    },
+    approveAppt (
+      { dispatch, commit},appt_id){
+       commit('approveApptRequest')
+        doctorService.approveSpecialistAppt(appt_id).then(
+          response => {
+            commit('approveApptSuccess')
+            dispatch('alert/success', 'approve appt success', { root: true })
+            commit('doctorProfileRequest')
+             const localUser = JSON.parse(localStorage.getItem('localUser'))
+            alert(localUser.doctor_id)
+           doctorService.getDoctorData(localUser.doctor_id).then(
+              response => {
+                const doctor = JSON.parse(localStorage.getItem('doctor'))
+                doctor.profile = response.profile
+                localStorage.setItem('doctor', JSON.stringify(doctor))
+                console.log(JSON.stringify(doctor))
+                commit('doctorProfileSuccess', response.profile)
+                dispatch('alert/success', 'doctor Retreived', { root: true })
+              })
+          },
+          error => {
+            commit('approveApptFailure')
+            dispatch('alert/error', error, { root: true })
+          }
+        )
     }
   }
 }
