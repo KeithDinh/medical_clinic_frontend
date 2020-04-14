@@ -109,10 +109,11 @@ function getDoctorForAppointment () {
 function approveSpecialistAppt (appt_id) {
   let reqHeader = authorizationHeader()
   reqHeader['Content-Type'] = 'application/json'
+  alert(appt_id)
   const requestOptions = {
     method: 'PUT',
     headers: reqHeader,
-    body: JSON.stringify(appt_id)
+    body: JSON.stringify({appt_id})
   }
   return fetch(`${config.apiUrl}/doctor/approveappt`, requestOptions)
     .then(handleResponse)
