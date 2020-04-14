@@ -244,7 +244,7 @@ export const doctor = {
         doctorService.approveSpecialistAppt(appt_id).then(
           response => {
             commit('approveApptSuccess')
-            dispatch('alert/success', 'Profile Updated', { root: true })
+            dispatch('alert/success', 'approve appt success', { root: true })
             commit('doctorProfileRequest')
              const localUser = JSON.parse(localStorage.getItem('localUser'))
             doctorService.getDoctor(localUser.doctor_id).then(
@@ -257,7 +257,7 @@ export const doctor = {
               })
           },
           error => {
-            commit('updateDoctorProfileFailure')
+            commit('approveApptFailure')
             dispatch('alert/error', error, { root: true })
           }
         )
