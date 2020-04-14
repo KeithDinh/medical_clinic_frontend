@@ -12,8 +12,8 @@
           <input type="text" v-model="profile.lastName" id="lastName" name="lastName" placeholder="Last Name"/>
           <label>Primary Doctor</label>
           <button v-if="!isOpen" class="button-info round" v-on:click="addClicked()">Change My Doctor</button><button v-if="isOpen" class="button-info round" v-on:click="addClicked()">Close</button></div>
-          <select v-if="isOpen" type="text" v-model="profile.primaryDoctor.primary_doctor" id="primaryDoctor" name="primaryDoctor">
-                  <option v-for="off in doctors" v-bind:value="off.doctor_id">{{ off.first_name }}</option>
+          <select v-if="isOpen" type="text" v-model="profile.primaryDoctor.doctor_id" id="primaryDoctor.doctor_id" name="primaryDoctor.doctor_id">
+                  <option v-for="off in doctors" v-bind:value="off.doctor_id"> {{ off.first_name }} {{off.middle_initial}} {{ off.last_name }}</option>
             </select>
           <input v-if="!isOpen" type="text" v-model="profile.primaryDoctor.primary_doctor" id="primaryDoctor"
           name="primaryDoctor" placeholder="primary doctor" disabled/>
