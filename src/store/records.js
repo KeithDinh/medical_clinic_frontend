@@ -1,4 +1,4 @@
-import {recordsService} from '../services'
+import {profileService, recordsService} from '../services'
 import { router } from '../router'
 
 const initialState = {
@@ -51,6 +51,10 @@ export const medicalRecords = {
       state.newRecordStatus= { addRecordRequest: true }
       state.newRecord = submittedRecord
     },
+       addRecordSuccess (state,newRecord){
+      state.newRecordStatus={postedNewRecord:true}
+      state.newRecord=newRecord
+    },
   },
   actions: {
     receiveRecords (
@@ -71,10 +75,23 @@ export const medicalRecords = {
       if (errors.length === 0) {
         confirm("add new medical record")
         recordsService.putRecord(apptId, patient.patientId, height, weight,diagnoses,labTesting, treatment, newPrescriptions, actualStartTime, actualEndTime)
-          .then(
+             .then(
+        response => {
+          commit('addRecordSuccess', {apptId, patientId , medicationId,  doseFormId, dosage, indication, datePrescribed})
+          const localUser = JSON.parse(localStorage.getItem('localUser'))
+          profileService.getProfile(localUser.patient_id).then(
             response => {
+              const patient = JSON.parse(localStorage.getItem('patient'))
+              console.log(patient)
+              patient.records = response.records
+
+              localStorage.setItem('patient', JSON.stringify(patient))
+              router.push('/dashboard')
             }
           )
+          dispatch('alert/success', 'New Prescription Added', { root: true })
+        }
+      )
       }
       else{
         alert("Missing Fields")

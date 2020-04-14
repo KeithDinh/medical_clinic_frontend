@@ -70,6 +70,10 @@ export const prescription = {
       state.newRxStatus= { addRxRequest: true }
       state.newRx = submittedRx
     },
+    addRxSuccess (state,newRx){
+      state.rxStatus={postedNewRx:true}
+      state.appt=newRx
+    },
   },
   actions: {
     loadPrescriptions ({ dispatch, commit,state}) {
@@ -84,10 +88,21 @@ export const prescription = {
       let errors = validatePrescriptionForm(apptId, medicationId, doseFormId, dosage, indication)
       if (errors.length === 0) {
         prescriptionService.putPrescription(apptId, patient.patientId , medicationId,  doseFormId, dosage, indication, datePrescribed)
-          .then(
+      .then(
+        response => {
+          commit('addRxSuccess', {apptId, patientId , medicationId,  doseFormId, dosage, indication, datePrescribed})
+          const localUser = JSON.parse(localStorage.getItem('localUser'))
+          profileService.getProfile(localUser.patient_id).then(
             response => {
+              const patient = JSON.parse(localStorage.getItem('patient'))
+              patient.prescription = response.prescription
+              localStorage.setItem('patient', JSON.stringify(patient))
+              router.push('/dashboard')
             }
           )
+          dispatch('alert/success', 'New Prescription Added', { root: true })
+        }
+      )
       }
       else{
         alert("Missing Fields")

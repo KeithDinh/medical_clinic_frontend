@@ -54,7 +54,7 @@
       </div>
       <div class="col-70">
         <select type="text" id="medicationId" name="medicationName" v-model="medicationId">
-          <option v-for="meds in medications.medicationNames[0]" v-bind:value="meds.medication_id">{{meds.medication_name}}</option>
+          <option v-for="meds in medications.medicationNames" v-bind:value="meds.medication_id">{{meds.medication_name}}</option>
         </select>
       </div>
     </div>
@@ -65,7 +65,7 @@
       </div>
       <div class="col-70">
         <select type="text" id="medicationForm" v-model="doseFormId" name="medicationForm">
-          <option v-for="meds in medications.medicationForms[0]" v-bind:value="meds.dose_form_id">{{meds.dose_form_name}}</option>
+          <option v-for="meds in medications.medicationForms" v-bind:value="meds.dose_form_id">{{meds.dose_form_name}}</option>
         </select>
       </div>
     </div>
