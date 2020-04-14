@@ -70,7 +70,7 @@ export const prescription = {
       state.newRxStatus= { addRxRequest: true }
       state.newRx = submittedRx
     },
-    addRxSucess (state,newRx){
+    addRxSuccess (state,newRx){
       state.rxStatus={postedNewRx:true}
       state.appt=newRx
     },
@@ -90,17 +90,17 @@ export const prescription = {
         prescriptionService.putPrescription(apptId, patient.patientId , medicationId,  doseFormId, dosage, indication, datePrescribed)
       .then(
         response => {
-          // commit('addRxSuccess', {apptId, patientId , medicationId,  doseFormId, dosage, indication, datePrescribed})
-          // const localUser = JSON.parse(localStorage.getItem('localUser'))
-          // profileService.getProfile(localUser.patient_id).then(
-          //   response => {
-          //     const patient = JSON.parse(localStorage.getItem('patient'))
-          //     patient.prescription = response.prescription
-          //     localStorage.setItem('patient', JSON.stringify(patient))
-          //     router.push('/dashboard')
-          //   }
-          // )
-          // dispatch('alert/success', 'New Prescription Added', { root: true })
+          commit('addRxSuccess', {apptId, patientId , medicationId,  doseFormId, dosage, indication, datePrescribed})
+          const localUser = JSON.parse(localStorage.getItem('localUser'))
+          profileService.getProfile(localUser.patient_id).then(
+            response => {
+              const patient = JSON.parse(localStorage.getItem('patient'))
+              patient.prescription = response.prescription
+              localStorage.setItem('patient', JSON.stringify(patient))
+              router.push('/dashboard')
+            }
+          )
+          dispatch('alert/success', 'New Prescription Added', { root: true })
         }
       )
       }
