@@ -11,7 +11,8 @@ export const doctorService = {
   updateDoctorProfile,
   getSpecialization,
   postDoctor,
-  getDoctorForAppointment
+  getDoctorForAppointment,
+  approveSpecialistAppt
 }
 
 function postDoctor (profile) {
@@ -92,5 +93,17 @@ function getDoctorForAppointment () {
     headers: authorizationHeader()
   }
   return fetch(`${config.apiUrl}/appointment/doctor/list`, requestOptions)
+    .then(handleResponse)
+}
+
+function approveSpecialistAppt (appt_id) {
+  let reqHeader = authorizationHeader()
+  reqHeader['Content-Type'] = 'application/json'
+  const requestOptions = {
+    method: 'PUT',
+    headers: reqHeader,
+    body: JSON.stringify(appt_id)
+  }
+  return fetch(`${config.apiUrl}/doctor/approveappt`, requestOptions)
     .then(handleResponse)
 }

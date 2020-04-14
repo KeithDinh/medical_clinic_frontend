@@ -118,7 +118,8 @@ export default {
   methods: {
     ...mapActions('doctor', [
       'loadDoctorAppointments',
-       'editPatient'
+       'editPatient',
+      'approveAppt'
     ]),
     ...mapActions('profile', [
       'reloadPatient'
@@ -130,7 +131,7 @@ export default {
       if (this.needApprove) {
         this.needApprove = false
       }
-    // TODO: send request, the update the doctor profile.
+      const res = this.approveAppt(appt_id)
     },
   },
   filters: {
