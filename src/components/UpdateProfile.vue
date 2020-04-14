@@ -10,8 +10,12 @@
           <input type="text" v-model="profile.middleInit" id="middleInit" name="middleInit" placeholder="middleInit"/>
           <label class="inputs">Last Name</label>
           <input type="text" v-model="profile.lastName" id="lastName" name="lastName" placeholder="Last Name"/>
-          <label class="inputs">Primary Doctor</label>
-          <input type="text" v-model="profile.primaryDoctor.primary_doctor" id="primaryDoctor"
+          <label>Primary Doctor</label>
+          <button v-if="!isOpen" class="button-info round" v-on:click="addClicked()">Change My Doctor</button><button v-if="isOpen" class="button-info round" v-on:click="addClicked()">Close</button></div>
+          <select v-if="isOpen" type="text" v-model="profile.primaryDoctor.doctor_id" id="primaryDoctor.doctor_id" name="primaryDoctor.doctor_id">
+                  <option v-for="off in doctors" v-bind:value="off.doctor_id"> {{ off.first_name }} {{off.middle_initial}} {{ off.last_name }}</option>
+            </select>
+          <input v-if="!isOpen" type="text" v-model="profile.primaryDoctor.primary_doctor" id="primaryDoctor"
           name="primaryDoctor" placeholder="primary doctor" disabled/>
           <label class="inputs">Gender</label>
           <input type="text" v-model="profile.gender" id="gender" name="gender" placeholder="gender"/>
@@ -48,6 +52,7 @@ export default {
   name: 'Profile',
   data () {
     return {
+      isOpen: false,
       usStates: [
         'AL',
         'AK',
@@ -110,16 +115,23 @@ export default {
   created () {
     // An Action Loaded in From mapActions
     this.loadProfile()
+    this.loadPhysician()
   },
   computed: {
     ...mapState('profile', {
       complete: state => state.profileStatus.profileComplete,
       profile: state => state.userProfile
-    })
+    }),
+    ...mapState('doctor', {
+      doctors: state => state.doctorsList
+    }),
   },
   methods: {
     ...mapActions('profile', [
       'loadProfile'// -> this.foo()
+    ]),
+    ...mapActions('doctor', [
+      'loadPhysician'// -> this.foo()
     ]),
     updateProfile (e) {
       this.submitted = true
@@ -127,6 +139,13 @@ export default {
       const { dispatch } = this.$store
       // An Action Loaded in From mapActions
       dispatch('profile/updateProfile', profile)
+    },
+    addClicked: function () {
+      if (this.isOpen) {
+        this.isOpen = false
+      } else {
+        this.isOpen = true
+      }
     }
   }
 }
