@@ -12,7 +12,7 @@
               </div>
               <div class="col-70">
                 <select type="text" v-model="doctor" id="doctor" name="doctor">
-                  <option v-for="doc in doctors" v-bind:value="doc.doctor_id">{{ doc.first_name }} {{ doc.last_name }}</option>
+                  <option v-for="doc in doctors" v-bind:value="doc.doctor_id"> {{ doc.first_name }} {{doc.middle_initial}} {{ doc.last_name }},   {{doc.specialization_name}}</option>
                 </select>
               </div>
               <div style="clear:both;"></div>
@@ -37,7 +37,7 @@
               <div class="col-70">
                 <input type="checkbox" v-model="referred" name="referred">
                 <select type="text" v-if="referred" v-model="refDoctor" id="refDoctor" name="refDoctor">
-                  <option v-for="doc in doctors" v-bind:value="doc.doctor_id">{{ doc.first_name }} {{ doc.last_name }}</option>
+                  <option v-for="doc in doctors" v-bind:value="doc.doctor_id">{{ doc.first_name }} {{doc.middle_initial}} {{ doc.last_name }},   {{doc.specialization_name}}</option>
                 </select>
               </div>
               <div style="clear:both;"></div>

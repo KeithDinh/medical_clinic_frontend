@@ -12,7 +12,17 @@ export const doctorService = {
   getSpecialization,
   postDoctor,
   getDoctorForAppointment,
+  getPhysician,
   approveSpecialistAppt
+}
+
+function getPhysician () {
+  const requestOptions = {
+    method: 'GET',
+    headers: authorizationHeader()
+  }
+  return fetch(`${config.apiUrl}/doctor/physician/list`, requestOptions)
+    .then(handleResponse)
 }
 
 function postDoctor (profile) {
