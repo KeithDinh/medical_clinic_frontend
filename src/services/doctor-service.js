@@ -12,8 +12,8 @@ export const doctorService = {
   getSpecialization,
   postDoctor,
   getDoctorForAppointment,
-  getPhysician,
-  approveSpecialistAppt
+  approveSpecialistAppt,
+  getPhysician
 }
 
 function getPhysician () {
