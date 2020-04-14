@@ -24,6 +24,9 @@
          <hr class="style1">
         <div class="text"><p class="align-left">Race: </p><p class="align-right">{{ profile.race }}</p></div>
         <div style="clear:both;"></div>
+        <hr class="style1">
+        <div class="text"><p class="align-left">Primary Doctor: </p><p class="align-right">{{ profile.primaryDoctor.primary_doctor }}</p></div>
+        <div style="clear:both;"></div>
       </div>
     </div>
   </div>

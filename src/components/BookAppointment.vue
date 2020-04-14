@@ -101,7 +101,7 @@ export default {
   },
   created () {
     this.$store.dispatch('profile/loadProfile'),
-    this.loadDoctors()
+    this.loadDoctorAppointment()
   },
   computed: {
     ...mapState('doctor', {
@@ -117,7 +117,7 @@ export default {
   },
   methods: {
     ...mapActions('doctor', [
-      'loadDoctors'
+      'loadDoctorAppointment'
     ]),
     ...mapActions('offices', [
       'loadOffices'
