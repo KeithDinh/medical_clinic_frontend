@@ -161,7 +161,7 @@ export const profile = {
             commit('updatePatientProfileSuccess')
             dispatch('alert/success', 'Profile Updated', { root: true })
             commit('loadProfileRequest')
-            profileService.getDoctor(profile.patientId).then(
+            profileService.getProfile(profile.patientId).then(
               response => {
                 const patient = JSON.parse(localStorage.getItem('patient'))
                 patient.profile = response.profile
