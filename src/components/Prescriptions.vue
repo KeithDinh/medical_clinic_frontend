@@ -1,9 +1,11 @@
 <template>
   <div class="row">
     <hr class="style1">
+    <div v-if="userStatus.localUser != null && userStatus.localUser.role_id !=2">
     <div style="position:relative;text-align: right;padding-right:10px"><button v-if="!isOpen" class="button-info round" v-on:click="addClicked()">Add New</button><button v-if="isOpen" class="button-info round" v-on:click="addClicked()">Close</button></div>
     <!--    TODO:Jon, please take a look at this. the value of isOpen changes when button is clicked, but the value of isOpen in the div doesn't change. My idea is showing the form here, instead of dashboard-->
     <div class="prescription-form" v-if="isOpen"><NewPrescription /> <hr class="style1" style="padding-bottom: 30px; margin-top:20px"></div>
+    </div>
     <div class="table-border-round">
     <table>
       <tr>
@@ -55,7 +57,11 @@ export default {
   computed: {
     ...mapState('prescription', {
       prescriptions: state => state.rxList
-    })
+    }),
+        userStatus () {
+    // if you want to expose the entire sate
+      return this.$store.state.authentication
+    }
   },
   methods: {
     ...mapActions('prescription', [
