@@ -8,7 +8,8 @@ export const appointmentService = {
   getAppointments,
   cancelAppointment,
   deleteAppointment,
-  getAdminAppointments
+  getAdminAppointments,
+  finishAppointment
 }
 
 function postAppointment (doctor, office, refDoctor, date, timeslot, reason, bookingMethod) {
@@ -49,7 +50,7 @@ function cancelAppointment (appt_id) {
     }
     return fetch(`${config.apiUrl}/patient/cancel/appointment`, requestOptions)
       .then(handleResponse)
-      
+
   }
 
 function deleteAppointment (appt_id) {
@@ -62,5 +63,17 @@ function deleteAppointment (appt_id) {
     }
     return fetch(`${config.apiUrl}/admin/delete/appointment`, requestOptions)
       .then(handleResponse)
-      
+
+  }
+
+  function finishAppointment (appt_id,appt_end_time) {
+  let reqHeader = authorizationHeader()
+    reqHeader['Content-Type'] = 'application/json'
+    const requestOptions = {
+      method: 'PUT',
+      headers: reqHeader,
+      body: JSON.stringify({"appt_id":appt_id,"appt_end_time":appt_end_time})
+    }
+    return fetch(`${config.apiUrl}/doctor/finish/appointment`, requestOptions)
+      .then(handleResponse)
   }

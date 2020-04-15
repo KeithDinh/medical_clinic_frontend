@@ -69,7 +69,7 @@ export const medicalRecords = {
     },
 
     addRecord ({ dispatch, commit }, {apptId, patient, height, weight,diagnoses,labTesting, treatment,newPrescriptions, actualStartTime, actualEndTime}) {
-      alert("action entered")
+      alert("adding")
       commit('addRecordRequest')
       let errors = validateRecordForm(apptId, height,weight,diagnoses,labTesting,treatment, newPrescriptions)
       if (errors.length === 0) {
@@ -82,14 +82,13 @@ export const medicalRecords = {
           profileService.getProfile(localUser.patient_id).then(
             response => {
               const patient = JSON.parse(localStorage.getItem('patient'))
-              console.log(patient)
               patient.records = response.records
 
               localStorage.setItem('patient', JSON.stringify(patient))
               router.push('/dashboard')
             }
           )
-          dispatch('alert/success', 'New Prescription Added', { root: true })
+          dispatch('alert/success', 'New Record Added', { root: true })
         }
       )
       }
