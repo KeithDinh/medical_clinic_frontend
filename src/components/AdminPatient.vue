@@ -25,7 +25,7 @@
               <div style="clear:both;"></div>
               <div class="text"><p class="align-left"> </p><p class="align-right">{{profile.state}} {{profile.zipcode}}</p></div>
               <div style="clear:both;"></div>
-              <div class="editPatient"><a href="#" v-on:click="patient(profile.patientId)">Edit Patient</a></div>
+              <div class="editPatient links"><a href="#" v-on:click="patient(profile.patientId)">Edit Patient</a></div>
           </div>
           </div>
       </div>
@@ -64,22 +64,6 @@ export default {
 }
 </script>
 <style media="screen">
-
-.editPatient {
-  text-align: center;
-  float: left;
-  background-color: #00c7db;
-  color: white;
-  transition: 0.3s;
-  opacity: 0.7;
-  padding: 5px 10px;
-  border-radius: 15px;
-}
-
-.editPatient:hover {
-background-color: #00c7db;
-opacity: 1
-}
 
 .patientBlock {
   margin-left: 170px;

@@ -309,8 +309,11 @@ header .login-links {
   text-align: right;
 }
 
-header .login-links button {font-weight:600;padding:10px 30px;border:none;border-radius:50px;background:#00c7db;color:#fff;}
-header .login-links button a {color:#fff;}
+.links {font-weight:600;border:none;background:transparent;}
+.links a {color:#fff;padding:10px 30px;border:none;border-radius:50px;background:#00c7db;}
+
+header .login-links button {font-weight:600;border:none;background:transparent;}
+header .login-links button a {color:#fff;padding:10px 30px;border:none;border-radius:50px;background:#00c7db;}
 
 header ul.nav-links>li {
   display: inline;

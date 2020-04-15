@@ -40,15 +40,6 @@ export const appointment = {
     },
     cancelApptFailure(state) {
       state.apptStatus = { cancelApptFailure: true }
-    },
-    deleteApptRequest (state) {
-      state.apptStatus = { deletingAppt: true }
-    },
-    deleteApptSuccess (state){
-      state.apptStatus = { deleteAppt: true }
-    },
-    deleteApptFailure(state) {
-      state.apptStatus = { deleteApptFailure: true }
     }
   },
   actions: {
@@ -102,30 +93,6 @@ export const appointment = {
           },
           error => {
             commit('cancelApptFailure')
-            dispatch('alert/error', error, { root: true })
-          }
-        )
-    },
-    deleteAppointment (
-      { dispatch, commit }, appt_id) {
-      commit('deleteApptRequest')
-      appointmentService.deleteAppointment(appt_id)
-        .then(
-          response => {
-            const apptDeleteStatus = response.msg
-            commit('deleteApptSuccess', apptDeleteStatus)
-            dispatch('alert/success', 'Deleted Appointment', { root: true })
-            commit('loadApptRequest')
-            appointmentService.getAppointments().then(
-              response => {
-                var patient = JSON.parse(localStorage.getItem('patient'))
-                patient['appointments'] = response
-                localStorage.setItem('patient', JSON.stringify(patient))
-                commit('loadApptSuccess', response)
-              })
-          },
-          error => {
-            commit('deleteApptFailure')
             dispatch('alert/error', error, { root: true })
           }
         )

@@ -6,7 +6,7 @@
         <div class="logo-text left">Health Hub</div>
         <ul class="nav-links">
           <li><a to="/" href="/">Home</a></li>
-          <li class="menu-item-has-children">
+          <li v-if="userStatus.localUser != null && userStatus.localUser.role_id === 2" class="menu-item-has-children">
             Patients
             <ul class="sub-menu">
               <li><a href="search-doctor">Search Doctor</a> </li>
@@ -18,7 +18,7 @@
               <li><a href="update-profile">Update Profile</a></li>
             </ul>
           </li>
-          <li class="menu-item-has-children">
+          <li v-if="userStatus.localUser != null && userStatus.localUser.role_id === 3" class="menu-item-has-children">
             Doctors
             <ul class="sub-menu">
               <li><a href="doctor-dashboard">Doctor Dashboard</a></li>
@@ -28,7 +28,7 @@
               <li><a href="update-doctor-profile">Update Profile</a></li>
             </ul>
           </li>
-          <li class="menu-item-has-children">
+          <li v-if="userStatus.localUser != null && userStatus.localUser.role_id === 1" class="menu-item-has-children">
             Admin
             <ul class="sub-menu">
               <li><a href="admin">Admin Dashboard</a></li>

@@ -13,6 +13,8 @@
         <th>Start Time</th>
         <th>End Time</th>
         <th>Booking Method</th>
+        <th>Appointment ID</th>
+        <th>Delete Appointment</th>
       </tr>
       <tr v-for="appt in adminAppointments">
         <td>{{appt.patient}}</td>
@@ -26,6 +28,10 @@
         <td>{{appt.appt_start_time}}</td>
         <td>{{appt.estimated_end_time}}</td>
         <td>{{appt.booking_method}}</td>
+        <td>{{appt.appointmentId}}</td>
+        <td>
+          <button class="button" v-on:click="DeleteAppt(appt.appointmentId)">Delete</button>
+        </td>
       </tr>
     </table>
     <div><br></div>
@@ -48,8 +54,12 @@ export default {
    },
    methods: {
      ...mapActions('admin', [
-       'loadAdminAppointments'
-     ])
+       'loadAdminAppointments',
+       'deleteAppointment'
+     ]),
+     DeleteAppt(value) {
+      this.deleteAppointment(value)
+     }
    }
 }
 </script>
@@ -62,6 +72,7 @@ th {
 
 td {
   text-align: center;
+  font-size: 12px;
 }
 
 tr:nth-child(even){

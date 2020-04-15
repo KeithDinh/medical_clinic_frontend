@@ -7,7 +7,8 @@ export const appointmentService = {
   postAppointment,
   getAppointments,
   cancelAppointment,
-  deleteAppointment
+  deleteAppointment,
+  getAdminAppointments
 }
 
 function postAppointment (doctor, office, refDoctor, date, timeslot, reason, bookingMethod) {
@@ -26,6 +27,15 @@ function getAppointments () {
 	headers: authorizationHeader()
   }
   return fetch(`${config.apiUrl}/patients/appointment`, requestOptions)
+    .then(handleResponse)
+}
+
+function getAdminAppointments () {
+  const requestOptions = {
+  method: 'GET',
+  headers: authorizationHeader()
+  }
+  return fetch(`${config.apiUrl}/admin/appointments`, requestOptions)
     .then(handleResponse)
 }
 

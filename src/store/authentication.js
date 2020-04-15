@@ -3,7 +3,7 @@ import { router } from '../router'
 
 const localUser = JSON.parse(localStorage.getItem('localUser'))
 const initialState = localUser
-  ? { status: { loggedIn: true }, localUser: localUser }
+  ? { status: { loggedIn: true }, localUser: {role_id: 0} }
   : { status: {}, localUser: null }
 
 //validate doctor registration
