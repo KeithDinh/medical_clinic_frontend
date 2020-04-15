@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div  v-if="userStatus.localUser != null && userStatus.localUser.role_id===2">
     <template v-for="message in messages">
        <div class="row">{{message.sending_time}}</div>
         <div>{{message.message}}</div>
@@ -21,7 +21,11 @@ export default {
   computed: {
     ...mapState('notifications', {
       messages: state => state.messagesList
-    })
+    }),
+            userStatus () {
+    // if you want to expose the entire sate
+      return this.$store.state.authentication
+    }
   },
   methods: {
     ...mapActions('notifications', [
