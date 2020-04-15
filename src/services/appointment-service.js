@@ -9,7 +9,6 @@ export const appointmentService = {
   cancelAppointment,
   deleteAppointment,
   getAdminAppointments,
-  finishAppointment
 }
 
 function postAppointment (doctor, office, refDoctor, date, timeslot, reason, bookingMethod) {
@@ -66,14 +65,4 @@ function deleteAppointment (appt_id) {
 
   }
 
-  function finishAppointment (appt_id,appt_end_time) {
-  let reqHeader = authorizationHeader()
-    reqHeader['Content-Type'] = 'application/json'
-    const requestOptions = {
-      method: 'PUT',
-      headers: reqHeader,
-      body: JSON.stringify({"appt_id":appt_id,"appt_end_time":appt_end_time})
-    }
-    return fetch(`${config.apiUrl}/doctor/finish/appointment`, requestOptions)
-      .then(handleResponse)
-  }
+

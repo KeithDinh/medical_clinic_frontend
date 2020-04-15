@@ -1,4 +1,4 @@
-import { appointmentService, profileService } from '../services'
+import {appointmentService, doctorService, profileService} from '../services'
 import { router } from '../router'
 
 const initialState = {
@@ -40,16 +40,6 @@ export const appointment = {
     },
     cancelApptFailure(state) {
       state.apptStatus = { finshApptFailure: true }
-    },
-    finishApptRequest (state) {
-      state.apptStatus = { finshingAppt: true }
-    },
-    finishApptSuccess (state,appts){
-      state.apptStatus = { finshingAppt: true }
-      state.apptsList = appts
-    },
-    finishApptFailure(state) {
-      state.apptStatus = { finishApptFailure: true }
     }
   },
   actions: {
@@ -107,30 +97,7 @@ export const appointment = {
           }
         )
     },
-    finishAppt (
-      { dispatch, commit }, {appt_id,appt_end_time}) {
-      commit('finishApptRequest')
-      appointmentService.finishAppointment(appt_id,appt_end_time)
-        .then(
-          response => {
-            const finishApptStatus = response.msg
-            commit('finishApptSuccess', finishApptStatus)
-            dispatch('alert/success', 'Appointment is finished', { root: true })
-            commit('loadApptRequest')
-            appointmentService.getAppointments().then(
-              response => {
-                var patient = JSON.parse(localStorage.getItem('patient'))
-                patient['appointments'] = response
-                localStorage.setItem('patient', JSON.stringify(patient))
-                commit('loadApptSuccess', response)
-              })
-          },
-          error => {
-            commit('finishApptFailure')
-            dispatch('alert/error', error, { root: true })
-          }
-        )
-    }
+
   }
 }
 

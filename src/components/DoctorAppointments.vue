@@ -149,7 +149,7 @@ export default {
       this.getTimestamp();
       const {appt_end_time} = this;
       const {dispatch} = this.$store
-      dispatch('appointment/finishAppt', {appt_id, appt_end_time})
+      dispatch('doctor/finishAppt', {appt_id, appt_end_time})
     },
 
   },
