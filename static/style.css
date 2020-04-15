@@ -569,6 +569,10 @@ table{
   font-weight: bold;
   margin:10px;
 }
+.button-info:hover {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
 .btn-small{
   font-size:12px;
   padding:5px 15px
@@ -577,19 +581,18 @@ table{
   font-size:14px;
   padding:8px 20px;
 }
-.button-info:hover {
-  background-color: #4CAF50; /* Green */
-  color: white;
-}
-.button-approved{
-  border: 2px solid #00c7db;
+.button-warning{
+  border: 2px solid #f47c20;
   transition-duration: 0.4s;
   background-color: white;
   font-weight: bold;
   margin:10px;
 }
 
-
+.button-warning:hover {
+  background-color: #f47c20; /* Green */
+  color: white;
+}
 
 #profile {text-align:center;}
 

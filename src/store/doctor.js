@@ -1,4 +1,4 @@
-import { doctorService, adminService } from '../services'
+import {doctorService, adminService, appointmentService} from '../services'
 import { router } from '../router'
 
 const initialState = {
@@ -95,6 +95,16 @@ export const doctor = {
     },
     approveApptFailure(state) {
       state.doctorApptStatus = { approvingApptFailure: true }
+    },
+    finishApptRequest (state) {
+      state.apptStatus = { finshingAppt: true }
+    },
+    finishApptSuccess (state,appts){
+      state.apptStatus = { finshingAppt: true }
+      state.apptsList = appts
+    },
+    finishApptFailure(state) {
+      state.apptStatus = { finishApptFailure: true }
     }
   },
   actions: {
@@ -261,21 +271,44 @@ export const doctor = {
           response => {
             commit('approveApptSuccess')
             dispatch('alert/success', 'approve appt success', { root: true })
-            commit('doctorProfileRequest')
+            commit('doctorApptRequest')
              const localUser = JSON.parse(localStorage.getItem('localUser'))
-            alert(localUser.doctor_id)
            doctorService.getDoctorData(localUser.doctor_id).then(
               response => {
                 const doctor = JSON.parse(localStorage.getItem('doctor'))
-                doctor.profile = response.profile
+                doctor.appointments = response.appointments
                 localStorage.setItem('doctor', JSON.stringify(doctor))
-                console.log(JSON.stringify(doctor))
-                commit('doctorProfileSuccess', response.profile)
-                dispatch('alert/success', 'doctor Retreived', { root: true })
+                commit('doctorApptSuccess', response.appointments)
+                dispatch('alert/success', 'appointments Retreived', { root: true })
               })
           },
           error => {
             commit('approveApptFailure')
+            dispatch('alert/error', error, { root: true })
+          }
+        )
+    },
+    finishAppt (
+      { dispatch, commit }, {appt_id,appt_end_time}) {
+      commit('finishApptRequest')
+      doctorService.finishAppointment(appt_id,appt_end_time)
+        .then(
+          response => {
+            commit('finishApptSuccess')
+            dispatch('alert/success', 'appt is finished', { root: true })
+            commit('doctorApptRequest')
+             const localUser = JSON.parse(localStorage.getItem('localUser'))
+           doctorService.getDoctorData(localUser.doctor_id).then(
+              response => {
+                const doctor = JSON.parse(localStorage.getItem('doctor'))
+                doctor.appointments = response.appointments
+                localStorage.setItem('doctor', JSON.stringify(doctor))
+                commit('doctorApptSuccess', response.appointments)
+                dispatch('alert/success', 'appointments Retreived', { root: true })
+              })
+          },
+          error => {
+            commit('finishApptFailure')
             dispatch('alert/error', error, { root: true })
           }
         )

@@ -1,4 +1,4 @@
-import { appointmentService, profileService } from '../services'
+import {appointmentService, doctorService, profileService} from '../services'
 import { router } from '../router'
 
 const initialState = {
@@ -39,7 +39,7 @@ export const appointment = {
       state.apptsList = appts
     },
     cancelApptFailure(state) {
-      state.apptStatus = { cancelApptFailure: true }
+      state.apptStatus = { finshApptFailure: true }
     }
   },
   actions: {
@@ -96,7 +96,8 @@ export const appointment = {
             dispatch('alert/error', error, { root: true })
           }
         )
-    }
+    },
+
   }
 }
 

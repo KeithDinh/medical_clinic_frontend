@@ -8,7 +8,7 @@ export const appointmentService = {
   getAppointments,
   cancelAppointment,
   deleteAppointment,
-  getAdminAppointments
+  getAdminAppointments,
 }
 
 function postAppointment (doctor, office, refDoctor, date, timeslot, reason, bookingMethod) {
@@ -49,7 +49,7 @@ function cancelAppointment (appt_id) {
     }
     return fetch(`${config.apiUrl}/patient/cancel/appointment`, requestOptions)
       .then(handleResponse)
-      
+
   }
 
 function deleteAppointment (appt_id) {
@@ -62,5 +62,7 @@ function deleteAppointment (appt_id) {
     }
     return fetch(`${config.apiUrl}/admin/delete/appointment`, requestOptions)
       .then(handleResponse)
-      
+
   }
+
+

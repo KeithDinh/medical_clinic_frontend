@@ -2,13 +2,14 @@
   <div class="db-col2">
     <tabs :options="{ useUrlFragment: false }" @clicked="tabClicked" @changed="tabChanged">
           <tab name="Today" class="table-border-round" >
-
              <table>
               <tr>
                 <th>Patient Name</th>
                 <th>Office Name</th>
                 <th>Date and Time</th>
                 <th>Reason for Visit</th>
+                <th></th>
+                <th></th>
               </tr>
               <template v-for="appt in allAppointmentsList.todayAppointments">
                 <tr>
@@ -17,13 +18,13 @@
                   <td>{{ appt.appt_start_time | frontEndDateFormat}} <br>
                       <div class="text-info subtitle1">{{appt.appt_start_time |frontEndTimeFormat}}</div></td>
                   <td>{{ appt.reason_for_visit}}</td>
-                  <td><div style="position:relative;text-align: right"><button class="button-info round btn-small" style="font-size: 12px" v-on:click="patient(appt.patient_id)" >View</button></div></td>
+                  <td><div style="position:relative;text-align: right; margin-right: 0px"><button class="button-info round btn-small" style="font-size: 12px" v-on:click="patient(appt.patient_id)" >View</button></div></td>
+                  <td v-if="appt.appt_status='pending'"><div style="position:relative;text-align: left"><button class="button-warning round btn-small" style="font-size: 12px" v-on:click="finish(appt.appt_id)" >Finish</button></div></td>
                 </tr>
               </template>
             </table>
           </tab>
           <tab name="Upcoming" class="table-border-round">
-            Future
             <table>
               <tr>
                 <th>Patient Name</th>
@@ -43,7 +44,7 @@
               </template>
             </table>
           </tab>
-          <tab name="Past Appointments" class="table-border-round">
+          <tab name="Past" class="table-border-round">
             <table>
               <tr>
                 <th>Patient Name</th>
@@ -64,7 +65,7 @@
             </table>
           </tab>
 
-          <tab name="Appointment Approval" class="table-border-round">
+          <tab name="Todo List" class="table-border-round">
             <table>
               <tr>
                 <th>Patient Name</th>
@@ -109,7 +110,8 @@ export default {
   },
   data: function () {
     return {
-      needApprove: true
+      needApprove: true,
+      appt_end_time:''
     }
   },
   computed: {
@@ -121,10 +123,13 @@ export default {
     ...mapActions('doctor', [
       'loadDoctorAppointments',
        'editPatient',
-      'approveAppt'
+      'approveAppt',
     ]),
     ...mapActions('profile', [
-      'reloadPatient'
+      'reloadPatient',
+    ]),
+      ...mapActions('appointment', [
+      'finishAppt',
     ]),
     patient(value) {
       const res = this.reloadPatient(value)
@@ -132,6 +137,21 @@ export default {
     approve(appt_id){
       const res = this.approveAppt(appt_id)
     },
+    getTimestamp: function () {
+      const today = new Date();
+      const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      const dateTime = date +' '+ time;
+      this.appt_end_time=dateTime;
+      return dateTime
+    },
+    finish(appt_id){
+      this.getTimestamp();
+      const {appt_end_time} = this;
+      const {dispatch} = this.$store
+      dispatch('doctor/finishAppt', {appt_id, appt_end_time})
+    },
+
   },
   filters: {
     frontEndTimeFormat(str) {
@@ -148,7 +168,7 @@ export default {
       var year= dateobj.getUTCFullYear();
       return month+"/"+date+"/"+year;
     }
-  }
+  },
 }
 </script>
 <style media="screen">

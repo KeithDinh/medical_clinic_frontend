@@ -1,7 +1,7 @@
 <template>
       <div class="row">
         <h2 class='dashboard_header'>Dashboard</h2>
-        <NotificationMessage />
+          <NotificationMessage />
         <div class="db">
         <Profile class="db1" />
         <tabs :options="{ useUrlFragment: false }" @clicked="tabClicked" @changed="tabChanged">
