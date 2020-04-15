@@ -6,6 +6,7 @@ const handleResponse = responseHandler.handleResponse
 export const appointmentService = {
   postAppointment,
   getAppointments,
+  cancelAppointment,
   deleteAppointment
 }
 
@@ -28,12 +29,28 @@ function getAppointments () {
     .then(handleResponse)
 }
 
-function deleteAppointment (appt_id) {
+function cancelAppointment (appt_id) {
+  let reqHeader = authorizationHeader()
+    reqHeader['Content-Type'] = 'application/json'
     const requestOptions = {
-      method: 'DELETE',
-      headers: authorizationHeader()
+      method: 'POST',
+      headers: reqHeader,
+      body: JSON.stringify({"appt_id":appt_id})
     }
-    return fetch(`${config.apiUrl}/patient/deleteappointment?aid=` + appt_id, requestOptions)
+    return fetch(`${config.apiUrl}/patient/cancel/appointment`, requestOptions)
       .then(handleResponse)
       
-}
+  }
+
+function deleteAppointment (appt_id) {
+  let reqHeader = authorizationHeader()
+    reqHeader['Content-Type'] = 'application/json'
+    const requestOptions = {
+      method: 'POST',
+      headers: reqHeader,
+      body: JSON.stringify({"appt_id":appt_id})
+    }
+    return fetch(`${config.apiUrl}/admin/delete/appointment`, requestOptions)
+      .then(handleResponse)
+      
+  }

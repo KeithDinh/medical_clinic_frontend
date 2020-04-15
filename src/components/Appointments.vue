@@ -43,10 +43,10 @@ export default {
   methods: {
     ...mapActions('appointment', [
       'loadAppointments',
-      'deleteAppointment'
+      'cancelAppointment'
     ]),
-    CancelAppt: function (apptId) {
-      this.deleteAppointment(apptId)
+    CancelAppt (apptId) {
+      this.cancelAppointment(apptId)
     }
   },
   filters: {

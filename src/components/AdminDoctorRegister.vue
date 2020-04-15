@@ -22,12 +22,7 @@
           <input type="text" v-model="city" id="city" name="city" placeholder="City">
           <label>State</label>
           <select type="text" v-model="state" id="state" name="state">
-            <option 
-              v-for="(usState, index) in usStates"
-              :key="index"
-              :selected="state === usState"
-              >{{ usState }}
-            </option>
+            <option v-for="(usState, index) in usStates" :key="index" :selected="state === usState">{{ usState }}</option>
           </select>
           <label>Zipcode</label>
           <input type="text" v-model="zipcode" id="zipcode" name="zipcode" placeholder="Zipcode">
@@ -44,8 +39,8 @@
           <datepicker v-model="dob" name="dob" placeholder="Date of birth" format="MM/dd/yyyy"></datepicker>
           <label>Gender</label>
           <select type="text" v-model="gender" id="gender" name="gender" placeholder="Gender">
-                  <option> M</option>
-                  <option> F</option>
+                  <option>M</option>
+                  <option>F</option>
           </select>
           <br>
           <br>
@@ -54,13 +49,7 @@
           
           <label>Race/Ethnicity</label>
           <select type="text" v-model="race" id="race" name="race" placeholder="Race / Ethnicity">
-                  <option> White</option>
-                  <option> African American</option>
-                  <option> Hispanic and Latino Americans</option>
-                  <option> Asian</option>
-                  <option>Native Americans and Alaska Natives</option>
-                  <option>Native Hawaiian or Other Pacific Islander</option>
-                  
+                  <option v-for="race in races" v-bind:value="race">{{ race }}</option>
             </select>
           <br><br>
           <button id="submit" v-on:click="register()">REGISTER</button>
@@ -101,6 +90,13 @@ export default {
       specialistId: '',
       race: '',
       image:'',
+      races: [
+        'African American',
+        'Asian',
+        'Native American and Alaskan Native',
+        'Native Hawaiian or Other Pacific Islander',
+        'White'
+      ],
       usStates: [
         'AL',
         'AK',

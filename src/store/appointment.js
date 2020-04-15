@@ -1,4 +1,4 @@
-import { appointmentService, profileService,deleteAppointmentService } from '../services'
+import { appointmentService, profileService } from '../services'
 import { router } from '../router'
 
 const initialState = {
@@ -31,12 +31,21 @@ export const appointment = {
     loadApptFailure (state) {
       state.apptStatus = { apptFailure: true }
     },
+    cancelApptRequest (state) {
+      state.apptStatus = { cancelingAppt: true }
+    },
+    cancelApptSuccess (state,appts){
+      state.apptStatus = { cancelAppt: true }
+      state.apptsList = appts
+    },
+    cancelApptFailure(state) {
+      state.apptStatus = { cancelApptFailure: true }
+    },
     deleteApptRequest (state) {
       state.apptStatus = { deletingAppt: true }
     },
-    deleteApptSuccess (state,appts){
+    deleteApptSuccess (state){
       state.apptStatus = { deleteAppt: true }
-      state.apptsList = appts
     },
     deleteApptFailure(state) {
       state.apptStatus = { deleteApptFailure: true }
@@ -73,10 +82,34 @@ export const appointment = {
       const patient = JSON.parse(localStorage.getItem('patient'))
       commit('loadApptSuccess', patient.appointments)
     },
+    cancelAppointment (
+      { dispatch, commit }, appt_id) {
+      commit('cancelApptRequest')
+      appointmentService.cancelAppointment(appt_id)
+        .then(
+          response => {
+            const apptCancelStatus = response.msg
+            commit('cancelApptSuccess', apptCancelStatus)
+            dispatch('alert/success', 'Canceled Appointment', { root: true })
+            commit('loadApptRequest')
+            appointmentService.getAppointments().then(
+              response => {
+                var patient = JSON.parse(localStorage.getItem('patient'))
+                patient['appointments'] = response
+                localStorage.setItem('patient', JSON.stringify(patient))
+                commit('loadApptSuccess', response)
+              })
+          },
+          error => {
+            commit('cancelApptFailure')
+            dispatch('alert/error', error, { root: true })
+          }
+        )
+    },
     deleteAppointment (
       { dispatch, commit }, appt_id) {
       commit('deleteApptRequest')
-      deleteAppointmentService.deleteAppointment(appt_id)
+      appointmentService.deleteAppointment(appt_id)
         .then(
           response => {
             const apptDeleteStatus = response.msg

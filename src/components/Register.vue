@@ -23,9 +23,16 @@
           <input type="text" v-model="zipcode" id="zipcode" name="zipcode" placeholder="Zipcode">
           <input type="text" v-model="phone" id="phone" name="phone" placeholder="Phone">
           <datepicker v-model="dob" name="dob" placeholder="Date of birth" format="MM/dd/yyyy"></datepicker>
-          <input type="text" v-model="gender" id="gender" name="gender" placeholder="Gender">
+          <label>Gender</label>
+          <select type="text" v-model="gender" id="gender" name="gender" placeholder="Gender">
+            <option>M</option>
+            <option>F</option>
+          </select>
           <input type="text" v-model="marital" id="marital" name="marital" placeholder="Marital Status">
-          <input type="text" v-model="race" id="race" name="race" placeholder="Race / Ethnicity">
+          <label>Race/Ethnicity</label>
+          <select type="text" v-model="race" id="race" name="race" placeholder="Race / Ethnicity">
+                  <option v-for="race in races" v-bind:value="race">{{ race }}</option>
+            </select>
           <button id="submit" v-on:click="register()">REGISTER</button>
         </div>
       </div>
@@ -56,6 +63,13 @@ export default {
       gender: '',
       marital: '',
       race: '',
+      races: [
+        'African American',
+        'Asian',
+        'Native American and Alaskan Native',
+        'Native Hawaiian or Other Pacific Islander',
+        'White'
+      ],
       usStates: [
         'AL',
         'AK',
