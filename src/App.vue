@@ -6,10 +6,10 @@
         <div class="logo-text left">Health Hub</div>
         <ul class="nav-links">
           <li><a to="/" href="/">Home</a></li>
+          <li><a href="search-doctor">Search Doctor</a> </li>
           <li v-if="userStatus.localUser != null && userStatus.localUser.role_id === 2" class="menu-item-has-children">
             Patients
             <ul class="sub-menu">
-              <li><a href="search-doctor">Search Doctor</a> </li>
               <hr class="style1">
               <li><a href="appointment">Book Appointment</a></li>
               <hr class="style1">
