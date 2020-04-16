@@ -17,6 +17,7 @@ import AdminPage from '@/components/AdminPage'
 import Office from '@/components/Office'
 import DoctorPatients from '@/components/DoctorPatients'
 import UpdateDoctorProfile from '@/components/UpdateDoctorProfile'
+import Reports from '@/components/Reports'
 // Letting Vue Know To Use Router
 Vue.use(Router)
 
@@ -43,6 +44,11 @@ export const router = new Router({
       path: '/admin',
       name: 'AdminPage',
       component: AdminPage
+    },
+    {
+      path: '/reports',
+      name: 'Reports',
+      component: Reports
     },
     {
       path: '/register',
@@ -105,7 +111,7 @@ router.beforeEach((to, from, next) => {
   var loggedIn = localStorage.getItem('localUser')
   if (to.path === '/dashboard' || to.path === '/update-profile' || to.path === '/appointment'
     || to.path === '/doctor-dashboard' || to.path === '/admin' || to.path==='/doctor-patients'
-    || to.path === '/update-doctor-profile' || to.path === '/doctor-register') {
+    || to.path === '/update-doctor-profile' || to.path === '/doctor-register' || to.path === '/reports') {
     if (loggedIn) {
       next()
       return
