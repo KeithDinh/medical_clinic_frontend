@@ -60,6 +60,7 @@ export default {
     disableModal: Function
   },
  created () {
+   setInterval(this.getTimestamp, 1000);
  },
  computed: {
 
@@ -68,12 +69,21 @@ export default {
 },
 
 methods: {
- // ...mapActions('offices', [
- //     'updateOffice'
- //   ]),
+  getTimestamp: function () {
+    const today = new Date();
+    const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    const dateTime = date +' '+ time;
+    this.rxObject.datePrescribed = dateTime;
+    return this.rxObject.datePrescribed;
+  },
+ ...mapActions('prescription', [
+     'updateRx'
+   ]),
   update: function() {
-    // const { officeObject } = this
-    // this.updateOffice(officeObject)
+     const { rxObject } = this
+     alert("inside Prescription Update Vue " + rxObject.first_name)
+    this.updateRx(rxObject)
     disableModal
   }
  }

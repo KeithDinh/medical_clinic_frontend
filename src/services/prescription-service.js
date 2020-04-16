@@ -29,15 +29,16 @@ function addPrescription (apptId, patientId, medicationId, doseFormId, dosage, i
     .then(handleResponse)
 }
 
-function updatePrescription (id, medication_name, dosage_form_name, dosage, indication, datePrescribed) {
+function updatePrescription (updateRxPayload) {
   let reqHeader = authorizationHeader()
   reqHeader['Content-Type'] = 'application/json'
   const requestOptions = {
     method: 'PUT',
-    headers: reqHeader,
-    body: JSON.stringify({id, medication_name, dosage_form_name, dosage, indication, datePrescribed})
+    headers: { 'Authorization': 'Bearer ' + userToken(), 'Content-Type': 'application/json' },
+    body: JSON.stringify(updateRxPayload)
   }
-  return fetch(`${config.apiUrl}/patients/updateprescription`, requestOptions)
+  alert("alert something plzzzzzzzzzz")
+  return fetch(`${config.apiUrl}/patients/updateprescription`, updateRxPayload)
     .then(handleResponse)
 }
 

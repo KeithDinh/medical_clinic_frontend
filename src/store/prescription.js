@@ -110,19 +110,19 @@ export const prescription = {
         alert("Missing Fields")
       }
     },
-    updateRx ({ dispatch, commit, state }, rxList) {
+    updateRx ({ dispatch, commit, state }, rxObject) {
       commit('updateRxRequest')
-      officeService.putOffice(office).then(
+      prescriptionService.updatePrescription(rxObject).then(
         response => {
           commit('updateRxSuccess')
           commit('loadRxRequest')
-          officeService.getOffices()
+          prescriptionService.getPrescriptions()
             .then(
               response => {
                 const localUser = JSON.parse(localStorage.getItem('localUser'))
-                localUser.offices = response.offices
+                localUser.prescription = response.prescription
                 localStorage.setItem('localUser', JSON.stringify(localUser))
-                commit('officeSuccess', response.offices)
+                commit('updateRxSuccess', response.prescription)
                 dispatch('alert/success', 'Prescription Updated', { root: true })
               },
               error => {
