@@ -1,7 +1,7 @@
 <template>
       <div class="row">
         <h2 class='dashboard_header'>Dashboard</h2>
-          <NotificationMessage />
+        <NotificationMessage />
         <div class="db">
         <Profile class="db1" />
         <tabs :options="{ useUrlFragment: false }" @clicked="tabClicked" @changed="tabChanged">
@@ -59,8 +59,8 @@ export default {
   .dashboard_header{ color: white; background-color: #15558d; padding: 20px;text-align: left;}
   .db{display: flex;  margin-top: 30px;}
   .db>*{background-color: #fff;  border: 1px solid rgba(0,0,0,0.1); border-radius: 7px;}
-  .db1{width: 25%; margin: 0 15px 0 30px;}
-  .db2{width: 75%; margin: 0 30px 0 15px;}
+  .db1{width: 300px; margin: 0 30px 0 30px;}
+  .db2{width: 300px; margin: 0 30px 0 15px;}
 
   /* TABS*/
 .tabs-component-tabs {
@@ -94,5 +94,7 @@ export default {
   .tabs-component-panels {
   padding: 4em 0;
 }
+
+
 
 </style>

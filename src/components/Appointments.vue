@@ -7,6 +7,7 @@
         <th>Appt Date</th>
         <th>Booking Date</th>
         <th>Status</th>
+        <th></th>
       </tr>
       <template v-for="appt in appointments">
         <tr>
@@ -43,10 +44,10 @@ export default {
   methods: {
     ...mapActions('appointment', [
       'loadAppointments',
-      'cancelAppointment'
+      'deleteAppointment'
     ]),
-    CancelAppt (apptId) {
-      this.cancelAppointment(apptId)
+    CancelAppt: function (apptId) {
+      this.deleteAppointment(apptId)
     }
   },
   filters: {

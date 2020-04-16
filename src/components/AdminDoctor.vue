@@ -74,14 +74,16 @@ export default
 }
 
 .editDoctor {
+  font-size: 15px;
+  font-weight: 600;
   text-align: center;
   float: left;
   background-color: #00c7db;
   color: white;
   transition: 0.3s;
   opacity: 0.7;
-  padding: 5px 10px;
-  border-radius: 15px;
+  padding: 7px 15px;
+  border-radius: 25px;
 }
 
 .editDoctor:hover {
