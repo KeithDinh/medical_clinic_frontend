@@ -61,11 +61,15 @@
   </div>
 </template>
 <script>
+import { mapState, mapActions } from 'vuex'
 import Vue from 'vue'
 import VueBreadcrumbs from 'vue-breadcrumbs'
 Vue.use(VueBreadcrumbs)
 export default {
   name: 'App',
+  created () {
+    this.loadUser()
+  },
   computed: {
     alert () {
       return this.$store.state.alert
@@ -82,6 +86,9 @@ export default {
     }
   },
   methods: {
+     ...mapActions('authentication', [
+       'loadUser'
+     ]),
     logout (e) {
       this.$store.dispatch('authentication/logout')
     }
