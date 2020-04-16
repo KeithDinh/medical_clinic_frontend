@@ -137,6 +137,10 @@ export const authentication = {
   namespaced: true,
   state: initialState,
   mutations: {
+    loadUserSuccess (state, localUser) {
+      state.status = { loggingIn: true }
+      state.localUser = localUser
+    },
     loginRequest (state, localUser) {
       state.status = { loggingIn: true }
       state.localUser = localUser
@@ -166,6 +170,10 @@ export const authentication = {
     }
   },
   actions: {
+    loadUser ({ dispatch, commit }) {
+      const localUser = JSON.parse(localStorage.getItem('localUser'))
+      commit('loadUserSuccess', localUser)
+    },
     login ({ dispatch, commit }, { email, password }) {
       commit('loginRequest', { email })
       let errors = validateLogin(email, password)
