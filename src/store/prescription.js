@@ -74,6 +74,9 @@ export const prescription = {
       state.rxStatus={postedNewRx:true}
       state.appt=newRx
     },
+    updateRxRequest (state) {state.rxStatus = {updatingRx: true}},
+    updateRxSuccess (state) {state.rxStatus = {updatedRx: true}},
+    updateRxFailure (state) {state.rxStatus = {updateRx: true}},
   },
   actions: {
     loadPrescriptions ({ dispatch, commit,state}) {
@@ -81,13 +84,12 @@ export const prescription = {
       const patient = JSON.parse(localStorage.getItem('patient'))
       commit('loadRxSuccess', patient.prescriptions)
     },
-
     addPrescription ({ dispatch, commit }, { apptId, patient , medicationId, doseFormId, dosage, indication, datePrescribed }) {
       alert("action entered")
       commit('addRxRequest')
       let errors = validatePrescriptionForm(apptId, medicationId, doseFormId, dosage, indication)
       if (errors.length === 0) {
-        prescriptionService.putPrescription(apptId, patient.patientId , medicationId,  doseFormId, dosage, indication, datePrescribed)
+        prescriptionService.addPrescription(apptId, patient.patientId , medicationId,  doseFormId, dosage, indication, datePrescribed)
       .then(
         response => {
           commit('addRxSuccess', {apptId, patientId , medicationId,  doseFormId, dosage, indication, datePrescribed})
@@ -108,6 +110,28 @@ export const prescription = {
         alert("Missing Fields")
       }
     },
+    updateRx ({ dispatch, commit, state }, rxList) {
+      commit('updateRxRequest')
+      officeService.putOffice(office).then(
+        response => {
+          commit('updateRxSuccess')
+          commit('loadRxRequest')
+          officeService.getOffices()
+            .then(
+              response => {
+                const localUser = JSON.parse(localStorage.getItem('localUser'))
+                localUser.offices = response.offices
+                localStorage.setItem('localUser', JSON.stringify(localUser))
+                commit('officeSuccess', response.offices)
+                dispatch('alert/success', 'Prescription Updated', { root: true })
+              },
+              error => {
+                commit('updateRxFailure')
+                dispatch('alert/error', error, { root: true })
+              }
+            )
+          dispatch('alert/success', 'Prescription Updated', { root: true })
+        })
+    }
   }
 }
-

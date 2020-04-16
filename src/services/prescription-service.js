@@ -5,7 +5,7 @@ const handleResponse = responseHandler.handleResponse
 
 export const prescriptionService = {
   getPrescriptions,
-  putPrescription
+  addPrescription
 }
 
 function getPrescriptions () {
@@ -17,7 +17,7 @@ function getPrescriptions () {
     .then(handleResponse)
 }
 
-function putPrescription (apptId, patientId, medicationId, doseFormId, dosage, indication, datePrescribed) {
+function addPrescription (apptId, patientId, medicationId, doseFormId, dosage, indication, datePrescribed) {
   let reqHeader = authorizationHeader()
   reqHeader['Content-Type'] = 'application/json'
   const requestOptions = {
@@ -28,3 +28,17 @@ function putPrescription (apptId, patientId, medicationId, doseFormId, dosage, i
   return fetch(`${config.apiUrl}/doctor/addprescription`, requestOptions)
     .then(handleResponse)
 }
+
+function updatePrescription (id, medication_name, dosage_form_name, dosage, indication, datePrescribed) {
+  let reqHeader = authorizationHeader()
+  reqHeader['Content-Type'] = 'application/json'
+  const requestOptions = {
+    method: 'PUT',
+    headers: reqHeader,
+    body: JSON.stringify({id, medication_name, dosage_form_name, dosage, indication, datePrescribed})
+  }
+  return fetch(`${config.apiUrl}/patients/updateprescription`, requestOptions)
+    .then(handleResponse)
+}
+
+// NEED GET MEDICATIONS TO SUBSTITUTE THE medication_names IN PrescriptionUpdate.VUE
