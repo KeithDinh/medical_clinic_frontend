@@ -11,7 +11,9 @@ const initialState = {
   adminDoctorStatus: {},
   doctors:{},
   adminOfficeStatus: {},
-  offices:{}
+  offices:{},
+  reportStatus: {},
+  reports: {}
 }
 
 
@@ -67,6 +69,26 @@ export const admin = {
     },
     deleteApptFailure(state) {
       state.apptStatus = { deleteApptFailure: true }
+    },
+    cancelApptRequest (state) {
+      state.apptStatus = { cancelingAppt: true }
+    },
+    cancelApptSuccess (state,appts){
+      state.apptStatus = { cancelAppt: true }
+      state.apptsList = appts
+    },
+    cancelApptFailure(state) {
+      state.apptStatus = { finshApptFailure: true }
+    },
+    reportRequest (state) {
+      state.reportStatus = { requestingReport: true }
+    },
+    reportSuccess (state, report){
+      state.reportStatus = { reportSuccess: true }
+      state.reports = report
+    },
+    reportFailure(state) {
+      state.reportStatus = { reportFailure: true }
     }
   },
 
@@ -134,6 +156,43 @@ export const admin = {
               dispatch('alert/error', error, { root: true })
             }
           )
+      },
+      cancelAppointment (
+        { dispatch, commit }, appt_id) {
+        commit('cancelApptRequest')
+        appointmentService.cancelAppointment(appt_id)
+          .then(
+            response => {
+              const apptCancelStatus = response.msg
+              alert(response.msg)
+              commit('cancelApptSuccess', apptCancelStatus)
+              dispatch('alert/success', 'Canceled Appointment', { root: true })
+              commit('adminApptRequest')
+              appointmentService.getAdminAppointments().then(
+                response => {
+                  var localUser = JSON.parse(localStorage.getItem('localUser'))
+                  localUser['appointments'] = response.appointments
+                  localStorage.setItem('localUser', JSON.stringify(localUser))
+                  commit('adminApptSuccess', response.appointments)
+                })
+            },
+            error => {
+              commit('cancelApptFailure')
+              dispatch('alert/error', error, { root: true })
+            }
+          )
+      },
+      loadReport (
+        { dispatch, commit }, {reportType, patient, doctor, office}) {
+        commit('reportRequest')
+        adminService.getReport(reportType, patient, doctor, office).then(
+          response => {
+            commit('reportSuccess', response.report)
+            dispatch('alert/success', 'Report Retreived', { root: true })
+          },
+          error => {
+            commit('reportFailure')
+          })
       }
   }
 }

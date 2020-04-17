@@ -1,24 +1,23 @@
 <template>
-      <div class="row">
-        <h2 class='dashboard_header'>Dashboard</h2>
-        <NotificationMessage />
-        <div class="db">
-        <Profile class="db1" />
-        <tabs :options="{ useUrlFragment: false }" @clicked="tabClicked" @changed="tabChanged">
-          <tab name="Appointments">
-            <Appointments />
-          </tab>
-          <tab name="Prescriptions">
-            <Prescriptions />
-          </tab>
-           <tab name="Records">
-            <MedicalRecords />
-          </tab>
+  <div class="row">
+    <div class="row dashboard_header"><h2>Dashboard</h2></div>
+      <NotificationMessage />
+    <div class="db">
+    <Profile class="db1" />
+    <tabs :options="{ useUrlFragment: false }" @clicked="tabClicked" @changed="tabChanged">
+      <tab name="Appointments">
+        <Appointments />
+      </tab>
+      <tab name="Prescriptions">
+        <Prescriptions />
+      </tab>
+       <tab name="Records">
+        <MedicalRecords />
+      </tab>
+    </tabs>
 
-        </tabs>
-
-        </div>
-      </div>
+    </div>
+  </div>
 </template>
 <script>
 import Vue from 'vue';

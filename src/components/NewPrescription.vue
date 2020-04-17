@@ -33,7 +33,7 @@
       </div>
       <div class="col-70">
         <select type="text" id="apptId" name="apptId" v-model="apptId">
-          <option v-for="appt in appointments" v-if="appt.doctor_id===doctor.doctorId" v-bind:value="appt.appt_id">{{appt.appt_start_time}}</option>
+          <option v-for="appt in appointments" v-if="appt.doctor_id===doctor.doctorId && isTodayAppt(appt.appt_start_time) && appt.appt_status==='started'" v-bind:value="appt.appt_id">{{appt.appt_start_time}}</option>
         </select>
       </div>
     </div>
@@ -108,12 +108,14 @@ export default {
       dosage :'',
       indication: '',
       datePrescribed :'',
+      todayDate:'',
       submitted: false
     }
   },
     created() {
     this.loadDoctorMedications(),
       setInterval(this.getTimestamp, 1000);
+    this.getTodayDate();
   },
   watch: {
   },
@@ -154,6 +156,31 @@ export default {
       this.datePrescribed = dateTime;
       return this.datePrescribed
     },
+    getDate: function (str){
+      const dateobj=new Date(str);
+      const month = ('0' + (dateobj.getMonth() + 1)).slice(-2);
+      const date = ('0' + dateobj.getDate()).slice(-2);
+      const year = dateobj.getFullYear();
+      const formattedDate = year + '-' + month + '-' + date;
+      return formattedDate;
+    },
+    getTodayDate: function () {
+      const todayDate = new Date();
+      const month = ('0' + (todayDate.getMonth() + 1)).slice(-2);
+      const date = ('0' + todayDate.getDate()).slice(-2);
+      const year = todayDate.getFullYear();
+      const formattedDate = year + '-' + month + '-' + date;
+      this.todayDate=formattedDate;
+      return formattedDate;
+    },
+    isTodayAppt(str){
+      const apptDate=this.getDate(str)
+      if (this.todayDate==apptDate){
+        return 1;
+      }
+      return 0;
+    }
+
   }
 }
 </script>

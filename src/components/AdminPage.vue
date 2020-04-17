@@ -1,9 +1,8 @@
  <template>
   <div id="admin">
+    <div class="row dashboard_header"><h2>Admin Dashboard</h2></div>
     <div class="row container">
-      <h2 class='dashboard_header'>Admin Dashboard</h2>
       <div >
-      <Admin class="db1" />
       <tabs :options="{ useUrlFragment: false }" @clicked="tabClicked" @changed="tabChanged">
         <tab name="Patients">
           <AdminPatient />
@@ -29,7 +28,6 @@
 <script>
 import Vue from 'vue';
 import { mapState, mapActions } from 'vuex'
-import AdminProfile from './AdminProfile'
 import AdminPatient from './AdminPatient'
 import AdminDoctor from './AdminDoctor'
 import AdminAppointment from './AdminAppointment'
@@ -45,7 +43,6 @@ export default {
     return {}
   },
   components: {
-    AdminProfile,
     AdminPatient,
     AdminDoctor,
     AdminAppointment,

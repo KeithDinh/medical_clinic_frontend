@@ -1,6 +1,6 @@
 <template>
       <div class="row">
-        <h2 class='dashboard_header'>Doctor Dashboard</h2>
+        <div class="row dashboard_header"><h2>Doctor Dashboard</h2></div>
         <div class="db">
         <DoctorProfile class="db1" />
         <DoctorAppointments class="db2" />

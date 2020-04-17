@@ -14,7 +14,7 @@ export const doctorService = {
   getDoctorForAppointment,
   approveSpecialistAppt,
   getPhysician,
-  finishAppointment
+  updateAppointmentStatus
 }
 
 function getPhysician () {
@@ -119,14 +119,15 @@ function approveSpecialistAppt (appt_id) {
     .then(handleResponse)
 }
 
-  function finishAppointment (appt_id,appt_end_time) {
+function updateAppointmentStatus (appt_id,timestamp,appt_status) {
+  console.log(appt_id,timestamp,appt_status)
   let reqHeader = authorizationHeader()
     reqHeader['Content-Type'] = 'application/json'
     const requestOptions = {
       method: 'PUT',
       headers: reqHeader,
-      body: JSON.stringify({"appt_id":appt_id,"appt_end_time":appt_end_time})
+      body: JSON.stringify({"appt_id":appt_id,"timestamp":timestamp,"appt_status":appt_status})
     }
-    return fetch(`${config.apiUrl}/doctor/finish/appointment`, requestOptions)
+    return fetch(`${config.apiUrl}/doctor/update/apptstatus`, requestOptions)
       .then(handleResponse)
   }
