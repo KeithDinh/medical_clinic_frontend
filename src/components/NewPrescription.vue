@@ -33,7 +33,7 @@
       </div>
       <div class="col-70">
         <select type="text" id="apptId" name="apptId" v-model="apptId">
-          <option v-for="appt in appointments" v-if="appt.doctor_id===doctor.doctorId && isTodayAppt(appt.appt_start_time)" v-bind:value="appt.appt_id">{{appt.appt_start_time}}</option>
+          <option v-for="appt in appointments" v-if="appt.doctor_id===doctor.doctorId && isTodayAppt(appt.appt_start_time) && appt.appt_status==='started'" v-bind:value="appt.appt_id">{{appt.appt_start_time}}</option>
         </select>
       </div>
     </div>

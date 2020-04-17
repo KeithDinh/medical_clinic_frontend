@@ -19,7 +19,7 @@
                       <div class="text-info subtitle1">{{appt.appt_start_time |frontEndTimeFormat}}</div></td>
                   <td>{{ appt.reason_for_visit}}</td>
                   <td><div style="position:relative;text-align: right; margin-right: 0px"><button class="button-info round btn-small" style="font-size: 12px" v-on:click="patient(appt.patient_id)" >View</button></div></td>
-                  <td v-if="appt.appt_status==='pending'"><div style="position:relative;text-align: left"><button class="button-warning round btn-small" style="font-size: 12px" v-on:click="start(appt.appt_id)" >Start </button></div></td>
+                  <td v-if="appt.appt_status==='pending'"><div style="position:relative;text-align: left"><button class="button-warning round btn-small" style="font-size: 12px" v-on:click="start(appt.appt_id,appt.patient_id)" >Start </button></div></td>
                   <td v-if="appt.appt_status==='started'"><div style="position:relative;text-align: left"><button class="button-warning round btn-small" style="font-size: 12px" v-on:click="finish(appt.appt_id)" >Finish</button></div></td>
                 </tr>
               </template>
@@ -159,12 +159,14 @@ export default {
       const {dispatch} = this.$store
       dispatch('doctor/updateApptStatus', {appt_id, timestamp,appt_status})
     },
-    start(appt_id){
+    start(appt_id,patient_id){
       this.getTimestamp();
       this.appt_status='started'
       const {timestamp,appt_status} = this;
       const {dispatch} = this.$store
       dispatch('doctor/updateApptStatus', {appt_id, timestamp,appt_status})
+      this.patient(patient_id)
+
     },
 
   },
