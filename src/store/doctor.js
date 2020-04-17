@@ -96,15 +96,15 @@ export const doctor = {
     approveApptFailure(state) {
       state.doctorApptStatus = { approvingApptFailure: true }
     },
-    finishApptRequest (state) {
-      state.apptStatus = { finshingAppt: true }
+    updateApptStatusRequest (state) {
+      state.apptStatus = { updatingApptStatus: true }
     },
-    finishApptSuccess (state,appts){
-      state.apptStatus = { finshingAppt: true }
+    updateApptStatusSuccess (state,appts){
+      state.apptStatus = { updatingApptStatus: true }
       state.apptsList = appts
     },
-    finishApptFailure(state) {
-      state.apptStatus = { finishApptFailure: true }
+    updateApptStatusFailure(state) {
+      state.apptStatus = { updateApptStatusFailure: true }
     }
   },
   actions: {
@@ -288,14 +288,15 @@ export const doctor = {
           }
         )
     },
-    finishAppt (
-      { dispatch, commit }, {appt_id,appt_end_time}) {
-      commit('finishApptRequest')
-      doctorService.finishAppointment(appt_id,appt_end_time)
+    updateApptStatus (
+      { dispatch, commit }, {appt_id,timestamp,appt_status}) {
+        console.log("APP END TIME", timestamp)
+      commit('updateApptStatusRequest')
+      doctorService.updateAppointmentStatus(appt_id,timestamp,appt_status)
         .then(
           response => {
-            commit('finishApptSuccess')
-            dispatch('alert/success', 'appt is finished', { root: true })
+            commit('updateApptStatusSuccess')
+            dispatch('alert/success', 'appt status is updated', { root: true })
             commit('doctorApptRequest')
              const localUser = JSON.parse(localStorage.getItem('localUser'))
            doctorService.getDoctorData(localUser.doctor_id).then(
@@ -308,7 +309,7 @@ export const doctor = {
               })
           },
           error => {
-            commit('finishApptFailure')
+            commit('updateApptStatusFailure')
             dispatch('alert/error', error, { root: true })
           }
         )
