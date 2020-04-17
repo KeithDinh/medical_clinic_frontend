@@ -22,9 +22,9 @@
             Doctors
             <ul class="sub-menu">
               <li><a href="doctor-dashboard">Doctor Dashboard</a></li>
-               <hr class="style1">
+              <hr class="style1">
               <li><a href="doctor-patients">Patients List</a></li>
-               <hr class="style1">
+              <hr class="style1">
               <li><a href="update-doctor-profile">Update Profile</a></li>
             </ul>
           </li>
@@ -32,6 +32,8 @@
             Admin
             <ul class="sub-menu">
               <li><a href="admin">Admin Dashboard</a></li>
+              <hr class="style1">
+              <li><a href="reports">Reports</a></li>
             </ul>
           </li>
           <li><a to="office" href="office">Health Offices</a></li>
