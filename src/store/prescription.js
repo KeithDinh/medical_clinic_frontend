@@ -84,12 +84,11 @@ export const prescription = {
       const patient = JSON.parse(localStorage.getItem('patient'))
       commit('loadRxSuccess', patient.prescriptions)
     },
-    addPrescription ({ dispatch, commit }, { apptId, patient , medicationId, doseFormId, dosage, indication, datePrescribed }) {
-      alert("action entered")
+    addPrescription ({ dispatch, commit }, { apptId, patient , med, doseFormId, dosage, indication, datePrescribed }) {
       commit('addRxRequest')
-      let errors = validatePrescriptionForm(apptId, medicationId, doseFormId, dosage, indication)
+      let errors = validatePrescriptionForm(apptId, med.medication_id, doseFormId, dosage, indication)
       if (errors.length === 0) {
-        prescriptionService.addPrescription(apptId, patient.patientId , medicationId,  doseFormId, dosage, indication, datePrescribed)
+        prescriptionService.addPrescription(apptId, patient.patientId , med.medication_id,  doseFormId, dosage, indication, datePrescribed)
       .then(
         response => {
           commit('addRxSuccess', {apptId, patientId , medicationId,  doseFormId, dosage, indication, datePrescribed})
@@ -103,6 +102,7 @@ export const prescription = {
             }
           )
           dispatch('alert/success', 'New Prescription Added', { root: true })
+          alert("Prescription is added")
         }
       )
       }
