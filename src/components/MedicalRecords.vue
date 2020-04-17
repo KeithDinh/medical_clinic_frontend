@@ -1,18 +1,15 @@
 <template>
   <div class="medicalrecords">
     <hr class="style1">
-    <div v-if="userStatus.localUser != null && userStatus.localUser.role_id !=2">
-       <div style="position:relative;text-align: right;padding-right:10px">
-         <button v-if="!isOpen" class="button-info round" v-on:click="addClicked()">Add New</button>
-         <button v-if="isOpen" class="button-info round" v-on:click="addClicked()">Close</button>
-       </div>
+     <div style="position:relative;text-align: right;padding-right:10px">
+       <button v-if="!isOpen" class="button-info round" v-on:click="addClicked()">Add New</button>
+       <button v-if="isOpen" class="button-info round" v-on:click="addClicked()">Close</button>
+     </div>
 
-      <div v-if="isOpen">
-        <NewRecord/>
-       <hr class="style1" style="padding-bottom: 30px; margin-top:20px">
-      </div>
+    <div v-if="isOpen">
+      <NewRecord/>
+     <hr class="style1" style="padding-bottom: 30px; margin-top:20px">
     </div>
-
 
     <div class="table-border-round">
       <table >
@@ -64,11 +61,7 @@ export default {
   computed: {
     ...mapState('medicalRecords', {
       records: state => state.recordsList
-    }),
-      userStatus () {
-    // if you want to expose the entire sate
-      return this.$store.state.authentication
-    }
+    })
   },
   methods: {
     ...mapActions('medicalRecords', [
@@ -109,5 +102,9 @@ export default {
 
 </script>
 <style media="screen">
+
+.medicalrecords {
+  margin: 5px;
+}
 
 </style>
