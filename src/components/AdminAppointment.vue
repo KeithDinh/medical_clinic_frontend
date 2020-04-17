@@ -30,7 +30,8 @@
         <td>{{appt.booking_method}}</td>
         <td>{{appt.appointmentId}}</td>
         <td>
-          <button class="button" v-on:click="DeleteAppt(appt.appointmentId)">Delete</button>
+          <button class="button" v-if="appt.appt_status === 'pending'" v-on:click="CancelAppt(appt.appointmentId)">Cancel</button>       
+          <button class="button" v-if="appt.appt_status === 'pending'" v-on:click="DeleteAppt(appt.appointmentId)">Delete</button>
         </td>
       </tr>
     </table>
@@ -55,10 +56,14 @@ export default {
    methods: {
      ...mapActions('admin', [
        'loadAdminAppointments',
-       'deleteAppointment'
+       'deleteAppointment',
+       'cancelAppointment'
      ]),
      DeleteAppt(value) {
       this.deleteAppointment(value)
+     },
+     CancelAppt(value) {
+      this.cancelAppointment(value)
      }
    }
 }
