@@ -74,15 +74,14 @@ methods: {
     const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     const dateTime = date +' '+ time;
-    this.rxObject.datePrescribed = dateTime;
-    return this.rxObject.datePrescribed;
+    this.rxObject.date_prescribed = dateTime;
+    return this.rxObject.date_prescribed;
   },
  ...mapActions('prescription', [
      'updateRx'
    ]),
   update: function() {
      const { rxObject } = this
-     alert("inside Prescription Update Vue " + rxObject.first_name)
     this.updateRx(rxObject)
     disableModal
   }

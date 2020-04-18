@@ -5,15 +5,16 @@ const handleResponse = responseHandler.handleResponse
 
 export const prescriptionService = {
   getPrescriptions,
-  addPrescription
+  addPrescription,
+  updatePrescription
 }
 
-function getPrescriptions () {
+function getPrescriptions (patient_id) {
   const requestOptions = {
 	method: 'GET',
 	headers: authorizationHeader()
   }
-  return fetch(`${config.apiUrl}/patients/prescriptions`, requestOptions)
+  return fetch(`${config.apiUrl}/patients/prescriptions?patient_id=` + patient_id, requestOptions)
     .then(handleResponse)
 }
 
@@ -34,11 +35,10 @@ function updatePrescription (updateRxPayload) {
   reqHeader['Content-Type'] = 'application/json'
   const requestOptions = {
     method: 'PUT',
-    headers: { 'Authorization': 'Bearer ' + userToken(), 'Content-Type': 'application/json' },
+    headers: reqHeader,
     body: JSON.stringify(updateRxPayload)
   }
-  alert("alert something plzzzzzzzzzz")
-  return fetch(`${config.apiUrl}/patients/updateprescription`, updateRxPayload)
+  return fetch(`${config.apiUrl}/patients/updateprescription`, requestOptions)
     .then(handleResponse)
 }
 

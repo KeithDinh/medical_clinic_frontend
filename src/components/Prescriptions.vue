@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <hr class="style1">
-    <div v-if="userStatus.localUser != null && userStatus.localUser.role_id !=2">
+    <div v-if="userStatus.localUser != null && userStatus.localUser.role_id ==3">
       <div style="position:relative;text-align: right;padding-right:10px">
         <button v-if="!isOpen" class="button-info round" v-on:click="addClicked()">Add New</button>
         <button v-if="isOpen" class="button-info round" v-on:click="addClicked()">Close</button>
@@ -17,7 +17,7 @@
         <th>Medication</th>
         <th>Dose Form</th>
         <th>Dosage</th>
-        <th v-if="userStatus.localUser.role_id !=2">Edit</th>
+        <th v-if="userStatus.localUser.role_id ==3">Edit</th>
       </tr>
       <template v-for="rx in prescriptions">
         <tr>
@@ -28,7 +28,7 @@
            <td>{{ rx.medication_name }}</td>
           <td>{{ rx.dose_form_name }}</td>
           <td>{{ rx.dosage }}</td>
-          <td v-if="userStatus.localUser.role_id !=2">
+          <td v-if="userStatus.localUser.role_id ==3">
             <button @click="popUpModal(rx)">Edit</button>
           </td>
         </tr>
