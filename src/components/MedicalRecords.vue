@@ -1,7 +1,7 @@
 <template>
   <div class="medicalrecords">
     <hr class="style1">
-     <div style="position:relative;text-align: right;padding-right:10px">
+     <div v-if="userStatus.localUser != null && userStatus.localUser.role_id ==3" style="position:relative;text-align: right;padding-right:10px">
        <button v-if="!isOpen" class="button-info round" v-on:click="addClicked()">Add New</button>
        <button v-if="isOpen" class="button-info round" v-on:click="addClicked()">Close</button>
      </div>
@@ -61,7 +61,11 @@ export default {
   computed: {
     ...mapState('medicalRecords', {
       records: state => state.recordsList
-    })
+    }),
+       userStatus () {
+    // if you want to expose the entire sate
+      return this.$store.state.authentication
+    }
   },
   methods: {
     ...mapActions('medicalRecords', [
