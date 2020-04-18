@@ -9,6 +9,7 @@
       <!--    TODO:Jon, please take a look at this. the value of isOpen changes when button is clicked, but the value of isOpen in the div doesn't change. My idea is showing the form here, instead of dashboard-->
       <div class="prescription-form" v-if="isOpen"><NewPrescription /> <hr class="style1" style="padding-bottom: 30px; margin-top:20px"></div>
     </div>
+    <NewPrescription/ >
     <div class="table-border-round">
     <table>
       <tr>
@@ -75,7 +76,6 @@ export default {
       prescriptions: state => state.rxList
     }),
         userStatus () {
-    // if you want to expose the entire sate
       return this.$store.state.authentication
     }
   },
@@ -96,12 +96,6 @@ export default {
       } else {
         this.isOpen = true
       }
-    },
-    addingPrescription (e) {
-      this.submitted=true
-      const {apptId, patient, medicationId, doseFormId, dosage, indication, datePrescribed} = this
-      const {dispatch} = this.$store
-      dispatch('prescription/addPrescription', {apptId, patient , medicationId, doseFormId, dosage, indication, datePrescribed})
     },
     getTimestamp: function () {
       const today = new Date();
