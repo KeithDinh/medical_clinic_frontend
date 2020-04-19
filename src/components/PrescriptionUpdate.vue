@@ -16,8 +16,8 @@
       <option
         v-for="(dose_name, index) in dose_form_names"
         :key="index"
-        :selected="rxObject.dose_form_name === dose_name"
-        >{{ dose_name }}
+        :selected="rxObject.dose_form_name === dose_name['dose_form_name']"
+        >{{ dose_name['dose_form_name'] }}
       </option>
     </select>
 
@@ -26,8 +26,8 @@
       <option
         v-for="(med_name, index) in medication_names"
         :key="index"
-        :selected="rxObject.medication_name === med_name"
-        >{{ med_name }}
+        :selected="rxObject.medication_name === med_name['medication_name']"
+        >{{ med_name['medication_name'] }}
       </option>
     </select>
     <button v-on:click="update()" @click="disableModal">Save</button>
@@ -42,8 +42,6 @@ export default {
   data(){
     return{
       rxObject: {},
-       dose_form_names: ['Tablets','Capsules','Powder','Dusting powder','Cream','Paste','Gel','Suppositories',
-       'Syrup','Solution','Emulsion','Suspension','Inhaler','Aerosols','Caplets','Meltlet'],
     }
   },
   props: {
@@ -51,30 +49,31 @@ export default {
     disableModal: Function
   },
  created () {
-   setInterval(this.getTimestamp, 1000);
+   this.loadMedications();
+   this.loadDoseForms()
  },
  computed: {
    ...mapState('prescription', {
-     medication_names: state => state.medications
+     medication_names: state => state.medications,
+     dose_form_names: state => state.doseForms
    }),
+   getTimestamp: function () {
+     const today = new Date();
+     const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+     const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+     const dateTime = date +' '+ time;
+     this.rxObject.date_prescribed = dateTime;
+   },
  },
  mounted() {
 },
 
 methods: {
   ...mapActions('prescription', [
-      'updateRx','loadMedications'
+      'updateRx','loadMedications','loadDoseForms'
     ]),
-
-  getTimestamp: function () {
-    const today = new Date();
-    const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    const dateTime = date +' '+ time;
-    this.rxObject.date_prescribed = dateTime;
-    return this.rxObject.date_prescribed;
-  },
   update: function() {
+    this.getTimestamp
     const { rxObject } = this
     this.updateRx(rxObject)
     disableModal

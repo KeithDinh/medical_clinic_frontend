@@ -8,7 +8,8 @@ const initialState = {
   rxList: [],
   newRxStatus:{},
   newRx:[],
-  medications: []
+  medications: [],
+  doseForms:[]
 }
 
 const validatePrescriptionForm = (apptId, medicationId, doseFormId, dosage,indication) => {
@@ -78,13 +79,11 @@ export const prescription = {
     updateRxRequest (state) {state.rxStatus = {updatingRx: true}},
     updateRxSuccess (state) {state.rxStatus = {updatedRx: true}},
     updateRxFailure (state) {state.rxStatus = {updateRx: true}},
-    loadMedSuccess(state, medObjects){state.medications= medObjects.map((singleObject)=>{
-      return singleObject.medication_name;
-    })}
+    loadMedSuccess(state, medObjects){state.medications= medObjects},
+    loadDoseFormsSuccess(state, doseFormObjects){state.doseForms= doseFormObjects}
   },
   actions: {
     loadMedications({ dispatch, commit,state}){
-      alert("in action")
       prescriptionService.getMedications().then(
         response => {
           const medications = response
@@ -92,7 +91,20 @@ export const prescription = {
           dispatch('alert/success', 'Medications Retreived', { root: true })
         },
         error => {
-          alert("action is wrong");
+          alert("loadMedications is wrong");
+          dispatch('alert/error', error, { root: true })
+        }
+      )
+    },
+    loadDoseForms({ dispatch, commit,state}){
+      prescriptionService.getDoseForms().then(
+        response => {
+          const doseForms = response
+          commit('loadDoseFormsSuccess', doseForms)
+          dispatch('alert/success', 'Dose FOrms Retreived', { root: true })
+        },
+        error => {
+          alert("loadDoseForms is wrong");
           dispatch('alert/error', error, { root: true })
         }
       )
@@ -101,7 +113,6 @@ export const prescription = {
       commit('loadRxRequest')
       const patient = JSON.parse(localStorage.getItem('patient'))
       commit('loadRxSuccess', patient.prescriptions)
-      dispatch('loadMedications')
     },
     addPrescription ({ dispatch, commit }, { apptId, patient , med, doseFormId, dosage, indication, datePrescribed }) {
       commit('addRxRequest')
@@ -138,11 +149,12 @@ export const prescription = {
           prescriptionService.getPrescriptions(rxObject.patient_id)
             .then(
               response => {
-                // *********************** JON: We need to reload the prescription list *******************
+                // TODO: JON: We need to reload the prescription list *******************
                 const localUser = JSON.parse(localStorage.getItem('localUser'))
-                localUser.prescription = response.prescription
+                localUser.prescriptions = response.prescriptions
+                alert(response.prescriptions)
                 localStorage.setItem('localUser', JSON.stringify(localUser))
-                commit('updateRxSuccess', response.prescription)
+                commit('updateRxSuccess', response.prescriptions)
                 dispatch('alert/success', 'Prescription Updated', { root: true })
                 //*****************************************************************************************
               },

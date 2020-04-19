@@ -7,7 +7,8 @@ export const prescriptionService = {
   getPrescriptions,
   addPrescription,
   updatePrescription,
-  getMedications
+  getMedications,
+  getDoseForms
 }
 
 function getPrescriptions (patient_id) {
@@ -51,4 +52,15 @@ function getMedications(){
     headers: reqHeader,
   }
   return fetch(`${config.apiUrl}/medications`, requestOptions).then(handleResponse)
+}
+
+
+function getDoseForms(){
+  let reqHeader = authorizationHeader()
+  reqHeader['Content-Type'] = 'application/json'
+  const requestOptions = {
+    method: 'GET',
+    headers: reqHeader,
+  }
+  return fetch(`${config.apiUrl}/doseForms`, requestOptions).then(handleResponse)
 }
