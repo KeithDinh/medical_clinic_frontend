@@ -13,7 +13,8 @@ const initialState = {
   adminOfficeStatus: {},
   offices:{},
   reportStatus: {},
-  reports: {}
+  reports: {},
+  reportInformation:{}
 }
 
 
@@ -89,7 +90,10 @@ export const admin = {
     },
     reportFailure(state) {
       state.reportStatus = { reportFailure: true }
-    }
+    },
+    reportInformationSuccess (state, report){
+      state.reportInformation = report
+    },
   },
 
   actions: {
@@ -181,6 +185,19 @@ export const admin = {
               dispatch('alert/error', error, { root: true })
             }
           )
+      },
+      loadUserReport (
+          { dispatch, commit }, {firstDate, secondDate, roleId}) {
+          commit('reportRequest')
+          adminService.getUserReport(firstDate, secondDate, roleId).then(
+            response => {
+              commit('reportSuccess', response.report)
+              commit('reportInformationSuccess', response.information)
+              dispatch('alert/success', 'Report Retreived', { root: true })
+            },
+            error => {
+              commit('reportFailure')
+            })
       },
       loadReport (
         { dispatch, commit }, {reportType, patient, doctor, office}) {

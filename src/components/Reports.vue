@@ -15,6 +15,32 @@
                 </select>
               </div>
             </div>
+          <div v-if = "reportType === 'Number of New Users'">
+             <div class="filter left">
+              <div class="row label">Filter by Roles</div>
+              <div class="row select">
+                <select type="text" v-model="roleId" id="reportType" name="reportType">
+                  <option value="all">All</option>
+                  <option value="3"> Doctor </option>
+                  <option value="2"> Patient </option>
+                </select>
+              </div>
+            </div>
+            <div class="filter left">
+              <div class="row label">Select A Start Date</div>
+              <div class="row select">
+              <datepicker :disabled-dates="disabledDates" v-model="firstDate" placeholder="Select Start Date" format="yyyy-MM-dd" id="reportType" name="reportType"></datepicker>
+              </div>
+            </div>
+             <div class="filter left">
+              <div class="row label">Select A End Date</div>
+              <div class="row select">
+              <datepicker :disabled-dates="disabledDates" v-model="secondDate" placeholder="Select End Date" format="yyyy-MM-dd" id="reportType" name="reportType"></datepicker>
+              </div>
+            </div>
+            <div class="row submit"><button v-on:click="GetUserReport()">GET REPORT</button></div>
+          </div>
+          <div v-else>
             <div class="filter left">
               <div class="row label">Filter by patient</div>
               <div class="row select">
@@ -42,8 +68,10 @@
                 </select>
               </div>
             </div>
-          </div>
           <div class="row submit"><button v-on:click="GetReport()">GET REPORT</button></div>
+          </div>
+          
+      </div>
         </form>
         <table v-if="reportType === 'Canceled Appointments'">
           <tr>
@@ -77,11 +105,41 @@
             <td>{{ report.reason_for_visit }}</td>
           </tr>
         </table>
+        <table v-else-if="reportType === 'Number of New Users'">
+          <tr>
+            <th>Start Date</th>
+            <th>End Date </th>
+            <th>Number of New Users</th>
+          </tr>
+          <tr>
+            <td>{{firstDate}}</td>
+            <td>{{secondDate}}</td>
+            <td>{{reports.count}}</td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <table >
+                <tr>
+                  <th style="width:40%">Role</th>
+                  <th style="width:40%">Email </th>
+                  <th>Date Account Created</th>
+                </tr>
+                <tr v-for="info in reportInformation">
+                  <td>{{info.role_name}}</td>
+                  <td>{{info.email}}</td>
+                  <td>{{info.date_account_created}}</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        
       </div>
     </div>
   </div>
 </template>
 <script>
+import Datepicker from 'vuejs-datepicker'
 import Vue from 'vue';
 import { mapState, mapActions } from 'vuex'
 import {Tabs, Tab} from 'vue-tabs-component';
@@ -93,18 +151,23 @@ export default {
   data () {
     return {
       reportType: '',
+      firstDate:'',
+      secondDate:'',
       reportTypes: [
         'Average Appointment Duration',
         'Canceled Appointments',
+        'Number of New Users'
       ],
       patient: 'all',
       doctor: 'all',
-      office: 'all'
+      office: 'all',
+      roleId:'all'      
     }
   },
   components: {
     Tabs,
-    Tab
+    Tab,
+    Datepicker
   },
   created () {
     this.loadAdminPatients()
@@ -116,7 +179,11 @@ export default {
       patients: state => state.patients,
       doctors: state => state.doctors,
       offices: state => state.offices,
-      reports: state => state.reports
+      reports: state => state.reports,
+      reportInformation: state => state.reportInformation
+    }),
+    ...mapState('dates', {
+      disabledDates: state => state.disabledDates
     })
   },
   methods: {
@@ -124,11 +191,19 @@ export default {
       'loadAdminPatients',
       'loadAdminDoctors',
       'loadAdminOffices',
-      'loadReport'
+      'loadReport',
+      'loadUserReport'
+    ]),
+    ...mapActions('dates', [
+      'loadDates',
     ]),
     GetReport () {
       const { reportType, patient, doctor, office } = this
       this.loadReport({ reportType, patient, doctor, office })
+    },
+    GetUserReport (){
+      const { firstDate, secondDate, roleId } = this
+      this.loadUserReport({ firstDate, secondDate, roleId })
     }
   }
 }

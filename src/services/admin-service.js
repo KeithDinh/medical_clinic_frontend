@@ -6,7 +6,8 @@ const handleResponse = responseHandler.handleResponse
 export const adminService = {
   getAdmin,
   getDoctor,
-  getReport
+  getReport,
+  getUserReport
 }
 
 function getAdmin () {
@@ -40,5 +41,17 @@ function getReport (reportType, patient, doctor, office) {
     body: JSON.stringify({reportType, patient, doctor, office})
   }
   return fetch(`${config.apiUrl}/admin/reports`, requestOptions)
+    .then(handleResponse)
+}
+
+function getUserReport (firstDate, secondDate, roleId) {
+  let reqHeader = authorizationHeader()
+  reqHeader['Content-Type'] = 'application/json'
+  const requestOptions = {
+    method: 'POST',
+    headers: reqHeader,
+    body: JSON.stringify({firstDate, secondDate, roleId})
+  }
+  return fetch(`${config.apiUrl}/admin/user/reports`, requestOptions)
     .then(handleResponse)
 }
