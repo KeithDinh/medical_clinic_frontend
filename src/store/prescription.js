@@ -7,7 +7,8 @@ const initialState = {
   rxStatus: {},
   rxList: [],
   newRxStatus:{},
-  newRx:[]
+  newRx:[],
+  medications: []
 }
 
 const validatePrescriptionForm = (apptId, medicationId, doseFormId, dosage,indication) => {
@@ -77,12 +78,30 @@ export const prescription = {
     updateRxRequest (state) {state.rxStatus = {updatingRx: true}},
     updateRxSuccess (state) {state.rxStatus = {updatedRx: true}},
     updateRxFailure (state) {state.rxStatus = {updateRx: true}},
+    loadMedSuccess(state, medObjects){state.medications= medObjects.map((singleObject)=>{
+      return singleObject.medication_name;
+    })}
   },
   actions: {
+    loadMedications({ dispatch, commit,state}){
+      alert("in action")
+      prescriptionService.getMedications().then(
+        response => {
+          const medications = response
+          commit('loadMedSuccess', medications)
+          dispatch('alert/success', 'Medications Retreived', { root: true })
+        },
+        error => {
+          alert("action is wrong");
+          dispatch('alert/error', error, { root: true })
+        }
+      )
+    },
     loadPrescriptions ({ dispatch, commit,state}) {
       commit('loadRxRequest')
       const patient = JSON.parse(localStorage.getItem('patient'))
       commit('loadRxSuccess', patient.prescriptions)
+      dispatch('loadMedications')
     },
     addPrescription ({ dispatch, commit }, { apptId, patient , med, doseFormId, dosage, indication, datePrescribed }) {
       commit('addRxRequest')

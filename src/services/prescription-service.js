@@ -6,7 +6,8 @@ const handleResponse = responseHandler.handleResponse
 export const prescriptionService = {
   getPrescriptions,
   addPrescription,
-  updatePrescription
+  updatePrescription,
+  getMedications
 }
 
 function getPrescriptions (patient_id) {
@@ -42,4 +43,12 @@ function updatePrescription (updateRxPayload) {
     .then(handleResponse)
 }
 
-// NEED GET MEDICATIONS TO SUBSTITUTE THE medication_names IN PrescriptionUpdate.VUE
+function getMedications(){
+  let reqHeader = authorizationHeader()
+  reqHeader['Content-Type'] = 'application/json'
+  const requestOptions = {
+    method: 'GET',
+    headers: reqHeader,
+  }
+  return fetch(`${config.apiUrl}/medications`, requestOptions).then(handleResponse)
+}
