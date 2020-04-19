@@ -44,15 +44,6 @@ export default {
       rxObject: {},
        dose_form_names: ['Tablets','Capsules','Powder','Dusting powder','Cream','Paste','Gel','Suppositories',
        'Syrup','Solution','Emulsion','Suspension','Inhaler','Aerosols','Caplets','Meltlet'],
-       // NEED FUNCTION IN Prescription-services for these lists, hella longgggggggggg
-       medication_names: [
-         'Abacavir Sulfate','Abarelix','Abatacept','Abiciximab','Abelcet','Abilify','Abraxane','Accutane','Acebutolol','Acetaminophen','Advicor',
-'Agrylin','Aciphex','Acitretin','Amino Acids','Asparaginase','Asacol','Aspirin','Bacitracin','Baclofen','Bactrim','Bactroban Nasal','Balsalazide',
-'Banzel','Baraclude','Baycol','Bayer','Becaplermin','Benconase','Benadryl','Benazepril','Benefix','Benetyl','Benicar','BenzaClin','Benzamycin',
-'Cantil','Canasa','Capoten','Captopril','Carac','Carbamazepine','Carbatrol','Cardiolite','Carmustine','Carnitor','Ceftin','Cefuroxime','Cetuximab',
-'Dacogen','Dalmane','Dapsone','Daraprim','Darvon','DDAVP','Daypro','Definity','Deferasirox','Efavirenz','Effexor','Eflornithine','Emla','Endometrin',
-'Extina','Chlorpheniramine Maleate','Phenylephrine Bitartrate','Tussin DM','Cold Remedy Non-Drowsy Quick Dissolving','Efferverscent Cold Relief',
-'Zinc Lozenges Cold Relief','Fluticasone Propionate Nasal Spray, USP','Theraflu','Tylenol Cold Flue Severe','Emergency-C Support Drink 500mg']
     }
   },
   props: {
@@ -63,12 +54,18 @@ export default {
    setInterval(this.getTimestamp, 1000);
  },
  computed: {
-
+   ...mapState('prescription', {
+     medication_names: state => state.medications
+   }),
  },
  mounted() {
 },
 
 methods: {
+  ...mapActions('prescription', [
+      'updateRx','loadMedications'
+    ]),
+
   getTimestamp: function () {
     const today = new Date();
     const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -77,11 +74,8 @@ methods: {
     this.rxObject.date_prescribed = dateTime;
     return this.rxObject.date_prescribed;
   },
- ...mapActions('prescription', [
-     'updateRx'
-   ]),
   update: function() {
-     const { rxObject } = this
+    const { rxObject } = this
     this.updateRx(rxObject)
     disableModal
   }
