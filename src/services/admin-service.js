@@ -52,6 +52,6 @@ function getUserReport (firstDate, secondDate, roleId) {
     headers: reqHeader,
     body: JSON.stringify({firstDate, secondDate, roleId})
   }
-  return fetch(`${config.apiUrl}/admin/user/reports`, requestOptions)
+  return fetch(`${config.apiUrl}/admin/reports`, requestOptions)
     .then(handleResponse)
 }

@@ -202,6 +202,8 @@ export default {
       this.loadReport({ reportType, patient, doctor, office })
     },
     GetUserReport (){
+      this.firstDate=this.firstDate.toString() 
+      this.secondDate=this.secondDate.toString() 
       const { firstDate, secondDate, roleId } = this
       this.loadUserReport({ firstDate, secondDate, roleId })
     }
