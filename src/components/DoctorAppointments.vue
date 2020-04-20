@@ -72,6 +72,7 @@
                 <th>Patient Name</th>
                 <th>Office Name</th>
                 <th>Doctor</th>
+                <th>Date and Time</th>
                 <th>Reason for Visit</th>
                 <th>Approve</th>
               </tr>
@@ -80,6 +81,8 @@
                    <td style="text-align: left">{{ appt.patient}}<br><div class="subtitle1">MRN: {{appt.patient_id}}</div></td>
                   <td>{{ appt.office}}</td>
                   <td>{{appt.doctor}}</td>
+                  <td>{{ appt.appt_start_time | frontEndDateFormat}} <br>
+                    <div class="text-info subtitle1">{{appt.appt_start_time | frontEndTimeFormat}}</div></td>
                   <td>{{ appt.reason_for_visit}}</td>
                   <td v-if="appt.appt_status=='need approval'">
                     <div style="position:relative;text-align: right">
