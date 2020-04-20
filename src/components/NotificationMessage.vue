@@ -1,18 +1,19 @@
 <template>
-  <div class="Messagebox">
-    <div class=messageTitle><h4 class="notification">NOTIFICATION <br>ALERTS!</h4>
-    <div class="messages">
-    <template v-for="message in messages">
-       <div >
-        <span class="sendingTime">{{message.sending_time}}</span>
-       </div>
-        <div class="alert">
-          {{message.message}}
-        </div>
-    </template>
+<div class="Messagebox">
+  <div class="dropdown">
+    <span><img class="logo"src="https://image.flaticon.com/icons/svg/1827/1827301.svg"> NOTIFICATION ALERTS! </span>
+    <div class="dropdown-content">
+      <template v-for="message in messages">
+            <div >
+                <span class="sendingTime">{{message.sending_time}}</span>
+            </div>
+              <div class="alert">
+                  {{message.message}}
+              </div>
+          </template>
+    </div>  
   </div>
-  </div>
-  </div>
+</div>
 </template>
 
 
@@ -45,13 +46,14 @@ export default {
 
 .notification {
   text-align: center;
-  background: yellow;
+  background: red;
   border-radius: 30%;
   margin: 10px;
 }
 
 .Messagebox {
-  padding: 15px 15px;
+  padding: 20px 20px;
+  padding-bottom: 40px;
 }
 
 .messageTitle {
@@ -65,7 +67,7 @@ export default {
 }
 
 .messages {
-  padding: 10px 15px;
+  padding: 15px 15px;
 
 }
 
@@ -77,19 +79,46 @@ export default {
 }
 
 .alert {
-  text-align: center;
+  text-align: left;
   font-size: 12px;
-  padding: 1px;
-  width: 60%;
-  background-color: #f44336;
-  border-radius: 25px;
-  padding: 10px;
+  background-color: #00c7db;
+  border-radius: 5px;
+  padding: 5px 5px;
   color: white;
   margin-bottom: 0.2px;
 
 }
 
+.dropdown {
+  text-align: center;
+  position: absolute;
+  display: inline-block;
+  background: red;
+  border-radius: 10px;
+  padding: 10px;
+  margin-left: 20px;
+  color: white;
+  width: 20%;
 
+}
 
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #F0F0F0;
+  border-radius: 10px;
+  min-width: 160px;
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.logo {
+  width: 20px;
+}
 
 </style>
+
