@@ -189,6 +189,7 @@ export const admin = {
       loadUserReport (
           { dispatch, commit }, {firstDate, secondDate, roleId}) {
           commit('reportRequest')
+          
           adminService.getUserReport(firstDate, secondDate, roleId).then(
             response => {
               commit('reportSuccess', response.report)
