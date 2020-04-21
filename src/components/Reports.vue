@@ -7,71 +7,71 @@
       <div class="row report-form">
         <form @submit.prevent="handleSubmit">
           <div class="row filters">
-            <div class="filter left">
-              <div class="row label">Report Type</div>
-              <div class="row select">
-                <select type="text" v-model="reportType" id="reportType" name="reportType">
-                  <option v-for="type in reportTypes" v-bind:value="type">{{ type }}</option>
-                </select>
+            <div class="row inputs">
+              <div class="filter left">
+                <div class="row label">Report Type</div>
+                <div class="row select">
+                  <select type="text" v-model="reportType" id="reportType" name="reportType">
+                    <option v-for="type in reportTypes" v-bind:value="type">{{ type }}</option>
+                  </select>
+                </div>
               </div>
-            </div>
-          <div v-if = "reportType === 'Number of New Users'">
-             <div class="filter left">
-              <div class="row label">Filter by Roles</div>
-              <div class="row select">
-                <select type="text" v-model="roleId" id="reportType" name="reportType">
-                  <option value="all">All</option>
-                  <option value="3"> Doctor </option>
-                  <option value="2"> Patient </option>
-                </select>
+              <div v-if = "reportType === 'Number of New Users'">
+                <div class="filter left">
+                  <div class="row label">Filter by Roles</div>
+                  <div class="row select">
+                    <select type="text" v-model="roleId" id="reportType" name="reportType">
+                      <option value="all">All</option>
+                      <option value="3"> Doctor </option>
+                      <option value="2"> Patient </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="filter left">
+                  <div class="row label">Select A Start Date</div>
+                  <div class="row select">
+                  <datepicker :disabled-dates="disabledDates" v-model="firstDate" placeholder="Select Start Date" format="yyyy-MM-dd" id="reportType" name="reportType"></datepicker>
+                  </div>
+                </div>
+                <div class="filter left">
+                  <div class="row label">Select A End Date</div>
+                  <div class="row select">
+                  <datepicker :disabled-dates="disabledDates" v-model="secondDate" placeholder="Select End Date" format="yyyy-MM-dd" id="reportType" name="reportType"></datepicker>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="filter left">
-              <div class="row label">Select A Start Date</div>
-              <div class="row select">
-              <datepicker :disabled-dates="disabledDates" v-model="firstDate" placeholder="Select Start Date" format="yyyy-MM-dd" id="reportType" name="reportType"></datepicker>
-              </div>
-            </div>
-             <div class="filter left">
-              <div class="row label">Select A End Date</div>
-              <div class="row select">
-              <datepicker :disabled-dates="disabledDates" v-model="secondDate" placeholder="Select End Date" format="yyyy-MM-dd" id="reportType" name="reportType"></datepicker>
-              </div>
-            </div>
-            <div class="row submit"><button v-on:click="GetUserReport()">GET REPORT</button></div>
-          </div>
-          <div v-else>
-            <div class="filter left">
-              <div class="row label">Filter by patient</div>
-              <div class="row select">
-                <select type="text" v-model="patient" id="reportType" name="reportType">
-                  <option value="all">All</option>
-                  <option v-for="pat in patients" v-bind:value="pat.patientId">{{ pat.firstName }} {{ pat.middleInit }} {{ pat.lastName }} patient id: {{ pat.patientId }}</option>
-                </select>
-              </div>
-            </div>
-            <div class="filter left">
-              <div class="row label">Filter by doctor</div>
-              <div class="row select">
-                <select type="text" v-model="doctor" id="reportType" name="reportType">
-                  <option value="all">All</option>
-                  <option v-for="doc in doctors" v-bind:value="doc.doctorId">{{ doc.firstName }} {{ doc.middleInit }} {{ doc.lastName }} doctor id: {{ doc.doctorId }}</option>
-                </select>
-              </div>
-            </div>
-            <div class="filter left">
-              <div class="row label">Filter by office</div>
-              <div class="row select">
-                <select type="text" v-model="office" id="reportType" name="reportType">
-                  <option value="all">All</option>
-                  <option v-for="off in offices" v-bind:value="off.office_id">{{ off.office_name }} office id: {{ off.office_id }}</option>
-                </select>
+              <div v-else>
+                <div class="filter left">
+                  <div class="row label">Filter by patient</div>
+                  <div class="row select">
+                    <select type="text" v-model="patient" id="reportType" name="reportType">
+                      <option value="all">All</option>
+                      <option v-for="pat in patients" v-bind:value="pat.patientId">{{ pat.firstName }} {{ pat.middleInit }} {{ pat.lastName }} patient id: {{ pat.patientId }}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="filter left">
+                  <div class="row label">Filter by doctor</div>
+                  <div class="row select">
+                    <select type="text" v-model="doctor" id="reportType" name="reportType">
+                      <option value="all">All</option>
+                      <option v-for="doc in doctors" v-bind:value="doc.doctorId">{{ doc.firstName }} {{ doc.middleInit }} {{ doc.lastName }} doctor id: {{ doc.doctorId }}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="filter left">
+                  <div class="row label">Filter by office</div>
+                  <div class="row select">
+                    <select type="text" v-model="office" id="reportType" name="reportType">
+                      <option value="all">All</option>
+                      <option v-for="off in offices" v-bind:value="off.office_id">{{ off.office_name }} office id: {{ off.office_id }}</option>
+                    </select>
+                  </div>
+                </div>
               </div>
             </div>
           <div class="row submit"><button v-on:click="GetReport()">GET REPORT</button></div>
-          </div>
-
-      </div>
+        </div>
         </form>
         <table v-if="reportType === 'Canceled Appointments'">
           <tr>
@@ -248,7 +248,7 @@ export default {
 <style>
 .report-form {padding:80px 0;}
 .report-form table {margin:40px 0 0;}
-.report-form .submit {margin:30px 0 0;text-align:center;}
+.report-form .submit {margin:15px 0 0;text-align:center;}
 .report-form .submit button {color:#fff;padding:10px 30px;border:none;border-radius:50px;background:#00c7db;}
 .filters {background:#888;padding:20px 10px 25px;}
 .filters .filter {width:25%;padding:10px}

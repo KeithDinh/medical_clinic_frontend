@@ -1,6 +1,6 @@
 <template>
-  <div class="db-col2">
-    <tabs :options="{ useUrlFragment: false }" @clicked="tabClicked" @changed="tabChanged">
+  <div>
+    <tabs class="tabs" :options="{ useUrlFragment: false }" @clicked="tabClicked" @changed="tabChanged">
           <tab name="Today" class="table-border-round" >
              <table>
               <tr>

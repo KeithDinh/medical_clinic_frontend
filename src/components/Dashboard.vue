@@ -1,21 +1,21 @@
 <template>
   <div class="row">
     <div class="row dashboard_header"><h2>Dashboard</h2></div>
-      <NotificationMessage />
-    <div class="db">
-    <Profile class="db1" />
-    <tabs :options="{ useUrlFragment: false }" @clicked="tabClicked" @changed="tabChanged">
-      <tab name="Appointments">
-        <Appointments />
-      </tab>
-      <tab name="Prescriptions">
-        <Prescriptions />
-      </tab>
-       <tab name="Records">
-        <MedicalRecords />
-      </tab>
-    </tabs>
-
+    <div class="row dashboard">
+      <Profile class="db-col1" />
+      <div class="db-col2">
+        <tabs class="tabs" :options="{ useUrlFragment: false }" @clicked="tabClicked" @changed="tabChanged">
+          <tab name="Appointments">
+            <Appointments />
+          </tab>
+          <tab name="Prescriptions">
+            <Prescriptions />
+          </tab>
+           <tab name="Records">
+            <MedicalRecords />
+          </tab>
+        </tabs>
+      </div>
     </div>
   </div>
 </template>
@@ -29,7 +29,6 @@ import Profile from './Profile'
 import Appointments from './Appointments'
 import Prescriptions from './Prescriptions'
 import MedicalRecords from './MedicalRecords'
-import NotificationMessage from "./NotificationMessage";
 export default {
   name: 'Dashboard',
   components: {
@@ -37,7 +36,6 @@ export default {
     Appointments,
     Prescriptions,
     MedicalRecords,
-    NotificationMessage,
     Tabs,
     Tab
   },
@@ -56,10 +54,8 @@ export default {
 <style media="screen">
 /* patient profile and info layout */
   .dashboard_header{ color: white; background-color: #15558d; padding: 20px;text-align: left;}
-  .db{display: flex;  margin-top: 30px;}
+  .db{display: flex;}
   .db>*{background-color: #fff;  border: 1px solid rgba(0,0,0,0.1); border-radius: 7px;}
-  .db1{width: 300px; margin: 0 30px 0 30px;}
-  .db2{width: 300px; margin: 0 30px 0 15px;}
 
   /* TABS*/
 .tabs-component-tabs {
@@ -82,16 +78,9 @@ export default {
   /*z-index: 2;*/
   /*transform: translateY(0);*/
 }
-  .tabs-component-tab-a {
-  align-items: center;
-  color: inherit;
-  display: flex;
-  padding: 0.4em 1.5em;
-  text-decoration: none;
-    border-radius:25px
-}
+
   .tabs-component-panels {
-  padding: 4em 0;
+  padding: 0 0 20px;
 }
 
 

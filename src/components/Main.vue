@@ -138,8 +138,8 @@ export default {
 
 .mainBG {
   position:relative;
-  background-size: cover;
-  background-image: url("/static/images/female-doctor.jpg");
+  background-size: contain;
+  background-image: url("/static/images/female-doctor-cropped.jpg");
   background-repeat: no-repeat;
   background-position: center;
   color: #0d75a6;
@@ -157,8 +157,7 @@ export default {
 h1 {font-weight:700;}
 h2 {font-weight:700;}
 
-.overlay {height:100%;width:100%;display:block;position:absolute;top:0;left:0;background: linear-gradient(90deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.8) 35%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 80%);}
-
+.overlay {height:100%;width:100%;display:block;position:absolute;top:0;left:0;background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 30%, rgba(255,255,255,0) 50%, rgba(255,255,255,0) 60%, rgba(255,255,255,1) 80%);}
 
 .specialist {
   padding:50px 0 80px;
