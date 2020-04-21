@@ -5,7 +5,8 @@ const initialState = {
   recordsStatus: {},
   recordsList: [],
   newRecordStatus:{},
-  newRecord:[]
+  newRecord:[],
+  updateRecordStatus: {}
 }
 
 const validateRecordForm = (apptId, height,weight,diagnoses,labTesting,treatment, newPrescriptions) => {
@@ -55,6 +56,9 @@ export const medicalRecords = {
       state.newRecordStatus={postedNewRecord:true}
       state.newRecord=newRecord
     },
+    updateRecRequest (state) {state.updateRecordStatus = {updatingRec: true}},
+    updateRecSuccess (state) {state.updateRecordStatus = {updatedRec: true}},
+    updateRecFailure (state) {state.updateRecordStatus = {updateRec: true}},
   },
   actions: {
     receiveRecords (
@@ -95,8 +99,21 @@ export const medicalRecords = {
       else{
         alert("Missing Fields")
       }
+    },
+    updateRecord ({ dispatch, commit, state }, recObject) {
+      
+      commit('updateRecRequest')
+      recordsService.editRecord(recObject).then(
+        response => {
+          commit('updateRecSuccess')
+          commit('loadRecRequest')
+          // TODO: Jon I'm stuck at reloading the list of records.
+          // If reload the page after updated, it will keep the origin
+          // The only way to validate the update is logging out and logging in again.
+          dispatch('alert/success', 'Record Updated', { root: true })
+
+        })
     }
   }
 
 }
-

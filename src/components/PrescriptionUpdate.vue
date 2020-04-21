@@ -22,7 +22,7 @@
     </select>
 
     <label for="medication_name">Medication</label><br>
-    <select type="text" v-model="rxObject.medication_name" id="medication_name" name="medication_name">
+    <select type="text" id="medication_name" name="medication_name">
       <option
         v-for="(med_name, index) in medication_names"
         :key="index"
@@ -49,31 +49,23 @@ export default {
     disableModal: Function
   },
  created () {
-   this.loadMedications();
-   this.loadDoseForms()
  },
  computed: {
    ...mapState('prescription', {
      medication_names: state => state.medications,
      dose_form_names: state => state.doseForms
    }),
-   getTimestamp: function () {
-     const today = new Date();
-     const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-     const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-     const dateTime = date +' '+ time;
-     this.rxObject.date_prescribed = dateTime;
-   },
  },
  mounted() {
 },
 
 methods: {
   ...mapActions('prescription', [
-      'updateRx','loadMedications','loadDoseForms'
+      'updateRx'
     ]),
   update: function() {
-    this.getTimestamp
+    this.rxObject.date_prescribed = (new Date()).toString().substr(4,20);
+    alert(this.rxObject.date_prescribed)
     const { rxObject } = this
     this.updateRx(rxObject)
     disableModal

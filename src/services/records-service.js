@@ -5,7 +5,8 @@ const handleResponse = responseHandler.handleResponse
 
 export const recordsService = {
   getMedicalRecords,
-  putRecord
+  putRecord,
+  editRecord
 }
 
 function getMedicalRecords () {
@@ -27,5 +28,17 @@ function putRecord (apptId, patientId, height, weight,diagnoses,labTesting, trea
   }
 
   return fetch(`${config.apiUrl}/doctor/addrecord`, requestOptions)
+    .then(handleResponse)
+}
+
+function editRecord (recordPayload) {
+  let reqHeader = authorizationHeader()
+  reqHeader['Content-Type'] = 'application/json'
+  const requestOptions = {
+    method: 'PUT',
+    headers: reqHeader,
+    body: JSON.stringify(recordPayload)
+  }
+  return fetch(`${config.apiUrl}/doctor/updateRecord`, requestOptions)
     .then(handleResponse)
 }

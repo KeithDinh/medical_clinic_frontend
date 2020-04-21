@@ -91,7 +91,6 @@ export const prescription = {
           dispatch('alert/success', 'Medications Retreived', { root: true })
         },
         error => {
-          alert("loadMedications is wrong");
           dispatch('alert/error', error, { root: true })
         }
       )
@@ -101,10 +100,10 @@ export const prescription = {
         response => {
           const doseForms = response
           commit('loadDoseFormsSuccess', doseForms)
-          dispatch('alert/success', 'Dose FOrms Retreived', { root: true })
+          dispatch('alert/success', 'Dose Forms Retreived', { root: true })
+          dispatch('loadMedications');
         },
         error => {
-          alert("loadDoseForms is wrong");
           dispatch('alert/error', error, { root: true })
         }
       )
@@ -113,6 +112,7 @@ export const prescription = {
       commit('loadRxRequest')
       const patient = JSON.parse(localStorage.getItem('patient'))
       commit('loadRxSuccess', patient.prescriptions)
+      dispatch('loadDoseForms')
     },
     addPrescription ({ dispatch, commit }, { apptId, patient , med, doseFormId, dosage, indication, datePrescribed }) {
       commit('addRxRequest')
@@ -152,7 +152,6 @@ export const prescription = {
                 // TODO: JON: We need to reload the prescription list *******************
                 const localUser = JSON.parse(localStorage.getItem('localUser'))
                 localUser.prescriptions = response.prescriptions
-                alert(response.prescriptions)
                 localStorage.setItem('localUser', JSON.stringify(localUser))
                 commit('updateRxSuccess', response.prescriptions)
                 dispatch('alert/success', 'Prescription Updated', { root: true })
@@ -164,6 +163,7 @@ export const prescription = {
               }
             )
           dispatch('alert/success', 'Prescription Updated', { root: true })
+
         })
     }
   }
