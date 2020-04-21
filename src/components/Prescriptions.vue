@@ -1,13 +1,7 @@
 <template>
   <div class="row">
-    <hr class="style1">
-    <div v-if="userStatus.localUser != null && userStatus.localUser.role_id == 3">
-      <!--    TODO:Jon, please take a look at this. the value of isOpen changes when button is clicked, but the value of isOpen in the div doesn't change. My idea is showing the form here, instead of dashboard-->
-      <div class="prescription-form" v-if="isOpen">
-        <NewPrescription /> <hr class="style1" style="padding-bottom: 30px; margin-top:20px">
-      </div>
-    </div>
-    <NewPrescription />
+    <hr class="style1" style="padding-bottom: 30px; margin-top:20px">
+        <NewPrescription />
     <div class="table-border-round">
     <table>
       <tr>
@@ -45,11 +39,7 @@
 <script>
 
 import { mapState, mapActions } from 'vuex'
-import Profile from "./Profile";
-import Appointments from "./Appointments";
-import MedicalRecords from "./MedicalRecords";
 import NewPrescription from "./NewPrescription";
-import {Tab, Tabs} from "vue-tabs-component";
 import PrescriptionUpdate from './PrescriptionUpdate';
 
 export default {
@@ -60,8 +50,6 @@ export default {
   },
    data: function () {
     return {
-      isOpen: false,
-      isHidden: false,
       singleRx: {}
     }
   },

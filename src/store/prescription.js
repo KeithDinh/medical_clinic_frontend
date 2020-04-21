@@ -149,14 +149,12 @@ export const prescription = {
           prescriptionService.getPrescriptions(rxObject.patient_id)
             .then(
               response => {
-                // TODO: JON: We need to reload the prescription list *******************
                 const localUser = JSON.parse(localStorage.getItem('localUser'))
                 localUser.prescriptions = response.prescriptions
                 alert(response.prescriptions)
                 localStorage.setItem('localUser', JSON.stringify(localUser))
                 commit('updateRxSuccess', response.prescriptions)
                 dispatch('alert/success', 'Prescription Updated', { root: true })
-                //*****************************************************************************************
               },
               error => {
                 commit('updateRxFailure')
