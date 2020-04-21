@@ -150,6 +150,24 @@
           </tr>
         </table>
 
+        <!--        General Appointment Summary -->
+        <table v-if="reportType === 'General Appointment Summary'">
+          <tr>
+            <th>OfficeId</th>
+            <th>Office</th>
+            <th>Total Canceled</th>
+            <th>Total Finished</th>
+            <th>Finished/Past Appt</th>
+          </tr>
+          <tr v-for="report in reports">
+            <td>{{ report.office_id}}</td>
+            <td>{{report.office_name}} </td>
+            <td>{{ report.finished_appts}}</td>
+            <td>{{report.canceled_appts}}</td>
+            <td>{{report.finshed_over_past_appts}}(%)</td>
+          </tr>
+        </table>
+
       </div>
     </div>
   </div>
@@ -172,7 +190,8 @@ export default {
       reportTypes: [
         'Average Appointment Duration',
         'Canceled Appointments',
-        'Number of New Users'
+        'Number of New Users',
+        'General Appointment Summary'
       ],
       patient: 'all',
       doctor: 'all',
