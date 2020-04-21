@@ -70,7 +70,7 @@
             </div>
           <div class="row submit"><button v-on:click="GetReport()">GET REPORT</button></div>
           </div>
-          
+
       </div>
         </form>
         <table v-if="reportType === 'Canceled Appointments'">
@@ -133,7 +133,23 @@
             </td>
           </tr>
         </table>
-        
+
+<!--        AVERAGE APPOINTMENT DURATION REPORT -->
+        <table v-if="reportType === 'Average Appointment Duration'">
+          <tr>
+            <th>DoctorId</th>
+            <th>Doctor</th>
+            <th>AVG Appt Duration</th>
+          </tr>
+          <tr v-for="report in reports">
+            <td>{{ report.doctor_id }}</td>
+            <td>
+              <div class="row name">{{ report.first_name }} {{ report.middle_initial }} {{ report.last_name }}</div>
+            </td>
+            <td>{{ report.avg_appt_duration}}</td>
+          </tr>
+        </table>
+
       </div>
     </div>
   </div>
@@ -161,7 +177,7 @@ export default {
       patient: 'all',
       doctor: 'all',
       office: 'all',
-      roleId:'all'      
+      roleId:'all'
     }
   },
   components: {
@@ -202,8 +218,8 @@ export default {
       this.loadReport({ reportType, patient, doctor, office })
     },
     GetUserReport (){
-      this.firstDate=this.firstDate.toString() 
-      this.secondDate=this.secondDate.toString() 
+      this.firstDate=this.firstDate.toString()
+      this.secondDate=this.secondDate.toString()
       const { firstDate, secondDate, roleId } = this
       this.loadUserReport({ firstDate, secondDate, roleId })
     }
