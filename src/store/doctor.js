@@ -265,9 +265,9 @@ export const doctor = {
         })
     },
     approveAppt (
-      { dispatch, commit},appt_id){
+      { dispatch, commit},{appt_id,is_approve}){
        commit('approveApptRequest')
-        doctorService.approveSpecialistAppt(appt_id).then(
+        doctorService.approveSpecialistAppt(appt_id,is_approve).then(
           response => {
             commit('approveApptSuccess')
             dispatch('alert/success', 'approve appt success', { root: true })

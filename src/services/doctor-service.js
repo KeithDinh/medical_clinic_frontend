@@ -107,20 +107,19 @@ function getDoctorForAppointment () {
     .then(handleResponse)
 }
 
-function approveSpecialistAppt (appt_id) {
+function approveSpecialistAppt (appt_id,is_approve) {
   let reqHeader = authorizationHeader()
   reqHeader['Content-Type'] = 'application/json'
   const requestOptions = {
     method: 'PUT',
     headers: reqHeader,
-    body: JSON.stringify({appt_id})
+    body: JSON.stringify({appt_id,is_approve})
   }
   return fetch(`${config.apiUrl}/doctor/approveappt`, requestOptions)
     .then(handleResponse)
 }
 
 function updateAppointmentStatus (appt_id,timestamp,appt_status) {
-  console.log(appt_id,timestamp,appt_status)
   let reqHeader = authorizationHeader()
     reqHeader['Content-Type'] = 'application/json'
     const requestOptions = {

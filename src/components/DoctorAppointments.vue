@@ -72,20 +72,25 @@
                 <th>Patient Name</th>
                 <th>Office Name</th>
                 <th>Doctor</th>
+                <th>Date and Time</th>
                 <th>Reason for Visit</th>
                 <th>Approve</th>
+                <th>Reject</th>
               </tr>
               <template v-for="appt in allAppointmentsList.approveAppointments">
                 <tr>
                    <td style="text-align: left">{{ appt.patient}}<br><div class="subtitle1">MRN: {{appt.patient_id}}</div></td>
                   <td>{{ appt.office}}</td>
                   <td>{{appt.doctor}}</td>
+                  <td>{{ appt.appt_start_time | frontEndDateFormat}} <br>
+                    <div class="text-info subtitle1">{{appt.appt_start_time | frontEndTimeFormat}}</div></td>
                   <td>{{ appt.reason_for_visit}}</td>
                   <td v-if="appt.appt_status=='need approval'">
-                    <div style="position:relative;text-align: right">
-                    <button class="button-info round btn-small" style="font-size: 12px" v-on:click="approve(appt.appt_id)">Approve</button>
-
-                  </div>
+                   <div style="position:relative;text-align: center;">
+                      <button class="button-info round btn-small" style="font-size: 12px" v-on:click="approve(appt.appt_id)">Approve</button></div>
+                  </td>
+                  <td v-if="appt.appt_status=='need approval'">
+                         <div style="position:relative;text-align: center;"><button class="button-warning round btn-small" style="font-size: 12px" v-on:click="reject(appt.appt_id)">Reject</button></div>
                   </td>
                 </tr>
               </template>
@@ -115,7 +120,8 @@ export default {
       appt_end_time:'',
       appt_start_time:'',
       timestamp:'',
-      appt_status:''
+      appt_status:'',
+      is_approve:false
     }
   },
   computed: {
@@ -128,7 +134,7 @@ export default {
       'loadDoctorAppointments',
        'editPatient',
       'approveAppt',
-      'updateApptStatus'
+      'updateApptStatus',
     ]),
     ...mapActions('profile', [
       'reloadPatient',
@@ -141,7 +147,16 @@ export default {
       const res = this.reloadPatient(value)
     },
     approve(appt_id){
-      const res = this.approveAppt(appt_id)
+      this.is_approve=true;
+      const {is_approve} = this;
+       const {dispatch} = this.$store;
+      dispatch('doctor/approveAppt', {appt_id,is_approve});
+    },
+    reject(appt_id){
+      this.is_approve=false;
+      const {is_approve} = this;
+       const {dispatch} = this.$store;
+      dispatch('doctor/approveAppt', {appt_id,is_approve});
     },
     getTimestamp: function () {
       const today = new Date();
