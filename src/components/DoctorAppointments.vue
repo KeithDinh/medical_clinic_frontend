@@ -190,14 +190,13 @@ export default {
       var dateobj=new Date(str);
       var hours = ("0"+ dateobj.getUTCHours()).slice(-2)
       var minutes = ("0"+ dateobj.getUTCMinutes()).slice(-2)
-      console.log(hours + ":" + minutes);
       return hours + ":" + minutes;
     },
     frontEndDateFormat(str) {
-      var dateobj=new Date(str);
-      var date = dateobj.getUTCDate();
-      var month=dateobj.getUTCMonth();
-      var year= dateobj.getUTCFullYear();
+      const dateobj = new Date(str);
+      const month = ('0' + (dateobj.getMonth() + 1)).slice(-2);
+      const date = ('0' + dateobj.getDate()).slice(-2);
+      const year = dateobj.getFullYear();
       return month+"/"+date+"/"+year;
     }
   },
