@@ -81,11 +81,9 @@ export default {
   text-align: left;
   font-size: 12px;
   background-color: #97e5ec;
-  border-radius: 5px;
-  padding: 10px 5px;
+  border-radius: 10px;
+  padding: 10px 10px;
   color: black;
-  margin-bottom: 0.2px;
-
 }
 
 .dropdown {
@@ -100,6 +98,7 @@ export default {
   color: #050505;
   width: 300px;
 
+
 }
 
 .dropdown-content {
@@ -112,6 +111,8 @@ export default {
   z-index: 1;
   margin-left:-10px;
   border-color: #96adc5;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition:0.4s;
 }
 
 .dropdown:hover .dropdown-content {
