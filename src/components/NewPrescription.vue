@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <div v-if="userStatus.localUser != null && userStatus.localUser.role_id == 3">
+        <hr class="style1">
       <div style="position:relative;text-align: right;padding-right:10px">
         <button v-if="!isOpen" class="button-info round" v-on:click="addClicked()">Add New</button>
         <button v-if="isOpen" class="button-info round" v-on:click="addClicked()">Close</button>

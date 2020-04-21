@@ -1,7 +1,7 @@
 <template>
 <div class="Messagebox">
-  <div class="dropdown">
-    <span><img class="logo"src="https://image.flaticon.com/icons/svg/1827/1827301.svg"> NOTIFICATION ALERTS! </span>
+  <div class="dropdown" >
+    <span style="color:white;font-weight: bold"><img class="logo"src="https://image.flaticon.com/icons/svg/1827/1827301.svg"> NOTIFICATION ALERTS! </span>
     <div class="dropdown-content">
       <template v-for="message in messages">
             <div >
@@ -11,7 +11,7 @@
                   {{message.message}}
               </div>
           </template>
-    </div>  
+    </div>
   </div>
 </div>
 </template>
@@ -46,13 +46,13 @@ export default {
 
 .notification {
   text-align: center;
-  background: red;
+  background: #f86504;
   border-radius: 30%;
   margin: 10px;
 }
 
 .Messagebox {
-  padding: 20px 20px;
+  padding: 30px 30px;
   padding-bottom: 40px;
 }
 
@@ -62,12 +62,12 @@ export default {
   padding-left: 3px;
   border: 2px solid #0d75a6;
   float: left;
-  width: 12%;
+  width: 300px;
   border-radius: 25px;
 }
 
 .messages {
-  padding: 15px 15px;
+  padding: 30px 30px;
 
 }
 
@@ -75,16 +75,15 @@ export default {
   font-size: 11px;
   color: black;
   text-align: center;
-
 }
 
 .alert {
   text-align: left;
   font-size: 12px;
-  background-color: #00c7db;
+  background-color: #97e5ec;
   border-radius: 5px;
-  padding: 5px 5px;
-  color: white;
+  padding: 10px 5px;
+  color: black;
   margin-bottom: 0.2px;
 
 }
@@ -93,23 +92,26 @@ export default {
   text-align: center;
   position: absolute;
   display: inline-block;
-  background: red;
-  border-radius: 10px;
+  background: #fa653b;
+  border-radius: 5px;
+  /*border-color: #0d75a6;*/
   padding: 10px;
-  margin-left: 20px;
-  color: white;
-  width: 20%;
+  /*margin-left: 20px;*/
+  color: #050505;
+  width: 300px;
 
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #F0F0F0;
+  background-color: #ffffff;
   border-radius: 10px;
-  min-width: 160px;
+  min-width: 250px;
   padding: 12px 16px;
   z-index: 1;
+  margin-left:-10px;
+  border-color: #96adc5;
 }
 
 .dropdown:hover .dropdown-content {

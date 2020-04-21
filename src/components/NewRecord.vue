@@ -1,6 +1,7 @@
 
 <template>
-  <div class="container">
+  <div class="container" v-if="userStatus.localUser != null && userStatus.localUser.role_id == 3">
+        <hr class="style1">
     <div style="position:relative;text-align: right;padding-right:10px">
         <button v-if="!isOpen" class="button-info round" v-on:click="addClicked()">Add New</button>
         <button v-if="isOpen" class="button-info round" v-on:click="addClicked()">Close</button>
@@ -171,6 +172,10 @@ export default {
     ...mapState('appointment', {
       appointments: state => state.apptsList
     }),
+    userStatus () {
+    // if you want to expose the entire sate
+      return this.$store.state.authentication
+    }
     },
 
   methods: {

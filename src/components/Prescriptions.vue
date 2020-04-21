@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <hr class="style1" style="padding-bottom: 30px; margin-top:20px">
+
         <NewPrescription />
     <div class="table-border-round">
     <table>

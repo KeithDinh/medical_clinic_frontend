@@ -90,7 +90,8 @@
                       <button class="button-info round btn-small" style="font-size: 12px" v-on:click="approve(appt.appt_id)">Approve</button></div>
                   </td>
                   <td v-if="appt.appt_status=='need approval'">
-                         <div style="position:relative;text-align: center;"><button class="button-warning round btn-small" style="font-size: 12px" v-on:click="reject(appt.appt_id)">Reject</button></div>
+                         <div style="position:relative;text-align: center;">
+                           <button class="button-warning round btn-small" style="font-size: 12px" v-on:click="reject(appt.appt_id)">Reject</button></div>
                   </td>
                 </tr>
               </template>
@@ -236,7 +237,7 @@ td{
     border-radius:25px
 }
   .tabs-component-panels {
-  padding: 4em 0;
+  padding: 0em 0;
 }
 
 

@@ -1,7 +1,8 @@
 <template>
   <div class="row">
     <div class="row dashboard_header"><h2>Dashboard</h2></div>
-      <NotificationMessage />
+    <div>  <NotificationMessage /></div>
+
     <div class="db">
     <Profile class="db1" />
     <tabs :options="{ useUrlFragment: false }" @clicked="tabClicked" @changed="tabChanged">
@@ -91,7 +92,7 @@ export default {
     border-radius:25px
 }
   .tabs-component-panels {
-  padding: 4em 0;
+  padding: 0em 0;
 }
 
 

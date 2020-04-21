@@ -1,6 +1,5 @@
 <template>
   <div class="medicalrecords">
-    <hr class="style1">
       <NewRecord/>
     <div class="table-border-round">
       <table >
