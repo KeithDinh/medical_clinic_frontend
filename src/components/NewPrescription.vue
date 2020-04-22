@@ -119,7 +119,8 @@ export default {
       datePrescribed :'',
       todayDate:'',
       isOpen: false,
-      submitted: false
+      submitted: false,
+      ackMsg:''
     }
   },
     created() {
@@ -157,16 +158,17 @@ export default {
     ]),
 
     addingPrescription (e) {
-      let ackMsg=''
+
       let errors=this.validatePrescriptionForm(this.apptId,this.med.medication_id,this.doseFormId,this.dosage,this.indication);
-      if(errors.length===0) {
-        if(this.med.medication_sideeffects.length!=0) {
-          ackMsg = "Acknowledge the side effects of this medication: " + this.med.medication_sideeffects;
+
+      if(errors.length==0) {
+        if(this.med.medication_sideeffects!=null) {
+          this.ackMsg = " Acknowledge the side effects of this medication" + this.med.medication_sideeffects;
         }
         else{
-          ackMsg='Confirm that you want to add this prescription?'
+          this.ackMsg =+" Do you want to add this prescription?"+this.med.medication_sideeffects;
         }
-        if(confirm(ackMsg)) {
+        if(confirm("Confirm: "+this.ackMsg)==true) {
           this.submitted = true
           const {apptId, patient, med, doseFormId, dosage, indication, datePrescribed} = this
           const {dispatch} = this.$store
@@ -178,7 +180,7 @@ export default {
             dosage,
             indication,
             datePrescribed
-          })
+          }),
           this.addClicked();
         }
       }
@@ -188,9 +190,9 @@ export default {
     },
     addClicked: function () {
       if (this.isOpen) {
-        this.isOpen = false
+        this.isOpen = false;
       } else {
-        this.isOpen = true
+        this.isOpen = true;
       }
     },
      validatePrescriptionForm (apptId, medicationId, doseFormId, dosage,indication) {
