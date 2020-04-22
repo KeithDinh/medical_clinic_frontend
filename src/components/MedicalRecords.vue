@@ -13,30 +13,35 @@
 
     <div class="table-border-round">
       <table >
-        <tr>
-          <th>Doctor</th>
-          <th>Date</th>
-          <th>Diagnoses</th>
-          <th>Treatment</th>
-          <th>New Prescription</th>
-          <th>Lab Test Required</th>
-          <th v-if="userStatus.localUser.role_id==3">Edit</th>
-        </tr>
-        <template v-for="record in records">
+        <thead>
           <tr>
-            <td>{{ record.first_name }} {{ record.last_name }}</td>
-            <td>{{ record.actual_start_time | frontEndDateFormat}} <br>
-              <div class="subtitle1">{{record.actual_start_time |frontEndTimeFormat}}</div>
-            </td>
-            <td style="font-size: 14px">{{ record.diagnoses }}</td>
-            <td style="font-size: 14px">{{ record.treatment }}</td>
-            <td>{{record.new_prescriptions | booleanFormat}}</td>
-            <td>{{ record.lab_testing | booleanFormat}}</td>
-            <td v-if="userStatus.localUser.role_id==3">
-              <button type="button" @click="popUpModal(record)">Edit</button>
-            </td>
+            <th>Doctor</th>
+            <th>Date</th>
+            <th>Diagnoses</th>
+            <th>Treatment</th>
+            <th>New Prescription</th>
+            <th>Lab Test Required</th>
+            <th v-if="userStatus.localUser.role_id==3">Edit</th>
           </tr>
-        </template>
+        </thead>
+        <tbody>
+          <template v-for="record in records">
+            <tr>
+              <td>{{ record.first_name }} {{ record.last_name }}</td>
+              <td>{{ record.actual_start_time | frontEndDateFormat}} <br>
+                <div class="subtitle1">{{record.actual_start_time |frontEndTimeFormat}}</div>
+              </td>
+              <td style="font-size: 14px">{{ record.diagnoses }}</td>
+              <td style="font-size: 14px">{{ record.treatment }}</td>
+              <td>{{record.new_prescriptions | booleanFormat}}</td>
+              <td>{{ record.lab_testing | booleanFormat}}</td>
+              <td v-if="userStatus.localUser.role_id==3">
+                <button type="button" @click="popUpModal(record)">Edit</button>
+              </td>
+            </tr>
+          </template>
+        </tbody>
+
         <div v-if="isHidden" class="modal-container">
           <MedicalRecordUpdate :disableModal="disableModal" :recObject="singleRx" class="modal" />
         </div>

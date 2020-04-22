@@ -65,7 +65,6 @@ methods: {
     ]),
   update: function() {
     this.rxObject.date_prescribed = (new Date()).toString().substr(4,20);
-    alert(this.rxObject.date_prescribed)
     const { rxObject } = this
     this.updateRx(rxObject)
     disableModal

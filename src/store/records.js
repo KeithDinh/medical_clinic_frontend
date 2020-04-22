@@ -101,15 +101,18 @@ export const medicalRecords = {
       }
     },
     updateRecord ({ dispatch, commit, state }, recObject) {
-      
       commit('updateRecRequest')
       recordsService.editRecord(recObject).then(
         response => {
           commit('updateRecSuccess')
           commit('loadRecRequest')
-          // TODO: Jon I'm stuck at reloading the list of records.
-          // If reload the page after updated, it will keep the origin
-          // The only way to validate the update is logging out and logging in again.
+          profileService.getProfile(recObject.patient_id).then(
+            response => {
+              const patient = JSON.parse(localStorage.getItem('patient'))
+              patient.records = response.records
+              localStorage.setItem('patient', JSON.stringify(patient))
+            }
+          )
           dispatch('alert/success', 'Record Updated', { root: true })
 
         })
