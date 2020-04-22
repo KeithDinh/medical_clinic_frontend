@@ -9,7 +9,7 @@ const initialState = {
   newRxStatus:{},
   newRx:[],
   medications: [],
-  doseForms:[]
+  doseForms:[],
 }
 
 const validatePrescriptionForm = (apptId, medicationId, doseFormId, dosage,indication) => {
@@ -102,6 +102,8 @@ export const prescription = {
           commit('loadDoseFormsSuccess', doseForms)
           dispatch('alert/success', 'Dose Forms Retreived', { root: true })
           dispatch('loadMedications');
+          commit('alert/loaded');
+
         },
         error => {
           dispatch('alert/error', error, { root: true })
@@ -112,7 +114,7 @@ export const prescription = {
       commit('loadRxRequest')
       const patient = JSON.parse(localStorage.getItem('patient'))
       commit('loadRxSuccess', patient.prescriptions)
-      dispatch('loadDoseForms')
+      dispatch('loadDoseForms', {root:true})
     },
     addPrescription ({ dispatch, commit }, { apptId, patient , med, doseFormId, dosage, indication, datePrescribed }) {
       commit('addRxRequest')
@@ -144,17 +146,17 @@ export const prescription = {
       commit('updateRxRequest')
       prescriptionService.updatePrescription(rxObject).then(
         response => {
-          commit('updateRxSuccess')
-          commit('loadRxRequest')
           profileService.getProfile(rxObject.patient_id).then(
             response => {
               const patient = JSON.parse(localStorage.getItem('patient'))
               patient.prescription = response.prescription
               localStorage.setItem('patient', JSON.stringify(patient))
+              dispatch('alert/completed',{root:true})
             }
           )
+          commit('updateRxSuccess')
+          commit('loadRxRequest')
           dispatch('alert/success', 'Prescription Updated', { root: true })
-
         })
     }
   }

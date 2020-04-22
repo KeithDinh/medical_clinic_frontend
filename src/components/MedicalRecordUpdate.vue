@@ -40,14 +40,18 @@ export default {
     recObject: Object,
     disableModal: Function
   },
+  computed:{
+    alert () {return this.$store.state.alert},
+  },
   methods: {
     ...mapActions('medicalRecords', ['updateRecord']),
+    ...mapActions('alert', ['setLoading']),
       update: function() {
       this.recObject.lab_testing = (this.$refs['lab_testing'].value == "Yes") ? 1 : 0;
-
       const { recObject } = this;
       this.updateRecord(recObject)
       disableModal
+      this.setLoading()
     }
  }
 }

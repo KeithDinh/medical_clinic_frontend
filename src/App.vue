@@ -1,6 +1,10 @@
 <template>
   <div id="app" class="row">
     <header class="row">
+      <div style="position: fixed;z-index:100; width: 100%; height: 100%; top: 0; background-color: rgba(0,0,0,0.2); overflow: hidden"
+       v-if="alert.loading === true">
+        <img style="position: absolute; top: 49%; left: 49%" src="/static/images/loading.gif">
+      </div>
       <div class="row-flex container top-header">
         <div class="logo"><img src="/static/images/logo.png" alt=""></div>
         <div class="logo-text left">Health Hub</div>
@@ -43,12 +47,14 @@
           <a href="login" v-if="userStatus.localUser" v-on:click="logout()">Logout</a>
           <a href="login" v-else>Login</a>
           </button>
+
         </div>
       </div>
     </header>
     <section class="row main">
       <router-view/>
     </section>
+
     <footer class="row">
       <div class="row return-messages" v-if="alert.messages">
         <div class="message error" v-if="alert.type == 'alert-danger'">
@@ -73,9 +79,8 @@ export default {
     this.loadUser()
   },
   computed: {
-    alert () {
-      return this.$store.state.alert
-    },
+
+    alert () {return this.$store.state.alert},
     // This Names Your Property That You Are Referencing in The Template
     userStatus () {
     // if you want to expose the entire sate

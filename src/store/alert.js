@@ -2,7 +2,8 @@ export const alert = {
   namespaced: true,
   state: {
     type: null,
-    messages: null
+    messages: null,
+    loading: false
   },
   actions: {
     success ({ commit }, messages) {
@@ -13,9 +14,17 @@ export const alert = {
     },
     clear ({ commit }, messages) {
       commit('success', messages)
+    },
+    completed({commit}){
+      commit('loaded')
+    },
+    setLoading({commit}){
+      commit('loading')
     }
   },
   mutations: {
+    loaded(state){state.loading = false;},
+    loading(state){state.loading = true;},
     success (state, messages) {
       state.type = 'alert-success'
       state.messages = messages

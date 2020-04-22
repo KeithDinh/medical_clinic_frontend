@@ -41,7 +41,6 @@ export default {
   name: 'PrescriptionUpdate',
   data(){
     return{
-      rxObject: {},
     }
   },
   props: {
@@ -51,9 +50,10 @@ export default {
  created () {
  },
  computed: {
+   alert () {return this.$store.state.alert},
    ...mapState('prescription', {
      medication_names: state => state.medications,
-     dose_form_names: state => state.doseForms
+     dose_form_names: state => state.doseForms,
    }),
  },
  mounted() {
@@ -68,6 +68,7 @@ methods: {
     const { rxObject } = this
     this.updateRx(rxObject)
     disableModal
+    this.alert.loading = true;
   }
  }
 }
