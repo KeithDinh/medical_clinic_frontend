@@ -22,15 +22,14 @@
           <td>{{ rx.dose_form_name }}</td>
           <td>{{ rx.dosage }}</td>
           <td v-if="userStatus.localUser.role_id ==3">
-            <button @click="popUpModal(rx)">Edit</button>
+            <button v-if="rx.appt_status == 'started'" @click="popUpModal(rx)">Edit</button>
           </td>
         </tr>
       </template>
     </table>
-    <div v-if="isHidden" class="modal-container">
+    <div v-if="isVisible" class="modal-container">
       <PrescriptionUpdate :disableModal="disableModal" :rxObject="singleRx" class="modal" />
     </div>
-
     </div>
   </div>
 </template>
@@ -50,7 +49,8 @@ export default {
   },
    data: function () {
     return {
-      singleRx: {}
+      singleRx: {},
+      isVisible: false,
     }
   },
   components: {
@@ -59,9 +59,10 @@ export default {
   },
   computed: {
     ...mapState('prescription', {
-      prescriptions: state => state.rxList
+      prescriptions: state => state.rxList,
+      loading: state => state.loading,
     }),
-        userStatus () {
+      userStatus () {
       return this.$store.state.authentication
     }
   },
@@ -69,13 +70,8 @@ export default {
     ...mapActions('prescription', [
       'loadPrescriptions'
     ]),
-    popUpModal(obj){
-      this.isHidden = true;
-      this.singleRx = obj;
-    },
-    disableModal () {
-     this.isHidden = false;
-   },
+    popUpModal(obj){this.isVisible = true;this.singleRx = obj;},
+    disableModal () {this.isVisible = false;},
     addClicked: function () {
       if (this.isOpen) {
         this.isOpen = false

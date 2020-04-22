@@ -111,6 +111,7 @@ export const medicalRecords = {
               const patient = JSON.parse(localStorage.getItem('patient'))
               patient.records = response.records
               localStorage.setItem('patient', JSON.stringify(patient))
+              dispath('alert/completed', {root:true});
             }
           )
           dispatch('alert/success', 'Record Updated', { root: true })
