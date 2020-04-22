@@ -411,8 +411,19 @@ section.main {
 .tabs-component-tabs {
   display: flex;
   justify-content: space-evenly;
-  margin: 30px 20px;
+  padding: 50px 20px 40px;
 }
+
+.tabs-component-tab-a {
+  align-items: center;
+  color: inherit;
+  display: flex;
+  padding: 0.4em 1.5em;
+  text-decoration: none;
+  border-radius:25px;
+  font-size: 16px;
+}
+
 
 .tab-component-tab {
   cursor: pointer;
@@ -427,6 +438,8 @@ section.main {
     border-radius: 5px;
     text-align: center;
 }
+
+.dashboard {padding:80px 10px;}
 
 .card-container{
   padding: 20px 20px;
@@ -452,10 +465,12 @@ section.main {
   margin-top: 6px;
 }
 
-.db{display: flex;  margin-top: 30px;}
+.db{display:flex;padding:0 20px;}
 .db>*{background-color: #fff;border: 1px}
-.db-col1{width: 25%; margin: 0 15px 0 30px;}
-.db-col2{width: 75%; margin: 0 30px 0 15px;}
+.db-col1{width: 25%;padding:0 10px;float:left;}
+.db-col2{width: 75%;padding:0 10px 0;float:left;}
+.panel {background:#fff;padding-bottom:20px;}
+.tabs {background:#fff;}
 label.inputs{
   display:inline-block;
   padding:12px;
@@ -550,6 +565,7 @@ table{
 }
 .table-border-round table tr th{
   padding:20px;
+  text-align: left;
 }
 .table-border-round table tr td{
   padding:20px;
@@ -594,7 +610,7 @@ table{
   color: white;
 }
 
-#profile {text-align:center;}
+.profile {text-align:center;display:table;}
 
 /*mobile media queries*/
 @media only screen and (max-width: 900px) {

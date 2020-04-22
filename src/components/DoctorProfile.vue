@@ -1,24 +1,14 @@
  <template>
-  <div id="doctorProfile">
-      <div style="margin: 30px 0 20px;">
-        <div>
+  <div class="profile">
+      <div class="row panel">
+        <div style="margin:30px 0 20px;">
           <img src="https://image.flaticon.com/icons/svg/758/758935.svg" width="100" alt="">
         </div>
         <div class="doctor-name">Dr.{{ doctor.firstName }}  <span>{{ doctor.middleInit }}</span> <span>{{ doctor.lastName }}</span></div>
-         <p class="subtitle1"> {{ doctor.specializationName }}</p>
-<!--         <hr size="2" width="80%" align="center" noshade="false">-->
+        <p class="subtitle1"> {{ doctor.specializationName }}</p>
+        <div style="clear:both;"></div>
         <hr class="style1">
           <div class="text"><p class="align-left">Phone: </p><p class="align-right">{{ doctor.phone }}</p></div>
-         <div style="clear:both;"></div>
-         <div class="text"><p class="align-left">Race </p><p class="align-right">{{ doctor.race }}</p></div>
-        <div style="clear:both;"></div>
-        <div class="text"><p class="align-left">Gender </p><p class="align-right">{{ doctor.gender }}</p></div>
-        <div style="clear:both;"></div>
-        <div class="text"><p class="align-left">Address </p><p class="align-right">{{doctor.street}} </p></div>
-        <div style="clear:both;"></div>
-        <div class="text"><p class="align-left"> </p><p class="align-right">{{doctor.city}}, {{doctor.state}} {{doctor.zipcode}}</p> </div>
-        <hr class="style1">
-
     </div>
   </div>
 </template>

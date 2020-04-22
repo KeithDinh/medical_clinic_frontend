@@ -1,11 +1,11 @@
 <template>
-      <div class="row">
-        <div class="row dashboard_header"><h2>Doctor Dashboard</h2></div>
-        <div class="db">
-        <DoctorProfile class="db1" />
-        <DoctorAppointments class="db2" />
-        </div>
-      </div>
+  <div class="row">
+    <div class="row dashboard_header"><h2>Doctor Dashboard</h2></div>
+    <div class="row dashboard">
+      <DoctorProfile class="db-col1" />
+      <DoctorAppointments class="db-col2" />
+    </div>
+  </div>
 </template>
 <script>
 import Vue from 'vue';
@@ -33,10 +33,7 @@ export default {
 
 <style media="screen">
   .dashboard_header{ color: white; background-color: #15558d; padding: 20px;text-align: left;}
-  .db{display: flex;  margin-top: 30px;}
-  .db>*{background-color: #fff;  border: 1px solid rgba(0,0,0,0.1); border-radius: 7px;}
-  .db1{width: 25%; margin: 0 15px 0 30px;}
-  .db2{width: 75%; margin: 0 30px 0 15px;}
+
 
 
 </style>

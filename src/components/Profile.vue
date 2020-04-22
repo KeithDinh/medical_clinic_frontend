@@ -1,5 +1,5 @@
 <template>
-  <div id="profile">
+  <div class="profile">
     <div class="row panel">
       <div v-if="profile" style="margin: 30px 0 20px;">
         <div>
@@ -27,6 +27,7 @@
         <hr class="style1">
         <div class="text"><p class="align-left">Primary Doctor: </p><p class="align-right">{{ profile.primaryDoctor.primary_doctor }}</p></div>
         <div style="clear:both;"></div>
+        <div class="row"><NotificationMessage /></div>
       </div>
     </div>
   </div>
@@ -34,10 +35,13 @@
 <script>
 
 import { mapState, mapActions } from 'vuex'
-
+import NotificationMessage from "./NotificationMessage";
 export default {
 
   name: 'Profile',
+  components: {
+    NotificationMessage
+  },
   created () {
     // An Action Loaded in From mapActions
     this.loadProfile()

@@ -54,6 +54,7 @@ export default {
 .Messagebox {
   padding: 30px 30px;
   padding-bottom: 40px;
+  margin:20px 0 0;
 }
 
 .messageTitle {
@@ -88,7 +89,6 @@ export default {
 
 .dropdown {
   text-align: center;
-  position: absolute;
   display: inline-block;
   background: #fa653b;
   border-radius: 5px;
@@ -97,7 +97,8 @@ export default {
   /*margin-left: 20px;*/
   color: #050505;
   width: 300px;
-
+  color: white;
+  width: 80%;
 
 }
 
