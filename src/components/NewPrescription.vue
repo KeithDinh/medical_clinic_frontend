@@ -166,7 +166,7 @@ export default {
           this.ackMsg = " Acknowledge the side effects of this medication" + this.med.medication_sideeffects;
         }
         else{
-          this.ackMsg =+" Do you want to add this prescription?"+this.med.medication_sideeffects;
+          this.ackMsg =+" Do you want to add this prescription?"
         }
         if(confirm("Confirm: "+this.ackMsg)==true) {
           this.submitted = true
