@@ -26,7 +26,7 @@
           <label class="inputs">Phone</label>
           <VuePhoneNumberInput v-model="profile.phone" />
           <label class="inputs">Street Address</label>
-          <input type="text" v-model="profile.street" id="addressOne" name="addressOne" placeholder="Address 1"/>
+          <input type="text" v-model="profile.street" id="street" name="street" placeholder="Address 1"/>
           <label class="inputs">City</label>
           <input type="text" v-model="profile.city" id="city" name="city" placeholder="City"/>
           <label class="inputs">State</label>
@@ -45,7 +45,7 @@
 import Vue from 'vue';
 import VuePhoneNumberInput from 'vue-phone-number-input';
 import 'vue-phone-number-input/dist/vue-phone-number-input.css';
- 
+
 Vue.component('vue-phone-number-input', VuePhoneNumberInput);
 import { mapState, mapActions } from 'vuex'
 export default {

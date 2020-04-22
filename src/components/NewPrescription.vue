@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div v-if="userStatus.localUser != null && userStatus.localUser.role_id == 3">
+    <div v-if="userStatus.localUser != null && userStatus.localUser.role_id == 3 && hasStartedAppt()">
         <hr class="style1">
       <div style="position:relative;text-align: right;padding-right:10px">
         <button v-if="!isOpen" class="button-info round" v-on:click="addClicked()">Add New</button>
@@ -119,7 +119,8 @@ export default {
       datePrescribed :'',
       todayDate:'',
       isOpen: false,
-      submitted: false
+      submitted: false,
+      ackMsg:''
     }
   },
     created() {
@@ -157,16 +158,17 @@ export default {
     ]),
 
     addingPrescription (e) {
-      let ackMsg=''
+
       let errors=this.validatePrescriptionForm(this.apptId,this.med.medication_id,this.doseFormId,this.dosage,this.indication);
-      if(errors.length===0) {
-        if(this.med.medication_sideeffects.length!=0) {
-          ackMsg = "Acknowledge the side effects of this medication: " + this.med.medication_sideeffects;
+
+      if(errors.length==0) {
+        if(this.med.medication_sideeffects!=null) {
+          this.ackMsg = " Acknowledge the side effects of this medication" + this.med.medication_sideeffects;
         }
         else{
-          ackMsg='Confirm that you want to add this prescription?'
+          this.ackMsg =+" Do you want to add this prescription?"
         }
-        if(confirm(ackMsg)) {
+        if(confirm("Confirm: "+this.ackMsg)==true) {
           this.submitted = true
           const {apptId, patient, med, doseFormId, dosage, indication, datePrescribed} = this
           const {dispatch} = this.$store
@@ -178,7 +180,7 @@ export default {
             dosage,
             indication,
             datePrescribed
-          })
+          }),
           this.addClicked();
         }
       }
@@ -188,9 +190,9 @@ export default {
     },
     addClicked: function () {
       if (this.isOpen) {
-        this.isOpen = false
+        this.isOpen = false;
       } else {
-        this.isOpen = true
+        this.isOpen = true;
       }
     },
      validatePrescriptionForm (apptId, medicationId, doseFormId, dosage,indication) {
@@ -243,6 +245,14 @@ export default {
         return 1;
       }
       return 0;
+    },
+    hasStartedAppt(){
+      let appt='';
+      for(let i=0;i< this.appointments.length;i++){
+        appt=this.appointments[i];
+        if(appt.doctor_id===this.doctor.doctorId && this.isTodayAppt(appt.appt_start_time) && appt.appt_status==='started')
+          return true;
+      }
     }
 
   }
