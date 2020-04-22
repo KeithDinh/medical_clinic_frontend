@@ -1,16 +1,6 @@
 <template>
   <div class="medicalrecords">
-    <hr class="style1">
-     <div v-if="userStatus.localUser != null && userStatus.localUser.role_id ==3" style="position:relative;text-align: right;padding-right:10px">
-       <button v-if="!isOpen" class="button-info round" v-on:click="addClicked()">Add New</button>
-       <button v-if="isOpen" class="button-info round" v-on:click="addClicked()">Close</button>
-     </div>
-
-    <div v-if="isOpen">
       <NewRecord/>
-     <hr class="style1" style="padding-bottom: 30px; margin-top:20px">
-    </div>
-
     <div class="table-border-round">
       <table >
         <thead>
@@ -46,7 +36,7 @@
           <MedicalRecordUpdate :disableModal="disableModal" :recObject="singleRx" class="modal" />
         </div>
       </table>
-      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -62,6 +52,8 @@ export default {
   created () {
     this.loadMedicalRecords()
   },
+  component:{
+    NewRecord,
    data: function () {
     return {
       isOpen: false,
@@ -97,10 +89,10 @@ export default {
       return hours + ":" + minutes;
     },
     frontEndDateFormat(str) {
-      var dateobj = new Date(str);
-      var date = dateobj.getUTCDate();
-      var month = dateobj.getUTCMonth();
-      var year = dateobj.getUTCFullYear();
+      const dateobj = new Date(str);
+      const month = ('0' + (dateobj.getMonth() + 1)).slice(-2);
+      const date = ('0' + dateobj.getDate()).slice(-2);
+      const year = dateobj.getFullYear();
       return month + "/" + date + "/" + year;
     },
     booleanFormat(str){
