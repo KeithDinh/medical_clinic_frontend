@@ -168,6 +168,7 @@ export const profile = {
                 localStorage.setItem('patient', JSON.stringify(patient))
                 commit('loadingProfileSuccess ', response.profile)
                 dispatch('alert/success', 'patient Retreived', { root: true })
+                router.push('/dashboard')
               })
           },
           error => {

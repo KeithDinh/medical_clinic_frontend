@@ -232,6 +232,7 @@ export const doctor = {
                 localStorage.setItem('doctor', JSON.stringify(doctor))
                 commit('doctorProfileSuccess', response.profile)
                 dispatch('alert/success', 'doctor Retreived', { root: true })
+                router.push('/doctor-dashboard')
               })
           },
           error => {

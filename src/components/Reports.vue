@@ -70,7 +70,9 @@
                 </div>
               </div>
             </div>
-          <div class="row submit"><button v-on:click="GetReport()">GET REPORT</button></div>
+          
+          <div v-if = "reportType === 'Number of New Users'" class="row submit"><button v-on:click="GetUserReport()">GET REPORT</button></div>
+          <div v-else class="row submit"><button v-on:click="GetReport()">GET REPORT</button></div>
         </div>
         </form>
         <table v-if="reportType === 'Canceled Appointments'">

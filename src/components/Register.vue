@@ -12,6 +12,7 @@
           <input type="text" v-model="lastName" id="lastName" name="lastName" placeholder="Last Name">
           <input type="text" v-model="street" id="street" name="street" placeholder="Street Address">
           <input type="text" v-model="city" id="city" name="city" placeholder="City">
+          <label>State</label>
           <select type="text" v-model="state" id="state" name="state">
             <option
               v-for="(usState, index) in usStates"
@@ -28,7 +29,11 @@
             <option>M</option>
             <option>F</option>
           </select>
-          <input type="text" v-model="marital" id="marital" name="marital" placeholder="Marital Status">
+          <label>Marital Status</label>
+          <select type="text" v-model="marital" id="marital" name="marital" placeholder="Marital Status">
+            <option value='S'>Single</option>
+            <option value= 'M'>Married</option>
+          </select>
           <label>Race/Ethnicity</label>
           <select type="text" v-model="race" id="race" name="race" placeholder="Race / Ethnicity">
                   <option v-for="race in races" v-bind:value="race">{{ race }}</option>
