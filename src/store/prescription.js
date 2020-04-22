@@ -146,7 +146,14 @@ export const prescription = {
         response => {
           commit('updateRxSuccess')
           commit('loadRxRequest')
-          prescriptionService.getPrescriptions(rxObject.patient_id)
+          profileService.getProfile(rxObject.patient_id).then(
+            response => {
+              const patient = JSON.parse(localStorage.getItem('patient'))
+              patient.prescription = response.prescription
+              localStorage.setItem('patient', JSON.stringify(patient))
+              router.push('/dashboard')
+            },
+          /* prescriptionService.getPrescriptions(rxObject.patient_id)
             .then(
               response => {
                 // TODO: JON: We need to reload the prescription list *******************
@@ -157,7 +164,7 @@ export const prescription = {
                 commit('updateRxSuccess', response.prescriptions)
                 dispatch('alert/success', 'Prescription Updated', { root: true })
                 //*****************************************************************************************
-              },
+              }, */
               error => {
                 commit('updateRxFailure')
                 dispatch('alert/error', error, { root: true })
