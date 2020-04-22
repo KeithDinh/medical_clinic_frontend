@@ -166,7 +166,7 @@
             <td>{{report.office_name}} </td>
             <td>{{ report.finished_appts}}</td>
             <td>{{report.canceled_appts}}</td>
-            <td>{{report.finshed_over_past_appts}}(%)</td>
+            <td>{{report.finished_over_past_appts}}(%)</td>
           </tr>
         </table>
 

@@ -5,7 +5,8 @@ const initialState = {
   recordsStatus: {},
   recordsList: [],
   newRecordStatus:{},
-  newRecord:[]
+  newRecord:[],
+  updateRecordStatus: {}
 }
 
 const validateRecordForm = (apptId, height,weight,diagnoses,labTesting,treatment, newPrescriptions) => {
@@ -55,6 +56,9 @@ export const medicalRecords = {
       state.newRecordStatus={postedNewRecord:true}
       state.newRecord=newRecord
     },
+    updateRecRequest (state) {state.updateRecordStatus = {updatingRec: true}},
+    updateRecSuccess (state) {state.updateRecordStatus = {updatedRec: true}},
+    updateRecFailure (state) {state.updateRecordStatus = {updateRec: true}},
   },
   actions: {
     receiveRecords (
@@ -95,8 +99,24 @@ export const medicalRecords = {
       else{
         alert("Missing Fields")
       }
+    },
+    updateRecord ({ dispatch, commit, state }, recObject) {
+      commit('updateRecRequest')
+      recordsService.editRecord(recObject).then(
+        response => {
+          commit('updateRecSuccess')
+          commit('loadRecRequest')
+          profileService.getProfile(recObject.patient_id).then(
+            response => {
+              const patient = JSON.parse(localStorage.getItem('patient'))
+              patient.records = response.records
+              localStorage.setItem('patient', JSON.stringify(patient))
+            }
+          )
+          dispatch('alert/success', 'Record Updated', { root: true })
+
+        })
     }
   }
 
 }
-

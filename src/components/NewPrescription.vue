@@ -1,11 +1,11 @@
 <template>
   <div class="container">
     <div v-if="userStatus.localUser != null && userStatus.localUser.role_id == 3">
+        <hr class="style1">
       <div style="position:relative;text-align: right;padding-right:10px">
         <button v-if="!isOpen" class="button-info round" v-on:click="addClicked()">Add New</button>
         <button v-if="isOpen" class="button-info round" v-on:click="addClicked()">Close</button>
       </div>
-      <!--    TODO:Jon, please take a look at this. the value of isOpen changes when button is clicked, but the value of isOpen in the div doesn't change. My idea is showing the form here, instead of dashboard-->
       <div class="prescription-form" v-if="isOpen">
         <form @submit.prevent="handleSubmit">
            <div class="row">
@@ -98,7 +98,7 @@
              <button class="button-info round" type="submit" v-if id="submit" v-on:click="addingPrescription()">SUBMIT</button>
           </div>
       </form>
-        <hr class="style1" style="padding-bottom: 30px; margin-top:20px"></div>
+      </div>
   </div>
 
 </div>
@@ -156,7 +156,6 @@ export default {
       'loadAppointments',
     ]),
 
-    //TODO: Jon, somwhow the only data from the form is the datePrescribed. From the console, the others is empty string
     addingPrescription (e) {
       let ackMsg=''
       let errors=this.validatePrescriptionForm(this.apptId,this.med.medication_id,this.doseFormId,this.dosage,this.indication);
