@@ -1,6 +1,6 @@
 
 <template>
-  <div class="container" v-if="userStatus.localUser != null && userStatus.localUser.role_id == 3">
+  <div class="container" v-if="userStatus.localUser != null && userStatus.localUser.role_id == 3 && hasStartedAppt()">
         <hr class="style1">
     <div style="position:relative;text-align: right;padding-right:10px">
         <button v-if="!isOpen" class="button-info round" v-on:click="addClicked()">Add New</button>
@@ -269,6 +269,14 @@ export default {
         return 1;
       }
       return 0;
+    },
+    hasStartedAppt(){
+      let appt='';
+      for(let i=0;i< this.appointments.length;i++){
+        appt=this.appointments[i];
+        if(appt.doctor_id===this.doctor.doctorId && this.isTodayAppt(appt.appt_start_time) && appt.appt_status==='started')
+          return true;
+      }
     }
 
   }
