@@ -30,12 +30,20 @@
         <td>{{appt.booking_method}}</td>
         <td>{{appt.appointmentId}}</td>
         <td>
-          <button class="button" v-if="appt.appt_status === 'pending'" v-on:click="CancelAppt(appt.appointmentId)">Cancel</button>       
-          <button class="button" v-if="appt.appt_status === 'pending'" v-on:click="DeleteAppt(appt.appointmentId)">Delete</button>
+          <button class="button" v-if="appt.appt_status === 'pending'" v-on:click="book(appt.appointmentId)">Cancel</button>       
+          <button class="button" v-if="appt.appt_status === 'pending'" v-on:click="bookTwo(appt.appointmentId)">Delete</button>
         </td>
       </tr>
     </table>
     <div><br></div>
+     <div v-if="booking === true" class="popup-confirm">
+      <div class="row message">Please press confirm to cancel an Appointment</div>
+      <div class="row confirm"><button class="confirm" v-on:click=" CancelAppt()">Confirm</button><button class="cancel" v-on:click="cancel()">Cancel</button></div>
+    </div>
+    <div v-if="bookingTwo === true" class="popup-confirm">
+      <div class="row message">Please press confirm to delete an Appointment</div>
+      <div class="row confirm"><button class="confirm" v-on:click=" DeleteAppt()">Confirm</button><button class="cancel" v-on:click="cancel()">Cancel</button></div>
+    </div>
  </div>
 </template>
 <script>
@@ -45,6 +53,13 @@ import { mapState, mapActions } from 'vuex'
 export default {
 
    name: 'AdminAppointment',
+   data: function () {
+    return {
+      booking: false,
+      appt :'',
+      bookingTwo:false
+    };
+  },
    created () {
       this.loadAdminAppointments()
    },
@@ -59,11 +74,29 @@ export default {
        'deleteAppointment',
        'cancelAppointment'
      ]),
-     DeleteAppt(value) {
-      this.deleteAppointment(value)
+    book: function (value) {
+      this.booking = true
+      this.appt=value
+    },
+    bookTwo: function (value) {
+      this.bookingTwo = true
+      this.appt=value
+    },
+    cancel: function () {
+      this.booking = false
+    },
+    cancelTwo: function () {
+      this.bookingTwo = false
+    },
+     DeleteAppt() {
+      this.bookingTwo = false
+      this.deleteAppointment(this.appt)
+      this.appt = ''
      },
-     CancelAppt(value) {
-      this.cancelAppointment(value)
+     CancelAppt() {
+      this.booking = false
+      this.cancelAppointment(this.appt)
+      this.appt = ''
      }
    }
 }
