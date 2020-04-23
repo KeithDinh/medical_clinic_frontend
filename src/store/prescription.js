@@ -52,8 +52,6 @@ export const prescription = {
     loadRxSuccess (state, rxs) {
       state.rxStatus = { loadedRx: true }
       state.rxList = rxs
-      // document.write(state.rxList)
-      console.log(state.rxList)
     },
     loadRxFailure (state) {
       state.rxStatus = { loadingRxFailure: true }
@@ -77,7 +75,11 @@ export const prescription = {
       state.appt=newRx
     },
     updateRxRequest (state) {state.rxStatus = {updatingRx: true}},
-    updateRxSuccess (state) {state.rxStatus = {updatedRx: true}},
+    updateRxSuccess (state) 
+    {
+      state.rxStatus = { loadedRx: true }
+      state.rxList = rxs
+    },
     updateRxFailure (state) {state.rxStatus = {updateRx: true}},
     loadMedSuccess(state, medObjects){state.medications= medObjects},
     loadDoseFormsSuccess(state, doseFormObjects){state.doseForms= doseFormObjects}
@@ -149,15 +151,13 @@ export const prescription = {
           profileService.getProfile(rxObject.patient_id).then(
             response => {
               const patient = JSON.parse(localStorage.getItem('patient'))
-              patient.prescription = response.prescription
-              localStorage.setItem('patient', JSON.stringify(patient))
-              dispatch('alert/completed',{root:true})
+              commit('updateRxSuccess')
+              commit('loadRxRequest', patient.prescriptions)
+              dispatch('alert/success', 'Prescription Updated', { root: true })
             }
           )
-          commit('updateRxSuccess')
-          commit('loadRxRequest')
-          dispatch('alert/success', 'Prescription Updated', { root: true })
-        })
+        }
+        )
     }
   }
 }

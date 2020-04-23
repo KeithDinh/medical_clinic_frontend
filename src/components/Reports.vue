@@ -40,6 +40,19 @@
                   </div>
                 </div>
               </div>
+              <div v-else-if="reportType === 'Average Appointment Duration'">
+                <div class="filter left">
+                 <div class="row label">Filter by office</div>
+                  <div class="row select">
+                    <select type="text" v-model="office" id="reportType" name="reportType">
+                      <option value="all">All</option>
+                      <option v-for="off in offices" v-bind:value="off.office_id">{{ off.office_name }} office id: {{ off.office_id }}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div v-else-if="reportType === 'General Appointment Summary'">
+              </div>
               <div v-else>
                 <div class="filter left">
                   <div class="row label">Filter by patient</div>

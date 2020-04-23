@@ -22,7 +22,7 @@
           <td>{{ rx.dose_form_name }}</td>
           <td>{{ rx.dosage }}</td>
           <td v-if="userStatus.localUser.role_id ==3">
-            <button v-if="rx.appt_status == 'started'" @click="popUpModal(rx)">Edit</button>
+            <button @click="popUpModal(rx)">Edit</button>
           </td>
         </tr>
       </template>

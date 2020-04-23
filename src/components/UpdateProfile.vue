@@ -22,11 +22,11 @@
           <label class="inputs">Race</label>
           <input type="text" v-model="profile.race" id="race" name="race" placeholder="race"/>
           <label class="inputs">Date Of Birth</label>
-          <input type="text" v-model="profile.dob" id="date_of_birth" name="date_of_birth" placeholder="date_of_birth" disabled/>
+          <input type="text" v-model="profile.dob.toString().substring(4,16)" id="dob" name="dob" placeholder="date_of_birth" disabled/>
           <label class="inputs">Phone</label>
           <VuePhoneNumberInput v-model="profile.phone" />
           <label class="inputs">Street Address</label>
-          <input type="text" v-model="profile.street" id="street" name="street" placeholder="Address 1"/>
+          <input type="text" v-model="profile.street" id="street" name="street" placeholder="street"/>
           <label class="inputs">City</label>
           <input type="text" v-model="profile.city" id="city" name="city" placeholder="City"/>
           <label class="inputs">State</label>
