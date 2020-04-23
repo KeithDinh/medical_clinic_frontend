@@ -16,6 +16,7 @@
                   </select>
                 </div>
               </div>
+
               <div v-if = "reportType === 'Number of New Users'">
                 <div class="filter left">
                   <div class="row label">Filter by Roles</div>
@@ -40,6 +41,7 @@
                   </div>
                 </div>
               </div>
+
               <div v-else-if="reportType === 'Average Appointment Duration'">
                 <div class="filter left">
                  <div class="row label">Filter by office</div>
@@ -51,6 +53,7 @@
                   </div>
                 </div>
               </div>
+
               <div v-else-if="reportType === 'General Appointment Summary'">
               </div>
               <div v-else>
@@ -83,7 +86,7 @@
                 </div>
               </div>
             </div>
-          
+
           <div v-if = "reportType === 'Number of New Users'" class="row submit"><button v-on:click="GetUserReport()">GET REPORT</button></div>
           <div v-else class="row submit"><button v-on:click="GetReport()">GET REPORT</button></div>
         </div>
@@ -230,7 +233,7 @@ export default {
       doctors: state => state.doctors,
       offices: state => state.offices,
       reports: state => state.reports,
-      
+
       reportInformation: state => state.reportInformation
     }),
     ...mapState('dates', {
@@ -242,7 +245,7 @@ export default {
       this.doctor = 'all'
       this.office= 'all'
       this.patient= 'all'
-      
+
     }
   },
   methods: {

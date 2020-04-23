@@ -46,21 +46,30 @@
               </div>
               <div class="col-70">
                 <datepicker :disabled-dates="disabledDates" v-model="date" name="date" placeholder="Select Date" format="MM/dd/yyyy"></datepicker>
-                <select type="text" v-model="timeslot" id="timeslot" name="timeslot">
-                  <option v-for="slot in timeslots" v-bind:value="slot.slot">{{ slot.time }}</option>
-                </select>
               </div>
             </div>
+
+            <div class="row">
+              <div class="col-30" style="text-align:left">
+                <label>Time</label>
+              </div>
+              <div class="col-70">
+                 <select type="text" v-model="timeslot" id="timeslot" name="timeslot" placeholder="Select Time">
+                  <option v-for="slot in timeslots" v-bind:value="slot.slot">{{ slot.time }}</option>
+                 </select>
+              </div>
+            </div>
+
             <div class="row">
               <div class="col-30" style="text-align:left;">
                 <label>Reason for visit</label>
               </div>
               <div class="col-70">
-                <textarea type="text" v-model="reason" placeholder="Reason for visit"></textarea>
+                <textarea maxlength="40" style="height:50px"  type="text" v-model="reason" placeholder="Reason for visit"></textarea>
               </div>
             </div>
-            <div style="padding:30px">
-              <button id="submit" v-on:click="book()">BOOK APPOINTMENT</button>
+            <div style="padding:30px; text-align: center">
+              <button class="button-info round large" id="submit" v-on:click="book()">BOOK APPOINTMENT</button>
             </div>
           </div>
         </form>
