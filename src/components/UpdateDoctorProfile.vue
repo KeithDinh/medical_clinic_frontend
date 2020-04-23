@@ -31,7 +31,7 @@
           </select>
           <label class="inputs">Zipcode</label>
           <input type="text" v-model="doctorProfile.zipcode" id="zipcode" name="zipcode" placeholder="Zipcode"/>
-          <button v-on:click="updateProfile()">UPDATE</button>
+          <button class="button-warning round btn-small" v-on:click="updateProfile()">UPDATE</button>
         </div>
       </div>
     </div>
@@ -41,7 +41,7 @@
 import Vue from 'vue';
 import VuePhoneNumberInput from 'vue-phone-number-input';
 import 'vue-phone-number-input/dist/vue-phone-number-input.css';
- 
+
 Vue.component('vue-phone-number-input', VuePhoneNumberInput);
 import { mapState, mapActions } from 'vuex'
 
@@ -57,7 +57,7 @@ export default {
         'OK','OR','PA','RI','SC','SD','TN','TX','UT',
         'VT','VA','WA','WV','WI','WY'
       ],
-      
+
     }
   },
   components: {

@@ -26,7 +26,7 @@
               <td>{{record.new_prescriptions | booleanFormat}}</td>
               <td>{{ record.lab_testing | booleanFormat}}</td>
               <td v-if="userStatus.localUser.role_id==3">
-                <button type="button" @click="popUpModal(record)">Edit</button>
+                <button class="button-warning round btn-small" type="button" @click="popUpModal(record)">Edit</button>
               </td>
             </tr>
           </template>

@@ -1,7 +1,7 @@
 <template>
 <div class="Messagebox">
   <div class="dropdown" >
-    <span style="color:white;font-weight: bold"><img class="logo"src="https://image.flaticon.com/icons/svg/1827/1827301.svg"> NOTIFICATION ALERTS! </span>
+    <span style="color:white;font-weight: bold"><img class="logo"src="https://image.flaticon.com/icons/svg/1827/1827301.svg"> NOTIFICATIONS!</span>
     <div class="dropdown-content">
       <template v-for="message in messages">
             <div >

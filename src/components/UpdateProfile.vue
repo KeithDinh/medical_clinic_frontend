@@ -35,7 +35,7 @@
           </select>
           <label class="inputs">Zipcode</label>
           <input type="text" v-model="profile.zipcode" id="zipcode" name="zipcode" placeholder="Zipcode"/>
-          <button v-on:click="updateProfile()">UPDATE</button>
+          <button class="button-warning round btn-medium " v-on:click="updateProfile()">UPDATE</button>
         </div>
       </div>
     </div>

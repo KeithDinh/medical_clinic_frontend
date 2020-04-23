@@ -32,25 +32,25 @@ function getDoctor (doctor_id) {
     })
 }
 
-function getReport (reportType, patient, doctor, office) {
+function getReport (reportType, patient, doctor, office,start,end) {
   let reqHeader = authorizationHeader()
   reqHeader['Content-Type'] = 'application/json'
   const requestOptions = {
     method: 'POST',
     headers: reqHeader,
-    body: JSON.stringify({reportType, patient, doctor, office})
+    body: JSON.stringify({reportType, patient, doctor, office,start,end})
   }
   return fetch(`${config.apiUrl}/admin/reports`, requestOptions)
     .then(handleResponse)
 }
 
-function getUserReport (firstDate, secondDate, roleId) {
+function getUserReport (reportType,firstDate, secondDate, roleId) {
   let reqHeader = authorizationHeader()
   reqHeader['Content-Type'] = 'application/json'
   const requestOptions = {
     method: 'POST',
     headers: reqHeader,
-    body: JSON.stringify({firstDate, secondDate, roleId})
+    body: JSON.stringify({reportType,firstDate, secondDate, roleId})
   }
   return fetch(`${config.apiUrl}/admin/reports`, requestOptions)
     .then(handleResponse)

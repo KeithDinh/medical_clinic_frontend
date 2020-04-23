@@ -69,7 +69,7 @@
               </div>
             </div>
             <div style="padding:30px; text-align: center">
-              <button class="button-info round large" id="submit" v-on:click="book()">BOOK APPOINTMENT</button>
+              <button class="button-info round btn-medium" id="submit" v-on:click="book()">BOOK APPOINTMENT</button>
             </div>
           </div>
         </form>
