@@ -136,8 +136,9 @@ body {
   background-color: #0cb338;
 }
 
-.row.form {
-  margin: 0 0 15px;
+.db-col2 form {
+  padding:40px 20px;
+  background:#fff;
 }
 
 .form-ctn {

@@ -1,9 +1,9 @@
 <template>
   <div class="row">
     <h2 class='dashboard_header'>Book Appointment</h2>
-    <div class="row form" >
-      <Profile class="block1 left" />
-      <div class="block2 left" style="padding-top:10px">
+    <div class="row dashboard" >
+      <Profile class="db-col1" />
+      <div class="db-col2">
         <form @submit.prevent="handleSubmit">
           <div id="appointment-form" class="row panel">
             <div class="row" >
@@ -15,10 +15,9 @@
                   <option v-for="doc in doctors" v-bind:value="doc.doctor_id"> {{ doc.first_name }} {{doc.middle_initial}} {{ doc.last_name }},   {{doc.specialization_name}}</option>
                 </select>
               </div>
-              <div style="clear:both;"></div>
             </div>
 
-            <div class="row" >
+            <div class="row">
               <div class="col-30" style="text-align:left">
                 <label>Select a Medical Office</label>
               </div>
@@ -27,10 +26,9 @@
                   <option v-for="off in offices" v-bind:value="off.office_id">{{ off.office_name }}</option>
                 </select>
               </div>
-              <div style="clear:both;"></div>
             </div>
 
-            <div class="row form" >
+            <div class="row">
               <div class="col-30" style="text-align:left">
                 <label for="referred">I was referred by another doctor</label>
               </div>
@@ -40,10 +38,9 @@
                   <option v-for="doc in doctors" v-bind:value="doc.doctor_id">{{ doc.first_name }} {{doc.middle_initial}} {{ doc.last_name }},   {{doc.specialization_name}}</option>
                 </select>
               </div>
-              <div style="clear:both;"></div>
             </div>
 
-            <div class="row form" >
+            <div class="row">
               <div class="col-30" style="text-align:left">
                 <label>Date</label>
               </div>
@@ -53,11 +50,17 @@
                   <option v-for="slot in timeslots" v-bind:value="slot.slot">{{ slot.time }}</option>
                 </select>
               </div>
-              <div style="clear:both;"></div>
             </div>
-            <textarea type="text" v-model="reason" placeholder="Reason for visit"></textarea>
+            <div class="row">
+              <div class="col-30" style="text-align:left;">
+                <label>Reason for visit</label>
+              </div>
+              <div class="col-70">
+                <textarea type="text" v-model="reason" placeholder="Reason for visit"></textarea>
+              </div>
+            </div>
             <div style="padding:30px">
-              <button id="submit" v-on:click="book()">BOOoK APPOINTMENT</button>
+              <button id="submit" v-on:click="book()">BOOK APPOINTMENT</button>
             </div>
           </div>
         </form>
@@ -147,12 +150,3 @@ export default {
   }
 }
 </script>
-<style media="screen">
-  .block1{width:25%;}
-  .block2{width:75%;}
-
-.col-30 {
-  
-}
-
-</style>
