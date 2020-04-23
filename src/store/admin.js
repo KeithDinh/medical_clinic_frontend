@@ -168,7 +168,6 @@ export const admin = {
           .then(
             response => {
               const apptCancelStatus = response.msg
-              alert(response.msg)
               commit('cancelApptSuccess', apptCancelStatus)
               dispatch('alert/success', 'Canceled Appointment', { root: true })
               commit('adminApptRequest')
