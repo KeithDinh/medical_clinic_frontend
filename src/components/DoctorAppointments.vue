@@ -237,7 +237,7 @@ td{
     border-radius:25px
 }
   .tabs-component-panels {
-  padding: 0em 0;
+  padding: 15px 0;
 }
 
 
