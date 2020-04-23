@@ -187,10 +187,10 @@ export const admin = {
           )
       },
       loadUserReport (
-          { dispatch, commit }, {firstDate, secondDate, roleId}) {
+          { dispatch, commit }, {reportType,firstDate, secondDate, roleId}) {
           commit('reportRequest')
-          
-          adminService.getUserReport(firstDate, secondDate, roleId).then(
+
+          adminService.getUserReport(reportType,firstDate, secondDate, roleId).then(
             response => {
               commit('reportSuccess', response.report)
               commit('reportInformationSuccess', response.information)
@@ -201,9 +201,9 @@ export const admin = {
             })
       },
       loadReport (
-        { dispatch, commit }, {reportType, patient, doctor, office}) {
+        { dispatch, commit }, {reportType, patient, doctor, office,start,end}) {
         commit('reportRequest')
-        adminService.getReport(reportType, patient, doctor, office).then(
+        adminService.getReport(reportType, patient, doctor, office,start,end).then(
           response => {
             commit('reportSuccess', response.report)
             dispatch('alert/success', 'Report Retreived', { root: true })
