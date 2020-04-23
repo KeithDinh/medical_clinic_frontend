@@ -13,7 +13,7 @@
         <div class="text"><p class="align-left">Phone: </p><p class="align-right">{{ profile.phone }}</p></div>
         <div style="clear:both;"></div>
          <hr class="style1">
-        <div class="text"><p class="align-left">DOB </p><p class="align-right">{{ profile.dob }}</p></div>
+        <div class="text"><p class="align-left">DOB </p><p class="align-right">{{ profile.dob.toString().substring(0,16) }}</p></div>
         <div style="clear:both;"></div>
          <hr class="style1">
         <div class="text"><p class="align-left">Gender: </p><p class="align-right">{{ profile.gender }}</p></div>

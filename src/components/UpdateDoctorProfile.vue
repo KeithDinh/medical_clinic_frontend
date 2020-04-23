@@ -18,11 +18,11 @@
           <label class="inputs">Race</label>
           <input type="text" v-model="doctorProfile.race" id="race" name="race" placeholder="race"/>
           <label class="inputs">Date Of Birth</label>
-          <input type="text" v-model="doctorProfile.dob" id="date_of_birth" name="date_of_birth" placeholder="date_of_birth" disabled/>
+          <input type="text" v-model="doctorProfile.dob.toString().substring(4,16)" id="dob" name="dob" placeholder="date_of_birth" disabled/>
           <label class="inputs">Phone</label>
           <VuePhoneNumberInput v-model="doctorProfile.phone" />
           <label class="inputs">Street Address</label>
-          <input type="text" v-model="doctorProfile.street" id="addressOne" name="addressOne" placeholder="Address 1"/>
+          <input type="text" v-model="doctorProfile.street" id="street" name="street" placeholder="Address 1"/>
           <label class="inputs">City</label>
           <input type="text" v-model="doctorProfile.city" id="city" name="city" placeholder="City"/>
           <label class="inputs">State</label>
@@ -50,57 +50,12 @@ export default {
   data () {
     return {
       usStates: [
-        'AL',
-        'AK',
-        'AZ',
-        'AR',
-        'CA',
-        'CO',
-        'CT',
-        'DE',
-        'DC',
-        'FL',
-        'GA',
-        'HI',
-        'ID',
-        'IL',
-        'IN',
-        'IA',
-        'KS',
-        'KY',
-        'LA',
-        'ME',
-        'MD',
-        'MA',
-        'MI',
-        'MN',
-        'MS',
-        'MO',
-        'MT',
-        'NE',
-        'NV',
-        'NH',
-        'NJ',
-        'NM',
-        'NY',
-        'NC',
-        'ND',
-        'OH',
-        'OK',
-        'OR',
-        'PA',
-        'RI',
-        'SC',
-        'SD',
-        'TN',
-        'TX',
-        'UT',
-        'VT',
-        'VA',
-        'WA',
-        'WV',
-        'WI',
-        'WY'
+        'AL','AK','AZ','AR','CA','CO','CT','DE','DC',
+        'FL','GA','HI','ID','IL','IN','IA','KS','KY',
+        'LA','ME','MD','MA','MI','MN','MS','MO','MT',
+        'NE','NV','NH','NJ','NM','NY','NC','ND','OH',
+        'OK','OR','PA','RI','SC','SD','TN','TX','UT',
+        'VT','VA','WA','WV','WI','WY'
       ],
       
     }

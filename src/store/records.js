@@ -57,7 +57,10 @@ export const medicalRecords = {
       state.newRecord=newRecord
     },
     updateRecRequest (state) {state.updateRecordStatus = {updatingRec: true}},
-    updateRecSuccess (state) {state.updateRecordStatus = {updatedRec: true}},
+    updateRecSuccess (state) {
+      state.recordsStatus = { loadedRecords: true }
+      state.recordsList = records
+    },
     updateRecFailure (state) {state.updateRecordStatus = {updateRec: true}},
   },
   actions: {
@@ -73,7 +76,6 @@ export const medicalRecords = {
     },
 
     addRecord ({ dispatch, commit }, {apptId, patient, height, weight,diagnoses,labTesting, treatment,newPrescriptions, actualStartTime, actualEndTime}) {
-      alert("adding")
       commit('addRecordRequest')
       let errors = validateRecordForm(apptId, height,weight,diagnoses,labTesting,treatment, newPrescriptions)
       if (errors.length === 0) {
@@ -86,9 +88,7 @@ export const medicalRecords = {
           profileService.getProfile(localUser.patient_id).then(
             response => {
               const patient = JSON.parse(localStorage.getItem('patient'))
-              patient.records = response.records
-
-              localStorage.setItem('patient', JSON.stringify(patient))
+              commit('loadRecordsSuccess', patient.records)
               router.push('/dashboard')
             }
           )
@@ -104,20 +104,16 @@ export const medicalRecords = {
       commit('updateRecRequest')
       recordsService.editRecord(recObject).then(
         response => {
-          commit('updateRecSuccess')
           commit('loadRecRequest')
           profileService.getProfile(recObject.patient_id).then(
             response => {
               const patient = JSON.parse(localStorage.getItem('patient'))
-              patient.records = response.records
-              localStorage.setItem('patient', JSON.stringify(patient))
-              dispath('alert/completed', {root:true});
+              commit('updateRecSuccess', patient.records)
+              dispatch('alert/success', 'Record Updated', { root: true })
             }
           )
-          dispatch('alert/success', 'Record Updated', { root: true })
-
-        })
+        }
+      )
     }
   }
-
 }
