@@ -17,13 +17,19 @@
           <td>{{ appt.booking_date | frontEndDateFormat}} <br>
              <div class="subtitle1">{{appt.booking_date |frontEndTimeFormat}}</div></td>
           <td>{{ appt.appt_status }}</td>
-          <td v-if= "appt.appt_status === 'pending'"><button class="button" v-on:click="CancelAppt(appt.appt_id)" >Cancel </button></td>
+          <td v-if= "appt.appt_status === 'pending'">
+            <button class="button" v-on:click="book(appt.appt_id)" >Cancel </button>
+            </td>
         </tr>
       </template>
       <tr>
         <td></td>
       </tr>
     </table>
+    </div>
+    <div v-if="booking === true" class="popup-confirm">
+      <div class="row message">Please press confirm to cancel an appointment</div>
+      <div class="row confirm"><button class="confirm" v-on:click=" CancelAppt()">Confirm</button><button class="cancel" v-on:click="cancel()">Cancel</button></div>
     </div>
   </div>
 </template>
@@ -33,6 +39,12 @@ import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'Appointments',
+   data: function () {
+    return {
+      booking: false,
+      appt :''
+    };
+  },
   created() {
     this.loadAppointments()
   },
@@ -46,8 +58,17 @@ export default {
       'loadAppointments',
       'cancelAppointment'
     ]),
-    CancelAppt: function (apptId) {
-      this.cancelAppointment(apptId)
+    book: function (value) {
+      this.booking = true
+      this.appt=value
+    },
+    cancel: function () {
+      this.booking = false
+    },
+    CancelAppt: function () {
+      this.booking = false
+      this.cancelAppointment(this.appt)
+      this.appt = ''
     }
   },
   filters: {
