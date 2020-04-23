@@ -16,6 +16,7 @@
                   </select>
                 </div>
               </div>
+
               <div v-if = "reportType === 'Number of New Users'">
                 <div class="filter left">
                   <div class="row label">Filter by Roles</div>
@@ -27,19 +28,8 @@
                     </select>
                   </div>
                 </div>
-                <div class="filter left">
-                  <div class="row label">Select A Start Date</div>
-                  <div class="row select">
-                  <datepicker :disabled-dates="disabledDates" v-model="firstDate" placeholder="Select Start Date" format="yyyy-MM-dd" id="reportType" name="reportType"></datepicker>
-                  </div>
-                </div>
-                <div class="filter left">
-                  <div class="row label">Select A End Date</div>
-                  <div class="row select">
-                  <datepicker :disabled-dates="disabledDates" v-model="secondDate" placeholder="Select End Date" format="yyyy-MM-dd" id="reportType" name="reportType"></datepicker>
-                  </div>
-                </div>
               </div>
+
               <div v-else-if="reportType === 'Average Appointment Duration'">
                 <div class="filter left">
                  <div class="row label">Filter by office</div>
@@ -51,6 +41,7 @@
                   </div>
                 </div>
               </div>
+
               <div v-else-if="reportType === 'General Appointment Summary'">
               </div>
               <div v-else>
@@ -82,12 +73,27 @@
                   </div>
                 </div>
               </div>
+                <div class="filter left">
+                  <div class="row label">Select A Start Date</div>
+                  <div class="row select">
+                  <datepicker :disabled-dates="disabledDates" v-model="firstDate" placeholder="Select Start Date" format="yyyy-MM-dd" id="reportType" name="reportType"></datepicker>
+                  </div>
+                </div>
+
+                <div class="filter left">
+                  <div class="row label">Select A End Date</div>
+                  <div class="row select">
+                  <datepicker :disabled-dates="disabledDates" v-model="secondDate" placeholder="Select End Date" format="yyyy-MM-dd" id="reportType" name="reportType"></datepicker>
+                  </div>
+                </div>
             </div>
-          
+
           <div v-if = "reportType === 'Number of New Users'" class="row submit"><button v-on:click="GetUserReport()">GET REPORT</button></div>
           <div v-else class="row submit"><button v-on:click="GetReport()">GET REPORT</button></div>
         </div>
         </form>
+
+            <!--        DISPLAY REPORT-->
         <table v-if="reportType === 'Canceled Appointments'">
           <tr>
             <th>Appt ID</th>
@@ -170,8 +176,8 @@
           <tr>
             <th>OfficeId</th>
             <th>Office</th>
+             <th>Total Finished</th>
             <th>Total Canceled</th>
-            <th>Total Finished</th>
             <th>Finished/Past Appt</th>
           </tr>
           <tr v-for="report in reports">
@@ -211,7 +217,9 @@ export default {
       patient: 'all',
       doctor: 'all',
       office: 'all',
-      roleId:'all'
+      roleId:'all',
+      start:'',//these two extra time variables is here for a purpose. helping with datepicker day offset.
+      end:''
     }
   },
   components: {
@@ -230,7 +238,7 @@ export default {
       doctors: state => state.doctors,
       offices: state => state.offices,
       reports: state => state.reports,
-      
+
       reportInformation: state => state.reportInformation
     }),
     ...mapState('dates', {
@@ -242,7 +250,7 @@ export default {
       this.doctor = 'all'
       this.office= 'all'
       this.patient= 'all'
-      
+
     }
   },
   methods: {
@@ -257,15 +265,30 @@ export default {
       'loadDates',
     ]),
     GetReport () {
-      const { reportType, patient, doctor, office } = this
-      this.loadReport({ reportType, patient, doctor, office })
+      this.start=this.getDate(this.firstDate);
+      this.end=this.getDate(this.secondDate);
+      console.log(this.start);
+         console.log(this.end)
+      const { reportType, patient, doctor, office,start, end } = this
+      this.loadReport({ reportType, patient, doctor, office,start,end })
     },
     GetUserReport (){
       this.firstDate=this.firstDate.toString()
       this.secondDate=this.secondDate.toString()
-      const { firstDate, secondDate, roleId } = this
-      this.loadUserReport({ firstDate, secondDate, roleId })
-    }
+      const { reportType,firstDate, secondDate, roleId } = this
+      this.loadUserReport({ reportType,firstDate, secondDate, roleId })
+    },
+       getDate: function (str){
+      if(str!=''){
+        str.toString();
+      const dateobj=new Date(str);
+      const month = ('0' + (dateobj.getMonth() + 1)).slice(-2);
+      const date = ('0' + dateobj.getDate()).slice(-2);
+      const year = dateobj.getFullYear();
+      const formattedDate = year + '-' + month + '-' + date;
+      return formattedDate;}
+      else  return null
+    },
   }
 }
 </script>
@@ -274,13 +297,13 @@ export default {
 .report-form table {margin:40px 0 0;}
 .report-form .submit {margin:15px 0 0;text-align:center;}
 .report-form .submit button {color:#fff;padding:10px 30px;border:none;border-radius:50px;background:#00c7db;}
-.filters {background:#888;padding:20px 10px 25px;}
+.filters {background:#15548c;padding:20px 10px 25px;}
 .filters .filter {width:25%;padding:10px}
 .filter .label {padding:0 0 5px 17px;color:#fff;}
 th {
     font-size: 14px;
     color: #fff;
-    background: #888;
+    background: #15548c;
     padding: 10px;
     text-align: left;
 }

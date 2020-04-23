@@ -4,53 +4,73 @@
       <div class="row form-ctn">
         <div class="row form-title">Register A Doctor</div>
         <div id="register-form" class="row forms">
+          
           <label>Email</label>
           <input type="text" v-model="email" id="email" name="email" placeholder="email"> 
+          
           <label>Password</label>
           <input type="password" v-model="passwordOne" id="passwordOne" name="passwordOne" placeholder="Password">
+          
           <label>Confirm Password</label>
           <input type="password" v-model="passwordTwo" id="passwordTwo" name="passwordTwo" placeholder="Confirm Password">
+          
           <label>First Name</label>
           <input type="text" v-model="firstName" id="firstName" name="firstName" placeholder="First Name">
+          
           <label>Middle Initial</label>
           <input type="text" v-model="middleInit" id="middle" name="middle" placeholder="Middle Initial">
+          
           <label>Last Name</label>
           <input type="text" v-model="lastName" id="lastName" name="lastName" placeholder="Last Name">
+          
           <label>Street Address</label>
           <input type="text" v-model="street" id="street" name="street" placeholder="Street Address">
+          
           <label>City</label>
           <input type="text" v-model="city" id="city" name="city" placeholder="City">
+          
           <label>State</label>
           <select type="text" v-model="state" id="state" name="state">
             <option v-for="(usState, index) in usStates" :key="index" :selected="state === usState">{{ usState }}</option>
           </select>
+          
           <label>Zipcode</label>
           <input type="text" v-model="zipcode" id="zipcode" name="zipcode" placeholder="Zipcode">
+          
           <label>Specialization</label>
           <select type="text" v-model="specialistId" id="specialistId" name="specialistId" placeholder="Specialization">
-                  <option v-for="off in specialList" v-bind:value="off.specialist_id">{{ off.specialization_name }}</option>
-            </select>
-          <br>
-          <br>
+              <option v-for="off in specialList" v-bind:value="off.specialist_id">{{ off.specialization_name }}</option>
+          </select>
+          <br><br>
+          
           <label>Phone</label>
           <VuePhoneNumberInput v-model="phone" id="phone" name="phone" placeholder="Phone"/>
           <br>
+          
           <label>Date Of Birth</label>
           <datepicker v-model="dob" name="dob" placeholder="Date of birth" format="MM/dd/yyyy"></datepicker>
+          
           <label>Gender</label>
           <select type="text" v-model="gender" id="gender" name="gender" placeholder="Gender">
                   <option>M</option>
                   <option>F</option>
           </select>
-          <br>
-          <br>
+          <br><br>
+
           <label>Profile Picture</label>
           <input type="text" v-model="image" id="image" name="image" placeholder="Image">
-          
+        
           <label>Race/Ethnicity</label>
           <select type="text" v-model="race" id="race" name="race" placeholder="Race / Ethnicity">
-                  <option v-for="race in races" v-bind:value="race">{{ race }}</option>
-            </select>
+                <option v-for="race in races" v-bind:value="race">{{ race }}</option>
+          </select>
+
+        
+          <input  type="checkbox">
+             
+           
+          <label>Select Offices</label>
+        
           <br><br>
           <button id="submit" v-on:click="register()">REGISTER</button>
         </div>
@@ -154,15 +174,16 @@ export default {
     }
   },
   created () {
-    this.loadSpecializations()
+    this.loadSpecializations(),
+    this.loadOffices()
   },
   computed: {
-    // registering () {
-    //   return this.$store.state.authentication.status.registering
-    // },
     ...mapState('doctor', {
       specialList: state => state.specializationList
     }),
+    ...mapState('offices', {
+      offices: state => state.officeList
+    })
   },
   methods: 
   {
@@ -178,6 +199,9 @@ export default {
     ...mapActions('authentication', [
           'registerDoctor'
     ]),
+    ...mapActions('offices', [
+          'loadOffices'
+    ])
   }
 }
 </script>
