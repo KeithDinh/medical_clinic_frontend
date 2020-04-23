@@ -123,9 +123,9 @@ export default {
       ackMsg:''
     }
   },
-    created() {
+  created() {
     this.loadDoctorMedications(),
-      setInterval(this.getTimestamp, 1000);
+    setInterval(this.getTimestamp, 1000);
     this.getTodayDate();
   },
   watch: {
@@ -250,11 +250,11 @@ export default {
       let appt='';
       for(let i=0;i< this.appointments.length;i++){
         appt=this.appointments[i];
-        if(appt.doctor_id===this.doctor.doctorId && this.isTodayAppt(appt.appt_start_time) && appt.appt_status==='started')
+        if(/* appt.doctor_id===this.doctor.doctor_id &&  */this.isTodayAppt(appt.appt_start_time) && appt.appt_status==='started')
           return true;
       }
+      return false;
     }
-
   }
 }
 </script>
