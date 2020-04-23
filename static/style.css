@@ -17,6 +17,37 @@ ol, ul {
   padding: 0;
 }
 
+.popup-confirm {
+    display: block;
+    position: fixed;
+    z-index: 5;
+    max-width: 300px;
+    top: 10%;
+    transform: translate(-50%);
+    left: 50%;
+    background: #fff;
+    border-radius:5px;
+    border:0;
+    padding:30px 20px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.popup-confirm .confirm {
+  margin:20px 0 0;
+}
+
+.popup-confirm .confirm button {
+  color:#fff;
+  padding:10px 30px;
+  border:none;
+  border-radius:50px;
+  font-size:16px;
+}
+
+.popup-confirm .confirm button.confirm {background:#00c7db;}
+
+.popup-confirm .confirm button.cancel {background:#bbb;margin:0 0 0 10px;}
+
 .content {
   position: relative;
   margin: 0 auto;

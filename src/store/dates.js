@@ -31,7 +31,6 @@ const getTimeslots = (dt) => {
   var month = dt.getMonth() + 1
   var year = dt.getFullYear()
   var dts = dates['state']['datesList']
-  alert(year)
   var timeslots = []
   var ts = []
   var hour = 0

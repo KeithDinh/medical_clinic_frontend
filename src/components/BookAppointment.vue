@@ -7,7 +7,7 @@
         <form @submit.prevent="handleSubmit">
           <div id="appointment-form" class="row panel">
             <div class="row" >
-              <div class="col-30" style="text-align:center">
+              <div class="col-30" style="text-align:left">
                 <label>Select a Doctor</label>
               </div>
               <div class="col-70">
@@ -19,7 +19,7 @@
             </div>
 
             <div class="row" >
-              <div class="col-30" style="text-align:center">
+              <div class="col-30" style="text-align:left">
                 <label>Select a Medical Office</label>
               </div>
               <div class="col-70">
@@ -31,7 +31,7 @@
             </div>
 
             <div class="row form" >
-              <div class="col-30" style="text-align:center">
+              <div class="col-30" style="text-align:left">
                 <label for="referred">I was referred by another doctor</label>
               </div>
               <div class="col-70">
@@ -44,7 +44,7 @@
             </div>
 
             <div class="row form" >
-              <div class="col-30" style="text-align:center">
+              <div class="col-30" style="text-align:left">
                 <label>Date</label>
               </div>
               <div class="col-70">
@@ -57,11 +57,15 @@
             </div>
             <textarea type="text" v-model="reason" placeholder="Reason for visit"></textarea>
             <div style="padding:30px">
-              <button id="submit" v-on:click="book()">BOOK APPOINTMENT</button>
+              <button id="submit" v-on:click="book()">BOOoK APPOINTMENT</button>
             </div>
           </div>
         </form>
       </div>
+    </div>
+    <div v-if="booking === true" class="popup-confirm">
+      <div class="row message">Please press confirm to book appointment</div>
+      <div class="row confirm"><button class="confirm" v-on:click="confirm()">Confirm</button><button class="cancel" v-on:click="cancel()">Cancel</button></div>
     </div>
   </div>
 </template>
@@ -77,6 +81,7 @@ export default {
   },
   data: function () {
     return {
+      booking: false,
       doctor: '',
       office: '',
       referred: false,
@@ -126,7 +131,15 @@ export default {
       'loadDates',
       'loadTimeslots'
     ]),
-    book (e) {
+    book: function () {
+      alert("booking")
+      this.booking = true
+    },
+    cancel: function () {
+      this.booking = false
+    },
+    confirm (e) {
+      this.booking = false
       const { doctor, office, refDoctor, date, timeslot, reason, bookingMethod } = this
       const { dispatch } = this.$store
       dispatch('appointment/setAppointment', { doctor, office, refDoctor, date, timeslot, reason, bookingMethod })
