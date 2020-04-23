@@ -230,11 +230,20 @@ export default {
       doctors: state => state.doctors,
       offices: state => state.offices,
       reports: state => state.reports,
+      
       reportInformation: state => state.reportInformation
     }),
     ...mapState('dates', {
       disabledDates: state => state.disabledDates
     })
+  },
+  watch: {
+    reportType: function () {
+      this.doctor = 'all'
+      this.office= 'all'
+      this.patient= 'all'
+      
+    }
   },
   methods: {
     ...mapActions('admin', [

@@ -1,7 +1,7 @@
 <template>
   <div class="row">
 
-        <NewPrescription />
+    <NewPrescription />
     <div class="table-border-round">
     <table>
       <tr>
@@ -59,8 +59,7 @@ export default {
   },
   computed: {
     ...mapState('prescription', {
-      prescriptions: state => state.rxList,
-      loading: state => state.loading,
+      prescriptions: state => state.rxList
     }),
       userStatus () {
       return this.$store.state.authentication

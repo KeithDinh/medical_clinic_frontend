@@ -79,17 +79,17 @@ export const medicalRecords = {
       commit('addRecordRequest')
       let errors = validateRecordForm(apptId, height,weight,diagnoses,labTesting,treatment, newPrescriptions)
       if (errors.length === 0) {
-        confirm("add new medical record")
+        //confirm("add new medical record")
         recordsService.putRecord(apptId, patient.patientId, height, weight,diagnoses,labTesting, treatment, newPrescriptions, actualStartTime, actualEndTime)
              .then(
         response => {
-          commit('addRecordSuccess', {apptId, patientId , medicationId,  doseFormId, dosage, indication, datePrescribed})
-          const localUser = JSON.parse(localStorage.getItem('localUser'))
-          profileService.getProfile(localUser.patient_id).then(
+          //commit('addRecordSuccess', {apptId, patientId , medicationId,  doseFormId, dosage, indication, datePrescribed})
+          //const localUser = JSON.parse(localStorage.getItem('localUser'))
+          profileService.getProfile(patient.patientId).then(
             response => {
               const patient = JSON.parse(localStorage.getItem('patient'))
               commit('loadRecordsSuccess', patient.records)
-              router.push('/dashboard')
+              //router.push('/doctor-dashboard')
             }
           )
           dispatch('alert/success', 'New Record Added', { root: true })
@@ -107,8 +107,8 @@ export const medicalRecords = {
           commit('loadRecRequest')
           profileService.getProfile(recObject.patient_id).then(
             response => {
-              const patient = JSON.parse(localStorage.getItem('patient'))
-              commit('updateRecSuccess', patient.records)
+              //const patient = JSON.parse(localStorage.getItem('patient'))
+              //commit('updateRecSuccess', patient.records)
               dispatch('alert/success', 'Record Updated', { root: true })
             }
           )
