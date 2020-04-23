@@ -277,13 +277,13 @@ export default {
 .report-form table {margin:40px 0 0;}
 .report-form .submit {margin:15px 0 0;text-align:center;}
 .report-form .submit button {color:#fff;padding:10px 30px;border:none;border-radius:50px;background:#00c7db;}
-.filters {background:#888;padding:20px 10px 25px;}
+.filters {background:#15548c;padding:20px 10px 25px;}
 .filters .filter {width:25%;padding:10px}
 .filter .label {padding:0 0 5px 17px;color:#fff;}
 th {
     font-size: 14px;
     color: #fff;
-    background: #888;
+    background: #15548c;
     padding: 10px;
     text-align: left;
 }
