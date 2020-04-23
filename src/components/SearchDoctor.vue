@@ -136,7 +136,7 @@ select{
   background: black;
   width: 300px;
   margin: 0 auto;
-  border-radius: 15px 50px 30px;
+  border-radius: 20px 20px 20px;
   text-align: center;
 }
 
