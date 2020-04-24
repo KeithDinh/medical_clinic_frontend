@@ -3,14 +3,18 @@ import { router } from '../router'
 
 const initialState = {
   officeStatus: {},
-  officeList: []
+  officeList: [],
+  officeDays: []
 }
+
 
 export const offices = {
   namespaced: true,
   state: initialState,
   mutations: {
-    
+    officeDaysSuccess(state, office){
+      state.officeDays = office;
+    },
     officeRequest (state) {
       state.officeStatus = { loadingOffices: true }
     },
@@ -40,6 +44,23 @@ export const offices = {
     }
   },
   actions: {
+    loadOfficeDays({dispatch,commit,state})
+    {
+      var size = state.officeList.length
+      var offs = []
+      for(let n=0; n<size; n++){
+        var office_struct = {
+          office_id: '',
+          office_name: '',
+          office_selected: false,
+          office_days: { mon: false, tue: false, wed: false, thu: false, fri: false, sat: false }
+        }
+        office_struct.office_id = state.officeList[n].office_id
+        office_struct.office_name = state.officeList[n].office_name
+        offs.push(office_struct)
+      }
+      commit('officeDaysSuccess', offs)
+    },
     loadOfficesByDoctor (
       { dispatch, commit }, doctor_id ) {
       commit('officeRequest')
@@ -57,7 +78,7 @@ export const offices = {
         )
     },
     loadOffices (
-      { dispatch, commit } ) {
+      { dispatch, commit, state } ) {
       commit('officeRequest')
       officeService.getOffices()
         .then(
@@ -65,12 +86,14 @@ export const offices = {
             const offices = response.offices
             commit('officeSuccess', offices)
             dispatch('alert/success', 'Offices Retreived', { root: true })
+            dispatch('loadOfficeDays')
           },
           error => {
             commit('officeFailure')
             dispatch('alert/error', error, { root: true })
           }
-        )    
+        )  
+  
     },
     updateOffice ({ dispatch, commit, state }, office) {
       commit('updateOfficeRequest')

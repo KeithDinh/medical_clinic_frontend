@@ -261,13 +261,13 @@ export const authentication = {
       }
     },
     registerDoctor ({ dispatch, commit }, { firstName, middleInit, lastName, phone, specialistId,
-      gender, email, passwordOne, passwordTwo, race, dob, street, city, state, zipcode, image }) {
+      gender, email, passwordOne, passwordTwo, race, dob, street, city, state, zipcode, image,offices }) {
       commit('registerRequest')
       let errors = validateDoctorRegistration(firstName, middleInit, lastName, phone, specialistId, gender, email,
         passwordOne, passwordTwo, race, dob, street, city, state, zipcode)
       if (errors.length === 0) {
         userService.registerDoctor(firstName, middleInit,lastName, phone, specialistId, gender, email, passwordOne, 
-          race, dob, street, city, state, zipcode, image)
+          race, dob, street, city, state, zipcode, image,offices)
           .then(
             localUser => {
               commit('registerSuccess', localUser)

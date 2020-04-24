@@ -89,12 +89,12 @@ function register (email, password, firstName, middleInit, lastName, street, cit
     })
 }
 
-function registerDoctor (firstName, middleInit, lastName,phone, specialistId,gender,email,password, race,dob, street, city, state, zipcode, image ) {
+function registerDoctor (firstName, middleInit, lastName,phone, specialistId,gender,email,password, race,dob, street, city, state, zipcode, image,offices ) {
   dob = formatDate(dob)
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ firstName, middleInit, lastName,phone, specialistId,gender,email,password, race,dob, street, city, state, zipcode, image })
+    body: JSON.stringify({ firstName, middleInit, lastName,phone, specialistId,gender,email,password, race,dob, street, city, state, zipcode, image,offices })
   }
   return fetch(`${config.apiUrl}/doctors/register`, requestOptions)
     .then(handleResponse)

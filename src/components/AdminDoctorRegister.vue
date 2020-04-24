@@ -71,16 +71,16 @@
 
           <template>
             <div v-for="off in offices" >
-              <input type="checkbox" id="off.office_id" v-bind:value="off.office_id" v-model="selectOffice">{{off.office_name}}
-              <div v-if="selectOffice">
-                <input type="checkbox" v-model="DayZero" value="0"> Monday
-                <input type="checkbox" v-model="DayOne"  value="1"> Tuesday
-                <input type="checkbox" v-model="DayTwo"  value="2"> Wednesday
-                <input type="checkbox" v-model="DayThree" value="3"> Thursday
-                <input type="checkbox" v-model="DayFour" value="4"> Friday
-                <input type="checkbox" v-model="DayFive" value="5"> Saturday
-                <button class="button" v-on:click="Save(off.office_id)">SAVE</button>
+              <input type="checkbox" id="off.office_id" v-bind:value="off.office_id" v-model="off.office_selected">{{off.office_name}}
+              <div v-if="off.office_selected">
+                <input type="checkbox" v-model="off.office_days.mon" value="true"> Monday
+                <input type="checkbox" v-model="off.office_days.tue"  value="true"> Tuesday
+                <input type="checkbox" v-model="off.office_days.wed"  value="true"> Wednesday
+                <input type="checkbox" v-model="off.office_days.thu" value="true"> Thursday
+                <input type="checkbox" v-model="off.office_days.fri" value="true"> Friday
+                <input type="checkbox" v-model="off.office_days.sat" value="true"> Saturday
               </div>
+              <br>
             </div>
           </template>
           <br><br>
@@ -107,31 +107,11 @@ export default {
 
   data () {
     return {
-      selectOffice:false,
-      WorkOffice:[],
-      dayZero:'',
-      dayOne:'',
-      dayTwo:'',
-      dayThree:'',
-      dayFour:'',
-      dayFive:'',
-      offId:'',
       email: '',
-      passwordOne: '',
-      passwordTwo: '',
-      firstName: '',
-      middleInit: '',
-      lastName: '',
-      street: '',
-      city: '',
-      state: '',
-      zipcode: '',
-      phone: '',
-      dob: '',
-      gender: '',
-      specialistId: '',
-      race: '',
-      image:'',
+      passwordOne: '',  passwordTwo: '',
+      firstName: '',  middleInit: '', lastName: '',
+      street: '',  city: '',  state: '', zipcode: '', phone: '',
+      dob: '', gender: '', specialistId: '', race: '', image:'',
       races: [
         'African American',
         'Asian',
@@ -158,28 +138,17 @@ export default {
       specialList: state => state.specializationList
     }),
     ...mapState('offices', {
-      offices: state => state.officeList
+      off: state=> state.officeList,
+      offices: state => state.officeDays
     })
   },
   methods: 
   {
     register (e) {
       this.submitted = true
-      const { firstName, middleInit, lastName, phone, specialistId, gender, email, passwordOne, passwordTwo, race, dob, street, city, state, zipcode, image } = this
+      const { firstName, middleInit, lastName, phone, specialistId, gender, email, passwordOne, passwordTwo, race, dob, street, city, state, zipcode, image,offices } = this
       const { dispatch } = this.$store
-      dispatch('authentication/registerDoctor', { firstName, middleInit, lastName, phone, specialistId, gender, email, passwordOne, passwordTwo, race, dob, street, city, state, zipcode, image })
-    },
-    Save(value){
-      this.offId=value
-      const {offId,dayZero, dayOne, dayTwo, dayThree, dayFour, dayFive} = this
-      WorkOffice.push(this)
-      this.dayZero=''
-      this.dayOne=''
-      this.dayTwo=''
-      this.dayThree=''
-      this.dayFour=''
-      this.dayFive=''
-      this.selectOffice= false
+      dispatch('authentication/registerDoctor', { firstName, middleInit, lastName, phone, specialistId, gender, email, passwordOne, passwordTwo, race, dob, street, city, state, zipcode, image,offices })
     },
     ...mapActions('doctor', [
           'loadSpecializations'
@@ -188,7 +157,8 @@ export default {
           'registerDoctor'
     ]),
     ...mapActions('offices', [
-          'loadOffices'
+          'loadOffices',
+          'loadOfficeDays',
     ])
   }
 }
