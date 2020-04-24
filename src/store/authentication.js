@@ -185,18 +185,16 @@ export const authentication = {
               if (localUser.role_id === 1)
                 router.push('/admin')
               else if (localUser.role_id === 2) {
-                alert('patient logged in')
                 //get patient
                 profileService.getProfile(localUser.patient_id).then(
                   response => {
                     router.push('/dashboard')
                   },
                   error => {
-                    alert('profileFailure')
+                    alert('Please Retry')
                   })
               }
               else if (localUser.role_id === 3) {
-                alert("doctor logged in")
                 // get doctor
                 doctorService.getDoctorData(localUser.doctor_id).then(
                   response => {
@@ -205,7 +203,7 @@ export const authentication = {
                     }
                   },
                   error => {
-                    alert('doctorFailure')
+                    alert('Please Retry')
                   })
               }                
 
@@ -236,7 +234,6 @@ export const authentication = {
   lastName, street, city, state, zipcode, phone, dob, gender, marital, race)
 
       if (errors.length === 0) {
-        alert("no errors")
         userService.register(email, passwordOne, firstName, middleInit, lastName, street, 
           city, state, zipcode, phone, dob, gender, marital, race)
           .then(
