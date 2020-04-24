@@ -64,14 +64,27 @@
           <select type="text" v-model="race" id="race" name="race" placeholder="Race / Ethnicity">
                 <option v-for="race in races" v-bind:value="race">{{ race }}</option>
           </select>
-
-        
-          <input  type="checkbox">
-             
-           
-          <label>Select Offices</label>
-        
+          
           <br><br>
+          <label>Select Offices</label> 
+          <br>
+
+          <template>
+            <div v-for="off in offices" >
+              <input type="checkbox" id="off.office_id" v-bind:value="off.office_id" v-model="selectOffice">{{off.office_name}}
+              <div v-if="selectOffice">
+                <input type="checkbox" v-model="DayZero" value="0"> Monday
+                <input type="checkbox" v-model="DayOne"  value="1"> Tuesday
+                <input type="checkbox" v-model="DayTwo"  value="2"> Wednesday
+                <input type="checkbox" v-model="DayThree" value="3"> Thursday
+                <input type="checkbox" v-model="DayFour" value="4"> Friday
+                <input type="checkbox" v-model="DayFive" value="5"> Saturday
+                <button class="button" v-on:click="Save(off.office_id)">SAVE</button>
+              </div>
+            </div>
+          </template>
+          <br><br>
+          
           <button id="submit" v-on:click="register()">REGISTER</button>
         </div>
       </div>
@@ -94,6 +107,15 @@ export default {
 
   data () {
     return {
+      selectOffice:false,
+      WorkOffice:[],
+      dayZero:'',
+      dayOne:'',
+      dayTwo:'',
+      dayThree:'',
+      dayFour:'',
+      dayFive:'',
+      offId:'',
       email: '',
       passwordOne: '',
       passwordTwo: '',
@@ -118,57 +140,11 @@ export default {
         'White'
       ],
       usStates: [
-        'AL',
-        'AK',
-        'AZ',
-        'AR',
-        'CA',
-        'CO',
-        'CT',
-        'DE',
-        'DC',
-        'FL',
-        'GA',
-        'HI',
-        'ID',
-        'IL',
-        'IN',
-        'IA',
-        'KS',
-        'KY',
-        'LA',
-        'ME',
-        'MD',
-        'MA',
-        'MI',
-        'MN',
-        'MS',
-        'MO',
-        'MT',
-        'NE',
-        'NV',
-        'NH',
-        'NJ',
-        'NM',
-        'NY',
-        'NC',
-        'ND',
-        'OH',
-        'OK',
-        'OR',
-        'PA',
-        'RI',
-        'SC',
-        'SD',
-        'TN',
-        'TX',
-        'UT',
-        'VT',
-        'VA',
-        'WA',
-        'WV',
-        'WI',
-        'WY'
+        'AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA',
+        'HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA',
+        'MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY',
+        'NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX',
+        'UT','VT','VA','WA','WV','WI','WY'
       ],
       submitted: false
     }
@@ -193,6 +169,18 @@ export default {
       const { dispatch } = this.$store
       dispatch('authentication/registerDoctor', { firstName, middleInit, lastName, phone, specialistId, gender, email, passwordOne, passwordTwo, race, dob, street, city, state, zipcode, image })
     },
+    Save(value){
+      this.offId=value
+      const {offId,dayZero, dayOne, dayTwo, dayThree, dayFour, dayFive} = this
+      WorkOffice.push(this)
+      this.dayZero=''
+      this.dayOne=''
+      this.dayTwo=''
+      this.dayThree=''
+      this.dayFour=''
+      this.dayFive=''
+      this.selectOffice= false
+    },
     ...mapActions('doctor', [
           'loadSpecializations'
     ]),
@@ -205,3 +193,15 @@ export default {
   }
 }
 </script>
+
+<style>
+.button {
+  background-color: #f91d1d;
+  color: white;
+  transition: 0.3s;
+  opacity: 0.7;
+  padding: 5px 10px;
+  border-radius: 15px;
+
+}
+</style>
