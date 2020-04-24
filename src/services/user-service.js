@@ -1,4 +1,4 @@
-import config from '../../config'
+import config from 'config'
 import { responseHandler } from './response-handler'
 const handleResponse = responseHandler.handleResponse
 

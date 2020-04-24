@@ -1,4 +1,4 @@
-import config from '../../config'
+import config from 'config'
 import { authorizationHeader, userToken } from '../helpers'
 import { responseHandler } from './response-handler'
 const handleResponse = responseHandler.handleResponse
