@@ -140,10 +140,6 @@ export default {
     ...mapActions('profile', [
       'reloadPatient',
     ]),
-    //   ...mapActions('appointment', [
-    //   'finishAppt',
-    //
-    // ]),
     patient(value) {
       const res = this.reloadPatient(value)
     },

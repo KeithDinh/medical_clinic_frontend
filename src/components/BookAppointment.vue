@@ -144,13 +144,13 @@ export default {
       'loadTimeslots'
     ]),
     book: function () {
-      alert("booking")
       this.booking = true
     },
     cancel: function () {
       this.booking = false
     },
     confirm (e) {
+      this.date=this.date.toString()
       this.booking = false
       const { doctor, office, refDoctor, date, timeslot, reason, bookingMethod } = this
       const { dispatch } = this.$store
