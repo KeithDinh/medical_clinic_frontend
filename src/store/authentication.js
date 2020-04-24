@@ -266,16 +266,10 @@ export const authentication = {
         userService.registerDoctor(firstName, middleInit,lastName, phone, specialistId, gender, email, passwordOne, 
           race, dob, street, city, state, zipcode, image,offices)
           .then(
-            localUser => {
-              commit('registerSuccess', localUser)
-              doctorService.getDoctor(localUser.doctor_id).then(
-                response => {
+            response => {
+                  alert("Docter Added. Go to Login to Check the Doctor User")
                   router.push('/admin')
                 },
-                error => {
-                  alert('registrationFailure')
-                })
-            },
             error => {
               commit('registerFailure', error)
               dispatch('alert/error', error, { root: true })

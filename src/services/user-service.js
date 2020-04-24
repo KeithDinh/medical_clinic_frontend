@@ -98,12 +98,4 @@ function registerDoctor (firstName, middleInit, lastName,phone, specialistId,gen
   }
   return fetch(`${config.apiUrl}/doctors/register`, requestOptions)
     .then(handleResponse)
-    .then(localUser => {
-    // Registrations is successful if a jwt token is returned
-      if (localUser.access_token) {
-      // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('localUser', JSON.stringify(localUser))
-      }
-      return localUser
-    })
 }
